@@ -1,0 +1,82 @@
+<div class="container-fluid body_bg">
+    <div class="row">
+      <div class="dotted_border"></div>
+      <div class="top_brdr"></div>
+      <div class="banner">
+        <div class="brand_logo"></div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-3">
+        <div class="lgn_cntnr">
+          <h2>Login</h2>
+          <form>
+            <div class="row">
+              <div class="col">
+                <div class="input-group lgn_input">
+                  <div class="input-group-prepend">
+                    <i class="fa fa-user input-group-text" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control"  [(ngModel)]="name" name="name" placeholder="Username" required />
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col">
+                <div class="input-group lgn_input">
+                  <div class="input-group-prepend">
+                    <i class="fa fa-lock input-group-text" aria-hidden="true"></i>
+                  </div>
+                  <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Password" required />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="input-group lgn_input ">
+                  <div class="input-group-prepend">
+                    <i class="fa fa-map-marker input-group-text" aria-hidden="true"></i>
+                  </div>
+                  <input type="text" class="form-control" [(ngModel)]="country" name="country" (change)="onProductChanged(country)" placeholder="Country" list="codes" step="5" min="5" max="200" required />
+                  <datalist id="codes"   >
+                    <select class="scrollbar" >
+                    <option *ngFor="let item of userData"  [value]="item.name">{{item.code}}</option>    
+                    </select>
+                  </datalist>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col text-left">
+                <div class="form-check lgn_lnks">
+                  <input type="checkbox" class="form-check-input" id="loggedIn">
+                  <label class="form-check-label" for="loggedIn">&nbsp;Keep me logged in</label>
+                </div>
+              </div>
+              <div class="col text-right">
+                <a href="#" target="_self" class="lgn_lnks">Forgot password?</a>
+              </div>
+            </div>
+            <div class="row">
+  
+            </div>
+            <div class="row">
+              <div class="col text-right">
+                <a (click)="login()" class="lgn_btn">Login</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  
+    <div class="row">
+      <div class="dotted_border"></div>
+      <div class="top_brdr btm_brdr"></div>
+    </div>
+  </div>
