@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     this.params.password = this.password;
     //this.userService.userAuth(this.params).subscribe(data => {
 
-      this.router.navigate(['adminmainpage']);
+      this.router.navigate(['admin']);
 
     //});
   }
