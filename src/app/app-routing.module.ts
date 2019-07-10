@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes}  from '@angular/router';
-
-import {MainpageComponent} from './admin/shared/pages/mainpage/mainpage.component';
 import {LoginComponent} from './common/login/login.component';
-//import {AdminmainComponent} from './lappmodule/admin-module/admin-shared/admin-pages/adminmain/adminmain.component'
 import {AuthGuard} from '../app/core/services/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component:LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'admin', loadChildren:'./admin/admin.module#AdminModule', canActivate: [AuthGuard]  },
+  { path: 'customer', loadChildren:'./customer/customer.module#CustomerModule', canActivate: [AuthGuard] },
   { path: 'login', component:LoginComponent },
   
 ];

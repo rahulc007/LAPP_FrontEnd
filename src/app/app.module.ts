@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AdminModule} from './admin/admin.module';
+import {CustomerModule} from './customer/customer.module';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -24,6 +25,7 @@ import { HotTableModule } from 'ng2-handsontable';
     BrowserModule,
     RouterModule,
     AdminModule,
+    CustomerModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

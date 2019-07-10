@@ -1,0 +1,12 @@
+<div class="border p-5">
+    <ngx-table [configuration]="configuration"
+    [data]="data"
+    [columns]="columns">
+</ngx-table>
+    </div>
+    
+    <ng-template #ver let-row let-rowIndex="rowIndex">
+                
+        <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="detailedlayout(row)" ><i class="fa fa-edit" aria-hidden="true"></i></button>
+        
+    </ng-template>

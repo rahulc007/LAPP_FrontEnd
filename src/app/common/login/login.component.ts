@@ -20,14 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     
-    // this.userService.getUserList().subscribe(data=>{
-    //   Object.assign(this.userData, data);
-    //   console.log("user data==>",this.userData)
-      
-    // },
-    // error => {
-    //   console.log("Something wrong here");
-    // })
+   
     this.userData = data;
   }
 
@@ -51,15 +44,13 @@ export class LoginComponent implements OnInit {
     }
     return matches;
   };
-  getcountry(item)
-  {
-    console.log("contry==>",item)
-  }
+  
+  
 
   login()
   {
     //this.router.navigate(['dashbord'])
-    console.log("country===>",this.country)
+    
     this.params.email = this.name;
     this.params.password = this.password;
     //this.userService.userAuth(this.params).subscribe(data => {
@@ -71,9 +62,9 @@ export class LoginComponent implements OnInit {
 
   onProductChanged(country)
   {
-    console.log("conty==",country)
+    
     let contrydata=this.userData.find(product => product.name === country);
-    console.log("conty data==",contrydata)
+   
   }
 
 }

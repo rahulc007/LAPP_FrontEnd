@@ -2,7 +2,8 @@ import { Component, OnInit, EventEmitter  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 const URL = 'http://localhost:9000/api/integration-api/fileupload';
 import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.component';
-import {ConfigurationService} from '../../common/ngx-easy-table/config-service'
+import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
+
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
