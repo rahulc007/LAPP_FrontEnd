@@ -6,7 +6,7 @@ import {MainpageComponent} from './shared/pages/mainpage/mainpage.component';
 import {UploadSapDataComponent} from './upload-sap-data/upload-sap-data.component';
 import {NewOrdersComponent} from './new-orders/new-orders.component';
 
-const basePath = 'admin';
+const basePath = '';
 
 const AdminRoutes: Routes = [
   {
@@ -22,7 +22,7 @@ const AdminRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(AdminRoutes)
+    RouterModule.forChild(AdminRoutes)
   ],
   exports: [RouterModule]
 })
