@@ -4,7 +4,7 @@ body {
     
     .input-container {
     margin: 3em auto;
-    max-width: 400px;
+    width: 300px;
     background-color: silver;
     border: 1px solid #DFDFDF;
     border-radius: 6px;
@@ -37,6 +37,10 @@ body {
         padding-left: 50px;  
         position: center;
       }
+
+      .uplbtn{
+        margin-top: 50px;
+      }
     
     @media (max-width: 300px) {
     button {
@@ -49,6 +53,9 @@ body {
     display: block;
     margin: 10px 5px;
     }
+
+
+    
 
     
     }
