@@ -7,11 +7,18 @@ import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import { LoginComponent } from './common/login/login.component'
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FileSelectDirective } from 'ng2-file-upload';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { TableModule } from 'ngx-easy-table';
+import { HotTableModule } from 'ng2-handsontable';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -19,9 +26,13 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     AdminModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule,
+    HotTableModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

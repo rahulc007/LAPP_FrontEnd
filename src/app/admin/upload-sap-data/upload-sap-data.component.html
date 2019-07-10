@@ -1,1 +1,31 @@
-<p>upload-sap-data works!</p>
+
+<div class="container-fluid"  >
+
+ 
+    <div class="col-md-12 "  >
+  <div class="row ">
+      
+      <div class="col-md-12 "  >
+         
+        <div class="input-container" >
+          <input type="file" ng2FileSelect [uploader]="uploader" accept=""  #file accept=".xlsx, .xls, .csv">
+            <button class="browse-btn" (click)="file.click()">
+              Browse Files
+            </button>
+  
+          <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
+        </div>
+
+        <p align="center">
+      
+        <button type="button" class="btn btn-success btn-s" 
+  (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+  <span class="glyphicon glyphicon-upload"></span> Upload
+  </button>
+</p>
+  
+</div>
+  </div>
+</div>
+</div>
+<div class="row" ></div>

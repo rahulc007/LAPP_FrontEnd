@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
 @import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+@import "~ngx-easy-table/style.scss";
+@import '~handsontable/dist/handsontable.full.css';
 .test li.active {
     width: 100%;
     background-color: red!important;

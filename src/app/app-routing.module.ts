@@ -7,8 +7,6 @@ import {LoginComponent} from './common/login/login.component';
 //import {AdminmainComponent} from './lappmodule/admin-module/admin-shared/admin-pages/adminmain/adminmain.component'
 import {AuthGuard} from '../app/core/services/auth.guard';
 
-//import {MainpageComponent} from './shared/pages/mainpage/mainpage.component'
-
 
 const routes: Routes = [
   { path: '', component:LoginComponent },

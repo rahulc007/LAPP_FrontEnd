@@ -17,16 +17,27 @@ import { CreateAdminComponent } from './create-admin/create-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import {SharedModule} from './shared/shared.module';
+import {FileUploadModule, FileSelectDirective} from 'ng2-file-upload';
+import {NgxEasyTableComponent} from '../common/ngx-easy-table/ngx-easy-table.component';
+import {ConfigurationService} from '../common/ngx-easy-table/config-service'
+import { TableModule } from 'ngx-easy-table';
+import { HotTableModule } from 'ng2-handsontable';
 
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent],
   imports: [
     CommonModule,
+    HotTableModule,
     AddminRoutingModule,
     SharedModule,
-    RouterModule
-  ]
+    RouterModule,
+    FileUploadModule,
+    FormsModule,
+    TableModule
+  ],
+  exports:[NgxEasyTableComponent],
+  providers:[ConfigurationService]
   
 })
 export class AdminModule { }
