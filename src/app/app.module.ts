@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AdminModule} from './admin/admin.module';
 import {CustomerModule} from './customer/customer.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,6 +12,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TableModule } from 'ngx-easy-table';
 import { HotTableModule } from 'ng2-handsontable';
+
+
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { HotTableModule } from 'ng2-handsontable';
     HttpClientModule,
     TableModule,
     HotTableModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ReactiveFormsModule
+    
   ],
   providers: [],
 

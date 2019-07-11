@@ -16,19 +16,17 @@ export class ViewComponent implements OnInit, AfterViewInit {
   // public columns: Columns[] = 
 
   public data = [{
-    phone: '+1 (934) 551-2224',
-    age: 20,
-    address: { street: 'North street', number: 12 },
-    company: 'ZILLANET',
-    name: 'Valentine Webb',
-    isActive: false,
+    Orders: '222',
+    Orderdate: '10-02-2019',
+   Orderedtime: '1:04AM',
+   Updateddate:'02-06-2019',
+   Updatedtime:'6:00PM'
   }, {
-    phone: '+1 (948) 460-3627',
-    age: 31,
-    address: { street: 'South street', number: 12 },
-    company: 'KNOWLYSIS',
-    name: 'Heidi Duncan',
-    isActive: true,
+    Orders: '333',
+    Orderdate: '12-02-2019',
+   Orderedtime: '3:04AM',
+   Updateddate:'08-06-2019',
+   Updatedtime:'5:00PM'
   }];
   constructor(private router: Router, private route: ActivatedRoute){}
   // version 9.1 and below
@@ -38,11 +36,11 @@ export class ViewComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'phone', title: 'Phone' },
-      { key: 'age', title: 'Age' },
-      { key: 'company', title: 'Company' },
-      { key: 'name', title: 'Name' },
-      { key: 'isActive', title: 'STATUS' },
+      { key: 'Orders', title: 'Orders' },
+      { key: ' Orderdate', title: ' Order Date' },
+      { key: 'Orderedtime', title: 'Ordered Time' },
+      { key: 'Updateddate', title: 'Updated Date ' },
+      { key: 'Updated Time', title: 'Updated Time' },
       {key: 'Actions', title: 'Actions', searchEnabled: false,cellTemplate: this.Ver}
     ];
   }
