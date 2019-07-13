@@ -1,16 +1,19 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole ,ViewChild, TemplateRef, ViewEncapsulation, AfterViewInit, OnDestroy} from '@angular/core';
 import {Routes, Router, ActivatedRoute} from '@angular/router';
 import {UserService} from '../../core/services/user.service';
 import {data} from '../../../assets/data/country_';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   
+  @ViewChild('content',{static: false}) content: TemplateRef<any>;
   country:any;
   submitted = false;
   params={email:"",password:""};
@@ -20,7 +23,7 @@ export class LoginComponent implements OnInit {
   userData: any[] = [];
   userList1:any;
   lastkeydown1: number = 0;
-  constructor( private formBuilder: FormBuilder,private router: Router, private route: ActivatedRoute,private userService: UserService) { }
+  constructor( private modalService: NgbModal,private formBuilder: FormBuilder,private router: Router, private route: ActivatedRoute,private userService: UserService) { }
 
   ngOnInit() {
 
@@ -57,23 +60,38 @@ export class LoginComponent implements OnInit {
   };
   
   
-
+  ngAfterViewInit() {
+  }
+  
+  get f() { return this.loginForm.controls; }
   login()
   {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
-        return;
+    // if (this.loginForm.invalid) {
+    //     return;
+    // }
+
+    let params={
+      "email":this.loginForm.value.username,
+      "password":this.loginForm.value.password
     }
-    //this.userService.userAuth(this.params).subscribe(data => {
+
+  // this.userService.login(params).pipe(first()).subscribe(data => {
 
       this.router.navigate(['admin']);
 
-    //});
+//     },
+//     error => {
+      
+//       this.modalService.open(this.content);
+//       this.loginForm.reset();
+     
+//  });
+    
   }
 
-  
 
   onProductChanged(country)
   {

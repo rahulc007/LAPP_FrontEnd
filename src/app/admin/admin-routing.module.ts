@@ -5,16 +5,20 @@ import {AuthGuard} from '../core/services/auth.guard';
 import {MainpageComponent} from './shared/pages/mainpage/mainpage.component';
 import {UploadSapDataComponent} from './upload-sap-data/upload-sap-data.component';
 import {NewOrdersComponent} from './new-orders/new-orders.component';
+import {UpdatedOrdersComponent} from './updated-orders/updated-orders.component';
+import { ViewComponent } from './profile/view/view.component';
 
 const basePath = 'admin';
 
 const AdminRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent,canActivate: [AuthGuard],
+    component: MainpageComponent,
     children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent },
     { path: 'upload', component: UploadSapDataComponent },
-    { path: 'neworders', component: NewOrdersComponent }]
+    { path: 'neworders', component: NewOrdersComponent },
+    { path: 'updatedorders', component: UpdatedOrdersComponent },
+     {path: 'profile', component:ViewComponent}]
     
   },
   

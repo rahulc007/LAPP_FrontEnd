@@ -7,24 +7,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import { LoginComponent } from './common/login/login.component'
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TableModule } from 'ngx-easy-table';
 import { HotTableModule } from 'ng2-handsontable';
-
-
+import {JwtInterceptor} from './core/services/jwt.interceptor';
+import {CoreModule} from './core/core.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    
-   
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     RouterModule,
     AdminModule,
     CustomerModule,
@@ -34,10 +33,9 @@ import { HotTableModule } from 'ng2-handsontable';
     TableModule,
     HotTableModule,
     AngularFontAwesomeModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule 
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
 
   bootstrap: [AppComponent]
 })

@@ -15,7 +15,7 @@ const CustomerRoutes: Routes = [
      children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },
      { path: 'dashbord', component: DashbordComponent },
      { path: 'orderview', component: ViewComponent },
-     { path: 'orderview/orderedit', component: EditComponent }]
+     { path: 'orderview/orderedit/:id', component: EditComponent }]
     
   },
   

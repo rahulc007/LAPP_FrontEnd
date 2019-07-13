@@ -19,13 +19,16 @@ import { RouterModule, Routes } from '@angular/router';
 import {SharedModule} from './shared/shared.module';
 import {FileUploadModule, FileSelectDirective} from 'ng2-file-upload';
 import {NgxEasyTableComponent} from '../common/ngx-easy-table/ngx-easy-table.component';
-import {ConfigurationService} from '../common/ngx-easy-table/config-service'
+import {PaginationComponent} from '../common/pagination/pagination.component';
+import {ConfigurationService} from '../common/ngx-easy-table/config-service';
 import { TableModule } from 'ngx-easy-table';
 import { HotTableModule } from 'ng2-handsontable';
+import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
+import {JwtInterceptor} from '../core/services/jwt.interceptor'
 
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent],
   imports: [
     CommonModule,
     HotTableModule,
@@ -34,10 +37,13 @@ import { HotTableModule } from 'ng2-handsontable';
     RouterModule,
     FileUploadModule,
     FormsModule,
-    TableModule
+    TableModule,
+    HttpClientModule,
+    ReactiveFormsModule
+    
   ],
-  exports:[NgxEasyTableComponent],
-  providers:[ConfigurationService]
+  exports:[NgxEasyTableComponent, PaginationComponent],
+  providers:[ConfigurationService,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}]
   
 })
 export class AdminModule { }

@@ -8,7 +8,7 @@ export class ConfigurationService {
     headerEnabled: true,
     orderEnabled: true,
     orderEventOnly: false,
-    paginationEnabled: true,
+    paginationEnabled: false,
     exportEnabled: false,
     clickEvent: false,
     selectRow: false,
@@ -20,7 +20,7 @@ export class ConfigurationService {
     isLoading: false,
     detailsTemplate: false,
     groupRows: false,
-    paginationRangeEnabled: true,
+    paginationRangeEnabled: false,
     collapseAllRows: false,
     checkboxes: false,
     resizeColumn: true,
@@ -31,7 +31,7 @@ export class ConfigurationService {
     showDetailsArrow: false,
     showContextMenu: false,
     persistState: false,
-    paginationMaxSize: 5,
+    //paginationMaxSize: 5,
     threeWaySort: false,
     tableLayout: {
       style: STYLE.NORMAL, // or STYLE.BIG or STYLE.TINY

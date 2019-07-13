@@ -19,7 +19,7 @@
     <div class="input-group-prepend">
     <i class="fa fa-user input-group-text" aria-hidden="true"></i>
     </div>
-    <input formControlName="username" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required/>
+    <input formControlName="username" class="form-control" type="text" placeholder="Enter User Name" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required/>
     
     
     </div>
@@ -37,7 +37,7 @@
     <i class="fa fa-lock input-group-text" aria-hidden="true"></i>
     </div>
     
-    <input formControlName="password" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required/>
+    <input formControlName="password" class="form-control" type="password" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required/>
     
     
     </div>
@@ -94,3 +94,23 @@
     <div class="top_brdr btm_brdr"></div>
     </div>
     </div>
+
+
+    <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">Login!
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                
+                     <p>Invalid User Name and Password</p>
+                    
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+              
+            </div>
+          </ng-template>
+
+         

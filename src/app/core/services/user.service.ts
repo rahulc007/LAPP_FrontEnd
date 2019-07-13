@@ -4,101 +4,64 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 //import { AppConfig } from '../../configs/app.config';
 import { map } from 'rxjs/operators';
 import { CookieService } from './cookieservice.service';
-//import { SessionTimeOutComponent } from '../modals/session-time-out/session-time-out.component';
+// import { SessionTimeOutComponent } from '../modals/session-time-out/session-time-out.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import {SessionTimeOutComponent} from '../modals/session-time-out/session-time-out.component';
 import {APP_CONFIG,AppConfig} from '../../configs/app.config';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private currentUserSubject: BehaviorSubject<Object>;
-  public currentUser: Observable<Object>;
-  private userApi: string = AppConfig.endpoints.userApi;
-  constructor(private http: HttpClient, private cookieService: CookieService, private modalService: NgbModal, private router: Router) {
-    this.currentUserSubject = new BehaviorSubject<Object>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private _router: Router,public http:HttpClient,private modalService: NgbModal) { }
+  isAuthenticated(): boolean {
+    return localStorage.getItem('token') != null && !this.isTokenExpired();
   }
 
-  public get currentUserValue(): Object {
-    return this.currentUserSubject.value;
+  // simulate jwt token is valid
+  // https://github.com/theo4u/angular4-auth/blob/master/src/app/helpers/jwt-helper.ts
+  isTokenExpired(): boolean {
+    return false;
   }
 
-  public decodeUser(data: any) {
+    login(data) {
+      const url = `http://localhost:3000/auth/token`
+        return this.http.post<any>(url, data)
+            .pipe(map(user => {
+                // login successful if there's a jwt token in the response
+                if (user) {
+                  localStorage.setItem('token', user.token);
+                  localStorage.setItem('userrole', user.role);
+                  localStorage.setItem('currentUser',JSON.stringify(user));
+                  localStorage.setItem('userId', user.userid);
+               this._router.navigate(['/dashboard']);
+                 }
+                 return user;
+           },
+           error =>{ console.log("error==>",error)
+            localStorage.setItem('loginerror',error)
+         }));
 
-    if (!data) {
-      return {};
+             
     }
+
     
-   
-    return JSON.parse(decodeURIComponent(window.atob(data.token).split('').map(function (c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join('')));
-  }
-
-
-  public userAuth(data): any { 
-    const url = this.userApi;
-    return this.http.post<any>(url, data)
-      .pipe(map(res => {
-        if (res) {
-          // store user details and  token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(res));
-          const userData = res;
-         
-            //const authToken = this.parseJwt(userData);
-            const d = new Date(0);
-            d.setUTCSeconds(userData.exp);
-            this.cookieService.set('token', userData.token, d);
-          
-          this.currentUserSubject.next(userData);
-        }
-        return res;
-      }));
-  }
-
-  public logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-    const d = new Date();
-    this.cookieService.set('token', '', d);
-    this.currentUserSubject.next(null);
-    this.router.navigate(['login']);
-
-  }
-
-  public isAuth() {
-    const token = this.getToken();
-    if (this.currentUser && token) {
-      return true;
-    } else {
-      return false;
+    logout(): void {
+      this.clear();
+      this._router.navigate(['login']);
     }
-  }
 
-  public getToken() {
-    return this.cookieService.get('token');
-  }
-  public sessionTimeOut() {
-    this.modalService.open(SessionTimeOutComponent);
-  }
+    public sessionTimeOut() {
+      this.modalService.open(SessionTimeOutComponent);
+    }
 
-  public parseJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    return JSON.parse(window.atob(base64));
-  }
+    clear(): void {
+      localStorage.clear();
+    }
 
-  getUserList() {
- 
 
-    return this.http.get('http://localhost../../../assets/data/country.json');
-    
-}
 
 
 }
