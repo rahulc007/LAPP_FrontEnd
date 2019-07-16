@@ -11,17 +11,20 @@ import {ConfigurationService} from '../common/ngx-easy-table/config-service';
 import { ViewComponent } from './orders/view/view.component';
 import { EditComponent } from './orders/edit/edit.component';
 import { TableModule } from 'ngx-easy-table';
+import { LegseditComponent } from './orders/legsedit/legsedit.component';
+import { HotTableModule } from '@handsontable/angular';
 
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     SharedModule,
     RouterModule,
     FormsModule,
-    TableModule
+    TableModule,
+    HotTableModule 
   ],
   exports:[],
   providers:[ConfigurationService],

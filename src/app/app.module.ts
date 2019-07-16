@@ -11,7 +11,7 @@ import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common
 import { FileSelectDirective } from 'ng2-file-upload';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { TableModule } from 'ngx-easy-table';
-import { HotTableModule } from 'ng2-handsontable';
+import { HotTableModule } from '@handsontable/angular';
 import {JwtInterceptor} from './core/services/jwt.interceptor';
 import {CoreModule} from './core/core.module';
 
@@ -31,7 +31,7 @@ import {CoreModule} from './core/core.module';
     AppRoutingModule,
     HttpClientModule,
     TableModule,
-    HotTableModule,
+    HotTableModule.forRoot(),
     AngularFontAwesomeModule,
     ReactiveFormsModule 
   ],

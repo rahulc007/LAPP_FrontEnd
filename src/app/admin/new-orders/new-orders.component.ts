@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit } from '@angula
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import {UserService} from '../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-orders',
@@ -18,7 +18,7 @@ export class NewOrdersComponent implements OnInit , AfterViewInit{
   baseUrl:any;
   public data :any[]=[];
  
-  constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute) {this.configuration = ConfigurationService.config; 
+  constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute,private router:Router) {this.configuration = ConfigurationService.config; 
     this.configuration = ConfigurationService.config;
   }
 
@@ -29,26 +29,28 @@ export class NewOrdersComponent implements OnInit , AfterViewInit{
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'id', title: 'Orders' },
-      { key: 'name', title: ' Order Date' },
-      { key: 'name', title: ' Updated Date' },
-      { key: 'name', title: ' Order Date' },
-      {key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
+      { key: 'id', title: 'User ID' },
+      { key: 'name', title: 'Order No' },
+      { key: 'name', title: 'Ordered Date' },
+      { key: 'name', title: 'Updated Date' },
+      {key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver}
     ]
+
   }
-
-
-  
-
 
   private loadPage(page) {
     // get page of items from api
-    this.http.get<any>(`http://localhost:8080/api/items?page=${page }`).subscribe(x => {
+    this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {
         this.pager = x.pager;
         this.pageOfItems = x.pageOfItems;
         this.data = this.pageOfItems
     });
   }
-  
+
+  ordersview(row)
+  {
+    console.log("row===>",row);
+    this.router.navigate(["admin/neworders/newordersview", row.id])
+  }
 
 }

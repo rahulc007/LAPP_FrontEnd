@@ -32,16 +32,15 @@ export class UserService {
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user) {
-                  localStorage.setItem('token', user.token);
-                  localStorage.setItem('userrole', user.role);
-                  localStorage.setItem('currentUser',JSON.stringify(user));
-                  localStorage.setItem('userId', user.userid);
-               this._router.navigate(['/dashboard']);
+                  sessionStorage.setItem('token', user.token);
+                  sessionStorage.setItem('userrole', user.role);
+                  sessionStorage.setItem('currentUser',JSON.stringify(user));
+                  this._router.navigate(['/dashboard']);
                  }
                  return user;
            },
            error =>{ console.log("error==>",error)
-            localStorage.setItem('loginerror',error)
+            sessionStorage.setItem('loginerror',error)
          }));
 
              

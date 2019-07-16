@@ -7,18 +7,22 @@ import {UploadSapDataComponent} from './upload-sap-data/upload-sap-data.componen
 import {NewOrdersComponent} from './new-orders/new-orders.component';
 import {UpdatedOrdersComponent} from './updated-orders/updated-orders.component';
 import { ViewComponent } from './profile/view/view.component';
+import {NewOrdersViewComponent} from './new-orders-view/new-orders-view.component';
+import {CustomerDetailsComponent} from './customer-details/customer-details.component';
 
 const basePath = 'admin';
 
 const AdminRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent,
-    children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent },
-    { path: 'upload', component: UploadSapDataComponent },
-    { path: 'neworders', component: NewOrdersComponent },
-    { path: 'updatedorders', component: UpdatedOrdersComponent },
-     {path: 'profile', component:ViewComponent}]
+    component: MainpageComponent,canActivate: [AuthGuard],
+    children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent , canActivate: [AuthGuard]},
+    { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard] },
+    { path: 'neworders', component: NewOrdersComponent, canActivate: [AuthGuard] },
+    { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard] },
+    { path: 'updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard] },
+     {path: 'profile', component:ViewComponent, canActivate: [AuthGuard]},
+     {path: 'customerdetails', component:CustomerDetailsComponent, canActivate: [AuthGuard]}]
     
   },
   

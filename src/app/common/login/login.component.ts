@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('content',{static: false}) content: TemplateRef<any>;
   country:any;
   submitted = false;
+  message:any;
   params={email:"",password:""};
   loginForm: FormGroup;
   name:any;
@@ -64,31 +65,33 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
   
   get f() { return this.loginForm.controls; }
+
   login()
   {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.loginForm.invalid) {
-    //     return;
-    // }
+    if (this.loginForm.invalid) {
+        return;
+    }
 
     let params={
       "email":this.loginForm.value.username,
       "password":this.loginForm.value.password
     }
 
-  // this.userService.login(params).pipe(first()).subscribe(data => {
+   this.userService.login(params).pipe(first()).subscribe(data => {
 
       this.router.navigate(['admin']);
 
-//     },
-//     error => {
+    },
+    error => {
       
-//       this.modalService.open(this.content);
-//       this.loginForm.reset();
-     
-//  });
+      this.message = "Invalid User Name & Password"
+      this.loginForm.reset();
+
+      
+ });
     
   }
 

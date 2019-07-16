@@ -5,6 +5,7 @@ import {AuthGuard} from '../core/services/auth.guard';
 import {MainpageComponent} from './shared/pages/mainpage/mainpage.component';
 import {ViewComponent} from './orders/view/view.component';
 import {EditComponent} from './orders/edit/edit.component';
+import {LegseditComponent} from './orders/legsedit/legsedit.component';
 
 const basePath = 'customer';
 
@@ -15,7 +16,9 @@ const CustomerRoutes: Routes = [
      children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },
      { path: 'dashbord', component: DashbordComponent },
      { path: 'orderview', component: ViewComponent },
-     { path: 'orderview/orderedit/:id', component: EditComponent }]
+     { path: 'orderview/orderedit/:id', component: EditComponent},
+     { path: 'orderview/orderedit/:id/editlegs', component: LegseditComponent},
+    ]
     
   },
   

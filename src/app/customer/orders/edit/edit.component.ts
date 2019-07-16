@@ -1,6 +1,9 @@
 import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import {ConfigurationService} from '../../../common/ngx-easy-table/config-service'
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+import {Routes, Router, ActivatedRoute} from '@angular/router';
+import {UserService} from '../../../core/services/user.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit',
@@ -14,39 +17,42 @@ export class EditComponent implements OnInit , AfterViewInit{
   public configuration: Config;
   public columns: any[] = [];
   // public columns: Columns[] = 
-
-  public data = [{
-    Orders: '222',
-    Ordereddate: '10-02-2019',
-   Orderedtime: '1:04AM',
-   Updateddate:'02-06-2019',
-   Updatedtime:'6:00PM'
-  }, {
-    Orders: '333',
-    Ordereddate: '12/02/2019',
-   Orderedtime: '3:04AM',
-   Updateddate:'08-06-2019',
-   Updatedtime:'5:00PM'
-  }];
-
+  pager = {};
+  pageOfItems = [];
+  baseUrl:any;
+  data:any[]=[];
+  
+  constructor(private UserService: UserService, private http: HttpClient, private router: Router,private route: ActivatedRoute) { }
   // version 9.1 and below
   ngOnInit() {
     this.configuration = ConfigurationService.config;
-    this.data=this.data;
+  //  this.data=this.data;
+    this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'Orders', title: 'Orders' },
-      { key: 'Ordereddate', title: 'Order Date' },
-      { key: 'Orderedtime', title: 'Ordered Time' },
-      { key: 'Updateddate', title: 'Updated Date ' },
-      { key: 'Updatedtime', title: 'Updated Time' },
-      {key: 'Actions', title: 'Actions', searchEnabled: false,cellTemplate: this.Ver}
+      { key: 'id', title: 'Line Item No' },
+      { key: 'name', title: 'Article Number' }, 
+      { key: 'name', title: ' Art Designation' }, 
+      { key: 'name', title: ' Length' }, 
+      { key: 'name', title: ' Quantity' }, 
+      {key: 'Actions', title: 'Edit', searchEnabled: false,cellTemplate: this.Ver}
     ];
   }
+
+  private loadPage(page) {
+    // get page of items from api
+    this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {
+        this.pager = x.pager;
+        this.pageOfItems = x.pageOfItems;
+        this.data = this.pageOfItems
+    });
+  }
+
   
-  detailedlayout(row)
+  orderview(row)
   {
     console.log("row===>",row)
+    this.router.navigate(['customer/orderview/orderedit/:id/editlegs']);
   }
 }

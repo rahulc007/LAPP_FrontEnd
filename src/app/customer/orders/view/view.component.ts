@@ -21,19 +21,7 @@ export class ViewComponent implements OnInit, AfterViewInit {
   pageOfItems = [];
   baseUrl:any;
   data:any[]=[];
-  // public data = [{
-  //   Orders: '222',
-  //   Orderdate: '10-02-2019',
-  //  Orderedtime: '1:04AM',
-  //  Updateddate:'02-06-2019',
-  //  Updatedtime:'6:00PM'
-  // }, {
-  //   Orders: '333',
-  //   Orderdate: '12-02-2019',
-  //  Orderedtime: '3:04AM',
-  //  Updateddate:'08-06-2019',
-  //  Updatedtime:'5:00PM'
-  // }];
+  
   constructor(private UserService: UserService, private http: HttpClient, private router: Router,private route: ActivatedRoute) { }
   // version 9.1 and below
   ngOnInit() {
@@ -43,16 +31,18 @@ export class ViewComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'id', title: 'Orders' },
-      { key: 'name', title: ' Order Date' },
-      
+      { key: 'id', title: 'Order No' },
+      { key: 'name', title: ' Order Date' }, 
+      { key: 'name', title: ' Ordered Time' }, 
+      { key: 'name', title: ' Updated Date' }, 
+      { key: 'name', title: ' Order Time' }, 
       {key: 'Actions', title: 'Actions', searchEnabled: false,cellTemplate: this.Ver}
     ];
   }
 
   private loadPage(page) {
     // get page of items from api
-    this.http.get<any>(`http://localhost:8080/api/items?page=${page }`).subscribe(x => {
+    this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {
         this.pager = x.pager;
         this.pageOfItems = x.pageOfItems;
         this.data = this.pageOfItems
@@ -60,10 +50,9 @@ export class ViewComponent implements OnInit, AfterViewInit {
   }
 
   
-  detailedlayout(row)
+  orderview(row)
   {
     console.log("row===>",row)
-
     this.router.navigate(['customer/orderview/orderedit', row.id]);
   }
 
