@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ViewComponent implements OnInit {
   profileForm: FormGroup;
   submitted = false;
+  mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
+
   constructor(private formBuilder: FormBuilder) { }
 
 
@@ -21,13 +23,12 @@ export class ViewComponent implements OnInit {
       country:['', Validators.required],
       State:['', Validators.required],
       City: ['', Validators.required],
-      phone: ['', [Validators.required,Validators.minLength(10),Validators.pattern("[0-9]{0-10}")]],
-      referncecode:['', Validators.required]
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern(this.mobnumPattern)]],
+      referncecode: ['', Validators.required]
    });
   }
 
-  continue()
-  {
+  continue()  {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -35,7 +36,7 @@ export class ViewComponent implements OnInit {
         return;
     }
 
-let params={
+let params = {
   "firstname":this.profileForm.value.fname,
   "lastname": this.profileForm.value.lname,
   "email": this.profileForm.value.email
