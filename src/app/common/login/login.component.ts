@@ -80,18 +80,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
       "password":this.loginForm.value.password
     }
 
-   //this.userService.login(params).pipe(first()).subscribe(data => {
+   this.userService.login(params).pipe(first()).subscribe(data => {
 
       this.router.navigate(['admin']);
 
-//     },
-//     error => {
+   },
+   error => {
       
-//       this.message = "Invalid User Name & Password"
-//       this.loginForm.reset();
+     this.message = "Invalid User Name & Password"
+     this.loginForm.reset();
 
       
-//  });
+  });
     
   }
 

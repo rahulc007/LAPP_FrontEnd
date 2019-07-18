@@ -1,16 +1,17 @@
-<div class="pagination" *ngIf="count > 0">
-	<div class="description">
-		<span class="page-counts">{{ getMin() }} - {{ getMax() }} of {{ count }}</span>
-		<span class="page-totals">{{ totalPages() }} pages</span>
-	</div>
-	<div class="numbers">
-		<button class="link" (click)="onPrev()" [disabled]="page === 1 || loading" [ngClass]="{ 'disabled': page === 1 || loading }">&lt; Previous</button>
-		
-		<button
-			*ngFor="let pageNum of getPages()"
-			(click)="onPage(pageNum)"
-			[ngClass]="{'active': pageNum === page, 'disabled': loading}">{{ pageNum }}</button>
-
-		<button class="link" (click)="onNext(true)" [disabled]="lastPage() || loading" [ngClass]="{ 'disabled': lastPage() || loading }">Next &gt;</button>
-	</div>
-</div>
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+        <a (click)="loadPage(page=1)"  class="page-link">First</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+        <a (click)="loadPage(page= pager.currentPage - 1)"  class="page-link">Previous</a>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+        <a (click)="loadPage(page= page)"  class="page-link">{{page}}</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+        <a (click)="loadPage(page= pager.currentPage + 1)"  class="page-link">Next</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+        <a (click)="loadPage(page= pager.totalPages)"  class="page-link">Last</a>
+    </li>
+</ul>
