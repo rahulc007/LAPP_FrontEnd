@@ -43,9 +43,7 @@ body {
         color:white;
       }
   
-    .siz{
-      margin-left:300px;
-    }    
+   
 
     @media (max-width: 300px) {
     button {
