@@ -18,7 +18,7 @@ const AdminRoutes: Routes = [
     component: MainpageComponent,
     children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent },
     { path: 'upload', component: UploadSapDataComponent},
-    { path: 'neworders', component: NewOrdersComponent},
+    { path: 'dashbord/neworders', component: NewOrdersComponent},
     { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent },
     { path: 'updatedorders', component: UpdatedOrdersComponent},
      {path: 'profile', component:ViewComponent},
