@@ -1,5 +1,5 @@
 
-        <form [formGroup]="profileForm" class="siz" (ngSubmit)="continue()">
+        <form [formGroup]="profileForm" class="siz mr-5" (ngSubmit)="continue()">
                 
                 <div class="row">
                 <div class="col-md-6">
@@ -39,7 +39,7 @@
                 
                 </div>
                 
-                <div class="row">
+                <div id="country" class="row">
                  <div class="col-md-3"> 
                     <input type="text" class="form-control" formControlName="country"  name="country"  placeholder="Country" list="codes" step="5" min="5" max="200" required />
                     <datalist id="codes" >
@@ -49,7 +49,7 @@
                     </datalist>
                    </div>
                 
-                   <div class="col-md-3">  
+                   <div class="col-md-3 ml-5">  
                        <input type="text" class="form-control" formControlName="State"  name="State"  placeholder="State" list="statecodes" step="5" min="5" max="200" required />
                      <datalist id="statecodes" >
                           <select class="scrollbar" >
@@ -59,7 +59,7 @@
                               
                        </div>
                 
-                           <div class="col-md-3"> 
+                           <div class="col-md-3 ml-5"> 
                                       <input type="text" class="form-control" formControlName="City"  name="city"  placeholder="City" list="citycodes" step="5" min="5" max="200" required />
                                        <datalist id="citycodes" >
                                             <select class="scrollbar" >
@@ -90,7 +90,7 @@
                 </div>
                 
                 <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6 offset-md-5">
                   <button (click)="continue()"  class="btn ">Continue</button>
                         </div>
                 </div>

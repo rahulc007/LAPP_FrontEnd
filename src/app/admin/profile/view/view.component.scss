@@ -194,8 +194,10 @@ a {
   }
 }
 .siz{
-  margin-top: 10px;
+  margin-left: 100px;
+  margin-top: 05px;
   width: 1000px;
+  padding-left:20px;
 }
 
 .btn{
@@ -204,4 +206,7 @@ a {
     background : rgb(181,122,40);
     width:300px;
 
+}
+#country input{
+  width: 300px;
 }

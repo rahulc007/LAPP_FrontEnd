@@ -33,7 +33,7 @@ import {CoreModule} from './core/core.module';
     TableModule,
     HotTableModule.forRoot(),
     AngularFontAwesomeModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
 

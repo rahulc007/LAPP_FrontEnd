@@ -4,7 +4,7 @@ body {
     
     .input-container {
     margin: 3em auto;
-    width: 300px;
+    width: 400px;
     background-color: silver;
     border: 1px solid #DFDFDF;
     border-radius: 6px;
@@ -20,8 +20,8 @@ body {
     }
     
     .browse-btn {
-    background: #03A595;
-    color: silver;
+    background: rgb(181,122,40);
+    color: white;
     min-height: 35px;
     padding: 10px;
     border: none;
@@ -37,11 +37,16 @@ body {
         padding-left: 50px;  
         position: center;
       }
-
-      .uplbtn{
-        margin-top: 50px;
+     
+      .UplBtn{
+        background-color: chocolate;
+        color:white;
       }
-    
+  
+    .siz{
+      margin-left:300px;
+    }    
+
     @media (max-width: 300px) {
     button {
     width: 100%;
@@ -54,8 +59,4 @@ body {
     margin: 10px 5px;
     }
 
-
-    
-
-    
-    }
+  }
