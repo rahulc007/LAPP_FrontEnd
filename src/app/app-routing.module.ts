@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'admin', loadChildren:'./admin/admin.module#AdminModule', canActivate: [AuthGuard]  },
   { path: 'customer', loadChildren:'./customer/customer.module#CustomerModule', canActivate: [AuthGuard] },
   { path: 'login', component:LoginComponent },
+  { path: '**', redirectTo: 'login', pathMatch: 'full'},
   
 ];
 

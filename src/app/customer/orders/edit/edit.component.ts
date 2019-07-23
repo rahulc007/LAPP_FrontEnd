@@ -42,7 +42,7 @@ export class EditComponent implements OnInit , AfterViewInit{
 
   private loadPage(page) {
     // get page of items from api
-    this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {
+    this.http.get<any>(`http://localhost:4000/items?page=${page }`).subscribe(x => {
         this.pager = x.pager;
         this.pageOfItems = x.pageOfItems;
         this.data = this.pageOfItems
@@ -53,6 +53,6 @@ export class EditComponent implements OnInit , AfterViewInit{
   orderview(row)
   {
     console.log("row===>",row)
-    this.router.navigate(['customer/orderview/orderedit/:id/editlegs']);
+    this.router.navigate(['customer/orderview/orderedit/editlegs',row.id]);
   }
 }

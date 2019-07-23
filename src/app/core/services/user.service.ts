@@ -32,15 +32,15 @@ export class UserService {
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user) {
-                  sessionStorage.setItem('token', user.token);
-                  sessionStorage.setItem('userrole', user.role);
-                  sessionStorage.setItem('currentUser',JSON.stringify(user));
+                  localStorage.setItem('token', user.token);
+                  localStorage.setItem('userrole', user.role);
+                  localStorage.setItem('currentUser',JSON.stringify(user));
                   this._router.navigate(['/dashboard']);
                  }
                  return user;
            },
            error =>{ console.log("error==>",error)
-            sessionStorage.setItem('loginerror',error)
+            localStorage.setItem('loginerror',error)
          }));
 
              
@@ -53,7 +53,7 @@ export class UserService {
     }
 
     public sessionTimeOut() {
-      this.modalService.open(SessionTimeOutComponent);
+    //  this.modalService.open(SessionTimeOutComponent);
     }
 
     clear(): void {

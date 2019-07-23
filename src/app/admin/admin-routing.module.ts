@@ -15,14 +15,14 @@ const basePath = 'admin';
 const AdminRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent,
-    children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent },
-    { path: 'dashbord/upload', component: UploadSapDataComponent},
-    { path: 'dashbord/neworders', component: NewOrdersComponent},
-    { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent},
-    { path: 'updatedorders', component: UpdatedOrdersComponent},
-     {path: 'profile', component:ViewComponent},
-     {path: 'customerdetails', component:CustomerDetailsComponent}]
+    component: MainpageComponent,canActivate: [AuthGuard],
+    children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent,canActivate: [AuthGuard] },
+    { path: 'dashbord/upload', component: UploadSapDataComponent,canActivate: [AuthGuard]},
+    { path: 'dashbord/neworders', component: NewOrdersComponent,canActivate: [AuthGuard]},
+    { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent,canActivate: [AuthGuard] },
+    { path: 'updatedorders', component: UpdatedOrdersComponent,canActivate: [AuthGuard]},
+     {path: 'profile', component:ViewComponent,canActivate: [AuthGuard]},
+     {path: 'customerdetails', component:CustomerDetailsComponent,canActivate: [AuthGuard]}]
     
   },
   

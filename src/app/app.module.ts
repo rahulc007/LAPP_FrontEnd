@@ -16,10 +16,12 @@ import {JwtInterceptor} from './core/services/jwt.interceptor';
 import {CoreModule} from './core/core.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+   
   ],
   imports: [
     BrowserModule,
