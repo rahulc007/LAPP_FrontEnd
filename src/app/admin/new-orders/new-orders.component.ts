@@ -27,6 +27,7 @@ export class NewOrdersComponent implements OnInit , AfterViewInit{
     this.route.queryParams.subscribe(x => this.loadPage(x.page || 1))
 
   }
+  
   ngAfterViewInit() {
     this.columns = [
       { key: 'id', title: 'User ID' },

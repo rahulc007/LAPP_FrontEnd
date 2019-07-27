@@ -28,6 +28,8 @@ export class UserService {
 
     login(data) {
       const url = `http://localhost:3000/auth/token`
+      
+     // const url = AppConfig.endpoints.loginApi
         return this.http.post<any>(url, data)
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response

@@ -1,9 +1,10 @@
 import { Component, OnInit, EventEmitter  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URL = 'http://localhost:9000/api/integration-api/fileupload';
+ const URL = 'http://localhost:9000/api/integration-api/fileupload';
 import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.component';
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
-
+import {AppConfig} from '../../configs/app.config';
+//const URL= AppConfig.endpoints.uploadApi;
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
@@ -11,6 +12,7 @@ import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
   providers:[ConfigurationService]
 })
 export class UploadSapDataComponent implements OnInit {
+
   fd = new FormData();
   configuration: any;
   file:File;

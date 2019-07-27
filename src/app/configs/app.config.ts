@@ -12,7 +12,8 @@ export const AppConfig: any = {
     error404: '404'
   },
   endpoints: {  
-    	userApi: `http://localhost:3000/auth/token`,
+      loginApi: `http://3.17.182.133:8090/validateUser`,
+      uploadApi: `http://3.17.182.133:8090/uploadSAPData`
   },
   votesLimit: 3,
   topHeroesLimit: 4,
