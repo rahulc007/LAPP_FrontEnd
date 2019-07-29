@@ -27,15 +27,15 @@ export class UserService {
   }
 
     login(data) {
-      const url = `http://localhost:3000/auth/token`
+      //const url = `http://localhost:3000/auth/token`
       
-     // const url = AppConfig.endpoints.loginApi
+      const url = AppConfig.endpoints.loginApi
         return this.http.post<any>(url, data)
             .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user) {
-                  localStorage.setItem('token', user.token);
-                  localStorage.setItem('userrole', user.role);
+                //login successful if there's a jwt token in the response
+                if (user.status===AppConfig.ok  &&   user.statusMessage !=AppConfig.error) {
+                  // localStorage.setItem('token', user.token);
+                  // localStorage.setItem('userrole', user.role);
                   localStorage.setItem('currentUser',JSON.stringify(user));
                   this._router.navigate(['/dashboard']);
                  }

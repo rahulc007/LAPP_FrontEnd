@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
- const URL = 'http://localhost:9000/api/integration-api/fileupload';
+ const URL = `http://3.17.182.133:8090/uploadSAPData`;
 import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.component';
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import {AppConfig} from '../../configs/app.config';
@@ -28,8 +28,7 @@ export class UploadSapDataComponent implements OnInit {
         
      };
      this.uploader.options.additionalParameter = {
-      layoutId: 10,
-      userId: 1
+     
   };
   }
 
@@ -43,7 +42,7 @@ public onFileSelected() {
 
   console.log("file==>",this.uploader.queue);
 
-  this.fd.append('file', this.file);
+  this.fd.append('orderData', this.file);
 
 }
 

@@ -15,8 +15,6 @@ export const AppConfig: any = {
       loginApi: `http://3.17.182.133:8090/validateUser`,
       uploadApi: `http://3.17.182.133:8090/uploadSAPData`
   },
-  votesLimit: 3,
-  topHeroesLimit: 4,
-  snackBarDuration: 3000,
-  repositoryURL: '/'
+  ok:200,
+  error: 'error'
 };

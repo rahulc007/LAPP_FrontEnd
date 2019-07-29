@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       country: ['', Validators.required]
    });
    
@@ -76,18 +76,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     let params={
-      "email":this.loginForm.value.username,
-      "password":this.loginForm.value.password
+      "emailId":this.loginForm.value.username,
+      "password":btoa(this.loginForm.value.password)
     }
 
    this.userService.login(params).pipe(first()).subscribe(data => {
 
       this.router.navigate(['admin']);
-
+      this.message = data.successMessage === null ? data.errorMessage: data.successMessage ;
+     
   },
    error => {
       
-     this.message = "Invalid User Name & Password"
+     this.message = error
      this.loginForm.reset();
 
       
