@@ -269,3 +269,21 @@ html, body {
     color: #ff7100;
   }
   /*dashboard end*/
+
+  .drpdown{
+      margin-left: -65px;
+  }
+
+  .btn {
+    border: 2px solid rgb(181,122,40);
+    background-color: white;
+    color: rgb(181,122,40);
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .warning {
+    border-color: rgb(181,122,40);
+    color: rgb(181,122,40);
+  }

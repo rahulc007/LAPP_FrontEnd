@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter  } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
  const URL = `http://3.17.182.133:8090/uploadSAPData`;
 import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.component';
@@ -12,11 +12,12 @@ import {AppConfig} from '../../configs/app.config';
   providers:[ConfigurationService]
 })
 export class UploadSapDataComponent implements OnInit {
-
+  @ViewChild('uploadFile',{static:false}) uploadFile:any;
   fd = new FormData();
   configuration: any;
-  file:File;
-  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'file'});
+  file:any;
+  orderData:any;
+  public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'orderData'});
   
 
   constructor() { }
@@ -25,8 +26,17 @@ export class UploadSapDataComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
          console.log('ImageUpload:uploaded:', item, status, response);
+        //  this.uploadFile.nativeElement.value = '';
         
+         
      };
+
+     this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
+      console.log('ImageUpload:uploaded:', item, status, response);
+     //  this.uploadFile.nativeElement.value = '';
+     this.uploader.clearQueue();
+      
+  };
      this.uploader.options.additionalParameter = {
      
   };
@@ -35,14 +45,15 @@ export class UploadSapDataComponent implements OnInit {
   onUpload() {
     
     this.uploader.uploadAll();
+    
     }
 
 public onFileSelected() {
  // const file: File = event[0];
 
-  console.log("file==>",this.uploader.queue);
+  console.log("file==>",this.file);
 
-  this.fd.append('orderData', this.file);
+  this.fd.append('file', this.file);
 
 }
 

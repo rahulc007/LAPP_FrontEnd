@@ -5,13 +5,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { RouterModule, Routes } from '@angular/router';
+import {NgbDropdownModule}  from '@ng-bootstrap/ng-bootstrap'
 
 
 @NgModule({
   declarations: [FooterComponent, HeaderComponent, SidebarComponent,  MainpageComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgbDropdownModule
   ],
   exports:[MainpageComponent]
 })
