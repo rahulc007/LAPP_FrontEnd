@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   login()
   {
     this.submitted = true;
-   console.log(atob('bGFwcGFkbWluQDEyMw=='))
+
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;

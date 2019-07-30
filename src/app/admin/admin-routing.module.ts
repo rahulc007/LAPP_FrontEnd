@@ -15,7 +15,7 @@ const basePath = 'admin';
 const AdminRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent,canActivate: [AuthGuard],
+    component: MainpageComponent, canActivate: [AuthGuard],
     children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },{ path: 'dashbord', component: DashbordComponent,canActivate: [AuthGuard] },
     { path: 'dashbord/upload', component: UploadSapDataComponent,canActivate: [AuthGuard]},
     { path: 'dashbord/neworders', component: NewOrdersComponent,canActivate: [AuthGuard]},

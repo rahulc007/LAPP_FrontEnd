@@ -17,7 +17,7 @@
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="drpdown">
                  
                   <button ngbDropdownItem>Reset Password</button>
-                  <button ngbDropdownItem [routerLink]="['/login']" routerLinkActive="router-link-active" >Logout</button>
+                  <button ngbDropdownItem (click)="logout()" routerLinkActive="router-link-active" >Logout</button>
                 </div>
             </div>
         </nav>
