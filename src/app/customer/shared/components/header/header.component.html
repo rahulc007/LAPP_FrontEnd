@@ -12,9 +12,11 @@
                 </li>
             </ul> -->
             <div ngbDropdown class="d-inline-block">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle><i
+                <button class="btn" id="dropdownBasic1" ngbDropdownToggle><i
                         class="fa fa-cog fa-spin fa-3x fa-fw"></i> Settings</button>
                 <div ngbDropdownMenu class="dropDown" aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem><i class="fa fa-user pr-2"></i> Profile
+                            </button>
                     <button ngbDropdownItem (click)="resetPwdOpen(resetPWD)"><i class="fa fa-unlock pr-2"></i> Reset
                         Password</button>
                     <button ngbDropdownItem (click)="signout()"><i class="fa fa-power-off pr-2"></i> Log Out</button>
@@ -63,7 +65,7 @@
                             [ngClass]="{ 'is-invalid': submitted && resetForm.controls.confirmPwd.errors }" required>
                         <div *ngIf="submitted && resetForm.controls.confirmPwd.errors" class="text-danger">
                              <div *ngIf="resetForm.controls.confirmPwd.errors.required">Confirm Password required</div>
-                            <div *ngIf="resetForm.controls.errors?.mismatch">Confirm Password must be equal to New Password</div>
+                             <div *ngIf="resetForm.controls.confirmPwd?.passwordMatcher">Same</div>
                         </div>
                     </div>
                 </div>

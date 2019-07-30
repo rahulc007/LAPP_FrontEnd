@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Routes, Router, ActivatedRoute} from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import {UserService} from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,31 +13,35 @@ import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from
 export class HeaderComponent implements OnInit {
   resetForm: FormGroup;
   submitted = false;
-
+  passmsg: string;
   constructor(private router: Router, private route: ActivatedRoute,
               private config: NgbModalConfig, private modalService: NgbModal,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder, private userService:UserService) { }
 
   ngOnInit() {
   }
 
   signout() {
-    this.router.navigate(['login']);
+    this.userService.logout();
   }
   resetPwdOpen(resetPWD) {
       this.modalService.open(resetPWD);
       this.resetForm = this.formBuilder.group ({
         oldPwd: ['', [Validators.required]],
         newPwd: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPwd: ['', [Validators.required, Validators.minLength(6)]],
-      },
-      {
-        validator: this.passwordMatchValidator
+        confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
       });
   }
-passwordMatchValidator(frm: FormGroup) {
-    return frm.controls['newPwd'].value === frm.controls['confirmPwd'].value ? null : {'mismatch': true};
-  }
+  private passwordMatcher(control: FormControl): { [s: string]: boolean } {
+    if (
+        this.resetForm &&
+        (control.value !== this.resetForm.controls.newPwd.value)
+    ) {
+        return { passwordNotMatch: true };
+    }
+    return null;
+}
+
   resetPassword() {
     this.submitted = true;
     if (this.resetForm.invalid) {
@@ -45,5 +50,6 @@ passwordMatchValidator(frm: FormGroup) {
 
     console.log(this.resetForm.value);
   }
+
 }
 

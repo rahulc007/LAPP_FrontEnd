@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60)]],
       country: ['', Validators.required]
    });
    
