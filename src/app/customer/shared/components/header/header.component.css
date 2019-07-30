@@ -101,9 +101,15 @@ html, body {
     font-size: 13px;
     line-height: 20px;
 }
-
-
-
+.fa-cog {
+  font-size: 18px;
+}
+.dropDown {
+  margin-left: -62px;
+}
+/* .btn-outline-primary:hover{
+background-color: #ff7100;
+} */
 
 /*dashboard start*/
 
