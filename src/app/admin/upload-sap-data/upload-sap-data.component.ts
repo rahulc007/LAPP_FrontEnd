@@ -15,6 +15,7 @@ export class UploadSapDataComponent implements OnInit {
   @ViewChild('uploadFile',{static:false}) uploadFile:any;
   fd = new FormData();
   configuration: any;
+  currentuser:any;
   file:any;
   orderData:any;
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'orderData'});
@@ -37,8 +38,10 @@ export class UploadSapDataComponent implements OnInit {
      this.uploader.clearQueue();
       
   };
+this.currentuser = localStorage.getItem('currentUser')
+
      this.uploader.options.additionalParameter = {
-     
+      emailId:this.currentuser
   };
   }
 

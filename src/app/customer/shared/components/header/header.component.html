@@ -65,7 +65,7 @@
                             [ngClass]="{ 'is-invalid': submitted && resetForm.controls.confirmPwd.errors }" required>
                         <div *ngIf="submitted && resetForm.controls.confirmPwd.errors" class="text-danger">
                              <div *ngIf="resetForm.controls.confirmPwd.errors.required">Confirm Password required</div>
-                             <div *ngIf="resetForm.controls.confirmPwd?.passwordMatcher">Same</div>
+                             <div *ngIf="resetForm.controls.confirmPwd.errors.passwordMatcher">Same</div>
                         </div>
                     </div>
                 </div>

@@ -53,7 +53,7 @@
     <div class="input-group-prepend">
     <i class="fa fa-map-marker input-group-text" aria-hidden="true"></i>
     </div>
-    <input type="text" class="form-control" formControlName="country"  name="country" (change)="onProductChanged(country)" placeholder="Country" list="codes" step="5" min="5" max="200" required />
+    <input type="text" class="form-control" formControlName="country"  name="country" (change)="onProductChanged($event)" placeholder="Country" list="codes" step="5" min="5" max="200" required />
     <datalist id="codes" >
     <select class="scrollbar" >
     <option *ngFor="let item of userData" [value]="item.name"></option> 

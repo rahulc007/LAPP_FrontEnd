@@ -14,6 +14,7 @@ import { TableModule } from 'ngx-easy-table';
 import { HotTableModule } from '@handsontable/angular';
 import {JwtInterceptor} from './core/services/jwt.interceptor';
 import {CoreModule} from './core/core.module';
+import {NgAutoCompleteModule} from 'ng-auto-complete';
 
 
 
@@ -35,7 +36,8 @@ import {CoreModule} from './core/core.module';
     TableModule,
     HotTableModule.forRoot(),
     AngularFontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgAutoCompleteModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
 

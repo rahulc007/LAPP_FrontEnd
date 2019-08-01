@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   userData: any[] = [];
   userList1:any;
   lastkeydown1: number = 0;
+  countryCode:any;
   constructor( private modalService: NgbModal,private formBuilder: FormBuilder,private router: Router, private route: ActivatedRoute,private userService: UserService) { }
 
   ngOnInit() {
@@ -77,7 +78,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     let params={
       "emailId":this.loginForm.value.username,
-      "password":btoa(this.loginForm.value.password)
+      "password":btoa(this.loginForm.value.password),
+      "countryCode": this.getcountrycode(this.loginForm.value.country)
+
     }
 
    this.userService.login(params).pipe(first()).subscribe(data => {
@@ -101,7 +104,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
   {
     
     let contrydata=this.userData.find(product => product.name === country);
-   
+  //  this.countryCode = contrydata.code
+  console.log("Cntry==>")
   }
+
+  getcountrycode(country)
+{
+  let contrydata=this.userData.find(product => product.name === country);
+  //  this.countryCode = contrydata.code
+  return contrydata.code;
+}
 
 }

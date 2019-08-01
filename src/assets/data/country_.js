@@ -1,4 +1,5 @@
 export const data = [
+    {"name": "All",  "code": "0"},
     { "name": "Afghanistan", "code": "AF" },
     { "name": "land Islands", "code": "AX" },
     { "name": "Albania", "code": "AL" },
