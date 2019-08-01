@@ -12,16 +12,16 @@
                 </li>
             </ul> -->
             <div ngbDropdown class="d-inline-block">
-                <button class="btn" id="dropdownBasic1" ngbDropdownToggle><i
-                        class="fa fa-cog fa-spin fa-3x fa-fw"></i> Settings</button>
-                <div ngbDropdownMenu class="dropDown" aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem><i class="fa fa-user pr-2"></i> Profile
-                            </button>
-                    <button ngbDropdownItem (click)="resetPwdOpen(resetPWD)"><i class="fa fa-unlock pr-2"></i> Reset
-                        Password</button>
-                    <button ngbDropdownItem (click)="signout()"><i class="fa fa-power-off pr-2"></i> Log Out</button>
+                    <button class="btn" id="dropdownReset" ngbDropdownToggle><i
+                            class="fa fa-cog fa-spin fa-3x fa-fw"></i> Settings</button>
+                    <div ngbDropdownMenu class="dropDown" aria-labelledby="dropdownReset">
+                        <button ngbDropdownItem routerLink="dashbord/customerProfile"><i class="fa fa-user pr-2"></i> Profile
+                                </button>
+                        <button ngbDropdownItem (click)="resetPwdOpen(resetPWD)"><i class="fa fa-unlock pr-2"></i> Reset
+                            Password</button>
+                        <button ngbDropdownItem (click)="signout()"><i class="fa fa-power-off pr-2"></i> Log Out</button>
+                    </div>
                 </div>
-            </div>
         </nav>
     </div>
 </div>

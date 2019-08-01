@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   userList1:any;
   lastkeydown1: number = 0;
   countryCode:any;
+  selected: string;
   constructor( private modalService: NgbModal,private formBuilder: FormBuilder,private router: Router, private route: ActivatedRoute,private userService: UserService) { }
 
   ngOnInit() {
@@ -99,20 +100,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
     
   }
 
-
-  onProductChanged(country)
-  {
-    
-    let contrydata=this.userData.find(product => product.name === country);
-  //  this.countryCode = contrydata.code
-  console.log("Cntry==>")
-  }
-
   getcountrycode(country)
 {
-  let contrydata=this.userData.find(product => product.name === country);
-  //  this.countryCode = contrydata.code
+  let contrydata=this.userData.find(cntry => cntry.name === country);
   return contrydata.code;
+}
+
+clear() {
+ this.selected = '';
 }
 
 }

@@ -1,0 +1,98 @@
+
+    <form [formGroup]="customerProfileForm" class="siz" (ngSubmit)="continue()">
+                
+        <div class="row">
+        <div class="col-md-5 form-group">
+        <input placeholder="First Name" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.firstName.errors }" required />
+        <div *ngIf="submitted && customerProfileForm.controls.firstName.errors" class="text-danger">
+                <div *ngIf="customerProfileForm.controls.firstName.errors.required" class="custom">First Name is required</div>
+            </div>
+        </div>
+        
+        <div class="col-md-5 form-group">
+        <input placeholder="Last Name" type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.lastName.errors }" required>
+        <div *ngIf="submitted && customerProfileForm.controls.lastName.errors" class="text-danger">
+                <div *ngIf="customerProfileForm.controls.lastName.errors.required" class="custom">Last Name is required</div>
+            </div>
+        </div>
+        </div>
+        
+        <div class="row">
+        
+         <div class="col-md-5 form-group">        
+                <input  placeholder="Email Id" formControlName="emailId" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted &&  customerProfileForm.controls.emailId.errors }" required>
+                <div *ngIf="submitted && customerProfileForm.controls.emailId.errors" class="text-danger">
+                        <div *ngIf="customerProfileForm.controls.emailId.errors.required" class="custom">Email is required</div>
+                        <div *ngIf="customerProfileForm.controls.emailId.errors.email" class="custom">Email must be a valid email address</div>
+                    </div>
+         </div>
+        
+        <div class="col-md-5 form-group">
+          <input placeholder="Your User ID" type="text" class="form-control" formControlName="userId" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.userId.errors }" required>
+          <div *ngIf="submitted && customerProfileForm.controls.userId.errors" class="text-danger">
+                <div *ngIf="customerProfileForm.controls.userId.errors.required" class="custom">User Id is required</div>
+            </div>
+        </div>
+        
+        </div>
+        
+        <div id="country" class="row px-0">
+            <div class="col-md-5 form-group cntry"> 
+                <input type="text" class="form-control" formControlName="country"  name="country"  placeholder="Country" list="codes" step="5" min="5" max="200" required />
+                <datalist id="codes" >
+                    <select class="scrollbar">
+                    <option *ngFor="let item of userData" [value]="item.name"></option> 
+                    </select>
+                </datalist>
+            </div>
+        
+           <div class="col-md-3 form-group state">  
+               <input type="text" class="form-control" formControlName="State"  name="State"  placeholder="State" list="statecodes" step="5" min="5" max="200" required />
+                <datalist id="statecodes" >
+                  <select class="scrollbar">
+                    <option *ngFor="let item of userData" [value]="item.name"></option> 
+                  </select>
+                </datalist>    
+            </div>
+        
+            <div class="col-md-3 form-group city"> 
+                <input type="text" class="form-control" formControlName="City"  name="City"  placeholder="City" list="citycodes" step="5" min="5" max="200" required />
+                    <datalist id="citycodes" >
+                        <select class="scrollbar" >
+                            <option *ngFor="let item of userData" [value]="item.name"></option> 
+                        </select>
+                    </datalist>                  
+            </div>
+        </div>
+        
+        <div class="row px-0">
+            <div class="col-md-5 form-group"> 
+                <input placeholder="Phone Number" type="text" class="form-control" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.phoneNumber.errors }" required>
+                    <div *ngIf="submitted && customerProfileForm.controls.phoneNumber.errors" class="text-danger">
+                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.required" class="custom">Phone is required</div>
+                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.pattern" class="custom">Phone Number not valid</div> 
+                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.minlength" class="custom">Phone must be at least 10 digit</div>
+                    </div>
+            </div>
+            <div class="col-md-5 form-group">
+                <input placeholder="Reference Code" type="text" class="form-control" formControlName="referenceCode" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.referenceCode.errors }" required>
+                     <div *ngIf="submitted && customerProfileForm.controls.referenceCode.errors" class="text-danger">
+                        <div *ngIf="customerProfileForm.controls.referenceCode.errors.required" class="custom">Reference Code is required</div>
+                    </div>
+             </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-3">
+                    <button (click)="reset()" class="btn btn-secondary">Reset All</button>
+            </div>
+            <div class="col-md-3 offset-md-4">
+                    <button class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+   
+        </form>
+
+        
+
+       

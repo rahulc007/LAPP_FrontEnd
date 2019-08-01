@@ -14,10 +14,11 @@ import { TableModule } from 'ngx-easy-table';
 import { LegseditComponent } from './orders/legsedit/legsedit.component';
 import { HotTableModule } from '@handsontable/angular';
 import { HandsontableComponent } from './orders/handsontable/handsontable.component';
+import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
 
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,
