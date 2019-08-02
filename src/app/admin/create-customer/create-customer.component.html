@@ -1,1 +1,110 @@
-<p>create-customer works!</p>
+
+        <form [formGroup]="customerForm" class="siz" (ngSubmit)="continue()">
+                
+            <div class="row">
+            <div class="col-md-6 form-group">
+            <input placeholder="First Name" type="text" formControlName="fname" class="form-control" [ngClass]="{ 'is-invalid': submitted && customerForm.controls.fname.errors }" required />
+            <div *ngIf="submitted && customerForm.controls.fname.errors" class="text-danger">
+                    <div *ngIf="customerForm.controls.fname.errors.required" class="custom">First Name is required</div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 form-group">
+            <input placeholder="Last Name" type="text" formControlName="lname" class="form-control" [ngClass]="{ 'is-invalid': submitted && customerForm.controls.lname.errors }" required>
+            <div *ngIf="submitted && customerForm.controls.lname.errors" class="text-danger">
+                    <div *ngIf="customerForm.controls.lname.errors.required" class="custom">Last Name is required</div>
+                
+                </div>
+            </div>
+            </div>
+            
+            <div class="row">
+            
+             <div class="col-md-6 form-group">        
+                    <input  placeholder="Email Id" formControlName="email" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls.email.errors }" required>
+                    <div *ngIf="submitted && customerForm.controls.email.errors" class="text-danger">
+                            <div *ngIf="customerForm.controls.email.errors.required" class="custom">Email is required</div>
+                            <div *ngIf="customerForm.controls.email.errors.email" class="custom">Email must be a valid email address</div>
+                        </div>
+             </div>
+            
+            <div class="col-md-6 form-group">
+              <input placeholder="Your User ID" type="text" class="form-control" formControlName="userid" [ngClass]="{ 'is-invalid': submitted && customerForm.controls.userid.errors }" required>
+              <!-- <div *ngIf="profileForm.controls.userid.errors.required">UserId is required</div> -->
+              <div *ngIf="submitted && customerForm.controls.userid.errors" class="text-danger">
+                    <div *ngIf="customerForm.controls.userid.errors.required" class="custom">User Id is required</div>
+                   
+                </div>
+            </div>
+            
+            </div>
+            
+            <div id="country" class="row">
+             <div class="col-md-3 form-group"> 
+                <input type="text" class="form-control" formControlName="country"  [(ngModel)]="country" (click)="countryclear()" (change)="getState()" placeholder="Country" list="codes" step="5" min="5" max="200" required />
+                <datalist id="codes" >
+                <select class="scrollbar">
+                <option *ngFor="let item of countryData" [value]="item.CountryName"></option> 
+                </select>
+                </datalist>
+               </div>
+            
+               <div class="col-md-3 ml-5 form-group">  
+                   <input type="text" class="form-control" formControlName="State"  [(ngModel)]="state" (click)="stateClear()" (change)="getCities()" placeholder="State" list="statecodes" step="5" min="5" max="200" required />
+                 <datalist id="statecodes" >
+                      <select class="scrollbar" >
+                        <option *ngFor="let item of stateData" [value]="item.StateName"></option> 
+                      </select>
+                   </datalist>
+                          
+                   </div>
+            
+                       <div class="col-md-3 ml-5 form-group"> 
+                                  <input type="text" class="form-control" formControlName="City"  [(ngModel)]="city" (click)="cityClear()" placeholder="City" list="citycodes" step="5" min="5" max="200" required />
+                                   <datalist id="citycodes" >
+                                        <select class="scrollbar" >
+                                        <option *ngFor="let item of citiesData" [value]="item"></option> 
+                                        </select>
+                                 </datalist>                  
+                    </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 form-group"> 
+
+                      <input placeholder="Phone Number" type="text" class="form-control" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && customerForm.controls.phone.errors }" required>
+                      <div *ngIf="submitted && customerForm.controls.phone.errors" class="text-danger">
+                            <div *ngIf="customerForm.controls.phone.errors.required" class="custom">Phone is required</div>
+                            <div *ngIf="customerForm.controls.phone.errors.pattern" class="custom">Phone Number not valid</div> 
+                            <div *ngIf="customerForm.controls.phone.errors.minlength" class="custom">Phone must be at least 10 digit</div>
+                            
+                        </div>
+                </div>
+            <div class="col-md-6 form-group">
+                    <input placeholder="Reference Code" type="text" class="form-control" formControlName="referncecode" [ngClass]="{ 'is-invalid': submitted && customerForm.controls.referncecode.errors }" required>
+                    <div *ngIf="submitted && customerForm.controls.referncecode.errors" class="text-danger">
+                          <div *ngIf="customerForm.controls.referncecode.errors.required" class="custom">Reference Code is required</div>
+                      </div>
+            </div>
+            </div>
+            
+            <div class="row">
+                    <div class="col-md-6  form-group"> 
+                            <input type="text" class="form-control" formControlName="usertype"  [(ngModel)]='usertype' (click)="clear()" placeholder="User Type" list="usertypecodes" step="5" min="5" max="200" [ngClass]="{ 'is-invalid': submitted && customerForm.controls.usertype.errors }" required />
+                             <datalist id="usertypecodes" >
+                                  <select class="scrollbar" >
+                                  <option *ngFor="let item of usertypeData" [value]="item.type"></option> 
+                                  </select>
+                           </datalist>  
+                           <div *ngIf="submitted && customerForm.controls.usertype.errors" class="text-danger">
+                                <div *ngIf="customerForm.controls.usertype.errors.required" class="custom">User Type is required</div>
+                            </div>                
+              </div>
+                    <div class="col-md-6 offset-md-5 form-group">
+              <button (click)="submit()"  class="btn  btn-primary">SUBMIT</button>
+                    </div>
+            </div>
+       
+            </form>
+
+       

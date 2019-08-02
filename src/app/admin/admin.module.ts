@@ -22,6 +22,7 @@ import {NgxEasyTableComponent} from '../common/ngx-easy-table/ngx-easy-table.com
 import {PaginationComponent} from '../common/pagination/pagination.component';
 import {ConfigurationService} from '../common/ngx-easy-table/config-service';
 import { TableModule } from 'ngx-easy-table';
+import { TranslateModule } from '@ngx-translate/core';
 import { HotTableModule } from 'ng2-handsontable';
 import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from '../core/services/jwt.interceptor'
@@ -35,6 +36,7 @@ import {JwtInterceptor} from '../core/services/jwt.interceptor'
     AddminRoutingModule,
     SharedModule,
     RouterModule,
+    TranslateModule.forRoot(),
     FileUploadModule,
     FormsModule,
     TableModule,

@@ -1,0 +1,17 @@
+{
+    
+    "login": "Login",
+    "Createusers": "Create users",
+    "Userapprovals": "User Approvals",
+    "CreateUsers":"Create Users",
+    "customerdetails":"customer Details",
+    "DownloadExcel":"Download Excel",
+    "username":"Customer ID/ Email ID",
+    "password":"Enter Password",
+    "country":"Choose Country",
+    "Unamerequired":"User Name Required",
+    "Passwordrequired":"Password  is Required",
+    "passwordminchar":"Password minimun 6 Characters",
+    "Select_Country":"Please Select Country",
+    "invalidlogin":"Invalid User Name / Password / Country "
+}

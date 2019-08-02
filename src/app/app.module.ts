@@ -15,8 +15,14 @@ import { HotTableModule } from '@handsontable/angular';
 import {JwtInterceptor} from './core/services/jwt.interceptor';
 import {CoreModule} from './core/core.module';
 import {NgAutoCompleteModule} from 'ng-auto-complete';
-
-
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -37,7 +43,14 @@ import {NgAutoCompleteModule} from 'ng-auto-complete';
     HotTableModule.forRoot(),
     AngularFontAwesomeModule,
     ReactiveFormsModule,
-    NgAutoCompleteModule
+    NgAutoCompleteModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
 

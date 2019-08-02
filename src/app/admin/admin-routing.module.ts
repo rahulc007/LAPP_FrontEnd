@@ -9,6 +9,7 @@ import {UpdatedOrdersComponent} from './updated-orders/updated-orders.component'
 import { ViewComponent } from './profile/view/view.component';
 import {NewOrdersViewComponent} from './new-orders-view/new-orders-view.component';
 import {CustomerDetailsComponent} from './customer-details/customer-details.component';
+import {CreateCustomerComponent} from './create-customer/create-customer.component';
 
 const basePath = 'admin';
 
@@ -22,7 +23,8 @@ const AdminRoutes: Routes = [
     { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent,canActivate: [AuthGuard] },
     { path: 'updatedorders', component: UpdatedOrdersComponent,canActivate: [AuthGuard]},
      {path: 'profile', component:ViewComponent,canActivate: [AuthGuard]},
-     {path: 'customerdetails', component:CustomerDetailsComponent,canActivate: [AuthGuard]}]
+     {path: 'customerdetails', component:CustomerDetailsComponent,canActivate: [AuthGuard]},
+     {path: 'createuser', component:CreateCustomerComponent,canActivate: [AuthGuard]}]
     
   },
   

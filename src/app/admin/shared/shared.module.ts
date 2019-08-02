@@ -6,14 +6,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
 import { RouterModule, Routes } from '@angular/router';
 import {NgbDropdownModule}  from '@ng-bootstrap/ng-bootstrap'
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [FooterComponent, HeaderComponent, SidebarComponent,  MainpageComponent],
   imports: [
     CommonModule,
     RouterModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    TranslateModule.forRoot()
   ],
   exports:[MainpageComponent]
 })

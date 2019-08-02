@@ -35,7 +35,7 @@ export class UserService {
                 //login successful if there's a jwt token in the response
                 if (user.status===AppConfig.ok  &&   user.statusMessage !=AppConfig.error) {
                   localStorage.setItem('token', user.token);
-                  // localStorage.setItem('userrole', user.role);
+                   localStorage.setItem('username', user.username);
                   localStorage.setItem('currentUser',JSON.stringify(user));
                   this._router.navigate(['/dashboard']);
                  }

@@ -38,7 +38,7 @@ export class UploadSapDataComponent implements OnInit {
      this.uploader.clearQueue();
       
   };
-this.currentuser = localStorage.getItem('currentUser')
+this.currentuser = localStorage.getItem('username')
 
      this.uploader.options.additionalParameter = {
       emailId:this.currentuser
