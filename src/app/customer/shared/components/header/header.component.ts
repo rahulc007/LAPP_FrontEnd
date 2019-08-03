@@ -26,11 +26,7 @@ export class HeaderComponent implements OnInit {
   }
   resetPwdOpen(resetPWD) {
       this.modalService.open(resetPWD);
-      this.resetForm = this.formBuilder.group ({
-        oldPwd: ['', [Validators.required]],
-        newPwd: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
-      });
+     
   }
   private passwordMatcher(control: FormControl): { [s: string]: boolean } {
     if (

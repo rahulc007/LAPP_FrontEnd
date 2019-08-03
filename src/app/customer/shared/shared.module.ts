@@ -7,10 +7,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule, Routes } from '@angular/router';
-
+import {ResetPasswordComponent} from '../../common/reset-password/reset-password.component'
 
 @NgModule({
-  declarations: [MainpageComponent, FooterComponent, HeaderComponent, SidebarComponent, MainpageComponent],
+  declarations: [MainpageComponent, FooterComponent, HeaderComponent, SidebarComponent, MainpageComponent,
+  ResetPasswordComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
