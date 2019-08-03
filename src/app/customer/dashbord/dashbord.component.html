@@ -3,7 +3,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="dshbrd_logo text-center">
+            <div class="dshbrd_logo mt-0 text-center">
                 <img src="../../../assets/images/lapp_logo.png" alt="LAPP" class="rounded" /><br/>
                 <p>Leading manufacturer of industrial cables, connectors and cable accessories</p>
             </div>
@@ -63,3 +63,56 @@
     </div>
   
   </div>
+<!-- Reset Password Modal -->
+<ng-template #resetPWD let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Reset Password</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="justify-content-center">
+            <form [formGroup]="resetForm" (ngSubmit)="resetPassword()">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label>Old Password</label>
+                        <input formControlName="oldPwd" class="form-control" type="password"
+                            [ngClass]="{ 'is-invalid': submitted && resetForm.controls.oldPwd.errors }" required>
+                        <div *ngIf="submitted && resetForm.controls.oldPwd.errors" class="text-danger">
+                            <div *ngIf="resetForm.controls.oldPwd.errors.required">Please enter Old Password</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label>New Password</label>
+                        <input type="password" formControlName="newPwd" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && resetForm.controls.newPwd.errors }" required>
+                        <div *ngIf="submitted && resetForm.controls.newPwd.errors" class="text-danger">
+                            <div *ngIf="resetForm.controls.newPwd.errors.required">New Password is required</div>
+                            <div *ngIf="resetForm.controls.newPwd.errors.minlength">Password must be at least 6
+                                characters</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" formControlName="confirmPwd" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && resetForm.controls.confirmPwd.errors }" required>
+                        <div *ngIf="submitted && resetForm.controls.confirmPwd.errors" class="text-danger">
+                             <div *ngIf="resetForm.controls.confirmPwd.errors.required">Confirm Password required</div>
+                             <div *ngIf="resetForm.controls.confirmPwd.errors.passwordMatcher">Same</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center mt-3">
+                        <button class="btn btn-warning">Reset Password</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>

@@ -1,5 +1,5 @@
 
-    <form [formGroup]="customerProfileForm" class="siz" (ngSubmit)="continue()">
+    <form [formGroup]="customerProfileForm" #form="ngForm" class="siz" >
                 
         <div class="row">
         <div class="col-md-5 form-group">
@@ -38,30 +38,39 @@
         
         <div id="country" class="row px-0">
             <div class="col-md-5 form-group cntry"> 
-                <input type="text" class="form-control" formControlName="country"  name="country"  placeholder="Country" list="codes" step="5" min="5" max="200" required />
-                <datalist id="codes" >
+                <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" (click)="clear()" (change)="getStates()" placeholder="Country" list="codes" step="5" min="5" max="200" required [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.country.errors }"/>
+                <datalist id="codes">
                     <select class="scrollbar">
-                    <option *ngFor="let item of userData" [value]="item.name"></option> 
+                    <option *ngFor="let country of countryData" [value]="country.CountryName"></option> 
                     </select>
                 </datalist>
+                <div *ngIf="submitted && customerProfileForm.controls.country.errors" class="text-danger">
+                    <div *ngIf="customerProfileForm.controls.country.errors.required" class="custom">Please Select Country </div>
+                </div>
             </div>
         
            <div class="col-md-3 form-group state">  
-               <input type="text" class="form-control" formControlName="State"  name="State"  placeholder="State" list="statecodes" step="5" min="5" max="200" required />
-                <datalist id="statecodes" >
+               <input type="text" class="form-control" formControlName="State"  [(ngModel)]="State" (click)="stateClear()" (change)="getCities()" placeholder="State" list="statecodes" step="5" min="5" max="200" required [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.State.errors }" />
+                <datalist id="statecodes">
                   <select class="scrollbar">
-                    <option *ngFor="let item of userData" [value]="item.name"></option> 
+                    <option *ngFor="let state of stateData" [value]="state.StateName"></option> 
                   </select>
-                </datalist>    
+                </datalist>
+                <div *ngIf="submitted && customerProfileForm.controls.State.errors" class="text-danger">
+                    <div *ngIf="customerProfileForm.controls.State.errors.required" class="customs">Please Select State</div>
+                </div>    
             </div>
         
             <div class="col-md-3 form-group city"> 
-                <input type="text" class="form-control" formControlName="City"  name="City"  placeholder="City" list="citycodes" step="5" min="5" max="200" required />
+                <input type="text" class="form-control" formControlName="City"  [(ngModel)]="City" (click)="cityClear()" placeholder="City" list="citycodes" step="5" min="5" max="200" required [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.City.errors }" />
                     <datalist id="citycodes" >
                         <select class="scrollbar" >
-                            <option *ngFor="let item of userData" [value]="item.name"></option> 
+                            <option *ngFor="let city of cityData" [value]="city"></option> 
                         </select>
-                    </datalist>                  
+                    </datalist>   
+                <div *ngIf="submitted && customerProfileForm.controls.City.errors" class="text-danger">
+                    <div *ngIf="customerProfileForm.controls.City.errors.required" class="customs">Please Select City</div>
+                </div>                 
             </div>
         </div>
         
@@ -87,7 +96,7 @@
                     <button (click)="reset()" class="btn btn-secondary">Reset All</button>
             </div>
             <div class="col-md-3 offset-md-4">
-                    <button class="btn btn-primary">Continue</button>
+                    <button (click)="continue()" class="btn btn-primary">Continue</button>
             </div>
         </div>
    

@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, ViewChild  } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, AfterViewInit  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
  const URL = `http://3.17.182.133:8090/uploadSAPData`;
 import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.component';
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import {AppConfig} from '../../configs/app.config';
+import { LappRestService  } from '../../core/rest-service/LappRestService';
 //const URL= AppConfig.endpoints.uploadApi;
 @Component({
   selector: 'app-upload-sap-data',
@@ -11,40 +12,62 @@ import {AppConfig} from '../../configs/app.config';
   styleUrls: ['./upload-sap-data.component.css'],
   providers:[ConfigurationService]
 })
-export class UploadSapDataComponent implements OnInit {
+export class UploadSapDataComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadFile',{static:false}) uploadFile:any;
   fd = new FormData();
   configuration: any;
   currentuser:any;
   file:any;
   orderData:any;
+  params: any = '';
+  public columns: any[] = [];
+  public data :any[]=[];
+
+
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'orderData'});
   
 
-  constructor() { }
+  constructor(private objService: LappRestService) {
+    this.configuration = ConfigurationService.config; 
+   }
 
   ngOnInit() {
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
          console.log('ImageUpload:uploaded:', item, status, response);
         //  this.uploadFile.nativeElement.value = '';
-        
-         
+        this.getUploadedData();
      };
-
      this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
       console.log('ImageUpload:uploaded:', item, status, response);
      //  this.uploadFile.nativeElement.value = '';
-     this.uploader.clearQueue();
-      
+     this.uploader.clearQueue();  
+     this.getUploadedData();
   };
 this.currentuser = localStorage.getItem('username')
 
      this.uploader.options.additionalParameter = {
       emailId:this.currentuser
   };
+  this.getUploadedData();
   }
+  getUploadedData() {
+    this.objService.Get('getSapFileInfo', this.params).subscribe( res=> {
+      console.log('upload data',res);
+      this.data=res.sapFileInofList;
+  
+    });
+  }
+  ngAfterViewInit() {
+    this.columns = [
+      { key: '', title: 'File Name' },
+      { key: '', title: 'File Size' },
+      { key: '', title: 'Order Count' },
+      { key: '', title: 'Uploaded By'},
+      { key: '', title: 'Created Date'}
+    ]
 
+  }
   onUpload() {
     
     this.uploader.uploadAll();

@@ -20,14 +20,14 @@ export class LegseditComponent implements OnInit {
   private hotRegisterer = new HotTableRegisterer();
 
   id = 'hotInstance';
+  numericNumberReg= '^-?[0-9]\\d*(\\.\\d{1,2})?$';
 
   constructor(private formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute) { }
-
+  
   ngOnInit() {
 
     this.legsForm = this.formBuilder.group({
-      rownum: ['', Validators.required],
-      
+      rownum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
    });
   }
 
@@ -48,7 +48,7 @@ export class LegseditComponent implements OnInit {
     this.rownum = this.legsForm.value.rownum;
 
     sessionStorage.setItem('rownum',this.rownum);
-  this.router.navigate(['customer/orderview/orderedit/editlegs/:id/legstable'])
+  this.router.navigate(['customer/dashbord/orderview/orderedit/editlegs/:id/legstable'])
     
     }
   }

@@ -35,8 +35,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
       { key: 'name', title: ' Order Date' }, 
       { key: 'name', title: ' Ordered Time' }, 
       { key: 'name', title: ' Updated Date' }, 
-      { key: 'name', title: ' Order Time' }, 
-      {key: 'Actions', title: 'Actions', searchEnabled: false,cellTemplate: this.Ver}
+      { key: 'name', title: ' Update Time' }, 
+      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
     ];
   }
 

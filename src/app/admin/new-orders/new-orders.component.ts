@@ -18,8 +18,8 @@ export class NewOrdersComponent implements OnInit , AfterViewInit{
   baseUrl:any;
   public data :any[]=[];
  
-  constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute,private router:Router) {this.configuration = ConfigurationService.config; 
-    this.configuration = ConfigurationService.config;
+  constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute,private router:Router) {
+    this.configuration = ConfigurationService.config; 
   }
 
   ngOnInit() {

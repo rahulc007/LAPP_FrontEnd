@@ -230,11 +230,11 @@ html, body {
   }
 
   .dshbrd_icn{
-    font-size: 24px;
+    font-size: 20px;
     color: #944505;
     font-weight: bold;
     box-shadow: 0 0 5px 3px #ccc;
-    margin: 30px;
+    margin: 20px;
     padding: 15px;
     border-radius: 3px;
     cursor: pointer;
