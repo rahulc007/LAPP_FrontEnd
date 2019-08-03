@@ -2,6 +2,7 @@
 
 @import "~ngx-easy-table/style.scss";
 @import '~handsontable/dist/handsontable.full.css';
+
 .test li.active {
     width: 100%;
     background-color: red!important;
@@ -10,3 +11,45 @@
   .test li {
     color: blue;
   }
+
+
+  html, body {
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #000;
+    background: #f5f5f5;
+    padding: 0;
+    margin: 0;
+}
+
+/* common styles start */
+.orange_clr{
+  color: #f58122 !important;
+}
+.btn{
+  padding: 0.5rem 2rem;
+}
+.btn-orange {
+  color: #fff;
+  background-color: #f58122;
+  border-color: #f58122;
+}
+.page_heading{
+  padding: 5px 0 0 50px;
+  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.page_heading.dashboard{
+  background: url('assets/images/dashboard.png') no-repeat;
+  background-size: contain;
+}
+.card{
+  border: none;
+}
+.card .card-title{
+  color: #ed7a2d;
+  font-size: 1.8rem;
+}
+/* common styles end */

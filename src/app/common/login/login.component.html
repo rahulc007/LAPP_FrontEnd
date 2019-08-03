@@ -1,4 +1,4 @@
-<div class="container-fluid body_bg">
+<!-- <div class="container-fluid body_bg">
   <div class="row">
     <div class="dotted_border"></div>
     <div class="top_brdr"></div>
@@ -70,12 +70,6 @@
             <div *ngIf="loginForm.controls.country.errors.required">Please Select Country </div>
           </div>
           <div class="row">
-            <!-- <div class="col text-left">
-    <div class="form-check lgn_lnks">
-    <input type="checkbox" class="form-check-input" id="loggedIn">
-    <label class="form-check-label" for="loggedIn">&nbsp;Keep me logged in</label>
-    </div>
-    </div> -->
             <div class="col text-right">
               <a href="#" target="_self" class="lgn_lnks">Forgot password?</a>
             </div>
@@ -102,7 +96,7 @@
     <div class="top_brdr btm_brdr"></div>
   </div>
 </div>
-
+-->
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">Login!
@@ -119,3 +113,101 @@
     <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
   </div>
 </ng-template>
+
+
+
+
+
+<div class="login_holder">
+  <div class="container-fluid">
+      <!-- header -->
+      <div class="row">
+          <div class="col">
+              <div class="header">
+                  <div class="logo">
+                      <!-- <img src="images/lapp_logo.png" alt="LAPP" /> -->
+                      <img src="assets/images/lapp_logo.png" alt="LAPP" />
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- contents -->
+      <div class="row">
+          <div class="col">
+              <div class="login_cntnr">
+                  <h2 class="text-center font-weight-bold">Login</h2>
+                  <br />
+                  <form [formGroup]="loginForm" (ngSubmit)="login()">
+                      <div class="form-group">
+                          <!-- <input type="text" class="form-control" id="" placeholder="Mail"> -->
+                          <input formControlName="username" class="form-control" type="text" placeholder="Customer ID/ Email ID" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
+                      </div>
+                      <div *ngIf="submitted && loginForm.controls.username.errors" class="text-danger">
+                        <div *ngIf="loginForm.controls.username.errors.required">User Name is required</div>
+                      </div>
+                      <div class="form-group">
+                          <!-- <input type="password" class="form-control" id="" placeholder="password"> -->
+                          <input formControlName="password" class="form-control" type="password" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required />
+                      </div>
+                      <div *ngIf="submitted && loginForm.controls.password.errors" class="text-danger">
+                        <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
+                        <div *ngIf="loginForm.controls.password.errors.minlength">Password minimun 6 Characters</div>
+                      </div>
+                      <div class="form-group">
+                          <!-- <input type="text" class="form-control" id="" placeholder="Country"> -->
+                          <input type="text" class="form-control" formControlName="country" [(ngModel)]='selected' (click)="clear()" placeholder="Country" list="codes" step="5" min="5" max="200" required />
+                        <datalist id="codes">
+                          <select class="scrollbar">
+                            <option *ngFor="let item of userData" [value]="item.name"></option>
+                          </select>
+                        </datalist>
+                      </div>
+                      <div *ngIf="submitted && loginForm.controls.country.errors" class="text-danger">
+                        <div *ngIf="loginForm.controls.country.errors.required">Please Select Country </div>
+                      </div>
+                      <div class="form-group text-right">
+                          <!-- <a href="" target="_self" class="orange_clr">Forgtot password?</a> -->
+                          <a href="#" target="_self" class="lgn_lnks orange_clr">Forgot password?</a>
+                      </div>
+                      <div *ngIf="message">
+                        <p class="text-danger">{{message}}</p>
+                      </div>
+                      <div class="form-group text-center">
+                          <!-- <button type="submit" class="btn btn-orange btn-lg">Login</button> -->
+                          <a (click)="login()" class="btn btn-orange lgn_btn">Login</a>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="col text-center d-none d-sm-block">
+              <div class="login_graphic"></div>
+              <div class="tagline">
+                  <span>Modern technologies</span> for a modern world.&nbsp;
+              </div>
+          </div>
+      </div>
+
+      <!-- footer -->
+      <div class="footer">
+          <div class="row">
+              <div class="col">
+                  <div class="text-center">
+                      <ul class="footer_links">
+                          <li>
+                              <a href="" target="_blank">About</a>
+                          </li>
+                          <li>
+                              <a href="" target="_blank">Terms</a>
+                          </li>
+                          <li>
+                              <a href="" target="_blank">Privacy</a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
