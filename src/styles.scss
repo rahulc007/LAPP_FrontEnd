@@ -24,6 +24,15 @@
 }
 
 /* common styles start */
+.logo {
+  width: 200px;
+  height: 50px;
+  float: left;
+}
+.logo img{
+  width: 100%;
+  display: block;
+}
 .orange_clr{
   color: #f58122 !important;
 }
@@ -52,4 +61,43 @@
   color: #ed7a2d;
   font-size: 1.8rem;
 }
+#content {
+  width: calc(100% - 250px);
+  padding: 0px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#content.active {
+  width: 100%;
+}
 /* common styles end */
+
+/*footer start*/
+.cntnt_footer{
+  background: #fff;
+}
+.footer{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 98%;
+  display: inline-block;
+}
+.footer_links{
+  display: inline-block;
+  margin: 4px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+.footer_links li{
+  float: left;
+  margin: 0 10px;
+}
+.footer_links li a{
+  color: #000;
+}
+/*footer end*/

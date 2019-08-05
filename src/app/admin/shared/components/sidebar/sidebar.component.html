@@ -1,4 +1,4 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<!-- <nav class="col-md-2 d-none d-md-block bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -53,5 +53,51 @@
             </li>
         </ul>
     </div>
-  </nav>
-  
+  </nav> -->
+
+
+
+<div id="sidebar">
+    <!-- <nav id="sidebar"> -->
+    <div class="sidebar-header">
+        <!-- <h3>Bootstrap Sidebar</h3> -->
+        <div class="logo">
+            <img src="assets/images/lapp_logo.png" alt="LAPP" />
+        </div>
+    </div>
+
+    <ul class="list-unstyled components">
+        <li>
+            <a href="#" [routerLink]="['dashbord']" routerLinkActive="router-link-active" class="menu_icon dashboard">Dashboard</a>
+        </li>
+        <li>
+            <a href="#" [routerLink]="['dashbord/upload']" routerLinkActive="router-link-active" class="menu_icon status">Upload</a>
+        </li>
+        <li>
+            <a href="#" [routerLink]="['dashbord/neworders']" routerLinkActive="router-link-active" class="menu_icon orders">New Orders</a>
+        </li>
+        <li>
+            <a href="#" [routerLink]="['updatedorders']" routerLinkActive="router-link-active" class="menu_icon orders">Updated Orders</a>
+        </li>
+        <li>
+            <a href="#" class="menu_icon status">Processed Orders</a>
+        </li>
+        <li>
+            <a href="#" class="menu_icon prvs_order">Previous Orders</a>
+        </li>
+        <li>
+            <a href="#" class="menu_icon status">DownloadExcel</a>
+        </li>
+        <li>
+            <a href="#" [routerLink]="['profile']" routerLinkActive="router-link-active" class="menu_icon status">Profile</a>
+        </li>
+        <li>
+            <a href="#" [routerLink]="['customerdetails']" routerLinkActive="router-link-active" class="menu_icon status">Custome Details</a>
+        </li>
+        <li>
+            <a href="#" [routerLink]="['createuser']" routerLinkActive="router-link-active" class="menu_icon status">Create Users</a>
+        </li>
+    </ul>
+
+    <!-- </nav> -->
+</div>

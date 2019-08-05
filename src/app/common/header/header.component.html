@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="dotted_border"></div>
         <div class="top_brdr"></div>
@@ -6,12 +6,12 @@
             <a class="navbar-brand col-sm-3 col-md-2 mr-0 brand_logo" href="#"></a>
 
             <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
-            <!-- <ul class="navbar-nav px-3">
+<!-- <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
                     <a class="nav-link" (click)="signout()"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i> Settings</a>
                 </li>
             </ul> -->
-            <div ngbDropdown class="d-inline-block">
+<!-- <div ngbDropdown class="d-inline-block">
                     <button class="btn" id="dropdownReset" ngbDropdownToggle><i
                             class="fa fa-cog fa-spin fa-3x fa-fw"></i> Settings</button>
                     <div ngbDropdownMenu class="dropDown" aria-labelledby="dropdownReset">
@@ -24,8 +24,36 @@
                 </div>
         </nav>
     </div>
+</div> -->
+
+
+<div class="navbar navbar-expand-sm">
+    <a class="navbar-brand" id="sidebarCollapse" href="#">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </a>
+    <ul class="navbar-nav float-right">
+        <li class="nav-item">
+            <div class="user_cntnt">
+                <span class="user_lbl">Welcome</span>
+                <span class="user_name">Firstname Lastname</span>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="dropdown dropleft" id="header_dd">
+                <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
+                <div class="dropdown-menu show">
+                    <!-- <a class="dropdown-item" href="#" [routerLink]="['dashbord/customerProfile']" >Profile</a> -->
+                    <button ngbDropdownItem routerLink="dashbord/customerProfile">Profile</button>
+                    <a class="dropdown-item" (click)="resetPwdOpen(resetPWD)">Reset Password</a>
+                    <a class="dropdown-item" (click)="signout()">Log Out</a>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
+
+
 <!-- Reset Password Modal -->
 <ng-template #resetPWD let-c="close" let-d="dismiss">
-   <reset-password (close)="d($event)"></reset-password>
+    <reset-password (close)="d($event)"></reset-password>
 </ng-template>
