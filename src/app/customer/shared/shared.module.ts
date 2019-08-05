@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { NgbModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MainpageComponent } from './pages/mainpage/mainpage.component';
@@ -21,15 +20,11 @@ import {RootSharedModule} from '../../common/root-shared.module';
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule,
-    NgbDropdownModule,
     ReactiveFormsModule,
     RootSharedModule
   ],
   exports: [
-    MainpageComponent,
-    NgbModule,
-    NgbDropdownModule  
+    MainpageComponent 
   ]
 
 })

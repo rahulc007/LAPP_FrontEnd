@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
    });
    
     this.userData = data;
+    this.selected= data[0].name;
   }
 
   
@@ -94,8 +95,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       
      this.message = error
      this.loginForm.reset();
-
-      
+  
   });
     
   }

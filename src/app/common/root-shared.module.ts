@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 //import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap'
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -15,7 +16,9 @@ import { BrowserModule } from '@angular/platform-browser';
   CommonModule,
   BrowserModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  NgbModule,
+  NgbDropdownModule
   ],
   exports: [
     HeaderComponent,

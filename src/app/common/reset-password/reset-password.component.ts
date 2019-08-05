@@ -1,29 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+  styleUrls: ['./reset-password.component.css'],
+  providers: [NgbModal, NgbModalConfig]
 })
 export class ResetPasswordComponent implements OnInit {
-
+  @Output() close = new EventEmitter();
   resetForm: FormGroup;
   submitted = false;
   passmsg: string;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
-
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
+              private config: NgbModalConfig, private modalService: NgbModal) { }
+  d(template) {
+    this.close.emit(template);
+  }
   ngOnInit() {
-
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],
       newPwd: ['', [Validators.required, Validators.minLength(6)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
     });
-
+    
   }
 
 
@@ -57,6 +60,8 @@ export class ResetPasswordComponent implements OnInit {
         });
     }
   }
-
-
+  
+  closeModal() {
+     this.modalService.dismissAll();
+    }
 }

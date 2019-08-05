@@ -141,14 +141,14 @@
                   <form [formGroup]="loginForm" (ngSubmit)="login()">
                       <div class="form-group">
                           <!-- <input type="text" class="form-control" id="" placeholder="Mail"> -->
-                          <input formControlName="username" class="form-control" type="text" placeholder="Customer ID/ Email ID" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
+                          <input formControlName="username" class="form-control" maxlength="60" type="text" placeholder="Customer ID/ Email ID" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
                       </div>
                       <div *ngIf="submitted && loginForm.controls.username.errors" class="text-danger">
                         <div *ngIf="loginForm.controls.username.errors.required">User Name is required</div>
                       </div>
                       <div class="form-group">
                           <!-- <input type="password" class="form-control" id="" placeholder="password"> -->
-                          <input formControlName="password" class="form-control" type="password" placeholder="Enter Password" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required />
+                          <input formControlName="password" class="form-control" type="password" placeholder="Enter Password" maxlength="60" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required />
                       </div>
                       <div *ngIf="submitted && loginForm.controls.password.errors" class="text-danger">
                         <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
@@ -156,7 +156,7 @@
                       </div>
                       <div class="form-group">
                           <!-- <input type="text" class="form-control" id="" placeholder="Country"> -->
-                          <input type="text" class="form-control" formControlName="country" [(ngModel)]='selected' (click)="clear()" placeholder="Country" list="codes" step="5" min="5" max="200" required />
+                          <input type="text" class="form-control" formControlName="country"  [(ngModel)]='selected' (click)="clear()" placeholder="Country" list="codes" step="5" min="5" max="200" required />
                         <datalist id="codes">
                           <select class="scrollbar">
                             <option *ngFor="let item of userData" [value]="item.name"></option>

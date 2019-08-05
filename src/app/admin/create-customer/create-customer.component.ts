@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserType } from '../../../assets/data/usertype_';
 import { Countries } from '../../../assets/data/countrydetails';
 import {LappRestService  } from '../../core/rest-service/LappRestService';
-
+import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
+import {data} from '../../../assets/data/country_';
 
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
-  styleUrls: ['./create-customer.component.scss']
+  styleUrls: ['./create-customer.component.scss'],
+  providers:[ConfigurationService]
 })
-export class CreateCustomerComponent implements OnInit {
+export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
   usertypeData: any[] = [];
   countryData: any[] = [];
@@ -24,7 +26,16 @@ export class CreateCustomerComponent implements OnInit {
   stateData: any[] = [];
   mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
   msg: string = '';
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
+  param ='';
+  userData: any[] = [];
+  public columns: any[] = [];
+  public data :any[]=[];
+  configuration: any;
+  usersData: any;
+
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { 
+    this.configuration = ConfigurationService.config; 
+  }
 
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
@@ -42,18 +53,37 @@ export class CreateCustomerComponent implements OnInit {
     this.submitted = false;
     this.usertypeData = UserType;
     this.countryData = Countries;
+    this.userData = data;
+    this.loadUsers();
 
   }
-
+  ngAfterViewInit() {
+    this.columns = [
+      { key: 'firstname'+'lastname', title: 'User Name' },
+      { key: 'consumerId', title: 'User ID' },
+      { key: 'emailId', title: 'Email ID' },
+      { key: 'phonenumber', title: 'Phone Number'},
+      { key: 'country', title: 'Country'},
+      { key: 'userTYpe', title: 'User Type'},
+      { key: 'createdBy', title: 'Created By'}
+    ]
+  }
+  loadUsers() {
+        
+    this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
+      console.log('getallUsr', response);
+     this.usersData = response.userProfileList;
+    })
+  }
   formSubmit() {
     this.submitted = true;
 
     if (this.customerForm.invalid) {
       return;
     }
-      console.log('Form Values', this.customerForm.value);
-    
 
+    const uId = localStorage.getItem('username');
+    console.log('Form Values',this.customerForm.value);
     const params = {
       "emailId": this.customerForm.value.email,
       "firstname": this.customerForm.value.fname,
@@ -64,16 +94,17 @@ export class CreateCustomerComponent implements OnInit {
       "city": this.customerForm.value.City,
       "phonenumber": this.customerForm.value.phone,
       "userTYpe": this.customerForm.value.usertype,
-      "createdBy": "user_emailID",
-      "countryCode": "001"
+      "createdBy": uId,
+      "countryCode": this.getcountrycode(this.customerForm.value.country)
     }
-    this.objService.Post('createUser',params).subscribe(data => {
-      console.log('data', data);
-      if(data.status === 200){
+    this.objService.Post('createUser',params).subscribe(datas => {
+      console.log('data', datas);
+      if(datas.status === 200){
         this.msg ='Successfully created User';
         this.customerForm.reset();
         this.submitted = false;
-        window.location.reload();
+       // window.location.reload();
+       this.loadUsers();
       }
     })
 
@@ -107,6 +138,12 @@ export class CreateCustomerComponent implements OnInit {
   getCities() {
     let stateData = this.stateData.find(state => state.StateName === this.state);
     this.citiesData = stateData.Cities;
+  }
+  getcountrycode(country)
+  {
+    let contrycodedata=this.countryData.find(cntry => cntry.CountryName === country);
+    console.log(contrycodedata)
+    return contrycodedata.countryCode;
   }
 
 }

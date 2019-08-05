@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <input placeholder="First Name" type="text" formControlName="fname" class="form-control" 
+            <input placeholder="First Name" type="text" formControlName="fname" maxlength="60" class="form-control" 
                 [ngClass]="{ 'is-invalid': submitted && customerForm.controls.fname.errors }" required />
             <div *ngIf="submitted && customerForm.controls.fname.errors" class="text-danger">
                 <div *ngIf="customerForm.controls.fname.errors.required" class="custom">First Name is required</div>
@@ -13,7 +13,7 @@
         </div>
 
         <div class="col-md-6">
-            <input placeholder="Last Name" type="text" formControlName="lname" class="form-control"
+            <input placeholder="Last Name" type="text" formControlName="lname" maxlength="60" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && customerForm.controls.lname.errors }" required>
             <div *ngIf="submitted && customerForm.controls.lname.errors" class="text-danger">
                 <div *ngIf="customerForm.controls.lname.errors.required" class="custom">Last Name is required</div>
@@ -25,7 +25,7 @@
     <div class="row">
 
         <div class="col-md-6 form-group">
-            <input placeholder="Email Id" formControlName="email" class="form-control" type="text"
+            <input placeholder="Email Id" formControlName="email" class="form-control" maxlength="60" type="text"
                 [ngClass]="{ 'is-invalid': submitted &&  customerForm.controls.email.errors }" required>
             <div *ngIf="submitted && customerForm.controls.email.errors" class="text-danger">
                 <div *ngIf="customerForm.controls.email.errors.required" class="custom">Email is required</div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-md-6 form-group">
-            <input placeholder="Your User ID" type="text" class="form-control" formControlName="userid"
+            <input placeholder="Your User ID" type="text" class="form-control" maxlength="60" formControlName="userid"
                 [ngClass]="{ 'is-invalid': submitted && customerForm.controls.userid.errors }" required>
             <div *ngIf="submitted && customerForm.controls.userid.errors" class="text-danger">
                 <div *ngIf="customerForm.controls.userid.errors.required" class="custom">User Id is required</div>
@@ -46,7 +46,7 @@
     </div> 
 
     <div id="country" class="row">
-        <div class="col-md-3 form-group">
+        <div class="col-md-3 mr-5 form-group">
             <input type="text" class="form-control" formControlName="country" [(ngModel)]="country"
                 (click)="countryclear()" (change)="getState()" placeholder="Country" list="codes" step="5" min="5"
                 max="200" required />
@@ -57,7 +57,7 @@
             </datalist>
         </div>
 
-        <div class="col-md-3 ml-5 form-group">
+        <div class="col-md-3 ml-4 mr-4 form-group">
             <input type="text" class="form-control" formControlName="State" [(ngModel)]="state" (click)="stateClear()"
                 (change)="getCities()" placeholder="State" list="statecodes" step="5" min="5" max="200" required />
             <datalist id="statecodes">
@@ -82,7 +82,7 @@
     <div class="row">
         <div class="col-md-6 form-group">
 
-            <input placeholder="Phone Number" type="text" class="form-control" formControlName="phone"
+            <input placeholder="Phone Number" type="text" class="form-control" maxlength="12" formControlName="phone"
                 [ngClass]="{ 'is-invalid': submitted && customerForm.controls.phone.errors }" required>
             <div *ngIf="submitted && customerForm.controls.phone.errors" class="text-danger">
                 <div *ngIf="customerForm.controls.phone.errors.required" class="custom">Phone is required</div>
@@ -120,4 +120,11 @@
     </div>
 
 </form>
+<div class="container">
+        <div class="border mt-3 p-5">
+            <app-ngx-easy-table [configuration]="configuration" [data]="usersData" [columns]="columns">
+            </app-ngx-easy-table>
+            <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination> -->
+        </div>
+</div>
 

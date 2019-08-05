@@ -27,5 +27,5 @@
 </div>
 <!-- Reset Password Modal -->
 <ng-template #resetPWD let-c="close" let-d="dismiss">
-   <reset-password></reset-password>
+   <reset-password (close)="d($event)"></reset-password>
 </ng-template>

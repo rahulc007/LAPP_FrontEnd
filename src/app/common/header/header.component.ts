@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Routes, Router, ActivatedRoute} from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
@@ -11,6 +11,12 @@ import {UserService} from '../../core/services/user.service';
   providers: [NgbModal, NgbModalConfig],
 })
 export class HeaderComponent implements OnInit {
+  closeResult: string;
+
+  d(e){
+      this.closeResult = e;
+  }
+
   resetForm: FormGroup;
   submitted = false;
   passmsg: string;
