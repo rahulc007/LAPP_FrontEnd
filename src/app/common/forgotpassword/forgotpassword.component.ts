@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {LappRestService  } from '../../core/rest-service/LappRestService';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -10,7 +11,7 @@ export class ForgotpasswordComponent implements OnInit {
   forgotPassword: FormGroup;
   submitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
   ngOnInit() {
     this.forgotPassword = this.formBuilder.group({
@@ -23,6 +24,16 @@ export class ForgotpasswordComponent implements OnInit {
     if(this.forgotPassword.invalid) {
       return;
     }
-    console.log(this.forgotPassword.value.email);
+   
+console.log("received email==>",this.forgotPassword.value.email)
+    let params={"emailId":this.forgotPassword.value.email}
+
+    this.objService.Post('forgot-password',params).subscribe(datas => {
+      console.log('data', datas);
+      if(datas.status === 200){
+        this.msg ='Successfully created User';
+       
+      }
+    })
   }
 }
