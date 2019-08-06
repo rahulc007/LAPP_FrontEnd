@@ -6,11 +6,14 @@ import { CommonModule } from '@angular/common';
 //import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     HeaderComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ForgotpasswordComponent
   ],
   imports: [
   CommonModule,
@@ -18,7 +21,8 @@ import { NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap'
   FormsModule,
   ReactiveFormsModule,
   NgbModule,
-  NgbDropdownModule
+  NgbDropdownModule,
+  TranslateModule
   ],
   exports: [
     HeaderComponent,

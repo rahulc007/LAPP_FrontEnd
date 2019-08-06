@@ -26,20 +26,36 @@ export class LoginComponent implements OnInit, AfterViewInit {
   lastkeydown1: number = 0;
   countryCode:any;
   selected: string;
+  passwordLength: any;
   constructor( private modalService: NgbModal,private formBuilder: FormBuilder,private router: Router, private route: ActivatedRoute,private userService: UserService) { }
 
   ngOnInit() {
     localStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60), this.passwordStrength.bind(this)]],
       country: ['', Validators.required]
    });
-   
     this.userData = data;
     this.selected= data[0].name;
   }
-  
+  private passwordStrength(control: FormControl) {
+   
+    if(this.loginForm &&
+      (control.value.length !=0 && control.value.length < 6 )) {
+      return this.passwordLength = 'Week Password'
+    }  else if(control.value.length ==0 ){
+      return this.passwordLength = ''
+    }
+  }
+   pwdStrength() {
+   console.log("hi")
+    if((this.loginForm.value.password.length !=0 && this.loginForm.value.password.length < 6 )) {
+      return this.passwordLength = 'Week Password'
+    }  else if(this.loginForm.value.password.length ==0 ){
+      return this.passwordLength = ''
+    }
+  }
   
 
   getUserIdsFirstWay($event) {
@@ -72,7 +88,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   login()
   {
     this.submitted = true;
-
+    
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
