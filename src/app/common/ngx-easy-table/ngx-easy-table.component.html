@@ -1,23 +1,11 @@
 <ngx-table [configuration]="configuration"
            [data]="data"
-           [columns]="columns">
-        <ng-template let-row>
-               
-            <td>
-                <small>{{row.fileName}}</small>
-
-            </td>
-            <td>
-                    <small>{{row.fileSize}}</small>
-            </td>
-            <td>
-                    <small>{{row.orderCount}}</small>
-            </td>
-            <td>
-                    <small>{{row.uploadedBy}}</small>
-            </td>
-            <td>
-                <small>{{row.createdDate | date:'medium'}}</small>
-            </td>
+           [columns]="columns" class="table-bordered table-striped">
+        <ng-template let-row>   
+            <td>{{row.fileName}}</td>
+            <td>{{row.fileSize}}</td>
+            <td>{{row.orderCount}}</td>
+            <td>{{row.uploadedBy}}</td>
+            <td>{{row.createdDate | date:'medium'}}</td>
         </ng-template>
 </ngx-table>

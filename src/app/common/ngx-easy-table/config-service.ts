@@ -36,7 +36,7 @@ export class ConfigurationService {
     tableLayout: {
       style: STYLE.NORMAL, // or STYLE.BIG or STYLE.TINY
       theme: THEME.LIGHT, // or THEME.DARK
-      borderless: true,
+      borderless: false,
       hover: true,
       striped: false,
     }

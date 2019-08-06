@@ -2,7 +2,7 @@ import { Component, OnInit, ɵConsole ,ViewChild, TemplateRef, ViewEncapsulation
 import {Routes, Router, ActivatedRoute} from '@angular/router';
 import {UserService} from '../../core/services/user.service';
 import {data} from '../../../assets/data/country_';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor( private modalService: NgbModal,private formBuilder: FormBuilder,private router: Router, private route: ActivatedRoute,private userService: UserService) { }
 
   ngOnInit() {
-
+    localStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60)]],
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.userData = data;
     this.selected= data[0].name;
   }
-
+  
   
 
   getUserIdsFirstWay($event) {
