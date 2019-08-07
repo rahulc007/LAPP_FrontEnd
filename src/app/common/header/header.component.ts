@@ -3,6 +3,7 @@ import {Routes, Router, ActivatedRoute} from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import {UserService} from '../../core/services/user.service';
+import { NavToggleService } from '../../common/nav-toggle-service/navtoggle.service';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,10 @@ export class HeaderComponent implements OnInit {
   usersId: string;
   constructor(private router: Router, private route: ActivatedRoute,
               private config: NgbModalConfig, private modalService: NgbModal,
-              private formBuilder: FormBuilder, private userService:UserService) { }
+              private formBuilder: FormBuilder, private userService:UserService,
+              private navService: NavToggleService
+              ) { }
+
 
   ngOnInit() {
     this.usersId= localStorage.getItem('username');
@@ -44,6 +48,7 @@ export class HeaderComponent implements OnInit {
         return { passwordNotMatch: true };
     }
     return null;
+
 }
 
   resetPassword() {
@@ -53,6 +58,10 @@ export class HeaderComponent implements OnInit {
     }
 
     console.log(this.resetForm.value);
+  }
+
+  toggleNav(){
+    this.navService.toggleSideBar();
   }
 
 }

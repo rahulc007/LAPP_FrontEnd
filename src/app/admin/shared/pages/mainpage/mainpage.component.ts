@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Routes, Router, ActivatedRoute} from '@angular/router';
+import {NavToggleService} from '../../../../common/nav-toggle-service/navtoggle.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -8,7 +9,9 @@ import {Routes, Router, ActivatedRoute} from '@angular/router';
 })
 export class MainpageComponent implements OnInit {
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private router: Router, private route: ActivatedRoute,
+    private navService: NavToggleService
+    ) { }
 
   ngOnInit() {
   }

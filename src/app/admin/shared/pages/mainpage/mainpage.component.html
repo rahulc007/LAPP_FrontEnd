@@ -16,7 +16,7 @@
     <div class="col">
       <div class="wrapper ">
         <app-sidebar></app-sidebar>
-        <div id="content">
+        <div id="content" [ngClass]="{'active':!navService.showSideBar}">
           <app-header></app-header>
           <section class="main-container">
             <router-outlet></router-outlet>
