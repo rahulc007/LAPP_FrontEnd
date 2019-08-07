@@ -23,11 +23,15 @@ export class ResetPasswordComponent implements OnInit {
   strColor = "";
   passwordLength: any;
   percent: number;
+  passwordStrength:number = 0;
+
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private config: NgbModalConfig, private modalService: NgbModal) { }
+
   d(template) {
     this.close.emit(template);
   }
+
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],
@@ -198,8 +202,8 @@ export class ResetPasswordComponent implements OnInit {
     }
     this.strColor = strColor;
     this.strText = strText;
-
-    console.log("password strength", strColor, strText);
+    this.passwordStrength = nScore;
+    console.log("password strength", strColor, strText, nScore);
   }
 
   // Checks a string for a list of characters
