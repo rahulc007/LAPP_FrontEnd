@@ -20,11 +20,13 @@ export class HeaderComponent implements OnInit {
   resetForm: FormGroup;
   submitted = false;
   passmsg: string;
+  usersId: string;
   constructor(private router: Router, private route: ActivatedRoute,
               private config: NgbModalConfig, private modalService: NgbModal,
               private formBuilder: FormBuilder, private userService:UserService) { }
 
   ngOnInit() {
+    this.usersId= localStorage.getItem('username');
   }
 
   signout() {

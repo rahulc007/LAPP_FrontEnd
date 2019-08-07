@@ -21,6 +21,8 @@ export class ResetPasswordComponent implements OnInit {
   m_strCharacters = "!@#$%^&*?_~"
   strText = "";
   strColor = "";
+  passwordLength: any;
+  percent: number;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private config: NgbModalConfig, private modalService: NgbModal) { }
   d(template) {
@@ -29,13 +31,19 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],
-      newPwd: ['', [Validators.required, Validators.minLength(6)]],
+      newPwd: ['', [Validators.required, Validators.minLength(8), this.progressValue.bind(this)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
     });
 
   }
 
-
+  private progressValue(control: FormControl) {
+    if(this.resetForm  &&
+      (control.value.length != 0)) {
+         return this.percent = 50;
+      }
+      return this.percent = null;
+  }
 
   private passwordMatcher(control: FormControl) {
     if (
@@ -52,6 +60,7 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm.invalid) {
       return;
     } else {
+      console.log(this.resetForm.value)
       let objPayload = {
         "emailId": 'admin@lapp.com',
         "oldPassword": btoa(this.resetForm.controls.oldPwd.value),

@@ -5,14 +5,14 @@
                 <div class="col-md-6 form-group">
                 <input placeholder="First Name" type="text" formControlName="fname" class="form-control" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.fname.errors }" required />
                 <div *ngIf="submitted && profileForm.controls.fname.errors" class="text-danger">
-                        <div *ngIf="profileForm.controls.fname.errors.required" class="custom">First Name is required</div>
+                        <div *ngIf="profileForm.controls.fname.errors.required" class="custom">{{'firstnamerequired'| translate}}</div>
                     </div>
                 </div>
                 
                 <div class="col-md-6 form-group">
                 <input placeholder="Last Name" type="text" formControlName="lname" class="form-control" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.lname.errors }" required>
                 <div *ngIf="submitted && profileForm.controls.lname.errors" class="text-danger">
-                        <div *ngIf="profileForm.controls.lname.errors.required" class="custom">Last Name is required</div>
+                        <div *ngIf="profileForm.controls.lname.errors.required" class="custom">{{'lastnamerequired'|translate}}</div>
                     
                     </div>
                 </div>
@@ -23,8 +23,8 @@
                  <div class="col-md-6 form-group">        
                         <input  placeholder="Email Id" formControlName="email" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted &&  profileForm.controls.email.errors }" required>
                         <div *ngIf="submitted && profileForm.controls.email.errors" class="text-danger">
-                                <div *ngIf="profileForm.controls.email.errors.required" class="custom">Email is required</div>
-                                <div *ngIf="profileForm.controls.email.errors.email" class="custom">Email must be a valid email address</div>
+                                <div *ngIf="profileForm.controls.email.errors.required" class="custom">{{'emailrequired'| translate}}</div>
+                                <div *ngIf="profileForm.controls.email.errors.email" class="custom">{{'emailvalid'| translate}}</div>
                             </div>
                  </div>
                 
@@ -32,7 +32,7 @@
                   <input placeholder="Your User ID" type="text" class="form-control" formControlName="userid" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.userid.errors }" required>
                   <!-- <div *ngIf="profileForm.controls.userid.errors.required">UserId is required</div> -->
                   <div *ngIf="submitted && profileForm.controls.userid.errors" class="text-danger">
-                        <div *ngIf="profileForm.controls.userid.errors.required" class="custom">User Id is required</div>
+                        <div *ngIf="profileForm.controls.userid.errors.required" class="custom">{{'useridrequired'| translate}}</div>
                        
                     </div>
                 </div>
@@ -74,23 +74,23 @@
  
                           <input placeholder="Phone Number" type="text" class="form-control" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.phone.errors }" required>
                           <div *ngIf="submitted && profileForm.controls.phone.errors" class="text-danger">
-                                <div *ngIf="profileForm.controls.phone.errors.required" class="custom">Phone is required</div>
-                                <div *ngIf="profileForm.controls.phone.errors.pattern" class="custom">Phone Number not valid</div> 
-                                <div *ngIf="profileForm.controls.phone.errors.minlength" class="custom">Phone must be at least 10 digit</div>
+                                <div *ngIf="profileForm.controls.phone.errors.required" class="custom">{{'phonenumberrequired'| translate}}</div>
+                                <div *ngIf="profileForm.controls.phone.errors.pattern" class="custom">{{'phonenumbervalid'| translate}}</div> 
+                                <div *ngIf="profileForm.controls.phone.errors.minlength" class="custom">{{'phonenumberdigit'| translate}}</div>
                                 
                             </div>
                     </div>
                 <div class="col-md-6 form-group">
                         <input placeholder="Reference Code" type="text" class="form-control" formControlName="referncecode" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.referncecode.errors }" required>
                         <div *ngIf="submitted && profileForm.controls.referncecode.errors" class="text-danger">
-                              <div *ngIf="profileForm.controls.referncecode.errors.required" class="custom">Reference Code is required</div>
+                              <div *ngIf="profileForm.controls.referncecode.errors.required" class="custom">{{'referencecoderequired'| translate}}</div>
                           </div>
                 </div>
                 </div>
                 
                 <div class="row">
                         <div class="col-md-6 offset-md-5">
-                  <button (click)="continue()"  class="btn ">Continue</button>
+                  <button (click)="continue()" [disabled]="profileForm.pristine || profileForm.invalid"  class="btn ">{{'continue'| translate}}</button>
                         </div>
                 </div>
            

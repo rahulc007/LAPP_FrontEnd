@@ -1,20 +1,20 @@
 <form [formGroup]="legsForm" class="mt-3" (ngSubmit)="onSubmit()">
 <div class="row ml-5">
     <div class="col-md-4 text-center">
-        <label for="rownum">Enter Number of Legs</label>
+        <label for="rownum">{{'enterlegs'| translate}}</label>
     </div>
     <div class="col-md-2">
         <input type="text" formControlName="rownum" class="form-control" [ngClass]="{ 'is-invalid': submitted && legsForm.controls.rownum.errors }" required />
     </div>
     <div *ngIf="submitted && legsForm.controls.rownum.errors" class="text-danger">
-        <div *ngIf="legsForm.controls.rownum.errors.required">Number of legs  required</div>
-        <div *ngIf="legsForm.controls.rownum.errors.pattern">Please enter valid Number only</div>
+        <div *ngIf="legsForm.controls.rownum.errors.required">{{'legsrequired'| translate}}</div>
+        <div *ngIf="legsForm.controls.rownum.errors.pattern">{{'validnumber'| translate}}</div>
     </div>
 </div>
 
 <div class="row mt-5">
     <div class="col-md-4 offset-md-3">
-        <button class="btn btn-primary">SUBMIT</button>
+        <button class="btn btn-primary">{{'submit'| translate}}</button>
     </div>
 </div>
 </form>

@@ -1,4 +1,4 @@
-<div class="text-center txt"><h2>Order View</h2></div>
+<div class="text-center txt"><h2>{{'orderview'| translate}}</h2></div>
 <div class="border p-5">
     <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
     <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>

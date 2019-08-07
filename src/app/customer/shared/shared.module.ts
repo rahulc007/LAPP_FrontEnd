@@ -8,6 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ResetPasswordComponent } from '../../common/reset-password/reset-password.component'
 import {RootSharedModule} from '../../common/root-shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     MainpageComponent,
@@ -21,7 +22,8 @@ import {RootSharedModule} from '../../common/root-shared.module';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    RootSharedModule
+    RootSharedModule,
+    TranslateModule.forRoot()
   ],
   exports: [
     MainpageComponent 

@@ -1,5 +1,5 @@
 <div class="text-center txt">
-    <h2>Updated Orders</h2>
+    <h2>{{'updateorders'| translate}}</h2>
 </div>
 
 
@@ -7,7 +7,7 @@
     <div class="col-md-10">
     </div>
     <div class="col-md-2">
-        <button class="btn btn-sm txtclr " (click)="downloadexcel()"  [disabled]="!data.length">Download</button>
+        <button class="btn btn-sm txtclr " (click)="downloadexcel()"  [disabled]="!data.length">{{'download'| translate}}</button>
     </div>
     <br>
     <br>
@@ -38,6 +38,6 @@
 <ng-template #ver let-row let-rowIndex="rowIndex">
 
     <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="detailedlayout(row)"><i class="fa fa-eye"
-            aria-hidden="true"></i>View</button>
+            aria-hidden="true"></i>{{'view'| translate}}</button>
 
 </ng-template>

@@ -1,4 +1,4 @@
-<div class="text-center txt"><h2>Order Details</h2></div>
+<div class="text-center txt"><h2>{{'orderdetails'|translate}}</h2></div>
 <div class="border p-5">
     <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
     
@@ -7,5 +7,5 @@
 </div>
 
 <ng-template #ver let-row let-rowIndex="rowIndex">          
-        <button class="btn btn-md   ml-4" id="verbasedata" (click)="ordersview(row)" ><i class="fa fa-eye" aria-hidden="true"></i>View</button>    
+        <button class="btn btn-md   ml-4" id="verbasedata" (click)="ordersview(row)" ><i class="fa fa-eye" aria-hidden="true"></i>{{'view'| translate}}</button>    
  </ng-template>

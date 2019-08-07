@@ -10,6 +10,7 @@ import {LappRestService  } from '../../core/rest-service/LappRestService';
 export class ForgotpasswordComponent implements OnInit {
   forgotPassword: FormGroup;
   submitted: boolean = false;
+  msg: string;
 
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 

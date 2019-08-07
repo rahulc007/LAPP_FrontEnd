@@ -6,13 +6,15 @@ import {SharedModule} from './shared/shared.module';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'ngx-easy-table';
+import { HotTableModule } from '@handsontable/angular';
 
 import {ConfigurationService} from '../common/ngx-easy-table/config-service';
+
 import { ViewComponent } from './orders/view/view.component';
 import { EditComponent } from './orders/edit/edit.component';
-import { TableModule } from 'ngx-easy-table';
 import { LegseditComponent } from './orders/legsedit/legsedit.component';
-import { HotTableModule } from '@handsontable/angular';
 import { HandsontableComponent } from './orders/handsontable/handsontable.component';
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
 
@@ -27,7 +29,8 @@ import { CustomerProfileComponent } from './profile/customer-profile/customer-pr
     FormsModule,
     TableModule,
     HotTableModule ,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule.forRoot()
   ],
   exports:[],
   providers:[ConfigurationService],

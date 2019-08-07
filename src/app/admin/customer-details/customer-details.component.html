@@ -1,5 +1,5 @@
 <div class="text-center txt">
-    <h2>Customer Details</h2>
+    <h2>{{'customerdetails'| translate}}</h2>
 </div>
 
 
@@ -28,7 +28,8 @@
 
 <ng-template #ver let-row let-rowIndex="rowIndex">
 
-    <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="editcustomer(row)">
-            Edit</button>
+<button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="editcustomer(row)">
+    {{'edit'| translate}}
+</button>
 
 </ng-template>

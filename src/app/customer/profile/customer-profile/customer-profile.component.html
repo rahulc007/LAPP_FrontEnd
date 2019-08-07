@@ -3,16 +3,16 @@
                 
         <div class="row">
         <div class="col-md-5 form-group">
-        <input placeholder="First Name" type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.firstName.errors }" required />
-        <div *ngIf="submitted && customerProfileForm.controls.firstName.errors" class="text-danger">
-                <div *ngIf="customerProfileForm.controls.firstName.errors.required" class="custom">First Name is required</div>
+        <input placeholder="First Name" type="text" formControlName="firstName" class="form-control" required />
+        <div *ngIf="customerProfileForm.controls.firstName.invalid && (customerProfileForm.controls.firstName.dirty || customerProfileForm.controls.firstName.touched)" class="text-danger">
+                <div *ngIf="customerProfileForm.controls.firstName.errors.required" class="custom">{{'firstnamerequired'| translate}}</div>
             </div>
         </div>
         
         <div class="col-md-5 form-group">
-        <input placeholder="Last Name" type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.lastName.errors }" required>
-        <div *ngIf="submitted && customerProfileForm.controls.lastName.errors" class="text-danger">
-                <div *ngIf="customerProfileForm.controls.lastName.errors.required" class="custom">Last Name is required</div>
+        <input placeholder="Last Name" type="text" formControlName="lastName" class="form-control" required>
+        <div *ngIf="customerProfileForm.controls.lastName.invalid && (customerProfileForm.controls.lastName.dirty || customerProfileForm.controls.lastName.touched)" class="text-danger">
+                <div *ngIf="customerProfileForm.controls.lastName.errors.required" class="custom">{{'lastnamerequired'| translate}}</div>
             </div>
         </div>
         </div>
@@ -20,17 +20,17 @@
         <div class="row">
         
          <div class="col-md-5 form-group">        
-                <input  placeholder="Email Id" formControlName="emailId" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted &&  customerProfileForm.controls.emailId.errors }" required>
-                <div *ngIf="submitted && customerProfileForm.controls.emailId.errors" class="text-danger">
-                        <div *ngIf="customerProfileForm.controls.emailId.errors.required" class="custom">Email is required</div>
-                        <div *ngIf="customerProfileForm.controls.emailId.errors.email" class="custom">Email must be a valid email address</div>
+                <input  placeholder="Email Id" formControlName="emailId" class="form-control" type="text" required>
+                <div *ngIf="customerProfileForm.controls.emailId.invalid && (customerProfileForm.controls.emailId.dirty || customerProfileForm.controls.emailId.touched)"  class="text-danger">
+                        <div *ngIf="customerProfileForm.controls.emailId.errors.required" class="custom">{{'emailrequired'| translate}}</div>
+                        <div *ngIf="customerProfileForm.controls.emailId.errors.email" class="custom">{{'emailvalid'| translate}}</div>
                     </div>
          </div>
         
         <div class="col-md-5 form-group">
-          <input placeholder="Your User ID" type="text" class="form-control" formControlName="userId" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.userId.errors }" required>
-          <div *ngIf="submitted && customerProfileForm.controls.userId.errors" class="text-danger">
-                <div *ngIf="customerProfileForm.controls.userId.errors.required" class="custom">User Id is required</div>
+          <input placeholder="Your User ID" type="text" class="form-control" formControlName="userId" required>
+          <div *ngIf="customerProfileForm.controls.userId.invalid && (customerProfileForm.controls.userId.dirty || customerProfileForm.controls.userId.touched)" class="text-danger">
+                <div *ngIf="customerProfileForm.controls.userId.errors.required" class="custom">{{'useridrequired'| translate}}</div>
             </div>
         </div>
         
@@ -44,8 +44,8 @@
                     <option *ngFor="let country of countryData" [value]="country.CountryName"></option> 
                     </select>
                 </datalist>
-                <div *ngIf="submitted && customerProfileForm.controls.country.errors" class="text-danger">
-                    <div *ngIf="customerProfileForm.controls.country.errors.required" class="custom">Please Select Country </div>
+                <div *ngIf="customerProfileForm.controls.country.invalid && (customerProfileForm.controls.country.dirty || customerProfileForm.controls.country.touched)" class="text-danger">
+                    <div *ngIf="customerProfileForm.controls.country.errors.required" class="custom">{{'selectcountry'| translate}}</div>
                 </div>
             </div>
         
@@ -56,8 +56,8 @@
                     <option *ngFor="let state of stateData" [value]="state.StateName"></option> 
                   </select>
                 </datalist>
-                <div *ngIf="submitted && customerProfileForm.controls.State.errors" class="text-danger">
-                    <div *ngIf="customerProfileForm.controls.State.errors.required" class="customs">Please Select State</div>
+                <div *ngIf="customerProfileForm.controls.State.invalid && (customerProfileForm.controls.State.dirty || customerProfileForm.controls.State.touched)" class="text-danger">
+                    <div *ngIf="customerProfileForm.controls.State.errors.required" class="customs">{{'selectstate'| translate}}</div>
                 </div>    
             </div>
         
@@ -68,8 +68,8 @@
                             <option *ngFor="let city of cityData" [value]="city"></option> 
                         </select>
                     </datalist>   
-                <div *ngIf="submitted && customerProfileForm.controls.City.errors" class="text-danger">
-                    <div *ngIf="customerProfileForm.controls.City.errors.required" class="customs">Please Select City</div>
+                <div *ngIf="customerProfileForm.controls.City.invalid && (customerProfileForm.controls.City.dirty || customerProfileForm.controls.City.touched)" class="text-danger">
+                    <div *ngIf="customerProfileForm.controls.City.errors.required" class="customs">{{'selectcity'| translate}}</div>
                 </div>                 
             </div>
         </div>
@@ -77,26 +77,26 @@
         <div class="row px-0">
             <div class="col-md-5 form-group"> 
                 <input placeholder="Phone Number" type="text" class="form-control" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.phoneNumber.errors }" required>
-                    <div *ngIf="submitted && customerProfileForm.controls.phoneNumber.errors" class="text-danger">
-                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.required" class="custom">Phone is required</div>
-                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.pattern" class="custom">Phone Number not valid</div> 
-                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.minlength" class="custom">Phone must be at least 10 digit</div>
+                    <div *ngIf="customerProfileForm.controls.phoneNumber.invalid && (customerProfileForm.controls.phoneNumber.dirty || customerProfileForm.controls.phoneNumber.touched)" class="text-danger">
+                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.required" class="custom">{{'phonenumberrequired'| translate}}</div>
+                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.pattern" class="custom">{{'phonenumbervalid'| translate}}</div> 
+                        <div *ngIf="customerProfileForm.controls.phoneNumber.errors.minlength" class="custom">{{'phonenumberdigit'| translate}}</div>
                     </div>
             </div>
             <div class="col-md-5 form-group">
                 <input placeholder="Reference Code" type="text" class="form-control" formControlName="referenceCode" [ngClass]="{ 'is-invalid': submitted && customerProfileForm.controls.referenceCode.errors }" required>
-                     <div *ngIf="submitted && customerProfileForm.controls.referenceCode.errors" class="text-danger">
-                        <div *ngIf="customerProfileForm.controls.referenceCode.errors.required" class="custom">Reference Code is required</div>
+                     <div *ngIf="customerProfileForm.controls.referenceCode.invalid && (customerProfileForm.controls.referenceCode.dirty || customerProfileForm.controls.referenceCode.touched)" class="text-danger">
+                        <div *ngIf="customerProfileForm.controls.referenceCode.errors.required" class="custom">{{'referencecoderequired'| translate}}</div>
                     </div>
              </div>
         </div>
         
         <div class="row">
             <div class="col-md-3">
-                    <button (click)="reset()" class="btn btn-secondary">Reset All</button>
+                    <button (click)="reset()" class="btn btn-secondary">{{'resetall'| translate}}</button>
             </div>
             <div class="col-md-3 offset-md-4">
-                    <button (click)="continue()" class="btn btn-primary">Continue</button>
+                    <button (click)="continue()" [disabled]="customerProfileForm.pristine || customerProfileForm.invalid"  class="btn btn-primary">{{'continue'| translate}}</button>
             </div>
         </div>
    

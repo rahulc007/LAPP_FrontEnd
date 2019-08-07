@@ -41,6 +41,32 @@
     "passwordlength":"Password must be at least 6 character",
     "confirmpassword":"Confirm Password",
     "confirmpasswordrequired":"Confirm Password required",
-    "confirmpasswordvalidation":"New Password & Confirm Password must be Same"
+    "confirmpasswordvalidation":"New Password & Confirm Password must be Same",
+    "firstnamerequired":"First Name is required",
+    "lastnamerequired":"Last Name is required",
+    "useridrequired":"User Id is required",
+    "phonenumberrequired":"Phone Number is required",
+    "phonenumbervalid":"Phone Number not valid",
+    "phonenumberdigit":"Phone Number must be at least 10 digit",
+    "usertyperequired":"User Type is required",
+    "edit":"Edit",
+    "orderdetails":"Order Details",
+    "view":"View",
+    "orderview":"Order View",
+    "referencecoderequired":"Reference Code is required",
+    "continue":"Continue",
+    "dashboard":"Dashboard",
+    "upload":"Upload",
+    "download":"Download",
+    "uploadfiles":"Upload Files",
+    "enterlegs":"Enter Number of Legs",
+    "legsrequired":"Number of legs  required",
+    "validnumber":"Please enter valid Number only",
+    "selectcountry":"Please Select Country",
+    "selectstate":"Please Select State",
+    "selectcity":"Please Select City",
+    "resetall":"Reset All",
+    "orders":"Orders"
+    
 
 }
