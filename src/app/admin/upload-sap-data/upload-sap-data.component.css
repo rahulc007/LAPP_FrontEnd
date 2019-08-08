@@ -1,10 +1,5 @@
-body {
-    font-family: sans-serif;
-    }
-    
     .input-container {
     margin: 3em auto;
-    width: 400px;
     background-color: silver;
     border: 1px solid #DFDFDF;
     border-radius: 6px;
@@ -20,7 +15,7 @@ body {
     }
     
     .browse-btn {
-    background: rgb(181,122,40);
+    /* background: rgb(181,122,40); */
     color: white;
     min-height: 35px;
     padding: 10px;
@@ -30,7 +25,7 @@ body {
     }
     
     .browse-btn:hover {
-    background: #4ec0b4;
+    background: #000;
     }
     .btn{
         padding-right: 50px;

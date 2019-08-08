@@ -23,6 +23,10 @@
     margin: 0;
 }
 
+a{
+  cursor: pointer;
+}
+
 /* common styles start */
 .logo {
   width: 200px;
@@ -212,9 +216,17 @@ ul ul a {
 .user_cntnt .user_name{
   color: #000;
 }
+#header_dd{
+  cursor: pointer;
+}
 #header_dd.dropdown{
   margin: 3px 0 5px;
   font-size: 16px;
+}
+
+.dropdown-item:hover{
+  color: #f08843 !important;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
@@ -239,6 +251,8 @@ ul ul a {
 /*footer start*/
 .cntnt_footer{
   background: #fff;
+  position: absolute;
+  bottom: 0;
 }
 .footer{
   position: absolute;

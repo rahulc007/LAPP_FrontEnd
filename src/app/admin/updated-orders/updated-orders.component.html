@@ -1,43 +1,39 @@
-<div class="text-center txt">
-    <h2>{{'updateorders'| translate}}</h2>
-</div>
-
+<h2 class="page_heading dashboard">{{'updateorders'| translate}}</h2>
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col">
+        <button class="btn btn-orange pull-right" (click)="downloadexcel()"
+            [disabled]="!data.length">{{'download'| translate}}</button>
     </div>
-    <div class="col-md-2">
-        <button class="btn btn-sm txtclr " (click)="downloadexcel()"  [disabled]="!data.length">{{'download'| translate}}</button>
-    </div>
-    <br>
-    <br>
 </div>
 
-<div class="border p-5">
-    <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
+<div class="clearfix">&nbsp;</div>
 
-    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-            <a (click)="loadPage(page=1)" class="page-link">First</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-            <a (click)="loadPage(page= pager.currentPage - 1)" class="page-link">Previous</a>
-        </li>
-        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-            <a (click)="loadPage(page= page)" class="page-link">{{page}}</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-            <a (click)="loadPage(page= pager.currentPage + 1)" class="page-link">Next</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-            <a (click)="loadPage(page= pager.totalPages)" class="page-link">Last</a>
-        </li>
-    </ul>
+<div class="row">
+    <div class="col">
+        <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
+
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+                <a (click)="loadPage(page=1)" class="page-link">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+                <a (click)="loadPage(page= pager.currentPage - 1)" class="page-link">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+                class="page-item number-item">
+                <a (click)="loadPage(page= page)" class="page-link">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+                <a (click)="loadPage(page= pager.currentPage + 1)" class="page-link">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+                <a (click)="loadPage(page= pager.totalPages)" class="page-link">Last</a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <ng-template #ver let-row let-rowIndex="rowIndex">
-
-    <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="detailedlayout(row)"><i class="fa fa-eye"
-            aria-hidden="true"></i>{{'view'| translate}}</button>
-
+    <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="detailedlayout(row)"><i class="fa fa-eye" aria-hidden="true"></i>{{'view'| translate}}</button>
 </ng-template>

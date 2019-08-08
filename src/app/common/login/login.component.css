@@ -45,7 +45,7 @@
   height: 100vh;
 }
 .login_graphic{
-  background: url('../../../assets/images/login_illustration.png') no-repeat;
+  background: url('../../../assets/images/login_illustration.png') no-repeat center center;
     display: block;
     background-size: contain;
     min-height: 400px;
