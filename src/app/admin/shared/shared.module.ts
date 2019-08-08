@@ -14,7 +14,7 @@ import {RootSharedModule} from '../../common/root-shared.module';
   declarations: [
     FooterComponent,
   //  HeaderComponent,
-    SidebarComponent,
+   // SidebarComponent,
     MainpageComponent,
  //   ResetPasswordComponent
   ],

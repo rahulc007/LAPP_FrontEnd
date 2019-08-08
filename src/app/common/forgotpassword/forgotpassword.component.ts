@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {LappRestService  } from '../../core/rest-service/LappRestService';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-forgotpassword',
@@ -12,7 +13,7 @@ export class ForgotpasswordComponent implements OnInit {
   submitted: boolean = false;
   msg: string;
 
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService, private router: Router) { }
 
   ngOnInit() {
     this.forgotPassword = this.formBuilder.group({
@@ -26,13 +27,13 @@ export class ForgotpasswordComponent implements OnInit {
       return;
     }
    
-console.log("received email==>",this.forgotPassword.value.email)
     let params={"emailId":this.forgotPassword.value.email}
 
-    this.objService.Post('forgot-password',params).subscribe(datas => {
+    this.objService.Post('forgotPassword',params).subscribe(datas => {
       console.log('data', datas);
       if(datas.status === 200){
-        this.msg ='Successfully created User';
+        
+        this.router.navigate(['login/passwordupdate']);
        
       }
     })

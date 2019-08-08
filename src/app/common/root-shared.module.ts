@@ -9,16 +9,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { PasswordUpdateComponent } from './password-update/password-update.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import {Router, RouterModule} from '@angular/router';
+
 @NgModule({
   declarations: [
     HeaderComponent,
     ResetPasswordComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    PasswordUpdateComponent,
+    SidebarComponent
   ],
   imports: [
   CommonModule,
   BrowserModule,
   FormsModule,
+  RouterModule,
   ReactiveFormsModule,
   NgbModule,
   NgbDropdownModule,
@@ -26,7 +33,8 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   exports: [
     HeaderComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    SidebarComponent 
   ]
 
 })

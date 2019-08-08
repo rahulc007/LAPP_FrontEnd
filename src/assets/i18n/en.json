@@ -66,7 +66,8 @@
     "selectstate":"Please Select State",
     "selectcity":"Please Select City",
     "resetall":"Reset All",
-    "orders":"Orders"
+    "orders":"Orders",
+    "passwordupdate":"Password Update"
     
 
 }

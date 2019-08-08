@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MainpageComponent,
     FooterComponent,
   //  HeaderComponent,
-    SidebarComponent,
+ //   SidebarComponent,
     MainpageComponent,
   // ResetPasswordComponent
   ],
