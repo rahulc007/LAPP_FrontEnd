@@ -32,7 +32,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   public data :any[]=[];
   configuration: any;
   usersData: any;
-
+  errorMsg: string;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { 
     this.configuration = ConfigurationService.config; 
   }
@@ -99,12 +99,15 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     }
     this.objService.Post('createUser',params).subscribe(datas => {
       console.log('data', datas);
-      if(datas.status === 200){
-        this.msg ='Successfully created User';
+      if(datas.status === 200 && datas.successMessage != null){
+        this.msg =datas.successMessage;
         this.customerForm.reset();
         this.submitted = false;
        // window.location.reload();
        this.loadUsers();
+      }
+      else if( datas.status === 200 && datas.errorMessage != null) {
+        this.errorMsg=datas.errorMessage
       }
     })
 

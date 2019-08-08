@@ -17,10 +17,10 @@ const CustomerRoutes: Routes = [
     component: MainpageComponent, canActivate: [AuthGuard],
      children: [ { path: '', redirectTo: 'dashbord',pathMatch: 'full' },
      { path: 'dashbord', component: DashbordComponent },
-     { path: 'orderview', component: ViewComponent },
-     { path: 'orderview/orderedit/:id', component: EditComponent},
-     { path: 'orderview/orderedit/editlegs/:id', component: LegseditComponent},
-     { path: 'orderview/orderedit/editlegs/:id/legstable', component: HandsontableComponent},
+     { path: 'dashbord/orderview', component: ViewComponent },
+     { path: 'dashbord/orderview/orderedit/:id', component: EditComponent},
+     { path: 'dashbord/orderview/orderedit/editlegs/:id', component: LegseditComponent},
+     { path: 'dashbord/orderview/orderedit/editlegs/:id/legstable', component: HandsontableComponent},
      { path: 'dashbord/customerProfile', component: CustomerProfileComponent}
     ]
     

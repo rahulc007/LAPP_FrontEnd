@@ -34,6 +34,7 @@ export class UserService {
             .pipe(map(user => {
                 //login successful if there's a jwt token in the response
                 if (user.status===AppConfig.ok  &&   user.statusMessage !=AppConfig.error) {
+                  localStorage.setItem('userType', user.userType);
                   localStorage.setItem('token', user.token);
                    localStorage.setItem('username', user.username);
                   localStorage.setItem('currentUser',JSON.stringify(user));

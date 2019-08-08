@@ -1,4 +1,4 @@
-<app-header></app-header>   
+<!-- <app-header></app-header>   
 <app-sidebar></app-sidebar>
 
 <div class="container-fluid">
@@ -7,4 +7,20 @@
     </section>
 </div>
 
- <app-footer></app-footer>
+ <app-footer></app-footer> -->
+ <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <div class="wrapper ">
+              <app-sidebar></app-sidebar>
+              <div id="content" [ngClass]="{'active':!navService.showSideBar}">
+                <app-header></app-header>
+                <section class="main-container">
+                  <router-outlet></router-outlet>
+                </section>
+                <app-footer></app-footer>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
