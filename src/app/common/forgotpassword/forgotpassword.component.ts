@@ -33,7 +33,7 @@ export class ForgotpasswordComponent implements OnInit {
       console.log('data', datas);
       if(datas.status === 200){
         
-        this.router.navigate(['login/passwordupdate']);
+        this.router.navigate(['login/passwordupdate', this.forgotPassword.value.email]);
        
       }
     })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {LappRestService  } from '../../core/rest-service/LappRestService';
+import {Router,ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-password-update',
@@ -11,8 +12,9 @@ export class PasswordUpdateComponent implements OnInit {
   passwordUpdate: FormGroup;
   submitted: boolean = false;
   msg: string;
+  emailId:any;
 
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService, private route: ActivatedRoute) { }
 
 
   ngOnInit() {
@@ -21,6 +23,10 @@ export class PasswordUpdateComponent implements OnInit {
       confirmPwd: ['', [Validators.required, Validators.minLength(6), this.passwordMatcher.bind(this)] ],
     });
     this.submitted = false;
+
+    this.route.paramMap.subscribe(params=>{
+      this.emailId = params.get('emailId');
+    });
 
   }
 
@@ -42,7 +48,7 @@ export class PasswordUpdateComponent implements OnInit {
     } else {
       console.log(this.passwordUpdate.value)
       let objPayload = {
-        "emailId": 'admin@lapp.com',
+        "emailId":  this.emailId ,
         "password": btoa(this.passwordUpdate.controls.newPwd.value),
        
       }
