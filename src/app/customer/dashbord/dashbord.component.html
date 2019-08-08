@@ -1,20 +1,21 @@
-
-<div class="container-fluid"  >
+<div class="container-fluid">
 
     <div class="row">
         <div class="col-md-12">
             <div class="dshbrd_logo mt-0 text-center">
-                <img src="../../../assets/images/lapp_logo.png" alt="LAPP" class="rounded" /><br/>
+                <img src="../../../assets/images/lapp_logo.png" alt="LAPP" class="rounded" /><br />
                 <p>{{'manufactors'| translate}}</p>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                {{'neworders'| translate}}
-            </div>
+            <span [routerLink]="['neworders']">
+                <div class="dshbrd_icn text-center">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    {{'neworders'| translate}}
+                </div>
+            </span>
         </div>
         <div class="col">
             <div class="dshbrd_icn text-center">
@@ -28,14 +29,15 @@
                 {{'processedorders'| translate}}
             </div>
         </div>
+
+    </div>
+    <div class="row">
         <div class="col">
             <div class="dshbrd_icn text-center">
                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                 {{'previousorders'| translate}}
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col">
             <div class="dshbrd_icn text-center">
                 <i class="fa fa-download" aria-hidden="true"></i>
@@ -43,17 +45,19 @@
             </div>
         </div>
         <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                {{'profile'| translate}}
-            </div>
+            <span [routerLink]="['profile']">
+                <div class="dshbrd_icn text-center">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    {{'profile'| translate}}
+                </div>
+            </span>
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <div class="dshbrd_icn text-center">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 {{'Userapprovals'| translate}}
             </div>
-        </div>
+        </div> -->
         <!-- <div class="col">
             <div class="dshbrd_icn text-center">
                 <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -61,8 +65,8 @@
             </div>
         </div> -->
     </div>
-  
-  </div>
+
+</div>
 <!-- Reset Password Modal -->
 <ng-template #resetPWD let-c="close" let-d="dismiss">
     <div class="modal-header">
@@ -80,7 +84,8 @@
                         <input formControlName="oldPwd" class="form-control" type="password"
                             [ngClass]="{ 'is-invalid': submitted && resetForm.controls.oldPwd.errors }" required>
                         <div *ngIf="submitted && resetForm.controls.oldPwd.errors" class="text-danger">
-                            <div *ngIf="resetForm.controls.oldPwd.errors.required">{{'oldpasswordrequired'| translate}}</div>
+                            <div *ngIf="resetForm.controls.oldPwd.errors.required">{{'oldpasswordrequired'| translate}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,8 +95,10 @@
                         <input type="password" formControlName="newPwd" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && resetForm.controls.newPwd.errors }" required>
                         <div *ngIf="submitted && resetForm.controls.newPwd.errors" class="text-danger">
-                            <div *ngIf="resetForm.controls.newPwd.errors.required">{{'newpasswordrequired'| translate}}</div>
-                            <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}</div>
+                            <div *ngIf="resetForm.controls.newPwd.errors.required">{{'newpasswordrequired'| translate}}
+                            </div>
+                            <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,8 +108,10 @@
                         <input type="password" formControlName="confirmPwd" class="form-control"
                             [ngClass]="{ 'is-invalid': submitted && resetForm.controls.confirmPwd.errors }" required>
                         <div *ngIf="submitted && resetForm.controls.confirmPwd.errors" class="text-danger">
-                             <div *ngIf="resetForm.controls.confirmPwd.errors.required">{{'confirmpasswordrequired'| translate}}</div>
-                             <div *ngIf="resetForm.controls.confirmPwd.errors.passwordMatcher">{{'confirmpasswordvalidation'| translate}}</div>
+                            <div *ngIf="resetForm.controls.confirmPwd.errors.required">
+                                {{'confirmpasswordrequired'| translate}}</div>
+                            <div *ngIf="resetForm.controls.confirmPwd.errors.passwordMatcher">
+                                {{'confirmpasswordvalidation'| translate}}</div>
                         </div>
                     </div>
                 </div>
