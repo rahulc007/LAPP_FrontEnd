@@ -24,10 +24,17 @@ export class PasswordUpdateComponent implements OnInit {
     });
     this.submitted = false;
 
-    this.route.paramMap.subscribe(params=>{
-      this.emailId = params.get('emailId');
-    });
+    // this.route.paramMap.subscribe(params=>{
+    //   this.emailId = params.get('emailId');
+    // });
 
+
+    this.route.queryParams.subscribe(params=>{
+      this.emailId = params['emailId'];
+    })
+
+
+    console.log("email Id ===>", this.emailId)
   }
 
   private passwordMatcher(control: FormControl) {

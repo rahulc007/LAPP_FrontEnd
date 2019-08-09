@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'customer', loadChildren:'./customer/customer.module#CustomerModule', canActivate: [AuthGuard] },
   { path: 'login', component:LoginComponent },
   { path:'login/forgotpassword', component:ForgotpasswordComponent},
-  {path:'login/passwordupdate/:emailId', component:PasswordUpdateComponent},
+  {path:'forgot-password', component:PasswordUpdateComponent},
   { path: '**', redirectTo: 'login', pathMatch: 'full'},
   
 ];
