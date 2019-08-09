@@ -32,8 +32,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.usersId= localStorage.getItem('username');
-    this.userTypeValue=localStorage.getItem('userType');
-    console.log(this.userTypeValue);
+    
   }
 
   signout() {
@@ -41,19 +40,8 @@ export class HeaderComponent implements OnInit {
   }
   resetPwdOpen(resetPWD) {
       this.modalService.open(resetPWD);
-     
   }
-  private passwordMatcher(control: FormControl): { [s: string]: boolean } {
-    if (
-        this.resetForm &&
-        (control.value !== this.resetForm.controls.newPwd.value)
-    ) {
-        return { passwordNotMatch: true };
-    }
-    return null;
-
-}
-
+ 
   resetPassword() {
     this.submitted = true;
     if (this.resetForm.invalid) {
@@ -67,11 +55,10 @@ export class HeaderComponent implements OnInit {
     this.navService.toggleSideBar();
   }
   openProfile() {
-    console.log(this.userTypeValue);
-    if(this.userTypeValue != 1) {
-      this.router.navigate(['customer/dashbord/customerProfile']);
+    if(this.userTypeValue === "2") {
+      this.router.navigate(['admin/dashbord/profile']);
     }
-    this.router.navigate(['admin/dashbord/profile']);
+      this.router.navigate(['customer/dashbord/profile']);
   }
 
 }

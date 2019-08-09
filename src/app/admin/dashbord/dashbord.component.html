@@ -80,14 +80,18 @@
     
                 <div class="row">
                     <div class="col">
+                        <span [routerLink]="['neworders']">
                         <div class="cntnt_box box1">
                             <h5>{{'neworders'| translate}}</h5>
                         </div>
+                        </span>
                     </div>
                     <div class="col">
+                        <span [routerLink]="['updatedorders']">
                         <div class="cntnt_box box2">
                             <h5>{{'updateorders'| translate}}</h5>
                         </div>
+                        </span>
                     </div>
                     <div class="col">
                         <div class="cntnt_box box3">
@@ -110,9 +114,11 @@
                         </div>
                     </div>
                     <div class="col">
+                        <span [routerLink]="['profile']">
                         <div class="cntnt_box box2">
                             <h5>{{'profile'| translate}}</h5>
                         </div>
+                        </span>
                     </div>
                     <div class="col">
                         <div class="cntnt_box box3">
@@ -120,9 +126,11 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="cntnt_box box1">
-                            <h5>{{'Createusers' | translate}}</h5>
-                        </div>
+                        <span [routerLink]="['createuser']">
+                            <div class="cntnt_box box1">
+                              <h5>{{'Createusers' | translate}}</h5>
+                            </div>
+                        </span> 
                     </div>
                     <div class="col-3">
                         <img src="../../../assets/images/latest_products.jpg" alt="LAPP" class="img-fluid rounded" />

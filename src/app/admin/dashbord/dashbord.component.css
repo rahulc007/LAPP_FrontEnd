@@ -170,6 +170,7 @@
   /*dashboard start*/
 .dashboard_cntnts{
   padding: 20px 5px;
+  cursor: pointer;
 }
 .dashboard_cntnts .cntnt_box{
   padding: 15px;

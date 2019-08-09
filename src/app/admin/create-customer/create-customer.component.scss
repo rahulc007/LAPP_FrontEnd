@@ -132,7 +132,7 @@ input[type="email"] {
   }
 }
 
-button {
+#createUser button {
   font-family: 'roboto', sans-serif;
   transition: transform 0.2s $cubic,
      box-shadow 0.2s $cubic;
@@ -150,7 +150,6 @@ button {
     box-shadow: 0 5px 6px 0 rgba(0,0,0,0.2);
   };
   float: right;
-
 }
 
 /*a {
@@ -200,13 +199,13 @@ a {
   padding-left:20px;
 }
 
-.btn{ 
+#createUser .btn{ 
     background : rgb(181,122,40);
     width:300px;
 }
 
 #country input{
-  width: 300px;
+  width: 290px;
 }
 .custom{
   margin-left:25px;

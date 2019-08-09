@@ -1,9 +1,18 @@
-<div *ngIf="msg" class="alert alert-success" role="alert">
+<div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertMsg">{{msg}}</span>
+</div>
+<div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertErrMsg">{{errorMsg}}</span>
+</div>
+ <!-- <div *ngIf="msg" class="alert alert-success" role="alert">
     {{msg}}
   </div>
   <div *ngIf="errorMsg" class="alert alert-danger" role="alert">
     {{errorMsg}}
-</div>
+</div> -->
+
 <form [formGroup]="customerForm" #form="ngForm" class="siz">
 
     <div class="row">
@@ -106,7 +115,7 @@
         </div>
     </div> 
 
-    <div class="row">
+    <div id="createUser" class="row">
         <div class="col-md-6 offset-md-5">
             <button  (click)="formSubmit()" [disabled]="customerForm.pristine || customerForm.invalid"  class="btn btn-primary">{{'submit'| translate}}</button>
         </div>

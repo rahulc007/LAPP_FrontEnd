@@ -1,72 +1,67 @@
-<div class="container-fluid">
+<div class="row">
+    <div class="col">
+        <div class="dashboard_cntnts">
+            <h2 class="page_heading dashboard">Dashboard</h2>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="dshbrd_logo mt-0 text-center">
-                <img src="../../../assets/images/lapp_logo.png" alt="LAPP" class="rounded" /><br />
-                <p>{{'manufactors'| translate}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <span [routerLink]="['neworders']">
-                <div class="dshbrd_icn text-center">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    {{'neworders'| translate}}
+            <div class="row">
+                <div class="col">
+                    <span [routerLink]="['neworders']">
+                    <div class="cntnt_box box1">
+                        <h5>{{'neworders'| translate}}</h5>
+                    </div>
+                </span>
                 </div>
-            </span>
-        </div>
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                {{'updateorders'| translate}}
-            </div>
-        </div>
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                {{'processedorders'| translate}}
-            </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-                {{'previousorders'| translate}}
-            </div>
-        </div>
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-download" aria-hidden="true"></i>
-                {{'DownloadExcel'| translate}}
-            </div>
-        </div>
-        <div class="col">
-            <span [routerLink]="['profile']">
-                <div class="dshbrd_icn text-center">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    {{'profile'| translate}}
+                <div class="col">
+                    <div class="cntnt_box box2">
+                        <h5>{{'updateorders'| translate}}</h5>
+                    </div>
                 </div>
-            </span>
-        </div>
-        <!-- <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                {{'Userapprovals'| translate}}
+                <div class="col">
+                    <div class="cntnt_box box3">
+                        <h5>{{'processedorders'| translate}}</h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="cntnt_box box1">
+                        <h5>{{'previousorders' | translate}}</h5>
+                    </div>
+                </div>
             </div>
-        </div> -->
-        <!-- <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-user-plus" aria-hidden="true"></i>
-                Create Users
-            </div>
-        </div> -->
-    </div>
 
+            <div class="row">&nbsp;</div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="cntnt_box box1">
+                        <h5>{{'DownloadExcel'| translate}}</h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <span [routerLink]="['profile']">
+                    <div class="cntnt_box box2">
+                        <h5>{{'profile'| translate}}</h5>
+                    </div>
+                    </span>
+                </div>
+                <div class="col">
+                    <div class="cntnt_box box3">
+                        <h5>{{'Userapprovals'| translate}}</h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="cntnt_box box1">
+                        <h5>{{'Createusers' | translate}}</h5>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <img src="../../../assets/images/latest_products.jpg" alt="LAPP" class="img-fluid rounded" />
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
 <!-- Reset Password Modal -->
 <ng-template #resetPWD let-c="close" let-d="dismiss">
     <div class="modal-header">
