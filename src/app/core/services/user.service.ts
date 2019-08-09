@@ -37,6 +37,7 @@ export class UserService {
                   localStorage.setItem('userType', user.userType);
                   localStorage.setItem('token', user.token);
                    localStorage.setItem('username', user.username);
+                   localStorage.setItem('firstTimeLogin', user.firstTimeLogin);
                   localStorage.setItem('currentUser',JSON.stringify(user));
                   this._router.navigate(['/dashboard']);
                  }

@@ -93,7 +93,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       "state": this.customerForm.value.State,
       "city": this.customerForm.value.City,
       "phonenumber": this.customerForm.value.phone,
-      "userTYpe": this.customerForm.value.usertype,
+      "userTYpe": this.getusertypeCode(this.customerForm.value.usertype),
       "createdBy": uId,
       "countryCode": this.getcountrycode(this.customerForm.value.country)
     }
@@ -147,6 +147,14 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     let contrycodedata=this.countryData.find(cntry => cntry.CountryName === country);
     console.log(contrycodedata)
     return contrycodedata.countryCode;
+  }
+
+
+  getusertypeCode(user)
+  {
+     let usercode = this.usertypeData.find(usr => usr.type === user);
+
+     return usercode.value;
   }
 
 }
