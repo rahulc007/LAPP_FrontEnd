@@ -92,7 +92,7 @@ export class CreateCustomerComponent implements OnInit {
       "state": this.customerForm.value.State,
       "city": this.customerForm.value.City,
       "phonenumber": this.customerForm.value.phone,
-      "userTYpe": this.getusertypeCode(this.customerForm.value.usertype),
+      "userType": this.getusertypeCode(this.customerForm.value.usertype),
       "createdBy": uId,
       "countryCode": this.getcountrycode(this.customerForm.value.country)
     }

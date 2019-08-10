@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Countries } from '../../../../assets/data/countrydetails';
 
 @Component({
   selector: 'app-view',
@@ -10,7 +11,9 @@ export class ViewComponent implements OnInit {
   profileForm: FormGroup;
   submitted = false;
   mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
-
+  countryData: any[] = [];
+  selectedCountry: string;
+ 
   constructor(private formBuilder: FormBuilder) { }
 
 
@@ -26,8 +29,16 @@ export class ViewComponent implements OnInit {
       phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern(this.mobnumPattern)]],
       referncecode: ['', Validators.required]
    });
+   this.countryData = Countries;
+   const cCode= localStorage.getItem("countrycode");
+   console.log(cCode)
+   this.selectedCountry=this.getCountryName(cCode);
   }
-
+getCountryName(cCode) {
+  let countryDataName= this.countryData.find(name=> name.countryCode === cCode);
+  console.log(countryDataName)
+  return countryDataName.CountryName;
+}
   continue()  {
     this.submitted = true;
 

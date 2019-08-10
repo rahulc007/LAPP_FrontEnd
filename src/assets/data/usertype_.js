@@ -5,6 +5,6 @@ export const UserType = [
 },
 {
     "type":"Customer",
-    "value":1
+    "value":3
 }
 ]
