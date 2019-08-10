@@ -5,6 +5,7 @@ import {data} from '../../../assets/data/country_';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {userTypes} from '../constants/constants';
 
 @Component({
   selector: 'app-login',
@@ -102,9 +103,16 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
    this.userService.login(params).pipe(first()).subscribe(data => {
-
-      this.router.navigate(['admin']);
-      this.message = data.successMessage === null ? data.errorMessage: data.successMessage ;
+      if(data.statusMessage === 'success'){
+        if(data.userType == userTypes.superAdmin || data.userType == userTypes.admin){
+          this.router.navigate(['admin']);
+        } else if(data.userType == userTypes.customer){
+          this.router.navigate(['customer']);
+        }
+      } else {
+        this.message = data.errorMessage;
+      }
+      
      
   },
    error => {
