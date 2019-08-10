@@ -29,10 +29,19 @@
 
 <div class="row">
   <div class="col-12">
-    <div class="">
-      <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
-      </app-ngx-easy-table>
-      <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination> -->
+    <div class="border p-5 table table-bordered table-striped">
+      <!-- <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
+      </app-ngx-easy-table> -->
+      <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">
+        <ng-template let-row>
+          <td>{{row.fileName}}</td>
+          <td>{{row.fileSize}}</td>
+          <td>{{row.orderCount}}</td>
+          <td>{{row.uploadedBy}}</td>
+          <td>{{row.createdDate | date:'medium'}}</td>
+        </ng-template>
+      </ngx-table>
+       <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination> -->
     </div>
   </div>
 </div>
