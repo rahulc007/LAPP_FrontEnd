@@ -17,9 +17,12 @@ import { EditComponent } from './orders/edit/edit.component';
 import { LegseditComponent } from './orders/legsedit/legsedit.component';
 import { HandsontableComponent } from './orders/handsontable/handsontable.component';
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
+import { RootSharedModule } from '../common/root-shared.module';
+import { ResetPasswordComponent } from '../common/reset-password/reset-password.component';
 
 
 @NgModule({
+  entryComponents: [ResetPasswordComponent],
   declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { CustomerProfileComponent } from './profile/customer-profile/customer-pr
     TableModule,
     HotTableModule ,
     ReactiveFormsModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    RootSharedModule
   ],
   exports:[],
   providers:[ConfigurationService],
