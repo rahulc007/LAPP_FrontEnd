@@ -1,29 +1,15 @@
-import { Component, OnInit} from '@angular/core';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ResetPasswordComponent } from 'src/app/common/reset-password/reset-password.component';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
-  styleUrls: ['./dashbord.component.css'],
-  providers: [NgbModal, NgbModalConfig]
+  styleUrls: ['./dashbord.component.css']
 })
 export class DashbordComponent implements OnInit {
 
-  closeResult: string;
+  constructor() { }
 
-  constructor(private config: NgbModalConfig, private modalService: NgbModal) {
-               
-   }
-  handle(e){
-    console.log("customer",e)
-    this.closeResult = e;
-}
   ngOnInit() {
-   this.modalopen();
   }
-  modalopen() {
-    this.modalService.open(ResetPasswordComponent);
-  }
+
 }
