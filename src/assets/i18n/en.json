@@ -67,7 +67,8 @@
     "selectcity":"Please Select City",
     "resetall":"Reset All",
     "orders":"Orders",
-    "passwordupdate":"Password Update"
+    "passwordupdate":"Password Update",
+    "firstname": "First name"
     
 
 }

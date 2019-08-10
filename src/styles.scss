@@ -80,6 +80,27 @@ a{
 }
 /* common styles end */
 
+/* form styles start*/
+.custom_form-group{
+  margin-bottom: 1.5rem;
+}
+.custom_form-group label{
+  margin: 0;
+  color: #807e7d;
+}
+.custom_form-group .form-control{
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 16px;
+  color: #000;
+  height: 30px;
+}
+/* form styles end*/
+
+
 /*navigation start*/
 .navbar{
   display: block;
