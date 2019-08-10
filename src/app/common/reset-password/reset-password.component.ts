@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -26,7 +26,10 @@ export class ResetPasswordComponent implements OnInit {
   passwordStrength:number = 0;
 
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
-    private config: NgbModalConfig, private modalService: NgbModal) { }
+    private config: NgbModalConfig, private modalService: NgbModal) { 
+      config.backdrop = 'static';
+      config.keyboard = false;
+    }
 
   d(template) {
     this.close.emit(template);
