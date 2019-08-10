@@ -56,12 +56,13 @@ export class CreateCustomerComponent implements OnInit {
     this.userData = data;
     this.loadUsers();
     this.columns = [
-      { key: 'firstname'+'lastname', title: 'User Name' },
-      { key: 'consumerId', title: 'User ID' },
+      { key: 'firstname', title: 'First Name' },
+      { key: 'lastname', title: 'Last Name' },
+      { key: 'pid', title: 'User ID' },
       { key: 'emailId', title: 'Email ID' },
       { key: 'phonenumber', title: 'Phone Number'},
       { key: 'country', title: 'Country'},
-      { key: 'userTYpe', title: 'User Type'},
+      { key: 'userType', title: 'User Type'},
       { key: 'createdBy', title: 'Created By'}
     ]
 
@@ -70,8 +71,8 @@ export class CreateCustomerComponent implements OnInit {
   loadUsers() {
         
     this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
-      console.log('getallUsr', response);
-     this.usersData = response.userProfileList;
+      console.log('getallUsr', response.userProfileList[0]);
+     this.data = response.userProfileList[0];
     })
   }
   formSubmit() {

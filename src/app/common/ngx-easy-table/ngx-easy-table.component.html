@@ -1,11 +1,4 @@
 <ngx-table [configuration]="configuration"
            [data]="data"
            [columns]="columns" class="table-bordered table-striped">
-        <ng-template let-row>   
-            <td>{{row.fileName}}</td>
-            <td>{{row.fileSize}}</td>
-            <td>{{row.orderCount}}</td>
-            <td>{{row.uploadedBy}}</td>
-            <td>{{row.createdDate | date:'medium'}}</td>
-        </ng-template>
 </ngx-table>
