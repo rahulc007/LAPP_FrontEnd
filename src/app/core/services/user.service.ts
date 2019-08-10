@@ -39,6 +39,7 @@ export class UserService {
                    localStorage.setItem('username', user.username);
                    localStorage.setItem('firstTimeLogin', user.firstTimeLogin);
                   localStorage.setItem('currentUser',JSON.stringify(user));
+                  localStorage.setItem('countrycode', JSON.stringify(user.countryCode));
                   this._router.navigate(['/dashboard']);
                  }
                  return user;

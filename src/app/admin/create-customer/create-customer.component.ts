@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserType } from '../../../assets/data/usertype_';
 import { Countries } from '../../../assets/data/countrydetails';
@@ -12,7 +12,7 @@ import {data} from '../../../assets/data/country_';
   styleUrls: ['./create-customer.component.scss'],
   providers:[ConfigurationService]
 })
-export class CreateCustomerComponent implements OnInit, AfterViewInit {
+export class CreateCustomerComponent implements OnInit {
 
   usertypeData: any[] = [];
   countryData: any[] = [];
@@ -55,9 +55,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.countryData = Countries;
     this.userData = data;
     this.loadUsers();
-
-  }
-  ngAfterViewInit() {
     this.columns = [
       { key: 'firstname'+'lastname', title: 'User Name' },
       { key: 'consumerId', title: 'User ID' },
@@ -67,7 +64,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       { key: 'userTYpe', title: 'User Type'},
       { key: 'createdBy', title: 'Created By'}
     ]
+
   }
+ 
   loadUsers() {
         
     this.objService.Get('getAllUserDetails', this.param).subscribe(response => {

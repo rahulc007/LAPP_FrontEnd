@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
  const URL = `http://3.17.182.133:8090/uploadSAPData`;
 import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.component';
@@ -12,7 +12,7 @@ import { LappRestService  } from '../../core/rest-service/LappRestService';
   styleUrls: ['./upload-sap-data.component.css'],
   providers:[ConfigurationService]
 })
-export class UploadSapDataComponent implements OnInit, AfterViewInit {
+export class UploadSapDataComponent implements OnInit {
   @ViewChild('uploadFile',{static:false}) uploadFile:any;
   fd = new FormData();
   configuration: any;
@@ -50,6 +50,13 @@ this.currentuser = localStorage.getItem('username')
       emailId:this.currentuser
   };
   this.getUploadedData();
+  this.columns = [
+    { key: 'fileName', title: 'File Name' },
+    { key: 'fileSize', title: 'File Size' },
+    { key: 'orderCount', title: 'Order Count' },
+    { key: 'uploadedBy', title: 'Uploaded By'},
+    { key: 'createdDate', title: 'Created Date'}
+  ]
   }
   getUploadedData() {
     this.objService.Get('getSapFileInfo', this.params).subscribe( res=> {
@@ -58,16 +65,7 @@ this.currentuser = localStorage.getItem('username')
   
     });
   }
-  ngAfterViewInit() {
-    this.columns = [
-      { key: '', title: 'File Name' },
-      { key: '', title: 'File Size' },
-      { key: '', title: 'Order Count' },
-      { key: '', title: 'Uploaded By'},
-      { key: '', title: 'Created Date'}
-    ]
-
-  }
+ 
   onUpload() {
     
     this.uploader.uploadAll();
