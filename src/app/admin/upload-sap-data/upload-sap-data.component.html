@@ -1,23 +1,33 @@
 <h2 class="page_heading dashboard">{{'upload'| translate}}</h2>
 
+<div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertMsg">File sucessfully uploaded!</span>
+</div>
+<div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertErrMsg">Please upload .xlsx, .xls, .csv only</span>
+</div>
+
 <div class="row">
   <div class="col"></div>
-  <div class="col-3">
+  <div class="col-4">
 
     <div class="input-container">
       <input type="file" ng2FileSelect [uploader]="uploader" accept="" #file accept=".xlsx, .xls, .csv">
       <button class="browse-btn btn-orange" (click)="file.click()">
         {{'uploadfiles'| translate}}
       </button>
-
       <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
     </div>
+    <p class="upload_msg">File timestamp should be in 'dd/mm/yyyy hh:mm' format</p>
+    <p class="upload_msg">Upload only .xlsx, .xls, .csv files</p>
   </div>
   <div class="col"></div>
 </div>
+<div class="row">&nbsp;</div>
 <div class="row">
-  <div class="col-12 text-center">
-
+  <div class="col text-center">
     <button type="button" class="btn btn-s btn-orange" (click)="uploader.uploadAll()"
       [disabled]="!uploader.getNotUploadedItems().length">
       <span class="glyphicon glyphicon-upload"></span> {{'submit'| translate}}
@@ -28,8 +38,8 @@
 <div class="clearfix">&nbsp;</div>
 
 <div class="row">
-  <div class="col-12">
-    <div class="border p-5 table table-bordered table-striped">
+  <div class="col">
+    <div class="table table-bordered">
       <!-- <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
       </app-ngx-easy-table> -->
       <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">

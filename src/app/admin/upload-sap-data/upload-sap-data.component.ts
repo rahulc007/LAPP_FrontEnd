@@ -22,6 +22,8 @@ export class UploadSapDataComponent implements OnInit {
   params: any = '';
   public columns: any[] = [];
   public data :any[]=[];
+  msg: string = '';
+  errorMsg: string = '';
 
 
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'orderData'});
@@ -33,17 +35,24 @@ export class UploadSapDataComponent implements OnInit {
 
   ngOnInit() {
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-         console.log('ImageUpload:uploaded:', item, status, response);
-        //  this.uploadFile.nativeElement.value = '';
-        this.getUploadedData();
-     };
-     this.uploader.onSuccessItem = (item: any, response: any, status: any, headers: any) => {
-      console.log('ImageUpload:uploaded:', item, status, response);
+    // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+    //      console.log('ImageUpload:uploaded:', item, status, response);
+    //     //  this.uploadFile.nativeElement.value = '';
+    //     this.getUploadedData();
+    //  };
+     this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
+      let data = JSON.parse(response);
+      // console.log('ImageUpload:uploaded===:', item,"===", status, "===", response, "===", data.status);
      //  this.uploadFile.nativeElement.value = '';
+     if(data.status == 200){
+       this.msg = "show";
+     } else if(data.status == 500){
+      this.errorMsg = "show";
+     }
      this.uploader.clearQueue();  
      this.getUploadedData();
   };
+  
 this.currentuser = localStorage.getItem('username')
 
      this.uploader.options.additionalParameter = {
@@ -60,7 +69,6 @@ this.currentuser = localStorage.getItem('username')
   }
   getUploadedData() {
     this.objService.Get('getSapFileInfo', this.params).subscribe( res=> {
-      console.log('upload data',res);
       this.data=res.sapFileInofList;
   
     });

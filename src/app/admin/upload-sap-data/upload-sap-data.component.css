@@ -1,10 +1,14 @@
     .input-container {
-    margin: 3em auto;
+    margin: 3em auto 0;
     background-color: silver;
     border: 1px solid #DFDFDF;
     border-radius: 6px;
     }
-    
+    .upload_msg{
+      font-size: 12px;
+      color: #807e7d;
+      margin: 0;
+    }
     input[type='file'] {
     display: none;
    
@@ -12,6 +16,7 @@
     
     .file-info {
     font-size: 0.9em;
+    padding: 10px;
     }
     
     .browse-btn {
