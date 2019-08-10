@@ -1,152 +1,99 @@
-<div class="row">
-    <div class="col">
-        <h2 class="page_heading dashboard">{{ 'profile' | translate}}</h2>
-    </div>
-</div>
 
-
-<form [formGroup]="profileForm" (ngSubmit)="continue()">
-
-    <div class="row">
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="">{{ 'firstname' | translate }}</label>
-                <input type="email" class="form-control" id="" formControlName="fname"
-                    [ngClass]="{ 'is-invalid': submitted && profileForm.controls.fname.errors }"
-                    placeholder="{{ 'firstname' | translate }}" required />
+        <form [formGroup]="profileForm" class="siz" (ngSubmit)="continue()">
+                
+                <div class="row">
+                <div class="col-md-6 form-group">
+                <input placeholder="First Name" type="text" formControlName="fname" class="form-control" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.fname.errors }" required />
                 <div *ngIf="submitted && profileForm.controls.fname.errors" class="text-danger">
-                    <div *ngIf="profileForm.controls.fname.errors.required" class="custom">
-                        {{'firstnamerequired'| translate}}</div>
+                        <div *ngIf="profileForm.controls.fname.errors.required" class="custom">{{'firstnamerequired'| translate}}</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="">Last name</label>
-                <input type="text" class="form-control" id="" placeholder="Last name"
-                    [ngClass]="{ 'is-invalid': submitted && profileForm.controls.lname.errors }" required />
+                
+                <div class="col-md-6 form-group">
+                <input placeholder="Last Name" type="text" formControlName="lname" class="form-control" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.lname.errors }" required>
                 <div *ngIf="submitted && profileForm.controls.lname.errors" class="text-danger">
-                    <div *ngIf="profileForm.controls.lname.errors.required" class="custom">
-                        {{'lastnamerequired'|translate}}
+                        <div *ngIf="profileForm.controls.lname.errors.required" class="custom">{{'lastnamerequired'|translate}}</div>
+                    
                     </div>
                 </div>
-            </div>
-        </div>
-
-    </div>
-
-
-
-    <div class="row">
-
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="">Email id</label>
-                <input type="email" class="form-control" id="" placeholder="Email Id" formControlName="email"
-                    [ngClass]="{ 'is-invalid': submitted &&  profileForm.controls.email.errors }" required />
-                <div *ngIf="submitted && profileForm.controls.email.errors" class="text-danger">
-                    <div *ngIf="profileForm.controls.email.errors.required" class="custom">
-                        {{'emailrequired'| translate}}
-                    </div>
-                    <div *ngIf="profileForm.controls.email.errors.email" class="custom">{{'emailvalid'| translate}}
+                </div>
+                
+                <div class="row">
+                
+                 <div class="col-md-6 form-group">        
+                        <input  placeholder="Email Id" formControlName="email" class="form-control" type="text" [ngClass]="{ 'is-invalid': submitted &&  profileForm.controls.email.errors }" required>
+                        <div *ngIf="submitted && profileForm.controls.email.errors" class="text-danger">
+                                <div *ngIf="profileForm.controls.email.errors.required" class="custom">{{'emailrequired'| translate}}</div>
+                                <div *ngIf="profileForm.controls.email.errors.email" class="custom">{{'emailvalid'| translate}}</div>
+                            </div>
+                 </div>
+                
+                <div class="col-md-6 form-group">
+                  <input placeholder="Your User ID" type="text" class="form-control" formControlName="userid" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.userid.errors }" required>
+                  <!-- <div *ngIf="profileForm.controls.userid.errors.required">UserId is required</div> -->
+                  <div *ngIf="submitted && profileForm.controls.userid.errors" class="text-danger">
+                        <div *ngIf="profileForm.controls.userid.errors.required" class="custom">{{'useridrequired'| translate}}</div>
+                       
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="">User id</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" formControlName="userid"
-                    [ngClass]="{ 'is-invalid': submitted && profileForm.controls.userid.errors }" required />
-                <div *ngIf="submitted && profileForm.controls.userid.errors" class="text-danger">
-                    <div *ngIf="profileForm.controls.userid.errors.required" class="custom">
-                        {{'useridrequired'| translate}}
-                    </div>
+                
                 </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="">Country</label>
-                <input type="text" class="form-control" formControlName="country" name="country" placeholder="Country"
-                    list="codes" step="5" min="5" max="200" required />
-                <datalist id="codes">
-                    <select class="scrollbar">
-                        <option *ngFor="let item of userData" [value]="item.name"></option>
+                
+                <div id="country" class="row">
+                 <div class="col-md-3 form-group"> 
+                    <input type="text" class="form-control" formControlName="country"  name="country"  placeholder="Country" list="codes" step="5" min="5" max="200" required />
+                    <datalist id="codes" >
+                    <select class="scrollbar" >
+                    <option *ngFor="let item of userData" [value]="item.name"></option> 
                     </select>
-                </datalist>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="exampleInputEmail1">State</label>
-                <input type="text" class="form-control" formControlName="State" name="State" placeholder="State"
-                    list="statecodes" step="5" min="5" max="200" required />
-                <datalist id="statecodes">
-                    <select class="scrollbar">
-                        <option *ngFor="let item of userData" [value]="item.name"></option>
-                    </select>
-                </datalist>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="exampleInputEmail1">City</label>
-                <input type="text" class="form-control" formControlName="City" name="city" placeholder="City"
-                    list="citycodes" step="5" min="5" max="200" required />
-                <datalist id="citycodes">
-                    <select class="scrollbar">
-                        <option *ngFor="let item of userData" [value]="item.name"></option>
-                    </select>
-                </datalist>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="form-group custom_form-group">
-                <label for="exampleInputEmail1">Phone number</label>
-                <input placeholder="Phone Number" type="text" class="form-control" formControlName="phone"
-                    [ngClass]="{ 'is-invalid': submitted && profileForm.controls.phone.errors }" required>
-                <div *ngIf="submitted && profileForm.controls.phone.errors" class="text-danger">
-                    <div *ngIf="profileForm.controls.phone.errors.required" class="custom">
-                        {{'phonenumberrequired'| translate}}</div>
-                    <div *ngIf="profileForm.controls.phone.errors.pattern" class="custom">
-                        {{'phonenumbervalid'| translate}}
-                    </div>
-                    <div *ngIf="profileForm.controls.phone.errors.minlength" class="custom">
-                        {{'phonenumberdigit'| translate}}</div>
+                    </datalist>
+                   </div>
+                
+                   <div class="col-md-3 ml-5 form-group">  
+                       <input type="text" class="form-control" formControlName="State"  name="State"  placeholder="State" list="statecodes" step="5" min="5" max="200" required />
+                     <datalist id="statecodes" >
+                          <select class="scrollbar" >
+                            <option *ngFor="let item of userData" [value]="item.name"></option> 
+                          </select>
+                       </datalist>
+                              
+                       </div>
+                
+                           <div class="col-md-3 ml-5 form-group"> 
+                                      <input type="text" class="form-control" formControlName="City"  name="city"  placeholder="City" list="citycodes" step="5" min="5" max="200" required />
+                                       <datalist id="citycodes" >
+                                            <select class="scrollbar" >
+                                            <option *ngFor="let item of userData" [value]="item.name"></option> 
+                                            </select>
+                                     </datalist>                  
+                        </div>
                 </div>
-            </div>
-        </div>
+                
+                <div class="row">
+                  <div class="col-md-6 form-group"> 
+ 
+                          <input placeholder="Phone Number" type="text" class="form-control" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.phone.errors }" required>
+                          <div *ngIf="submitted && profileForm.controls.phone.errors" class="text-danger">
+                                <div *ngIf="profileForm.controls.phone.errors.required" class="custom">{{'phonenumberrequired'| translate}}</div>
+                                <div *ngIf="profileForm.controls.phone.errors.pattern" class="custom">{{'phonenumbervalid'| translate}}</div> 
+                                <div *ngIf="profileForm.controls.phone.errors.minlength" class="custom">{{'phonenumberdigit'| translate}}</div>
+                                
+                            </div>
+                    </div>
+                <div class="col-md-6 form-group">
+                        <input placeholder="Reference Code" type="text" class="form-control" formControlName="referncecode" [ngClass]="{ 'is-invalid': submitted && profileForm.controls.referncecode.errors }" required>
+                        <div *ngIf="submitted && profileForm.controls.referncecode.errors" class="text-danger">
+                              <div *ngIf="profileForm.controls.referncecode.errors.required" class="custom">{{'referencecoderequired'| translate}}</div>
+                          </div>
+                </div>
+                </div>
+                
+                <div class="row">
+                        <div class="col-md-6 offset-md-5">
+                  <button (click)="continue()" [disabled]="profileForm.pristine || profileForm.invalid"  class="btn ">{{'continue'| translate}}</button>
+                        </div>
+                </div>
+           
+                </form>
 
-        <div class="col">&nbsp;</div>
-
-        <!-- <div class="col-md-6 form-group">
-            <input placeholder="Reference Code" type="text" class="form-control" formControlName="referncecode"
-                [ngClass]="{ 'is-invalid': submitted && profileForm.controls.referncecode.errors }" required>
-            <div *ngIf="submitted && profileForm.controls.referncecode.errors" class="text-danger">
-                <div *ngIf="profileForm.controls.referncecode.errors.required" class="custom">
-                    {{'referencecoderequired'| translate}}</div>
-            </div>
-        </div> -->
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <button (click)="continue()" [disabled]="profileForm.pristine || profileForm.invalid"
- class="btn btn-orange">Save</button>&nbsp;
-            <button class="btn btn-orange">Edit</button>
-        </div>
-    </div>
-
-</form>
+           
