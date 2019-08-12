@@ -240,6 +240,14 @@
     <div class="col">
         <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
         </app-ngx-easy-table>
-        <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination> -->
+         <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->
     </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-4">
+        <button class="btn btn-primary" (click)="download()">Download</button>
+    </div>
+
 </div>

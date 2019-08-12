@@ -5,6 +5,7 @@ import {NgxEasyTableComponent} from '../../common/ngx-easy-table/ngx-easy-table.
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import {AppConfig} from '../../configs/app.config';
 import { LappRestService  } from '../../core/rest-service/LappRestService';
+import * as XLSX from 'xlsx';
 //const URL= AppConfig.endpoints.uploadApi;
 @Component({
   selector: 'app-upload-sap-data',
@@ -24,6 +25,7 @@ export class UploadSapDataComponent implements OnInit {
   public data :any[]=[];
   msg: string = '';
   errorMsg: string = '';
+  sapData:any;
 
 
   public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'orderData'});
@@ -95,6 +97,20 @@ this.currentuser = localStorage.getItem('username')
     
     }
 
+    downloadfile()
+    {
+      
+        // this.exportToCSV();
+        const emailId = localStorage.getItem('username');
+        // this.objService.Get('downloadSAPData?emailId='+emailId).subscribe( res=> {
+        //   this.sapData=res;
+      
+        // });
+
+        window.location.href='http://3.17.182.133:8090/downloadSAPData?emailId='+emailId;
+
+    }
+
 public onFileSelected() {
  // const file: File = event[0];
 
@@ -115,5 +131,21 @@ removeFile(item) {
   //this.clearSelectedPicture();
 }
 
+
+exportToCSV() {
+  try {
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.sapData);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, 'file.xlsx');
+  } catch (err) {
+    console.error('export error', err);
+  }
+}
 
 }

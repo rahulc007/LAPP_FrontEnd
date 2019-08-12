@@ -5,6 +5,7 @@ import { Countries } from '../../../assets/data/countrydetails';
 import {LappRestService  } from '../../core/rest-service/LappRestService';
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import {data} from '../../../assets/data/country_';
+import {AppConfig} from '../../configs/app.config';
 
 @Component({
   selector: 'app-create-customer',
@@ -169,6 +170,14 @@ export class CreateCustomerComponent implements OnInit {
      let usercode = this.usertypeData.find(usr => usr.type === user);
 
      return usercode.value;
+  }
+
+  download()
+  {
+    const emailId = localStorage.getItem('username');
+
+    window.location.href='http://3.17.182.133:8090/downloadCustData?emailId='+emailId;
+    
   }
 
 }

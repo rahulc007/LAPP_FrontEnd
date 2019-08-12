@@ -51,7 +51,13 @@
           <td>{{row.createdDate | date:'medium'}}</td>
         </ng-template>
       </ngx-table>
-       <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination> -->
+       <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->
     </div>
   </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-3"><button class="btn btn-primary" (click)="downloadfile()">download</button></div>
+
 </div>
