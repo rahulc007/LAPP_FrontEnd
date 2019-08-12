@@ -55,10 +55,12 @@ export class HeaderComponent implements OnInit {
     this.navService.toggleSideBar();
   }
   openProfile() {
-    if(this.userTypeValue === "2") {
+    if(this.userTypeValue === "1" || this.userTypeValue === "2") {
       this.router.navigate(['admin/dashbord/profile']);
     }
-      this.router.navigate(['customer/dashbord/profile']);
+      else if(this.userTypeValue === "3") {
+        this.router.navigate(['customer/dashbord/profile']);
+    }
   }
 
 }

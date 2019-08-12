@@ -33,6 +33,7 @@ export class CreateCustomerComponent implements OnInit {
   configuration: any;
   usersData: any;
   errorMsg: string;
+  params: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { 
     this.configuration = ConfigurationService.config; 
   }
@@ -72,17 +73,17 @@ export class CreateCustomerComponent implements OnInit {
     
     const userType = localStorage.getItem('userType');
    
-    if(userType == 1)
+    if(userType == '1')
     {
     this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
       console.log('getallUsr', response.userProfileList);
      this.data = response.userProfileList;
     })
   }
-  else if(userType == 2)
+  else if(userType == '2')
   {
     const emailId = localStorage.getItem('username');
-    this.objService.Get('getUserByCreated?emailId='+emailId).subscribe(response => {
+    this.objService.Get('getUserByCreated?emailId='+emailId, this.params).subscribe(response => {
       console.log('getallUsr', response.userProfileList[0]);
      this.data = response.userProfileList;
     })

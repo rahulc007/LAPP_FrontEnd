@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Countries } from '../../../../assets/data/countrydetails';
-
+import {LappRestService  } from '../../../core/rest-service/LappRestService';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
@@ -13,30 +13,50 @@ export class ViewComponent implements OnInit {
   mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
   countryData: any[] = [];
   selectedCountry: string;
- 
-  constructor(private formBuilder: FormBuilder) { }
+  profileData: any;
+  param: '';
+  stateData: any[]=[];
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      userid: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      uemailId: ['', [Validators.required, Validators.email]],
+      consumerId: ['', Validators.required],
       country:['', Validators.required],
-      State:['', Validators.required],
-      City: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.minLength(10), Validators.pattern(this.mobnumPattern)]],
-      referncecode: ['', Validators.required]
+      state:['', Validators.required],
+      city: ['', Validators.required],
+      phonenumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern(this.mobnumPattern)]]
+      // referncecode: ['', Validators.required]
    });
    this.countryData = Countries;
-   const cCode= localStorage.getItem("countrycode");
-   console.log(cCode)
-   this.selectedCountry=this.getCountryName(cCode);
+   this.loadUsers();
+   
   }
+  loadUsers() {
+    const userEmail=localStorage.getItem('username');
+    this.objService.Get('getUserProfile?emailId='+ userEmail , this.param).subscribe(response => {
+      console.log("response", response);
+     this.profileData = response.userProfileEntity;
+     console.log("profileData",this.profileData)
+    })
+  }
+  getState() {
+    console.log(this.profileData.country);
+    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
+    this.stateData = stateNames.States;
+    console.log(this.stateData)
+
+  }
+
+  // getCities() {
+  //   let stateData = this.stateData.find(state => state.StateName === this.state);
+  //   this.citiesData = stateData.Cities;
+  // }
 getCountryName(cCode) {
   let countryDataName= this.countryData.find(name=> name.countryCode === cCode);
-  console.log(countryDataName)
   return countryDataName.CountryName;
 }
   continue()  {
