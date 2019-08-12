@@ -441,15 +441,63 @@
       background-size: contain;
     }
     .menu_icon.dashboard{
-      background: url(/assets/images/dashboard.png) no-repeat;
+      background: url(/assets/images/menu_icons/dashboard.png) no-repeat;
     }
-    .menu_icon.orders{
-      background: url(/assets/images/orders.png) no-repeat;
+    .menu_icon.dashboard:hover{
+      background: url(/assets/images/menu_icons/dashboard_hover.png) no-repeat;
+    }
+    .menu_icon.upload{
+      background: url(/assets/images/menu_icons/upload.png) no-repeat;
+    }
+    .menu_icon.upload:hover{
+      background: url(/assets/images/menu_icons/upload_hover.png) no-repeat;
+    }
+    .menu_icon.new_order{
+      background: url(/assets/images/menu_icons/newordr.png) no-repeat;
+    }
+    .menu_icon.new_order:hover{
+      background: url(/assets/images/menu_icons/newordr_hover.png) no-repeat;
+    }
+    .menu_icon.updtd_order{
+      background: url(/assets/images/menu_icons/updatedordr.png) no-repeat;
+    }
+    .menu_icon.updtd_order:hover{
+      background: url(/assets/images/menu_icons/updatedordr_hover.png) no-repeat;
+    }
+    .menu_icon.prcsd_order{
+      background: url(/assets/images/menu_icons/procesedordr.png) no-repeat;
+    }
+    .menu_icon.prcsd_order:hover{
+      background: url(/assets/images/menu_icons/procesedordr_hover.png) no-repeat;
     }
     .menu_icon.prvs_order{
-      background: url(/assets/images/previousorders.png) no-repeat;
+      background: url(/assets/images/menu_icons/prvsordr.png) no-repeat;
     }
-    .menu_icon.status{
-      background: url(/assets/images/status.png) no-repeat;
+    .menu_icon.prvs_order:hover{
+      background: url(/assets/images/menu_icons/prvsordr_hover.png) no-repeat;
+    }
+    .menu_icon.dwnload{
+      background: url(/assets/images/menu_icons/download.png) no-repeat;
+    }
+    .menu_icon.dwnload:hover{
+      background: url(/assets/images/menu_icons/download_hover.png) no-repeat;
+    }
+    .menu_icon.prfile{
+      background: url(/assets/images/menu_icons/prfile.png) no-repeat;
+    }
+    .menu_icon.prfile:hover{
+      background: url(/assets/images/menu_icons/prfile_hover.png) no-repeat;
+    }
+    .menu_icon.custmr_dtls{
+      background: url(/assets/images/menu_icons/custmrdtls.png) no-repeat;
+    }
+    .menu_icon.custmr_dtls:hover{
+      background: url(/assets/images/menu_icons/custmrdtls_hover.png) no-repeat;
+    }
+    .menu_icon.creat_usrs{
+      background: url(/assets/images/menu_icons/createusr.png) no-repeat;
+    }
+    .menu_icon.creat_usrs:hover{
+      background: url(/assets/images/menu_icons/createusr_hover.png) no-repeat;
     }
     /*sidebar end*/
