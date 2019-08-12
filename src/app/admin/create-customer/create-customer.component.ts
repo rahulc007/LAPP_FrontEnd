@@ -59,7 +59,7 @@ export class CreateCustomerComponent implements OnInit {
       { key: 'firstname', title: 'First Name' },
       { key: 'lastname', title: 'Last Name' },
       { key: 'pid', title: 'User ID' },
-      { key: 'emailId', title: 'Email ID' },
+      { key: 'uemailId', title: 'Email ID' },
       { key: 'phonenumber', title: 'Phone Number'},
       { key: 'country', title: 'Country'},
       { key: 'userType', title: 'User Type'},
@@ -69,11 +69,24 @@ export class CreateCustomerComponent implements OnInit {
   }
  
   loadUsers() {
-        
+    
+    const userType = localStorage.getItem('userType');
+   
+    if(userType == 1)
+    {
     this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
-      console.log('getallUsr', response.userProfileList[0]);
-     this.data = response.userProfileList[0];
+      console.log('getallUsr', response.userProfileList);
+     this.data = response.userProfileList;
     })
+  }
+  else if(userType == 2)
+  {
+    const emailId = localStorage.getItem('username');
+    this.objService.Get('getUserByCreated?emailId='+emailId).subscribe(response => {
+      console.log('getallUsr', response.userProfileList[0]);
+     this.data = response.userProfileList;
+    })
+  }
   }
   formSubmit() {
     this.submitted = true;
