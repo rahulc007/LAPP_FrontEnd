@@ -23,8 +23,9 @@ export class ResetPasswordComponent implements OnInit {
   strColor = "";
   passwordLength: any;
   percent: number;
-  passwordStrength:number = 0;
-
+  passwordStrength: number = 0;
+  isErrorMessage: boolean = false;
+  resetMessage: string = '';
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private config: NgbModalConfig, private modalService: NgbModal) { }
 
@@ -38,20 +39,20 @@ export class ResetPasswordComponent implements OnInit {
       newPwd: ['', [Validators.required, Validators.minLength(8), this.progressValue.bind(this)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
     },
-   {validator: this.checkPasswords });
+      { validator: this.checkPasswords });
 
   }
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-  let pass = group.controls.oldPwd.value;
-  let newPwd = group.controls.newPwd.value;
-  return pass === newPwd ? { Same: true } :   null   
-}
+    let pass = group.controls.oldPwd.value;
+    let newPwd = group.controls.newPwd.value;
+    return pass === newPwd ? { Same: true } : null
+  }
   private progressValue(control: FormControl) {
-    if(this.resetForm  &&
+    if (this.resetForm &&
       (control.value.length != 0)) {
-         return this.percent = 50;
-      }
-      return this.percent = null;
+      return this.percent = 50;
+    }
+    return this.percent = null;
   }
 
 
@@ -70,16 +71,25 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm.invalid) {
       return;
     } else {
-      console.log(this.resetForm.value)
+      let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
       let objPayload = {
-        "emailId": 'admin@lapp.com',
-        "oldPassword": btoa(this.resetForm.controls.oldPwd.value),
-        "newPassword": btoa(this.resetForm.controls.newPwd.value),
-        "countryCode": "0"
+        "emailId": objUserDetails["username"],
+        "oldPassword": btoa(this.resetForm.value.oldPwd),
+        "newPassword": btoa(this.resetForm.value.newPwd),
+        "countryCode": objUserDetails["countryCode"],
       }
 
       this.objService.Post('resetPassword', objPayload).subscribe(res => {
-        console.log("reset response", res);
+        this.isErrorMessage = false;
+        if (res.status === 200 && res.statusMessage == 'success') {
+          this.resetMessage = 'Reset done successfully.'
+          this.resetForm.reset();
+          this.submitted = false;
+          this.strText = "";
+        } else {
+          this.isErrorMessage = true;
+          this.resetMessage = 'Something went wrong.'
+        }
       },
         error => {
         });

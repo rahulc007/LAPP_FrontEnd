@@ -12,13 +12,17 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (localStorage.getItem('currentUser')) {
-            // logged in so return true
+            if (route.data && route.data.restrictedToCustomer && route.data.restrictedToCustomer === true) {
+                this.userService.sessionTimeOut();
+                this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+                return false;
+            }// logged in so return true
             return true;
         }
 
         // not logged in so redirect to login page with the return url
         this.userService.sessionTimeOut();
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
     }
 }

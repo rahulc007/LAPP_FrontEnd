@@ -23,7 +23,7 @@ const AdminRoutes: Routes = [
     { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent,canActivate: [AuthGuard] },
     { path: 'dashbord/updatedorders', component: UpdatedOrdersComponent,canActivate: [AuthGuard]},
      {path: 'dashbord/profile', component:ViewComponent,canActivate: [AuthGuard]},
-     {path: 'dashbord/customerdetails', component:CustomerDetailsComponent,canActivate: [AuthGuard]},
+     {path: 'dashbord/customerdetails', component:CustomerDetailsComponent,data:{}, canActivate: [AuthGuard]},
      {path: 'dashbord/createuser', component:CreateCustomerComponent,canActivate: [AuthGuard]}]
     
   },
