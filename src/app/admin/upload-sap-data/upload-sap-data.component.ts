@@ -15,6 +15,7 @@ import * as XLSX from 'xlsx';
 })
 export class UploadSapDataComponent implements OnInit {
   @ViewChild('uploadFile',{static:false}) uploadFile:any;
+  isAdmin=0;
   fd = new FormData();
   configuration: any;
   currentuser:any;
@@ -83,6 +84,7 @@ this.currentuser = localStorage.getItem('username')
   }
   else if(userType == 2)
   {
+    this.isAdmin=1;
     const emailId = localStorage.getItem('username');
     this.objService.Get('getSapFileInfoByUser?emailId='+emailId).subscribe( res=> {
       this.data=res.sapFileInofList;
@@ -102,20 +104,13 @@ this.currentuser = localStorage.getItem('username')
       
         // this.exportToCSV();
         const emailId = localStorage.getItem('username');
-        // this.objService.Get('downloadSAPData?emailId='+emailId).subscribe( res=> {
-        //   this.sapData=res;
-      
-        // });
-
+        
         window.location.href='http://3.17.182.133:8090/downloadSAPData?emailId='+emailId;
 
     }
 
 public onFileSelected() {
- // const file: File = event[0];
-
-  console.log("file==>",this.file);
-
+ 
   this.fd.append('file', this.file);
 
 }
@@ -132,20 +127,6 @@ removeFile(item) {
 }
 
 
-exportToCSV() {
-  try {
-    /* generate worksheet */
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.sapData);
 
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
-    XLSX.writeFile(wb, 'file.xlsx');
-  } catch (err) {
-    console.error('export error', err);
-  }
-}
 
 }

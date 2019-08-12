@@ -35,6 +35,7 @@ export class CreateCustomerComponent implements OnInit {
   usersData: any;
   errorMsg: string;
   params: any;
+  downflag=0; 
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { 
     this.configuration = ConfigurationService.config; 
   }
@@ -83,6 +84,7 @@ export class CreateCustomerComponent implements OnInit {
   }
   else if(userType == '2')
   {
+    this.downflag = 1;
     const emailId = localStorage.getItem('username');
     this.objService.Get('getUserByCreated?emailId='+emailId, this.params).subscribe(response => {
       console.log('getallUsr', response.userProfileList[0]);
