@@ -15,6 +15,7 @@ export class ViewComponent implements OnInit {
   selectedCountry: string;
   profileData: any;
   param: '';
+  state:any;
   stateData: any[]=[];
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
@@ -34,6 +35,9 @@ export class ViewComponent implements OnInit {
    this.countryData = Countries;
    this.loadUsers();
    
+    
+   
+   
   }
   loadUsers() {
     const userEmail=localStorage.getItem('username');
@@ -41,15 +45,18 @@ export class ViewComponent implements OnInit {
       console.log("response", response);
      this.profileData = response.userProfileEntity;
      console.log("profileData",this.profileData)
+     let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
+    this.stateData = stateNames.States;
+    this.profileForm.value.state = this.profileData.state;
+    console.log(this.profileData.country);
+    console.log( this.stateData)
+     //this.getState()
     })
   }
-  getState() {
-    console.log(this.profileData.country);
-    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
-    this.stateData = stateNames.States;
-    console.log(this.stateData)
+  // getState() {
+    
 
-  }
+  // }
 
   // getCities() {
   //   let stateData = this.stateData.find(state => state.StateName === this.state);

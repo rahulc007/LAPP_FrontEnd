@@ -84,8 +84,8 @@
         <div class="col">
             <div class="form-group custom_form-group">
                 <label for="state">State</label>
-                <input type="text" class="form-control" formControlName="state" [(ngModel)]="profileData.state"
-                (click)="getState()" placeholder="State" list="statecodes" step="5" min="5" max="200" required />
+                <input type="text" class="form-control" formControlName="state" 
+                 placeholder="State" list="statecodes" step="5" min="5" max="200" required />
                 <datalist id="statecodes">
                     <select class="scrollbar">
                         <option *ngFor="let item of stateData" [value]="item.StateName"></option>

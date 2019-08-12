@@ -46,6 +46,7 @@ export class UploadSapDataComponent implements OnInit {
      //  this.uploadFile.nativeElement.value = '';
      if(data.status == 200){
        this.msg = "show";
+       this.getUploadedData();
      } else if(data.status == 500){
       this.errorMsg = "show";
      }
@@ -68,10 +69,24 @@ this.currentuser = localStorage.getItem('username')
   ]
   }
   getUploadedData() {
+
+    const userType = localStorage.getItem('userType');
+
+    if(userType == 1)
+    {
     this.objService.Get('getSapFileInfo', this.params).subscribe( res=> {
       this.data=res.sapFileInofList;
   
     });
+  }
+  else if(userType == 2)
+  {
+    const emailId = localStorage.getItem('username');
+    this.objService.Get('getSapFileInfoByUser?emailId='+emailId).subscribe( res=> {
+      this.data=res.sapFileInofList;
+  
+    });
+  }
   }
  
   onUpload() {
