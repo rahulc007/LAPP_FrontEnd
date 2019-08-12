@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   submitted = false;
   passmsg: string;
   usersId: string;
-  userTypeValue: any;
+  userType: any;
   constructor(private router: Router, private route: ActivatedRoute,
               private config: NgbModalConfig, private modalService: NgbModal,
               private formBuilder: FormBuilder, private userService:UserService,
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.usersId= localStorage.getItem('username');
-    
+    this.userType = localStorage.getItem('userType');
   }
 
   signout() {
@@ -55,10 +55,10 @@ export class HeaderComponent implements OnInit {
     this.navService.toggleSideBar();
   }
   openProfile() {
-    if(this.userTypeValue === "1" || this.userTypeValue === "2") {
+    if(this.userType === "1" || this.userType === "2") {
       this.router.navigate(['admin/dashbord/profile']);
     }
-      else if(this.userTypeValue === "3") {
+      else if(this.userType === "3") {
         this.router.navigate(['customer/dashbord/profile']);
     }
   }

@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashbord.component.css']
 })
 export class DashbordComponent implements OnInit {
-
+  userType: any;
   constructor(private router: Router) { }
 
   ngOnInit() {
+   this.userType = localStorage.getItem('userType');
   }
 
 }

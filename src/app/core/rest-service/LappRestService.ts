@@ -48,4 +48,11 @@ export class LappRestService {
       catchError(LappRestService.handleError(subUrl, []))
       );
   }
+  public Put(subUrl: string, payload: any): Observable<any> {
+    return this.http.put<any>(this._BaseUrl + subUrl, payload)
+      .pipe(
+      tap(() => { }),
+      catchError(LappRestService.handleError(subUrl, []))
+      );
+  }
 }
