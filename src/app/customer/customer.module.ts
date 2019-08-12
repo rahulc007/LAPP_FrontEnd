@@ -17,7 +17,8 @@ import { EditComponent } from './orders/edit/edit.component';
 import { LegseditComponent } from './orders/legsedit/legsedit.component';
 import { HandsontableComponent } from './orders/handsontable/handsontable.component';
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
-
+import {RootSharedModule} from '../common/root-shared.module';
+import { ResetPasswordComponent } from 'src/app/common/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent],
@@ -30,10 +31,12 @@ import { CustomerProfileComponent } from './profile/customer-profile/customer-pr
     TableModule,
     HotTableModule ,
     ReactiveFormsModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    RootSharedModule
   ],
   exports:[],
   providers:[ConfigurationService],
-  bootstrap: [DashbordComponent]
+  bootstrap: [DashbordComponent],
+  entryComponents:[ResetPasswordComponent]
 })
 export class CustomerModule { }
