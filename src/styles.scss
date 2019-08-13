@@ -296,3 +296,32 @@ ul ul a {
   color: #000;
 }
 /*footer end*/
+
+
+/*dashboard first time login reset password popup start*/
+.dashboard_reset_popup{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 999999;
+}
+.popup_body{
+  width: 350px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  background: #fff;
+  position: relative;
+  top: 30%;
+}
+.popup_body .modal-title{
+  line-height: 18px;
+}
+.popup_body .modal-title small{
+  font-size: 70%;
+  color: #f58122;
+}
+/*dashboard first time login reset password popup end*/
