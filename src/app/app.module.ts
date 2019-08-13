@@ -17,6 +17,8 @@ import {CoreModule} from './core/core.module';
 import {NgAutoCompleteModule} from 'ng-auto-complete';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {LoaderComponent} from './common/loader/loader.component';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -28,7 +30,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     LoginComponent,
-   
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
