@@ -62,6 +62,63 @@
     </div>
 </div>
 
-<!-- Reset Password Modal -->
-
+<div *ngIf="showResetPopUp" class="col-md-6">
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div *ngIf="resetMessage != ''"  [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
+    {{resetMessage}}
+  </div>
+<div class="modal-body">
+    <div class="justify-content-center">
+        <form [formGroup]="resetForm">
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>{{'oldpassword'| translate}}</label>
+                    <input formControlName="oldPwd" class="form-control" type="password" required>
+                    <div *ngIf="resetForm.controls.oldPwd.invalid && (resetForm.controls.oldPwd.dirty || resetForm.controls.oldPwd.touched)"
+                        class="text-danger">
+                        <div *ngIf="resetForm.controls.oldPwd.errors.required">{{'oldpasswordrequired'| translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>{{'newpassword'| translate}}</label>
+                    <input type="password" formControlName="newPwd" class="form-control" required (keypress)="scorePassword()">
+                    <div *ngIf="resetForm.controls.newPwd.invalid && (resetForm.controls.newPwd.dirty || resetForm.controls.newPwd.touched)"
+                        class="text-danger">
+                        <div *ngIf="resetForm.controls.newPwd.errors.required">{{'newpasswordrequired'| translate}}</div>
+                        <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}</div>
+                        <div *ngIf="resetForm.hasError('Same')">Old & New Password must not be the Same</div>
+                    </div>
+                    <!-- <div class="progress">
+                        <div class="progress-bar bg-danger" [style.width.%]="passwordStrength"></div>
+                    </div> -->
+                    <div [style.color]="strColor">{{strText}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label>{{'confirmpassword'| translate}}</label>
+                    <input type="password" formControlName="confirmPwd" class="form-control" required>
+                    <div *ngIf="resetForm.controls.confirmPwd.invalid && (resetForm.controls.confirmPwd.dirty || resetForm.controls.confirmPwd.touched)"
+                        class="text-danger">
+                        <div *ngIf="resetForm.controls.confirmPwd.errors.required">{{'confirmpasswordrequired'| translate}}</div>
+                        <div *ngIf="passwordMatcher">{{'confirmpasswordvalidation'| translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center mt-3">
+                    <button class="btn btn-warning" [disabled]="resetForm.pristine || resetForm.invalid" (click)="resetPassword()"> {{'resetpassword'| translate}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
    
