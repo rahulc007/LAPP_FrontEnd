@@ -1,76 +1,3 @@
-<!-- <div class="container-fluid">
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="dshbrd_logo mt-0 text-center">
-                <img src="../../../assets/images/lapp_logo.png" alt="LAPP" class="rounded" /><br />
-                <p>{{'manufactors'| translate}}</p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <span [routerLink]="['neworders']">
-                <div class="dshbrd_icn text-center">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    {{'neworders'| translate}}
-                </div>
-            </span>
-        </div>
-        <div class="col">
-            <span [routerLink]="['updatedorders']">
-                <div class="dshbrd_icn text-center">
-                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
-                    {{'updateorders'| translate}}
-                </div>
-            </span>
-        </div>
-        <div class="col">
-            <div class="dshbrd_icn text-center px-0">
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                {{'processedorders'| translate}}
-            </div>
-        </div>
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-                {{'previousorders' | translate}}
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-download" aria-hidden="true"></i>
-                {{'DownloadExcel'| translate}}
-            </div>
-        </div>
-        <div class="col">
-            <span [routerLink]="['profile']">
-                <div class="dshbrd_icn text-center">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    {{'profile'| translate}}
-                </div>
-            </span>
-
-        </div>
-        <div class="col">
-            <div class="dshbrd_icn text-center">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                {{'Userapprovals' | translate}}
-            </div>
-        </div>
-        <div class="col">
-            <span [routerLink]="['createuser']">
-                <div class="dshbrd_icn text-center">
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    {{'Createusers' | translate}}
-                </div>
-            </span>
-        </div>
-    </div>
-
-</div> -->
 
 
 <div class="row">
@@ -140,3 +67,63 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="showResetPopUp" class="col-md-6">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div *ngIf="resetMessage != ''"  [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
+            {{resetMessage}}
+          </div>
+        <div class="modal-body">
+            <div class="justify-content-center">
+                <form [formGroup]="resetForm">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>{{'oldpassword'| translate}}</label>
+                            <input formControlName="oldPwd" class="form-control" type="password" required>
+                            <div *ngIf="resetForm.controls.oldPwd.invalid && (resetForm.controls.oldPwd.dirty || resetForm.controls.oldPwd.touched)"
+                                class="text-danger">
+                                <div *ngIf="resetForm.controls.oldPwd.errors.required">{{'oldpasswordrequired'| translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>{{'newpassword'| translate}}</label>
+                            <input type="password" formControlName="newPwd" class="form-control" required (keypress)="scorePassword()">
+                            <div *ngIf="resetForm.controls.newPwd.invalid && (resetForm.controls.newPwd.dirty || resetForm.controls.newPwd.touched)"
+                                class="text-danger">
+                                <div *ngIf="resetForm.controls.newPwd.errors.required">{{'newpasswordrequired'| translate}}</div>
+                                <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}</div>
+                                <div *ngIf="resetForm.hasError('Same')">Old & New Password must not be the Same</div>
+                            </div>
+                            <!-- <div class="progress">
+                                <div class="progress-bar bg-danger" [style.width.%]="passwordStrength"></div>
+                            </div> -->
+                            <div [style.color]="strColor">{{strText}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>{{'confirmpassword'| translate}}</label>
+                            <input type="password" formControlName="confirmPwd" class="form-control" required>
+                            <div *ngIf="resetForm.controls.confirmPwd.invalid && (resetForm.controls.confirmPwd.dirty || resetForm.controls.confirmPwd.touched)"
+                                class="text-danger">
+                                <div *ngIf="resetForm.controls.confirmPwd.errors.required">{{'confirmpasswordrequired'| translate}}</div>
+                                <div *ngIf="passwordMatcher">{{'confirmpasswordvalidation'| translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center mt-3">
+                            <button class="btn btn-warning" [disabled]="resetForm.pristine || resetForm.invalid" (click)="resetPassword()"> {{'resetpassword'| translate}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
