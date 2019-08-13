@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 //import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule, NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -23,7 +23,7 @@ import {Router, RouterModule} from '@angular/router';
   ],
   imports: [
   CommonModule,
-  BrowserModule,
+ // BrowserModule,
   FormsModule,
   RouterModule,
   ReactiveFormsModule,

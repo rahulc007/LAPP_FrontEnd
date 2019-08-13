@@ -72,7 +72,7 @@
             <div class="popup_body">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}<br/><small class="title-small">Please reset your password</small></h4>
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <button *ngIf="passwordReseted" type="button" class="close" aria-label="Close" (click)="closePopUp()">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>

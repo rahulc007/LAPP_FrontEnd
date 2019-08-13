@@ -14,9 +14,12 @@ export class DashbordComponent implements OnInit {
   submitted: boolean = false;
   strColor: string = '';
   strText: string = '';
+  passwordReseted: boolean = false;
+  isErrorMessage: boolean = false;
+  resetMessage: string = '';
   constructor(private formBuilder: FormBuilder,
     private objService: LappRestService,
-    private ps:PasswordStrengthService) {
+    private ps: PasswordStrengthService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.showResetPopUp = objUserDetails.firstTimeLogin;
   }
@@ -61,15 +64,18 @@ export class DashbordComponent implements OnInit {
 
       this.objService.Post('resetPassword', objPayload).subscribe(res => {
         if (res.status === 200 && res.statusMessage == 'success') {
-
+          this.passwordReseted = true;
           this.resetForm.reset();
           this.submitted = false;
+          this.resetMessage = 'Password Reset done successfully.';
 
         } else {
-
+          this.resetMessage = 'Something went wrong';
+          this.isErrorMessage = true;
         }
       },
         error => {
+          this.isErrorMessage = true;
         });
     }
   }
@@ -80,5 +86,8 @@ export class DashbordComponent implements OnInit {
     this.strText = objData.strText;
   }
 
+  closePopUp() {
+    this.showResetPopUp = false;
+  }
 
 }
