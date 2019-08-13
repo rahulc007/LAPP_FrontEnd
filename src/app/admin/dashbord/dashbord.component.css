@@ -180,7 +180,7 @@
 .dashboard_cntnts .cntnt_box h5{
   font-weight: bold;
   font-size: 1.8rem;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 }
 .dashboard_cntnts .cntnt_box p{
   margin: 0;
