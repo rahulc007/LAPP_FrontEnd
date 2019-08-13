@@ -68,9 +68,10 @@
         </div>
     </div>
 
-    <div *ngIf="showResetPopUp" class="col-md-6">
+    <div *ngIf="showResetPopUp" class="dashboard_reset_popup">
+            <div class="popup_body">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}</h4>
+            <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}<br/><small class="title-small">Please reset your password</small></h4>
             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -125,5 +126,6 @@
                     </div>
                 </form>
             </div>
+        </div>
         </div>
         </div>
