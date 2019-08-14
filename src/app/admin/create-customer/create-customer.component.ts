@@ -15,6 +15,7 @@ import { userTypes } from '../../common/constants/constants';
 })
 export class CreateCustomerComponent implements OnInit {
 
+  emailId:any;
   usertypeData: any[] = [];
   countryData: any[] = [];
   citiesData: any[] = [];
@@ -92,6 +93,7 @@ export class CreateCustomerComponent implements OnInit {
       })
     }
   }
+
   formSubmit() {
     this.submitted = true;
 
@@ -128,6 +130,24 @@ export class CreateCustomerComponent implements OnInit {
       }
     })
 
+  }
+
+  getPerticularUser(email)
+  {
+
+    var emailId = email;
+    this.objService.Get('getUserProfile?emailId=' + emailId).subscribe(res=>{
+     console.log("perticular user data==>",res)
+     this.data = res.userProfileEntity;
+    })
+  }
+
+  search(event)
+  {
+    if(event.target.value==='')
+    {
+      this.loadUsers();
+    }
   }
 
   clear() {
