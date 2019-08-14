@@ -75,20 +75,20 @@ export class CreateCustomerComponent implements OnInit {
 
   loadUsers() {
 
-    const userType = localStorage.getItem('userType');
+    //const userType = localStorage.getItem('userType');
 
-    if (userType == '1') {
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+
+    if (objUserDetails.userType === userTypes.superAdmin) {
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
-        console.log('getallUsr', response.userProfileList);
         this.data = response.userProfileList;
       })
     }
-    else if (userType == '2') {
+    else if (objUserDetails.userType  === userTypes.admin) {
       this.downflag = 1;
       this.usertypeData = UserType.filter(itm => itm["value"] != "2")
       const emailId = localStorage.getItem('username');
       this.objService.Get('getUserByCreated?emailId=' + emailId, this.params).subscribe(response => {
-        console.log('getallUsr', response.userProfileList[0]);
         this.data = response.userProfileList;
       })
     }
@@ -117,7 +117,7 @@ export class CreateCustomerComponent implements OnInit {
       "countryCode": this.getcountrycode(this.customerForm.value.country)
     }
     this.objService.Post('createUser', params).subscribe(datas => {
-      console.log('data', datas);
+      
       if (datas.status === 200 && datas.successMessage != null) {
         this.msg = datas.successMessage;
         this.customerForm.reset();
@@ -137,7 +137,6 @@ export class CreateCustomerComponent implements OnInit {
 
     var emailId = email;
     this.objService.Get('getUserProfile?emailId=' + emailId, this.params).subscribe(res=>{
-     console.log("perticular user data==>",res)
      this.data = res.userProfileEntity;
     })
   }
@@ -180,15 +179,13 @@ export class CreateCustomerComponent implements OnInit {
     this.citiesData = stateData.Cities;
   }
   getcountrycode(country) {
-    let contrycodedata = this.countryData.find(cntry => cntry.CountryName === country);
-    console.log(contrycodedata)
+    let contrycodedata = this.countryData.find(cntry => cntry.CountryName === country);  
     return contrycodedata.countryCode;
   }
 
 
   getusertypeCode(user) {
     let usercode = this.usertypeData.find(usr => usr.type === user);
-
     return usercode.value;
   }
 

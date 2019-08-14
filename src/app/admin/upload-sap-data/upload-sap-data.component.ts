@@ -5,6 +5,7 @@ import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-tabl
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
 import { LappRestService } from '../../core/rest-service/LappRestService';
+import {userTypes} from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
 //const URL= AppConfig.endpoints.uploadApi;
 @Component({
@@ -73,15 +74,15 @@ export class UploadSapDataComponent implements OnInit {
   }
   getUploadedData() {
 
-    const userType = localStorage.getItem('userType');
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
 
-    if (userType == "1") {
+    if (objUserDetails.userType === userTypes.superAdmin) {
       this.objService.Get('getSapFileInfo', this.params).subscribe(res => {
         this.data = res.sapFileInofList;
 
       });
     }
-    else if (userType == "2") {
+    else if (objUserDetails.userType === userTypes.admin) {
       this.isAdmin = 1;
       const emailId = localStorage.getItem('username');
       this.objService.Get('getSapFileInfoByUser?emailId=' + emailId, {}).subscribe(res => {
