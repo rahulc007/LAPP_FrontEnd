@@ -12,7 +12,7 @@
             <li>
                 <a href="#" [routerLink]="['dashboard']" routerLinkActive="router-link-active" class="menu_icon dashboard">{{'dashboard'| translate}}</a>
             </li>
-            <li>
+            <li *ngIf="isAdmin || isSuperAdmin">
                 <a href="#" [routerLink]="['upload']" routerLinkActive="router-link-active" class="menu_icon upload">{{'upload'| translate}}</a>
             </li>
             <li>

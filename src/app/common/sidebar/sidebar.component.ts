@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavToggleService } from '../nav-toggle-service/navtoggle.service';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { userTypes } from '../constants/constants';
+import {UserService} from '../../core/services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,7 @@ export class SidebarComponent implements OnInit {
   isSuperAdmin: boolean = false;
 
   primarySampleComponent: any;
-  constructor(private navService: NavToggleService) {
+  constructor(private navService: NavToggleService, private UserService: UserService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType == userTypes.superAdmin) {
       this.isSuperAdmin = true;

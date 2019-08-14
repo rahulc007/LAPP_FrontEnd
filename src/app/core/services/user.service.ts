@@ -66,6 +66,19 @@ export class UserService {
     }
 
 
+    isAdmin(): boolean {
+      
+      const userType = localStorage.getItem('userType');
+
+      if(userType == '1' || userType == '2')
+      {
+        return true;
+      }
+
+      return false;
+    }
+
+
 
 
 }
