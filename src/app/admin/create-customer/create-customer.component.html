@@ -30,7 +30,11 @@
                     <div *ngIf="customerForm.controls.fname.invalid && (customerForm.controls.fname.dirty || customerForm.controls.fname.touched)"
                         class="text-danger">
                         <div *ngIf="customerForm.controls.fname.errors.required" class="custom">
-                            {{'firstnamerequired'| translate}}</div>
+                            {{'firstnamerequired'| translate}}
+                        </div>
+                        <div *ngIf="customerForm.controls.fname.errors.pattern" class="custom">
+                                {{'characters'| translate}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,7 +46,11 @@
                     <div *ngIf="customerForm.controls.lname.invalid && (customerForm.controls.lname.dirty || customerForm.controls.lname.touched)"
                         class="text-danger">
                         <div *ngIf="customerForm.controls.lname.errors.required" class="custom">
-                            {{'lastnamerequired'| translate}}</div>
+                            {{'lastnamerequired'| translate}}
+                        </div>
+                        <div *ngIf="customerForm.controls.lname.errors.pattern" class="custom">
+                            {{'characters'| translate}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,6 +99,12 @@
                             <option *ngFor="let item of countryData" [value]="item.CountryName"></option>
                         </select>
                     </datalist>
+                    <div *ngIf="customerForm.controls.country.invalid && (customerForm.controls.country.dirty || customerForm.controls.country.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.country.errors.required" class="custom">
+                        {{'selectcountry'| translate}}
+                    </div>
+                </div>
                 </div>
             </div>
             <div class="col">
@@ -104,6 +118,12 @@
                             <option *ngFor="let item of stateData" [value]="item.StateName"></option>
                         </select>
                     </datalist>
+                    <div *ngIf="customerForm.controls.State.invalid && (customerForm.controls.State.dirty || customerForm.controls.State.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.State.errors.required" class="custom">
+                        {{'selectstate'| translate}}
+                    </div>
+                </div>
                 </div>
             </div>
             <div class="col">
@@ -116,6 +136,12 @@
                             <option *ngFor="let item of citiesData" [value]="item"></option>
                         </select>
                     </datalist>
+                    <div *ngIf="customerForm.controls.City.invalid && (customerForm.controls.City.dirty || customerForm.controls.City.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.City.errors.required" class="custom">
+                        {{'selectcity'| translate}}
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

@@ -11,9 +11,10 @@ import {Router,ActivatedRoute} from '@angular/router';
 export class PasswordUpdateComponent implements OnInit {
   passwordUpdate: FormGroup;
   submitted: boolean = false;
-  msg: string;
+  errorMsg: string;
   emailId:any;
-
+  successMsg: string;
+  flag: boolean= false;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService, private route: ActivatedRoute) { }
 
 
@@ -62,6 +63,14 @@ export class PasswordUpdateComponent implements OnInit {
 
       this.objService.Post('updatePwd', objPayload).subscribe(res => {
         console.log("reset response", res);
+        if(res.status === 200 && res.statusMessage==='success') {
+          this.successMsg="Password Updated Successfully";
+          this.flag= true;
+        }
+        else if(res.statusMessage === 'error') {
+          this.errorMsg= "Fail to update Password";
+          this.flag= false;
+        }
       },
         error => {
         });
