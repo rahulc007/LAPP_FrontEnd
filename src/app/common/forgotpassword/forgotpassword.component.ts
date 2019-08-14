@@ -11,8 +11,8 @@ import {Router} from '@angular/router'
 export class ForgotpasswordComponent implements OnInit {
   forgotPassword: FormGroup;
   submitted: boolean = false;
-  msg: string;
-
+  errorMsg: string;
+  successMsg: string;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService, private router: Router) { }
 
   ngOnInit() {
@@ -31,10 +31,12 @@ export class ForgotpasswordComponent implements OnInit {
 
     this.objService.Post('forgotPassword',params).subscribe(datas => {
       console.log('data', datas);
-      if(datas.status === 200){
-        
-        this.router.navigate(['login/passwordupdate', this.forgotPassword.value.email]);
-       
+      if(datas.status === 200 && datas.statusMessage === 'success'){
+        this.successMsg='Password link sent to your registered E-mail ID Successfully !';
+       // this.router.navigate(['login/passwordupdate', this.forgotPassword.value.email]);
+      }
+      else if(datas.statusMessage === 'error'){
+        this.errorMsg = 'E-mail ID is not Registered';
       }
     })
   }
