@@ -10,16 +10,16 @@
     
         <ul class="list-unstyled components">
             <li>
-                <a href="#" [routerLink]="['dashbord']" routerLinkActive="router-link-active" class="menu_icon dashboard">{{'dashboard'| translate}}</a>
+                <a href="#" [routerLink]="['dashboard']" routerLinkActive="router-link-active" class="menu_icon dashboard">{{'dashboard'| translate}}</a>
             </li>
             <li>
-                <a href="#" [routerLink]="['dashbord/upload']" routerLinkActive="router-link-active" class="menu_icon upload">{{'upload'| translate}}</a>
+                <a href="#" [routerLink]="['upload']" routerLinkActive="router-link-active" class="menu_icon upload">{{'upload'| translate}}</a>
             </li>
             <li>
-                <a href="#" [routerLink]="['dashbord/neworders']" routerLinkActive="router-link-active" class="menu_icon new_order">{{'neworders'| translate}}</a>
+                <a href="#" [routerLink]="['neworders']" routerLinkActive="router-link-active" class="menu_icon new_order">{{'neworders'| translate}}</a>
             </li>
             <li>
-                <a href="#" [routerLink]="['dashbord/updatedorders']" routerLinkActive="router-link-active" class="menu_icon updtd_order">{{'updateorders'| translate}}</a>
+                <a href="#" [routerLink]="['updatedorders']" routerLinkActive="router-link-active" class="menu_icon updtd_order">{{'updateorders'| translate}}</a>
             </li>
             <li>
                 <a href="#" class="menu_icon prcsd_order">{{'processedorders'| translate}}</a>
@@ -31,13 +31,13 @@
                 <a href="#" class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
             </li>
             <li>
-                <a href="#" [routerLink]="['dashbord/profile']" routerLinkActive="router-link-active" class="menu_icon prfile">{{'profile'| translate}}</a>
+                <a href="#" [routerLink]="['profile']" routerLinkActive="router-link-active" class="menu_icon prfile">{{'profile'| translate}}</a>
             </li>
             <!-- <li *ngIf="isAdmin || isSuperAdmin">
                 <a href="#" [routerLink]="['dashbord/customerdetails']" routerLinkActive="router-link-active" class="menu_icon custmr_dtls">{{'customerdetails'| translate}}</a>
             </li> -->
             <li *ngIf="isAdmin || isSuperAdmin">
-                <a href="#" [routerLink]="['dashbord/createuser']" routerLinkActive="router-link-active" class="menu_icon creat_usrs">{{'CreateUsers'| translate}}</a>
+                <a href="#" [routerLink]="['createuser']" routerLinkActive="router-link-active" class="menu_icon creat_usrs">{{'CreateUsers'| translate}}</a>
             </li>
         </ul>
     
