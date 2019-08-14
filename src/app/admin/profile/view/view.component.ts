@@ -14,7 +14,7 @@ export class ViewComponent implements OnInit {
   mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
   countryData: any[] = [];
   selectedCountry: string;
-  profileData: any;
+  profileData: any[] = [];
   param: '';
   stateData: any[] = [];
   citiesData: any[] = [];
@@ -35,9 +35,11 @@ export class ViewComponent implements OnInit {
       // referncecode: ['', Validators.required]
     });
     this.countryData = Countries;
-    // this.loadUsers();
     this.userTypeValue= localStorage.getItem('userType');
-    console.log(this.userTypeValue)
+    console.log("User Type",this.userTypeValue)
+    if(this.userTypeValue !== "1") {
+      this.loadUsers();
+    }
   }
   loadUsers() {
     const userEmail = localStorage.getItem('username');
@@ -47,16 +49,16 @@ export class ViewComponent implements OnInit {
   }
   getState(event) {
     event.target.value = '';
-    this.profileData.city = '';
-    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
+    this.profileData['city'] = '';
+    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
     this.stateData = stateNames.States;
   }
 
   getCity(event) {
     event.target.value = '';
-    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
+    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
     this.stateData = stateNames.States;
-    let cityNames = this.stateData.find(state => state.StateName === this.profileData.state);
+    let cityNames = this.stateData.find(state => state.StateName === this.profileData['state']);
     this.citiesData = cityNames.Cities;
   }
   
@@ -69,7 +71,7 @@ export class ViewComponent implements OnInit {
     }
 
     let params = {
-      "pid": this.profileData.pid,
+      "pid": this.profileData['pid'],
       "emailId": this.profileForm.value.uemailId,
       "firstname": this.profileForm.value.firstname,
       "lastname": this.profileForm.value.lastname,

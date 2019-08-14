@@ -54,14 +54,14 @@ export class HeaderComponent implements OnInit {
   toggleNav(){
     this.navService.toggleSideBar();
   }
-  openProfile() {
-    if(this.userType === "1" || this.userType === "2") {
-      this.router.navigate(['admin/dashbord/profile']);
-    }
-      else if(this.userType === "3") {
-        this.router.navigate(['customer/dashbord/profile']);
-    }
-  }
+  // openProfile() {
+  //   if(this.userType === "1" || this.userType === "2") {
+  //     this.router.navigate(['admin/dashbord/profile']);
+  //   }
+  //     else if(this.userType === "3") {
+  //       this.router.navigate(['customer/dashbord/profile']);
+  //   }
+  // }
 
 }
 

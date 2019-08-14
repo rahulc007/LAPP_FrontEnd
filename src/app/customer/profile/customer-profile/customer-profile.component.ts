@@ -20,7 +20,7 @@ export class CustomerProfileComponent implements OnInit {
   countryData: any[] = [];
   citiesData: any[] = [];
   param: any;
-  profileData: any;
+  profileData: any[] = [];
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
   ngOnInit() {
@@ -52,16 +52,16 @@ export class CustomerProfileComponent implements OnInit {
   }
   getState(event) {
     event.target.value = '';
-    this.profileData.city = '';
-    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
+    this.profileData['city'] = '';
+    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
     this.stateData = stateNames.States;
   }
 
   getCity(event) {
     event.target.value = '';
-    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData.country);
+    let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
     this.stateData = stateNames.States;
-    let cityNames = this.stateData.find(state => state.StateName === this.profileData.state);
+    let cityNames = this.stateData.find(state => state.StateName === this.profileData['state']);
     this.citiesData = cityNames.Cities;
   }
   continue() {
@@ -71,7 +71,7 @@ export class CustomerProfileComponent implements OnInit {
     }
     console.log(this.profileForm.value)
     let params = {
-      "pid": this.profileData.pid,
+      "pid": this.profileData['pid'],
       "emailId": this.profileForm.value.uemailId,
       "firstname": this.profileForm.value.firstname,
       "lastname": this.profileForm.value.lastname,

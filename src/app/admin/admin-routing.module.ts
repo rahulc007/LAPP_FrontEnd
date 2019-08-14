@@ -17,14 +17,15 @@ const AdminRoutes: Routes = [
   {
     path: basePath,
     component: MainpageComponent, canActivate: [AuthGuard],
-    children: [{ path: '', redirectTo: 'dashbord', pathMatch: 'full' }, { path: 'dashbord', component: DashbordComponent, canActivate: [AuthGuard] },
-    { path: 'dashbord/upload', component: UploadSapDataComponent, canActivate: [AuthGuard] },
-    { path: 'dashbord/neworders', component: NewOrdersComponent, canActivate: [AuthGuard] },
-    { path: 'neworders/newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard] },
-    { path: 'dashbord/updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard] },
-    { path: 'dashbord/profile', component: ViewComponent, canActivate: [AuthGuard] },
-    { path: 'dashbord/customerdetails', component: CustomerDetailsComponent, data: {}, canActivate: [AuthGuard] },
-    { path: 'dashbord/createuser', component: CreateCustomerComponent, canActivate: [AuthGuard] }]
+    children: [{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: 'dashboard', component: DashbordComponent, canActivate: [AuthGuard] },
+    { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard] },
+    { path: 'neworders', component: NewOrdersComponent, canActivate: [AuthGuard] },
+    { path: 'newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard] },
+    { path: 'updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard] },
+    { path: 'profile', component: ViewComponent, canActivate: [AuthGuard] },
+    { path: 'customerdetails', component: CustomerDetailsComponent, data: {}, canActivate: [AuthGuard] },
+    { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard] }]
 
   },
 
