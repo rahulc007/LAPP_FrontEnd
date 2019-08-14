@@ -44,8 +44,8 @@ export class CreateCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
+      fname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      lname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       email: ['', [Validators.required, Validators.email]],
       userid: ['', Validators.required],
       country: ['', Validators.required],

@@ -24,8 +24,8 @@ export class ViewComponent implements OnInit {
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       uemailId: ['', [Validators.required, Validators.email]],
       consumerId: ['', Validators.required],
       country: ['', Validators.required],
