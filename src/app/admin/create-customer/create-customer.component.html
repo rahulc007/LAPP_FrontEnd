@@ -255,7 +255,7 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-4" *ngIf="downflag===1">
-        <button class="btn btn-primary" (click)="download()"  [disabled]="!data">Download</button>
+        <button class="btn btn-primary" (click)="download()"  [disabled]="!data || data.length <=0">Download</button>
     </div>
 
 </div>
