@@ -268,6 +268,19 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
   update()
   {
-    
+    let params={
+      "firstname": this.firstname,
+      "lastname": this.lastname,
+      "emailId": this.emailId,
+      "uid": this.uid,
+      "country": this.country,
+      "state": this.state,
+      "city": this.city,
+      "phone": this.phone,
+      "usertype": this.usertype,
+
+    }
+
+    this.objService.Put('updateUsers', params).subscribe(res=>{})
   }
 }
