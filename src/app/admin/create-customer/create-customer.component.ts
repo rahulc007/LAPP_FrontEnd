@@ -26,7 +26,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   country:any;
   phone:any;
   editflag=0;
-
+  searcherror:string;
   deleteData:any;
   usertypeData: any[] = [];
   countryData: any[] = [];
@@ -139,7 +139,15 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
     var emailId = email;
     this.objService.Get('getUserProfile?emailId=' + emailId, this.params).subscribe(res=>{
+
+      if(res.userProfileEntity!==null)
+      {
      this.data = res.userProfileEntity;
+      }
+      else  if(res.userProfileEntity === null)
+      {
+        this.searcherror = "Email Id is not registered"
+      }
     })
   }
 
@@ -148,6 +156,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     if(event.target.value==='')
     {
       this.loadUsers();
+      this.searcherror = ''
     }
   }
 
@@ -198,6 +207,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+
+    if(objUserDetails.userType === userTypes.superAdmin)
+    {
     this.columns = [
       { key: 'firstname', title: 'First Name' },
       { key: 'lastname', title: 'Last Name' },
@@ -210,6 +223,20 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       {key: 'Delete', title: 'Delete', searchEnabled: false, cellTemplate: this.Verdelete},
       {key: 'Edit', title: 'Edit', searchEnabled: false, cellTemplate: this.Veredit}
     ]
+  }
+  else if(objUserDetails.userType === userTypes.admin)
+    {
+    this.columns = [
+      { key: 'firstname', title: 'First Name' },
+      { key: 'lastname', title: 'Last Name' },
+      { key: 'pid', title: 'User ID' },
+      { key: 'uemailId', title: 'Email ID' },
+      { key: 'phonenumber', title: 'Phone Number' },
+      { key: 'country', title: 'Country' },
+      { key: 'userType', title: 'User Type' },
+      { key: 'createdBy', title: 'Created By' }
+    ]
+  }
   }
 
 

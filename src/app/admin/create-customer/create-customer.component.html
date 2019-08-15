@@ -267,9 +267,18 @@
 <div class="col-md-2 pl-0">
     <button class="btn btn-secondary" (click)="getPerticularUser(smailId)" [disabled]="!smailId">{{'search'| translate}}</button>
     </div>
+
     <div class="col-md-4 text-center" *ngIf="downflag===1">
             <button class="btn btn-orange" (click)="download()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
         </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-10 "> <div class="col-md-2 text-danger error" *ngIf="searcherror">
+                {{searcherror}}
+               </div> </div>
     </div>
 
 <div class="row">
