@@ -91,5 +91,8 @@
     "plsrestpswd":"Bitte setzen Sie ihr Passwort zurück",
     "deleteuser?":"Möchten Sie diesen Benutzer wirklich löschen?",
     "No":"Nein",
-    "Yes":"Ja"
+    "Yes":"Ja",
+    "entertheemailid":"Geben Sie die E-Mail-ID ein",
+    "enternewpassword":"Neues Passwort eingeben",
+    "enterconfirmpwd":"Geben Sie das Passwort ein"
 }
