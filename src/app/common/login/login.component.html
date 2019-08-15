@@ -99,18 +99,18 @@
 -->
 
 <ng-template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">Login!
+  <div class="modal-header">{{'login'| translate}}!
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
 
-    <p>Invalid User Name and Password</p>
+    <p>{{'invalidusernamepassword'| translate}}</p>
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">{{'cancel'| translate}}</button>
   </div>
 </ng-template>
 

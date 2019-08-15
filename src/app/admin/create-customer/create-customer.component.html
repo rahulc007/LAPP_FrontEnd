@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <h2 class="page_heading dashboard">Create users</h2>
+        <h2 class="page_heading dashboard">{{'Createusers'| translate}}</h2>
     </div>
 </div>
 
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">First Name</label>
+                    <label for="">{{'firstname'| translate}}</label>
                     <input type="text" id="" placeholder="First Name" formControlName="fname" maxlength="60"
                         class="form-control" required />
                     <div *ngIf="customerForm.controls.fname.invalid && (customerForm.controls.fname.dirty || customerForm.controls.fname.touched)"
@@ -40,7 +40,7 @@
             </div>
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">Last Name</label>
+                    <label for="">{{'lastname'| translate}}</label>
                     <input type="text" class="form-control" id="" placeholder="Last Name" formControlName="lname"
                         maxlength="60" required />
                     <div *ngIf="customerForm.controls.lname.invalid && (customerForm.controls.lname.dirty || customerForm.controls.lname.touched)"
@@ -59,7 +59,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">Email Id</label>
+                    <label for="">{{'emailid'| translate}}</label>
                     <input placeholder="Email Id" formControlName="email" class="form-control" maxlength="60" type="text"
                         required />
                     <div *ngIf="customerForm.controls.email.invalid && (customerForm.controls.email.dirty || customerForm.controls.email.touched)"
@@ -74,7 +74,7 @@
             </div>
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">User id</label>
+                    <label for="">{{'userid'| translate}}</label>
                     <input placeholder="User id" type="text" class="form-control" maxlength="60" formControlName="userid"
                         required />
                     <div *ngIf="customerForm.controls.userid.invalid && (customerForm.controls.userid.dirty || customerForm.controls.userid.touched)"
@@ -90,7 +90,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">Country</label>
+                    <label for="">{{'countryName'| translate}}</label>
                     <input type="text" class="form-control" formControlName="country" [(ngModel)]="country"
                         (click)="countryclear()" (change)="getState()" placeholder="Country" list="codes" step="5" min="5"
                         max="200" required />
@@ -109,7 +109,7 @@
             </div>
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">State</label>
+                    <label for="">{{'state'| translate}}</label>
                     <input type="text" class="form-control" formControlName="State" [(ngModel)]="state"
                         (click)="stateClear()" (change)="getCities()" placeholder="State" list="statecodes" step="5" min="5"
                         max="200" required />
@@ -128,7 +128,7 @@
             </div>
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">City</label>
+                    <label for="">{{'city'| translate}}</label>
                     <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" (click)="cityClear()"
                         placeholder="City" list="citycodes" step="5" min="5" max="200" required />
                     <datalist id="citycodes">
@@ -184,7 +184,7 @@
         <div class="row">
             <div class="col">
                     <div class="form-group custom_form-group">
-                            <label for="">Phone Number</label>
+                            <label for="">{{'phone'| translate}}</label>
                             <input placeholder="Phone Number" type="text" class="form-control" maxlength="12" formControlName="phone" required />
                             <div *ngIf="customerForm.controls.phone.invalid && (customerForm.controls.phone.dirty || customerForm.controls.phone.touched)"
                                 class="text-danger">
@@ -199,7 +199,7 @@
             </div>
             <div class="col">
                     <div class="form-group custom_form-group">
-                    <label for="">User Type</label>
+                    <label for="">{{'usertype'| translate}}</label>
                     <input type="text" class="form-control" formControlName="usertype" [(ngModel)]='usertype' (click)="clear()"
                         placeholder="User Type" list="usertypecodes" step="5" min="5" max="200" required />
                     <datalist id="usertypecodes">
@@ -260,14 +260,16 @@
     
     </form>
 
-    <div class="row">
-        <div class="col-md-4"></div>
-<div class="col-md-2">
+    <div class="row mt-3">
+<div class="col-md-2 pt-1 left">
         <input type="text" [(ngModel)]="emailId" class="form-control" (keyup)="search($event)" placeholder="Enter the Email Id">
 </div>
-<div class="col-md-2">
-    <button class="btn btn-secondary" (click)="getPerticularUser(emailId)" [disabled]="!emailId">Search</button>
+<div class="col-md-2 pl-0">
+    <button class="btn btn-secondary" (click)="getPerticularUser(emailId)" [disabled]="!emailId">{{'search'| translate}}</button>
     </div>
+    <div class="col-md-4 text-center" *ngIf="downflag===1">
+            <button class="btn btn-orange" (click)="download()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
+        </div>
     </div>
 
 <div class="row">
@@ -276,14 +278,6 @@
         </app-ngx-easy-table>
          <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->
     </div>
-</div>
-
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-4" *ngIf="downflag===1">
-        <button class="btn btn-primary" (click)="download()"  [disabled]="!data || data.length <=0">Download</button>
-    </div>
-
 </div>
 
 
@@ -305,7 +299,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <h5>{{'Are you sure you want to delete this user ?' | translate}}</h5>
+      <h5>{{'deleteuser?' | translate}}</h5>
     </div>
     <div class="modal-footer justify-content-between">
       <button type="button" class="btn btn-warning" (click)="d('Cross click')">{{'No' | translate}}</button>

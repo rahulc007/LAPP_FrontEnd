@@ -2,11 +2,11 @@
 
 <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
     <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-    <span id="alertMsg">File sucessfully uploaded!</span>
+    <span id="alertMsg">{{'fileuploadedsuccess'| translate}}</span>
 </div>
 <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
     <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-    <span id="alertErrMsg">Please upload .xlsx, .xls, .csv only</span>
+    <span id="alertErrMsg">{{'pleaseuploadxcel'| translate}}</span>
 </div>
 
 <div class="row">
@@ -20,8 +20,8 @@
       </button>
       <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
     </div>
-    <p class="upload_msg">File name should be in <b>dd/mm/yyyy hh:mm</b> format</p>
-    <p class="upload_msg">Upload only .xlsx, .xls, .csv files</p>
+    <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
+    <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
   </div>
   <div class="col"></div>
 </div>
@@ -33,6 +33,11 @@
       <span class="glyphicon glyphicon-upload"></span> {{'submit'| translate}}
     </button>
   </div>
+  
+  <div class="col-md-3 ml" *ngIf="isAdmin===1">
+      <button class="btn btn-orange" (click)="downloadfile()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
+  </div>
+ 
 </div>
 
 <div class="clearfix">&nbsp;</div>
@@ -56,8 +61,4 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4"></div>
-  <div class="col-md-3" *ngIf="isAdmin===1"><button class="btn btn-primary" (click)="downloadfile()" [disabled]="!data || data.length <=0">download</button></div>
 
-</div>

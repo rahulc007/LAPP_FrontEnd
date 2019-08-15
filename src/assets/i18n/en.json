@@ -69,7 +69,27 @@
     "passwordupdate":"Password Update",
     "characters": "Enter Alphabetic Letters",
     "Delete":"Delete",
-    "Edit":"Edit"
-    
-
+    "Edit":"Edit",
+    "firstname":"First Name",
+    "lastname":"Last Name",
+    "emailid":"Email Id",
+    "userid":"User id",
+    "countryName":"Country",
+    "state":"State",
+    "city":"City",
+    "phone":"Phone Number",
+    "usertype":"User Type",
+    "search":"Search",
+    "save":"Save",
+    "fileuploadedsuccess":"File sucessfully uploaded!",
+    "pleaseuploadxcel":"Please upload .xlsx, .xls, .csv only",
+    "filenameshould":"File name should be in ",
+    "format":"format",
+    "invalidusernamepassword":"Invalid User Name and Password",
+    "cancel":"Cancel",
+    "oldnewpasswordnotsame":"Old & New Password must not be the Same",
+    "plsrestpswd":"Please reset your password",
+    "deleteuser?":"Are you sure you want to delete this user ?",
+    "No":"No",
+    "Yes":"Yes"
 }

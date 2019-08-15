@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">First name</label>
+                    <label for="">{{'firstname'| translate}}</label>
                     <input type="text" class="form-control" placeholder="First name" formControlName="firstname"  [(ngModel)]="profileData.firstname" maxlength="60" required />
                     <div *ngIf="profileForm.controls.firstname.invalid && (profileForm.controls.firstname.dirty || profileForm.controls.firstname.touched)" class="text-danger">
                         <div *ngIf="profileForm.controls.firstname.errors.required" class="custom">
@@ -23,7 +23,7 @@
     
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">Last name</label>
+                    <label for="">{{'lastname'| translate}}</label>
                     <input type="text" class="form-control" id="" placeholder="Last name" formControlName="lastname" [(ngModel)]="profileData.lastname" maxlength="60" required />
                     <div *ngIf="profileForm.controls.lastname.invalid && (profileForm.controls.lastname.dirty || profileForm.controls.lastname.touched)" class="text-danger">
                         <div *ngIf="profileForm.controls.lastname.errors.required" class="custom">
@@ -41,14 +41,14 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">Email id</label>
+                    <label for="">{{'emailid'| translate}}</label>
                     <input type="email" class="form-control" disabled placeholder="Email Id" formControlName="uemailId" [(ngModel)]="profileData.uemailId" required />
                 </div>
             </div>
     
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="">User id</label>
+                    <label for="">{{'userid'| translate}}</label>
                     <input type="text" class="form-control" disabled placeholder="Email Id" formControlName="consumerId" [(ngModel)]="profileData.consumerId" required />
                 </div>
             </div>
@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="country">Country</label>
+                    <label for="country">{{'countryName'| translate}}</label>
                     <input type="text" class="form-control" disabled [(ngModel)]="profileData.country"
                         formControlName="country" list="codes" step="5" min="5" max="200" required />
                     <datalist id="codes">
@@ -71,7 +71,7 @@
     
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="state">State</label>
+                    <label for="state">{{'state'| translate}}</label>
                     <input type="text" class="form-control" formControlName="state" [(ngModel)]="profileData.state"
                     (click)="getState($event)" placeholder="State" list="statecodes" step="5" min="5" max="200" required />
                     <datalist id="statecodes">
@@ -89,7 +89,7 @@
     
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="city">City</label>
+                    <label for="city">{{'city'| translate}}</label>
                     <input type="text" class="form-control" formControlName="city" [(ngModel)]="profileData.city"
                     (click)="getCity($event)" placeholder="City" list="citycodes" step="5" min="5" max="200" required />
                     <datalist id="citycodes">
@@ -109,7 +109,7 @@
         <div class="row">
             <div class="col">
                 <div class="form-group custom_form-group">
-                    <label for="exampleInputEmail1">Phone number</label>
+                    <label for="exampleInputEmail1">{{'phone'| translate}}</label>
                     <input placeholder="Phone Number" type="text" class="form-control" formControlName="phonenumber" [(ngModel)]="profileData.phonenumber" required>
                     <div *ngIf="profileForm.controls.phonenumber.invalid && (profileForm.controls.phonenumber.dirty || profileForm.controls.phonenumber.touched)" class="text-danger">
                         <div *ngIf="profileForm.controls.phonenumber.errors.required" class="custom">
@@ -131,7 +131,7 @@
         <div class="row">
             <div class="col">
                 <button (click)="continue()" [disabled]="profileForm.pristine || profileForm.invalid"
-                    class="btn btn-orange">Save</button>&nbsp;
+                    class="btn btn-orange">{{'save'| translate}}</button>&nbsp;
             </div>
         </div>
     

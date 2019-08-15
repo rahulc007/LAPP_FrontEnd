@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <div class="dashboard_cntnts">
-            <h2 class="page_heading dashboard">Dashboard</h2>
+            <h2 class="page_heading dashboard">{{'dashboard'| translate}}</h2>
 
             <div class="row">
                 <div class="col">
@@ -67,7 +67,7 @@
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}
                 <br/>
-                <small class="title-small">Please reset your password</small>
+                <small class="title-small">{{'plsrestpswd'| translate}}</small>
             </h4>
             <button *ngIf="passwordReseted" type="button" class="close" aria-label="Close" (click)="closePopUp()">
                 <span aria-hidden="true">&times;</span>
@@ -97,7 +97,7 @@
                                 class="text-danger">
                                 <div *ngIf="resetForm.controls.newPwd.errors.required">{{'newpasswordrequired'| translate}}</div>
                                 <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}</div>
-                                <div *ngIf="resetForm.hasError('Same')">Old & New Password must not be the Same</div>
+                                <div *ngIf="resetForm.hasError('Same')">{{'oldnewpasswordnotsame'| translate}}</div>
                             </div>
                             <!-- <div class="progress">
                         <div class="progress-bar bg-danger" [style.width.%]="passwordStrength"></div>
