@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserType } from '../../../assets/data/usertype_';
 import { Countries } from '../../../assets/data/countrydetails';
@@ -7,14 +7,20 @@ import { ConfigurationService } from '../../common/ngx-easy-table/config-service
 import { data } from '../../../assets/data/country_';
 import { AppConfig } from '../../configs/app.config';
 import { userTypes } from '../../common/constants/constants';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
   styleUrls: ['./create-customer.component.scss'],
   providers: [ConfigurationService]
 })
-export class CreateCustomerComponent implements OnInit {
+export class CreateCustomerComponent implements OnInit, AfterViewInit {
+  @ViewChild('verdelete', {static: false}) Verdelete: TemplateRef<any>;
+  @ViewChild('veredit', {static: false}) Veredit: TemplateRef<any>;
+  @ViewChild('deletecontent', {static: false}) deletecontent: TemplateRef<any>;
 
+  deleteData:any;
   emailId:any;
   usertypeData: any[] = [];
   countryData: any[] = [];
@@ -37,7 +43,7 @@ export class CreateCustomerComponent implements OnInit {
   errorMsg: string;
   params: any;
   downflag = 0;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService) {
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService, private modalService: NgbModal,) {
     this.configuration = ConfigurationService.config;
 
   }
@@ -60,16 +66,7 @@ export class CreateCustomerComponent implements OnInit {
     this.countryData = Countries;
     this.userData = data;
     this.loadUsers();
-    this.columns = [
-      { key: 'firstname', title: 'First Name' },
-      { key: 'lastname', title: 'Last Name' },
-      { key: 'pid', title: 'User ID' },
-      { key: 'uemailId', title: 'Email ID' },
-      { key: 'phonenumber', title: 'Phone Number' },
-      { key: 'country', title: 'Country' },
-      { key: 'userType', title: 'User Type' },
-      { key: 'createdBy', title: 'Created By' }
-    ]
+   
 
   }
 
@@ -102,7 +99,7 @@ export class CreateCustomerComponent implements OnInit {
     }
 
     const uId = localStorage.getItem('username');
-    console.log('Form Values', this.customerForm.value);
+    
     const params = {
       "emailId": this.customerForm.value.email,
       "firstname": this.customerForm.value.fname,
@@ -194,6 +191,53 @@ export class CreateCustomerComponent implements OnInit {
 
     window.location.href = 'http://3.17.182.133:8090/downloadCustData?emailId=' + emailId;
 
+  }
+
+  ngAfterViewInit() {
+    this.columns = [
+      { key: 'firstname', title: 'First Name' },
+      { key: 'lastname', title: 'Last Name' },
+      { key: 'pid', title: 'User ID' },
+      { key: 'uemailId', title: 'Email ID' },
+      { key: 'phonenumber', title: 'Phone Number' },
+      { key: 'country', title: 'Country' },
+      { key: 'userType', title: 'User Type' },
+      { key: 'createdBy', title: 'Created By' },
+      {key: 'Delete', title: 'Delete', searchEnabled: false, cellTemplate: this.Verdelete},
+      {key: 'Edit', title: 'Edit', searchEnabled: false, cellTemplate: this.Veredit}
+
+     
+    ]
+  }
+
+
+  deletefun(row)
+  {
+    //  console.log("delete the row data===>", row)
+
+    
+    this.deleteData = row;
+    this.modalService.open(this.deletecontent)
+  }
+
+  yesDelete()
+  {
+    let params={
+       "consumerId": this.deleteData.consumerId,
+     "country": this.deleteData.country,
+      "uemailId": this.deleteData.uemailId,
+       "createdBy": this.deleteData.createdBy
+     }
+
+     this.objService.Post('deleteUser', params).subscribe(res=>{
+
+     })
+  }
+
+  editfun(row)
+  {
+
+    console.log("edit the row data===>", row)
   }
 
 }

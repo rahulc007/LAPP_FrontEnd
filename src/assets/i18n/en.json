@@ -67,7 +67,9 @@
     "resetall":"Reset All",
     "orders":"Orders",
     "passwordupdate":"Password Update",
-    "characters": "Enter Alphabetic Letters"
+    "characters": "Enter Alphabetic Letters",
+    "Delete":"Delete",
+    "Edit":"Edit"
     
 
 }
