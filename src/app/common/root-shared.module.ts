@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PasswordUpdateComponent } from './password-update/password-update.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import {Router, RouterModule} from '@angular/router';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {Router, RouterModule} from '@angular/router';
     ResetPasswordComponent,
     ForgotpasswordComponent,
     PasswordUpdateComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoaderComponent
   ],
   imports: [
   CommonModule,
@@ -34,7 +36,8 @@ import {Router, RouterModule} from '@angular/router';
   exports: [
     HeaderComponent,
     ResetPasswordComponent,
-    SidebarComponent 
+    SidebarComponent,
+    LoaderComponent
   ]
 
 })

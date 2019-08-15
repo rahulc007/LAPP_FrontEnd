@@ -17,7 +17,8 @@ import {CoreModule} from './core/core.module';
 import {NgAutoCompleteModule} from 'ng-auto-complete';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {LoaderComponent} from './common/loader/loader.component';
+import { RootSharedModule } from './common/root-shared.module';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -29,8 +30,7 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    LoaderComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     NgAutoCompleteModule,
+    RootSharedModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
