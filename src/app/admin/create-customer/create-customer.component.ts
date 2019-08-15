@@ -171,7 +171,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   getState() {
-
     let contrydata = this.countryData.find(cntry => cntry.CountryName === this.country);
     this.stateData = contrydata.States;
   }
@@ -210,17 +209,12 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       { key: 'createdBy', title: 'Created By' },
       {key: 'Delete', title: 'Delete', searchEnabled: false, cellTemplate: this.Verdelete},
       {key: 'Edit', title: 'Edit', searchEnabled: false, cellTemplate: this.Veredit}
-
-     
     ]
   }
 
 
   deletefun(row)
   {
-    //  console.log("delete the row data===>", row)
-
-    
     this.deleteData = row;
     this.modalService.open(this.deletecontent)
   }
@@ -229,8 +223,8 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   {
     let params={
        "consumerId": this.deleteData.consumerId,
-     "country": this.deleteData.country,
-      "uemailId": this.deleteData.uemailId,
+       "country": this.deleteData.country,
+       "uemailId": this.deleteData.uemailId,
        "createdBy": this.deleteData.createdBy
      }
 
@@ -243,8 +237,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   {
 
     this.editflag =1;
-
-    console.log("edit the row data===>", row)
     this.firstname = row.firstname
     this.lastname = row.lastname
     this.emailId = row.uemailId
@@ -255,15 +247,14 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.phone = row.phonenumber
 
     let usercode = this.usertypeData.find(usr => usr.value === row.userType);
-    this.usertype = usercode.type
 
+    this.usertype = usercode.type
   }
 
   create()
   {
     this.editflag =0;
-    this.customerForm=''
-
+    this.customerForm.reset();
   }
 
   update()
@@ -277,8 +268,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       "state": this.state,
       "city": this.city,
       "phone": this.phone,
-      "usertype": this.usertype,
-
+      "usertype": this.usertype
     }
 
     this.objService.Put('updateUsers', params).subscribe(res=>{})
