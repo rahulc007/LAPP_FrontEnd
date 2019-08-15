@@ -6,28 +6,34 @@
             <div class="row">
                 <div class="col">
                     <div class="row">
-                        <div class="col">
-                            <span [routerLink]="['/admin/neworders']">
+                        <div class="col col-md-3 col-sm-12">
+                            <span [routerLink]="['upload']">
                                 <div class="cntnt_box box1">
+                                    <div class="dashboard_icon upload"></div>
+                                    <h5>{{'upload'| translate}}</h5>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="col">
+                            <span [routerLink]="['neworders']">
+                                <div class="cntnt_box box2">
+                                    <div class="dashboard_icon new_order"></div>
                                     <h5>{{'neworders'| translate}}</h5>
                                 </div>
                             </span>
                         </div>
                         <div class="col">
-                            <span [routerLink]="['/admin/updatedorders']">
-                                <div class="cntnt_box box2">
+                            <span [routerLink]="['updatedorders']">
+                                <div class="cntnt_box box3">
+                                    <div class="dashboard_icon updtd_order"></div>
                                     <h5>{{'updateorders'| translate}}</h5>
                                 </div>
                             </span>
                         </div>
                         <div class="col">
-                            <div class="cntnt_box box3">
-                                <h5>{{'processedorders'| translate}}</h5>
-                            </div>
-                        </div>
-                        <div class="col">
                             <div class="cntnt_box box1">
-                                <h5>{{'previousorders' | translate}}</h5>
+                                    <div class="dashboard_icon prcsd_order"></div>
+                                <h5>{{'processedorders'| translate}}</h5>
                             </div>
                         </div>
                     </div>
@@ -36,25 +42,29 @@
                     <div class="row">
                         <div class="col">
                             <div class="cntnt_box box1">
-                                <h5>{{'DownloadExcel'| translate}}</h5>
+                                    <div class="dashboard_icon prvs_order"></div>
+                                <h5>{{'previousorders'| translate}}</h5>
                             </div>
                         </div>
                         <div class="col">
                             <span [routerLink]="['/admin/profile']">
                                 <div class="cntnt_box box2">
-                                    <h5>{{'profile'| translate}}</h5>
+                                        <div class="dashboard_icon dwnload"></div>
+                                    <h5>{{'DownloadExcel'| translate}}</h5>
                                 </div>
                             </span>
                         </div>
                         <div class="col">
                             <div class="cntnt_box box3">
-                                <h5>{{'Userapprovals'| translate}}</h5>
+                                    <div class="dashboard_icon prfile"></div>
+                                <h5>{{'profile'| translate}}</h5>
                             </div>
                         </div>
                         <div class="col">
                             <span [routerLink]="['/admin/createuser']">
                                 <div class="cntnt_box box1">
-                                    <h5>{{'Createusers' | translate}}</h5>
+                                        <div class="dashboard_icon custmr_dtls"></div>
+                                    <h5>{{'CreateUsers'| translate}}</h5>
                                 </div>
                             </span>
                         </div>

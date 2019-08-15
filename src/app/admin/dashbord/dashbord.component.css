@@ -176,11 +176,17 @@
   padding: 15px;
   color: #fff;
   border-radius: 5px;
+  min-height: 138px;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .dashboard_cntnts .cntnt_box h5{
-  font-weight: bold;
-  font-size: 1.8rem;
-  /* margin-bottom: 15px; */
+  /* font-weight: bold; */
+  font-size: 1.5rem;
+  margin: 0;
+  position: absolute;
+  bottom: 15px;
 }
 .dashboard_cntnts .cntnt_box p{
   margin: 0;
@@ -195,3 +201,50 @@
   background: #17a380;
 }
 /*dashboard end*/
+
+.dashboard_icon{
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 15px;
+}
+.dashboard_icon.upload{
+  background: url(/assets/images/menu_icons/upload.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.upload{
+  background: url(/assets/images/menu_icons/upload.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.new_order{
+  background: url(/assets/images/menu_icons/newordr.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.updtd_order{
+  background: url(/assets/images/menu_icons/updatedordr.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.prcsd_order{
+  background: url(/assets/images/menu_icons/procesedordr.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.prvs_order{
+  background: url(/assets/images/menu_icons/prvsordr.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.dwnload{
+  background: url(/assets/images/menu_icons/download.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.prfile{
+  background: url(/assets/images/menu_icons/prfile.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.custmr_dtls{
+  background: url(/assets/images/menu_icons/custmrdtls.png) no-repeat;
+  background-size: contain;
+}
+.dashboard_icon.creat_usrs{
+  background: url(/assets/images/menu_icons/createusr.png) no-repeat;
+  background-size: contain;
+}

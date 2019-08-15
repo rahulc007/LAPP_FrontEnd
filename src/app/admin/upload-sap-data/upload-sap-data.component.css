@@ -1,8 +1,8 @@
     .input-container {
-    margin: 3em auto 0;
-    background-color: silver;
-    border: 1px solid #DFDFDF;
-    border-radius: 6px;
+      /* margin: 3em auto 0; */
+      border-bottom: 1px solid #DFDFDF;
+      height: 35px;
+      margin-bottom: 3px;
     }
     .upload_msg{
       font-size: 12px;
@@ -22,30 +22,31 @@
       margin-right: -84px;
     }
     .browse-btn {
-    /* background: rgb(181,122,40); */
-    color: white;
-    min-height: 35px;
-    padding: 10px;
-    border: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    color: #807e7d;
+    padding: 6px 10px;
+    border-radius: 5px;
+    float: right;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.5);
     }
-    
     .browse-btn:hover {
-    background: #000;
+      color: #000;
+      background: transparent;
     }
+
     .btn{
         padding-right: 50px;
         padding-left: 50px;  
         position: center;
       }
-     
-      .UplBtn{
-        background-color: chocolate;
-        color:white;
-      }
   
-   
+      .upload_btn{
+        background: url(/assets/images/menu_icons/upload_hover.png) no-repeat;
+        background-size: auto 70%;
+        background-position: 5px 5px;
+        padding: 16px;
+        float: left;    
+      }
 
     @media (max-width: 300px) {
     button {

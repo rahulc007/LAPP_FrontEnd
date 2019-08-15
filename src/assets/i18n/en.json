@@ -8,7 +8,7 @@
     "username":"Customer ID/ Email ID",
     "password":"Enter Password",
     "country":"Choose Country",
-    "Unamerequired":"User Name Required",
+    "Unamerequired":"Customer ID/ Email ID Required",
     "Passwordrequired":"Password  is Required",
     "passwordminchar":"Password minimun 6 Characters",
     "Select_Country":"Please Select Country",
@@ -94,5 +94,6 @@
     "Yes":"Yes",
     "entertheemailid":"Enter the Email Id",
     "enternewpassword":"Enter New Password",
-    "enterconfirmpwd":"Enter Conform Password"
+    "enterconfirmpwd":"Enter Conform Password",
+    "browse":"Browse"
 }
