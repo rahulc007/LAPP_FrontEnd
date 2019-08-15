@@ -25,7 +25,7 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="">{{'firstname'| translate}}</label>
-                    <input type="text" id="" placeholder="First Name" formControlName="fname" maxlength="60"
+                    <input type="text" id="" placeholder="First Name" formControlName="fname"  [(ngModel)]="firstname"  maxlength="60"
                         class="form-control" required />
                     <div *ngIf="customerForm.controls.fname.invalid && (customerForm.controls.fname.dirty || customerForm.controls.fname.touched)"
                         class="text-danger">
@@ -41,7 +41,7 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="">{{'lastname'| translate}}</label>
-                    <input type="text" class="form-control" id="" placeholder="Last Name" formControlName="lname"
+                    <input type="text" class="form-control" id="" placeholder="Last Name" formControlName="lname" [(ngModel)]="lastname"
                         maxlength="60" required />
                     <div *ngIf="customerForm.controls.lname.invalid && (customerForm.controls.lname.dirty || customerForm.controls.lname.touched)"
                         class="text-danger">
@@ -60,7 +60,7 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="">{{'emailid'| translate}}</label>
-                    <input placeholder="Email Id" formControlName="email" class="form-control" maxlength="60" type="text"
+                    <input placeholder="Email Id" formControlName="email" class="form-control" [(ngModel)]="emailId"  maxlength="60" type="text"
                         required />
                     <div *ngIf="customerForm.controls.email.invalid && (customerForm.controls.email.dirty || customerForm.controls.email.touched)"
                         class="text-danger">
@@ -75,7 +75,7 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="">{{'userid'| translate}}</label>
-                    <input placeholder="User id" type="text" class="form-control" maxlength="60" formControlName="userid"
+                    <input placeholder="User id" type="text" class="form-control" maxlength="60"  [(ngModel)]="uid"  formControlName="userid"
                         required />
                     <div *ngIf="customerForm.controls.userid.invalid && (customerForm.controls.userid.dirty || customerForm.controls.userid.touched)"
                         class="text-danger">
@@ -185,7 +185,7 @@
             <div class="col">
                     <div class="form-group custom_form-group">
                             <label for="">{{'phone'| translate}}</label>
-                            <input placeholder="Phone Number" type="text" class="form-control" maxlength="12" formControlName="phone" required />
+                            <input placeholder="Phone Number" type="text" [(ngModel)]="phone" class="form-control" maxlength="12" formControlName="phone" required />
                             <div *ngIf="customerForm.controls.phone.invalid && (customerForm.controls.phone.dirty || customerForm.controls.phone.touched)"
                                 class="text-danger">
                                 <div *ngIf="customerForm.controls.phone.errors.required" class="custom">
@@ -253,8 +253,14 @@
         </div> -->
     
         <div id="createUser" class="row">
-            <div class="col">
+            <div class="col" *ngIf="editflag===0">
                 <button (click)="formSubmit()" [disabled]="customerForm.pristine || customerForm.invalid" class="btn btn-orange">{{'submit'| translate}}</button>
+            </div>
+            <div class="col-md-2" *ngIf="editflag===1">
+                <button (click)="update()" class="btn btn-orange">{{'update'| translate}}</button>
+            </div>
+            <div class="col-md-2" *ngIf="editflag===1">
+                <button (click)="create()" class="btn btn-orange">{{'create'| translate}}</button>
             </div>
         </div>
     

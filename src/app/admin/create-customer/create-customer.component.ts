@@ -19,14 +19,19 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   @ViewChild('verdelete', {static: false}) Verdelete: TemplateRef<any>;
   @ViewChild('veredit', {static: false}) Veredit: TemplateRef<any>;
   @ViewChild('deletecontent', {static: false}) deletecontent: TemplateRef<any>;
+  firstname:any;
+  lastname:any;
+  emailId:any;
+  uid:any;
+  country:any;
+  phone:any;
+  editflag=0;
 
   deleteData:any;
-  emailId:any;
   usertypeData: any[] = [];
   countryData: any[] = [];
   citiesData: any[] = [];
   usertype: any;
-  country: any;
   state: any;
   city: any;
   customerForm: FormGroup;
@@ -237,7 +242,32 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   editfun(row)
   {
 
+    this.editflag =1;
+
     console.log("edit the row data===>", row)
+    this.firstname = row.firstname
+    this.lastname = row.lastname
+    this.emailId = row.uemailId
+    this.uid = row.consumerId
+    this.country = row.country
+    this.state = row.state
+    this.city = row.city
+    this.phone = row.phonenumber
+
+    let usercode = this.usertypeData.find(usr => usr.value === row.userType);
+    this.usertype = usercode.type
+
   }
 
+  create()
+  {
+    this.editflag =0;
+    this.customerForm=''
+
+  }
+
+  update()
+  {
+    
+  }
 }
