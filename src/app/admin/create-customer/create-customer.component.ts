@@ -20,6 +20,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   @ViewChild('veredit', {static: false}) Veredit: TemplateRef<any>;
   @ViewChild('deletecontent', {static: false}) deletecontent: TemplateRef<any>;
   firstname:any;
+  isAdmin=0;
   lastname:any;
   emailId:any;
   uid:any;
@@ -54,6 +55,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    
     this.customerForm = this.formBuilder.group({
       fname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       lname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
@@ -82,11 +84,26 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
 
     if (objUserDetails.userType === userTypes.superAdmin) {
+      this.customerForm.reset();
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
         this.data = response.userProfileList;
       })
     }
     else if (objUserDetails.userType  === userTypes.admin) {
+      this.isAdmin = 1; 
+      this.firstname='';
+      this.lastname='';
+      this.emailId='';
+      this.uid='';
+      this.state='';
+      this.city='';
+      this.phone='';
+
+      this.usertype = 'Customer';
+      let contrycodedata = this.countryData.find(cntry => cntry.countryCode === objUserDetails.countryCode);  
+      this.country = contrycodedata.CountryName;
+
+      this.getState();
       this.downflag = 1;
       this.usertypeData = UserType.filter(itm => itm["value"] != "2")
       const emailId = localStorage.getItem('username');
@@ -98,8 +115,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
   formSubmit() {
     this.submitted = true;
-    this.msg = '';
+	this.msg = '';
     this.errorMsg = '';
+
     if (this.customerForm.invalid) {
       return;
     }
@@ -123,7 +141,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       
       if (datas.status === 200 && datas.successMessage != null) {
         this.msg = datas.successMessage;
-        this.customerForm.reset();
+       
         this.submitted = false;
         // window.location.reload();
         this.loadUsers();
