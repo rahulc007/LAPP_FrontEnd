@@ -87,7 +87,29 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     if (objUserDetails.userType === userTypes.superAdmin) {
       this.customerForm.reset();
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
-        this.data = response.userProfileList;
+
+
+        const arraylist=[];
+        arraylist=response.userProfileList;
+
+        arraylist.forEach(list=>{
+          if(list.usertype ===  userTypes.admin)
+          {
+            list.role='Admin';
+          }
+          else if(list.userType ===  userTypes.superAdmin)
+          {
+            list.role='Super Admin';
+          }
+          else if(list.userType ===  userTypes.customer)
+          {
+            list.role='Customer';
+          }
+        })
+        
+        console.log("get all=>",arraylist)
+        this.data = arraylist;
+        // this.data = response.userProfileList;
       })
     }
     else if (objUserDetails.userType  === userTypes.admin) {
@@ -108,8 +130,29 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       this.downflag = 1;
       this.usertypeData = UserType.filter(itm => itm["value"] != "2")
       const emailId = localStorage.getItem('username');
+
       this.objService.Get('getUserByCreated?emailId=' + emailId, this.params).subscribe(response => {
-        this.data = response.userProfileList;
+        
+        const arraylist=[];
+        arraylist=response.userProfileList;
+
+        arraylist.forEach(list=>{
+          if(list.usertype ===  userTypes.admin)
+          {
+            list.role='Admin';
+          }
+          else if(list.userType ===  userTypes.superAdmin)
+          {
+            list.role='Super Admin';
+          }
+          else if(list.userType ===  userTypes.customer)
+          {
+            list.role='Customer';
+          }
+        })
+        
+        console.log("get all=>",arraylist)
+        this.data = arraylist;
       })
       this.customerForm.reset();
     }
@@ -162,6 +205,22 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
       if(res.userProfileEntity!==null)
       {
+
+        if(res.userProfileEntity.userType ===  userTypes.admin)
+        {
+          res.userProfileEntity.role='Admin';
+        }
+        else if(res.userProfileEntity.userType ===  userTypes.superAdmin)
+        {
+          res.userProfileEntity.role='Super Admin';
+        }
+        else if(res.userProfileEntity.userType ===  userTypes.customer)
+        {
+          res.userProfileEntity.role='Customer';
+        }
+
+        console.log("user =>", res.userProfileEntity)
+         
      this.data = res.userProfileEntity;
      this.searcherror = '';
       }
@@ -235,11 +294,11 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.columns = [
       { key: 'firstname', title: 'First Name' },
       { key: 'lastname', title: 'Last Name' },
-      { key: 'pid', title: 'User ID' },
+      { key: 'consumerId', title: 'User ID' },
       { key: 'uemailId', title: 'Email ID' },
       { key: 'phonenumber', title: 'Phone Number' },
       { key: 'country', title: 'Country' },
-      { key: 'userType', title: 'User Type' },
+      { key: 'role', title: 'User Type' },
       { key: 'createdBy', title: 'Created By' },
       {key: 'Delete', title: 'Delete', searchEnabled: false, cellTemplate: this.Verdelete},
       {key: 'Edit', title: 'Edit', searchEnabled: false, cellTemplate: this.Veredit}
@@ -250,11 +309,11 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.columns = [
       { key: 'firstname', title: 'First Name' },
       { key: 'lastname', title: 'Last Name' },
-      { key: 'pid', title: 'User ID' },
+      { key: 'consumerId', title: 'User ID' },
       { key: 'uemailId', title: 'Email ID' },
       { key: 'phonenumber', title: 'Phone Number' },
       { key: 'country', title: 'Country' },
-      { key: 'userType', title: 'User Type' },
+      { key: 'role', title: 'User Type' },
       { key: 'createdBy', title: 'Created By' }
     ]
   }
