@@ -40,6 +40,12 @@ a{
 .orange_clr{
   color: #f58122 !important;
 }
+.black_clr{
+  color: #000 !important;
+}
+.black_clr1{
+  color: rgba(0, 0, 0, 0.7) !important;
+}
 .btn{
   padding: 0.5rem 2rem;
 }
@@ -77,6 +83,18 @@ a{
 
 #content.active {
   width: 100%;
+}
+input::-webkit-calendar-picker-indicator {
+  display: none;/* remove default arrow */
+}
+.myarrow{
+  display: flex;
+}
+.myarrow:after {
+  content: url('assets/images/down_arrow.png');
+  margin: 8px 0 0 -20px;
+  padding: .1em;
+  pointer-events:none;
 }
 /* common styles end */
 

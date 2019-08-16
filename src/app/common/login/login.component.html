@@ -151,7 +151,7 @@
                           <input  type="password" formControlName="password" class="form-control"  placeholder="{{'password' | translate}}" maxlength="60" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required />
                           <div *ngIf="submitted && loginForm.controls.password.errors" class="text-danger">
                             <div *ngIf="loginForm.controls.password.errors.required">{{'Passwordrequired'| translate}}</div>
-                            <div *ngIf="loginForm.controls.password.errors.minlength">{{'passwordminchar' | translate}}</div>
+                            <!-- <div *ngIf="loginForm.controls.password.errors.minlength">{{'passwordminchar' | translate}}</div> -->
                             <!-- <div *ngIf="passwordStrength">{{passwordLength}}</div> -->
                           </div>
                       </div>
@@ -159,7 +159,7 @@
                           <!-- <input type="text" class="form-control" id="" placeholder="Country"> -->
                           <!-- <input type="text" class="form-control" formControlName="country"  [(ngModel)]='selected' (click)="clear()" placeholder="{{'country' | translate}}" list="codes" step="5" min="5" max="200" required />
                         <datalist id="codes"> -->
-                          <select class="form-control" formControlName="country" [(ngModel)]='selected'  >
+                          <select class="form-control" formControlName="country" [(ngModel)]='selected' style="border: 1px solid #a3a09e;height: 33px;font-size: 15px;" >
                             <option *ngFor="let item of userData" [value]="item.name">{{item.name}}</option>
                           </select>
                         <!-- </datalist> -->
@@ -169,11 +169,11 @@
                       </div>
                       <div class="form-group text-right">
                           <!-- <a href="" target="_self" class="orange_clr">Forgtot password?</a> -->
-                          <a [routerLink]="['/login/forgotpassword']" routerLinkActive="router-link-active"  class="lgn_lnks orange_clr">{{'forgotpassword' | translate}}</a>
+                          <a [routerLink]="['/login/forgotpassword']" routerLinkActive="router-link-active"  class="lgn_lnks black_clr1">{{'forgotpassword' | translate}}</a>
                       </div>
-                      <div *ngIf="message">
-                        <p class="text-danger">{{message}}</p>
-                      </div>
+                      <div class="text-center" *ngIf="message">
+                        <span class="text-danger">{{'invalidlogin' | translate}}</span>
+                      </div>					  
                       <div class="form-group text-center">
                           <!-- <button type="submit" class="btn btn-orange btn-lg">Login</button> -->
                           <a (click)="login()" class="btn btn-orange lgn_btn">{{'login'| translate}}</a>

@@ -34,10 +34,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     localStorage.clear();
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60), this.passwordStrength.bind(this)]],
+      // password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60), this.passwordStrength.bind(this)]],
+      password: ['', [Validators.required, Validators.maxLength(60)]],
       country: ['', Validators.required]
    });
     this.userData = data;
+    console.log("userData--",this.userData);
     this.selected= data[0].name;
   }
   private passwordStrength(control: FormControl) {
