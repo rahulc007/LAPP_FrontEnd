@@ -86,7 +86,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
 
     if (objUserDetails.userType === userTypes.superAdmin) {
-      this.customerForm.reset();
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
         this.isAdmin=0
 
@@ -188,7 +187,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       
       if (datas.status === 200 && datas.successMessage != null) {
         this.loadUsers();
-        this.initial();
+        this.selectedReset();
         this.msg = datas.successMessage;
       }
       else if (datas.status === 200 && datas.errorMessage != null) {
@@ -197,7 +196,15 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     })
 
   }
-
+selectedReset() {
+  this.customerForm.controls['fname'].reset();
+  this.customerForm.controls['lname'].reset();
+  this.customerForm.controls['email'].reset();
+  this.customerForm.controls['userid'].reset();
+  this.customerForm.controls['State'].reset();
+  this.customerForm.controls['City'].reset();
+  this.customerForm.controls['phone'].reset();
+}
   getPerticularUser(email)
   {
 
