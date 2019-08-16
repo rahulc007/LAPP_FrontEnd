@@ -118,7 +118,7 @@ ul ul a {
 
 .user_cntnt{
   padding: 0 0 0 45px;
-  background: url('/assets/images/dp.png') no-repeat;
+  background: url('../../../assets/images/dp.png') no-repeat;
   background-position: center left;
   background-size: contain;
   display: block;

@@ -6,7 +6,6 @@ import {AuthGuard} from '../app/core/services/auth.guard';
 import { ForgotpasswordComponent} from './common/forgotpassword/forgotpassword.component';
 import {PasswordUpdateComponent} from './common/password-update/password-update.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
   { path: 'admin', loadChildren:'./admin/admin.module#AdminModule', canActivate: [AuthGuard]  },
