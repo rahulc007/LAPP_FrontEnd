@@ -123,7 +123,7 @@
                                     {{'newpasswordrequired'| translate}}</div>
                                 <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}
                                 </div>
-                                <div *ngIf="passwordOldNewMatcher">Old & New Password must not be the Same</div>
+                                <div *ngIf="passwordOldNewMatcher">{{'oldnewpasswordnotsame' | translate}}</div>
                             </div>
                             <!-- <div class="progress">
                                 <div class="progress-bar bg-danger" [style.width.%]="passwordStrength"></div>

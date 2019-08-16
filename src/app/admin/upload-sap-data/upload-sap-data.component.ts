@@ -38,13 +38,18 @@ export class UploadSapDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; 
+      this.msg = '';
+      this.errorMsg = '';
+    };
     // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
     //      console.log('ImageUpload:uploaded:', item, status, response);
     //     //  this.uploadFile.nativeElement.value = '';
     //     this.getUploadedData();
     //  };
     this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
+      this.msg = '';
+      this.errorMsg = '';
       let data = JSON.parse(response);
       // console.log('ImageUpload:uploaded===:', item,"===", status, "===", response, "===", data.status);
       //  this.uploadFile.nativeElement.value = '';

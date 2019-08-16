@@ -274,13 +274,13 @@
                 <button class="btn btn-orange" (click)="download()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
             </div> -->
         </div>
-    
-    
+        
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-10 "> <div class="col-md-2 text-danger error" *ngIf="searcherror">
-                    {{searcherror}}
-                   </div> </div>
+                <div class="col">
+                    <div class="text-danger" *ngIf="searcherror">
+                        {{searcherror}}
+                    </div>
+                </div>
         </div>
     
     <div class="row">
