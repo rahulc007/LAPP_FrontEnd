@@ -89,8 +89,8 @@
                             (click)="countryclear()" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5"
                             max="200" required />
                         <datalist id="codes">
-                            <select class="scrollbar">
-                                <option *ngFor="let item of countryData" [value]="item.CountryName"></option>
+                            <select class="scrollbar" [disabled]="isAdmin===1">
+                                <option *ngFor="let item of countryData" [value]="item.CountryName" [disabled]="isAdmin===1"></option>
                             </select>
                         </datalist>
                         <div *ngIf="customerForm.controls.country.invalid && (customerForm.controls.country.dirty || customerForm.controls.country.touched)"

@@ -154,7 +154,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
         console.log("get all=>",arraylist)
         this.data = arraylist;
       })
-      this.customerForm.reset();
+     // this.customerForm.reset();
     }
     
   }
