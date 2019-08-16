@@ -85,7 +85,7 @@
                 <div class="col">
                     <div class="form-group custom_form-group">
                         <label for="">{{'countryName'| translate}}</label>
-                        <input type="text" class="form-control" disabled formControlName="country" [(ngModel)]="country" [disabled]="isAdmin===1"
+                        <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" [disabled]="isAdmin===1"
                             (click)="countryclear()" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5"
                             max="200" required />
                         <datalist id="codes">
@@ -160,7 +160,7 @@
                 <div class="col">
                         <div class="form-group custom_form-group">
                         <label for="">{{'usertype'| translate}}</label>
-                        <input type="text" class="form-control" disabled formControlName="usertype" [(ngModel)]='usertype' (click)="clear()"
+                        <input type="text" class="form-control" formControlName="usertype" [(ngModel)]='usertype' (click)="clear()"
                             placeholder="{{'usertype'| translate}}" list="usertypecodes" step="5" min="5" max="200" required />
                         <datalist id="usertypecodes">
                             <select class="scrollbar">
