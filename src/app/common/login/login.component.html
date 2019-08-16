@@ -1,102 +1,3 @@
-<!-- <div class="container-fluid body_bg">
-  <div class="row">
-    <div class="dotted_border"></div>
-    <div class="top_brdr"></div>
-    <div class="banner">
-      <div class="brand_logo"></div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-3">
-      <div class="lgn_cntnr">
-        <h2>Login</h2>
-        <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <div class="row">
-            <div class="col">
-              <div class="input-group lgn_input">
-                <div class="input-group-prepend">
-                  <i class="fa fa-user input-group-text" aria-hidden="true"></i>
-                </div>
-                <input formControlName="username" class="form-control" type="text" placeholder="Customer ID/ Email ID"
-                  [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
-
-
-              </div>
-            </div>
-          </div>
-          <div *ngIf="submitted && loginForm.controls.username.errors" class="text-danger">
-            <div *ngIf="loginForm.controls.username.errors.required">User Name is required</div>
-          </div>
-
-
-          <div class="row">
-            <div class="col">
-              <div class="input-group lgn_input">
-                <div class="input-group-prepend">
-                  <i class="fa fa-lock input-group-text" aria-hidden="true"></i>
-                </div>
-
-                <input formControlName="password" class="form-control" type="password" placeholder="Enter Password"
-                  [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required />
-
-
-              </div>
-            </div>
-          </div>
-          <div *ngIf="submitted && loginForm.controls.password.errors" class="text-danger">
-            <div *ngIf="loginForm.controls.password.errors.required">Password is required</div>
-            <div *ngIf="loginForm.controls.password.errors.minlength">Password minimun 6 Characters</div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="input-group lgn_input ">
-                <div class="input-group-prepend">
-                  <i class="fa fa-map-marker input-group-text" aria-hidden="true"></i>
-                </div>
-                <input type="text" class="form-control" formControlName="country" [(ngModel)]='selected'
-                (click)="clear()" placeholder="Country" list="codes" step="5" min="5" max="200"
-                  required />
-                <datalist id="codes">
-                  <select class="scrollbar">
-                    <option *ngFor="let item of userData" [value]="item.name"></option>
-                  </select>
-                </datalist>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="submitted && loginForm.controls.country.errors" class="text-danger">
-            <div *ngIf="loginForm.controls.country.errors.required">Please Select Country </div>
-          </div>
-          <div class="row">
-            <div class="col text-right">
-              <a href="#" target="_self" class="lgn_lnks">Forgot password?</a>
-            </div>
-          </div>
-          <div class="row">
-
-          </div>
-          <div *ngIf="message">
-            <p class="text-danger">{{message}}</p>
-          </div>
-          <div class="row">
-            <div class="col text-right">
-              <a (click)="login()" class="lgn_btn">Login</a>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="col"></div>
-  </div>
-
-  <div class="row">
-    <div class="dotted_border"></div>
-    <div class="top_brdr btm_brdr"></div>
-  </div>
-</div>
--->
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">{{'login'| translate}}!
@@ -113,9 +14,6 @@
     <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">{{'cancel'| translate}}</button>
   </div>
 </ng-template>
-
-
-
 
 
 <div class="login_holder">
@@ -140,14 +38,14 @@
                   <br />
                   <form [formGroup]="loginForm" (ngSubmit)="login()">
                       <div class="form-group">
-                          <!-- <input type="text" class="form-control" id="" placeholder="Mail"> -->
+                          
                           <input formControlName="username" class="form-control" maxlength="60" type="text" placeholder="{{'username' | translate}}" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
                           <div *ngIf="submitted && loginForm.controls.username.errors" class="text-danger">
                             <div *ngIf="loginForm.controls.username.errors.required">{{'Unamerequired' | translate}}</div>
                           </div>
                       </div>
                       <div class="form-group">
-                          <!-- <input type="password" class="form-control" id="" placeholder="password"> -->
+                         
                           <input  type="password" formControlName="password" class="form-control"  placeholder="{{'password' | translate}}" maxlength="60" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors }" required />
                           <div *ngIf="submitted && loginForm.controls.password.errors" class="text-danger">
                             <div *ngIf="loginForm.controls.password.errors.required">{{'Passwordrequired'| translate}}</div>
@@ -156,26 +54,24 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <!-- <input type="text" class="form-control" id="" placeholder="Country"> -->
-                          <!-- <input type="text" class="form-control" formControlName="country"  [(ngModel)]='selected' (click)="clear()" placeholder="{{'country' | translate}}" list="codes" step="5" min="5" max="200" required />
-                        <datalist id="codes"> -->
+                         
                           <select class="form-control" formControlName="country" [(ngModel)]='selected' style="border: 1px solid #a3a09e;height: 33px;font-size: 15px;" >
                             <option *ngFor="let item of userData" [value]="item.name">{{item.name}}</option>
                           </select>
-                        <!-- </datalist> -->
+                        
                         <div *ngIf="submitted && loginForm.controls.country.errors" class="text-danger">
                           <div *ngIf="loginForm.controls.country.errors.required">{{'Select_Country'| translate}} </div>
                         </div>
                       </div>
                       <div class="form-group text-right">
-                          <!-- <a href="" target="_self" class="orange_clr">Forgtot password?</a> -->
+                          
                           <a [routerLink]="['/login/forgotpassword']" routerLinkActive="router-link-active"  class="lgn_lnks black_clr1">{{'forgotpassword' | translate}}</a>
                       </div>
                       <div class="text-center" *ngIf="message">
                         <span class="text-danger">{{'invalidlogin' | translate}}</span>
                       </div>					  
                       <div class="form-group text-center">
-                          <!-- <button type="submit" class="btn btn-orange btn-lg">Login</button> -->
+                          
                           <a (click)="login()" class="btn btn-orange lgn_btn">{{'login'| translate}}</a>
                       </div>
                   </form>

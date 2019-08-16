@@ -49,6 +49,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   errorMsg: string;
   params: any;
   downflag = 0;
+  smailId: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService, private modalService: NgbModal,) {
     this.configuration = ConfigurationService.config;
 
@@ -78,7 +79,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   loadUsers() {
-
+    
     //const userType = localStorage.getItem('userType');
 
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
@@ -110,12 +111,14 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       this.objService.Get('getUserByCreated?emailId=' + emailId, this.params).subscribe(response => {
         this.data = response.userProfileList;
       })
+      this.customerForm.reset();
     }
+    
   }
 
   formSubmit() {
     this.submitted = true;
-	this.msg = '';
+	  this.msg = '';
     this.errorMsg = '';
 
     if (this.customerForm.invalid) {
@@ -140,11 +143,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.objService.Post('createUser', params).subscribe(datas => {
       
       if (datas.status === 200 && datas.successMessage != null) {
-        this.msg = datas.successMessage;
-       
-        this.submitted = false;
-        // window.location.reload();
         this.loadUsers();
+        this.submitted = false;
+        this.msg = datas.successMessage;
       }
       else if (datas.status === 200 && datas.errorMessage != null) {
         this.errorMsg = datas.errorMessage
@@ -162,6 +163,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       if(res.userProfileEntity!==null)
       {
      this.data = res.userProfileEntity;
+     this.searcherror = '';
       }
       else  if(res.userProfileEntity === null)
       {

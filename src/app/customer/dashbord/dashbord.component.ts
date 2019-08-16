@@ -28,7 +28,7 @@ export class DashbordComponent implements OnInit {
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],
-      newPwd: ['', [Validators.required, Validators.minLength(8), this.passwordOlNewMatcher.bind(this)]],
+      newPwd: ['', [Validators.required, Validators.minLength(6), this.passwordOlNewMatcher.bind(this)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
     });
 

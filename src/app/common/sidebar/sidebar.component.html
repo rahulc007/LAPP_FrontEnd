@@ -1,8 +1,8 @@
 
   <div id="sidebar" *ngIf="navService.showSideBar" >
-        <!-- <nav id="sidebar"> -->
+     
         <div class="sidebar-header">
-            <!-- <h3>Bootstrap Sidebar</h3> -->
+            
             <div class="logo">
                 <img src="assets/images/lapp_logo.png" alt="LAPP" />
             </div>
@@ -33,13 +33,10 @@
             <li>
                 <a href="#" [routerLink]="['profile']" routerLinkActive="router-link-active" class="menu_icon prfile">{{'profile'| translate}}</a>
             </li>
-            <!-- <li *ngIf="isAdmin || isSuperAdmin">
-                <a href="#" [routerLink]="['dashbord/customerdetails']" routerLinkActive="router-link-active" class="menu_icon custmr_dtls">{{'customerdetails'| translate}}</a>
-            </li> -->
+            
             <li *ngIf="isAdmin || isSuperAdmin">
                 <a href="#" [routerLink]="['createuser']" routerLinkActive="router-link-active" class="menu_icon creat_usrs">{{'CreateUsers'| translate}}</a>
             </li>
         </ul>
     
-        <!-- </nav> -->
     </div>
