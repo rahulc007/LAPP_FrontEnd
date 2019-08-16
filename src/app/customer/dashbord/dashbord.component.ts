@@ -28,16 +28,19 @@ export class DashbordComponent implements OnInit {
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],
-      newPwd: ['', [Validators.required, Validators.minLength(8)]],
+      newPwd: ['', [Validators.required, Validators.minLength(8), this.passwordOlNewMatcher.bind(this)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
-    },
-      { validator: this.checkPasswords });
+    });
 
   }
-  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
-    let pass = group.controls.oldPwd.value;
-    let newPwd = group.controls.newPwd.value;
-    return pass === newPwd ? { Same: true } : null
+  private passwordOlNewMatcher(control: FormControl) {
+    if (
+      this.resetForm &&
+      (control.value === this.resetForm.controls.oldPwd.value)
+    ) {
+      return { passwordMatch: true };
+    }
+    return null;
   }
   private passwordMatcher(control: FormControl) {
     if (

@@ -23,6 +23,8 @@ export class ForgotpasswordComponent implements OnInit {
   }
   forgot() {
     this.submitted = true;
+    this.successMsg = '';
+    this.errorMsg = '';
     if(this.forgotPassword.invalid) {
       return;
     }

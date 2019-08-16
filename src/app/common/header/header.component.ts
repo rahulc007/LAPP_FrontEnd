@@ -27,7 +27,10 @@ export class HeaderComponent implements OnInit {
               private config: NgbModalConfig, private modalService: NgbModal,
               private formBuilder: FormBuilder, private userService:UserService,
               private navService: NavToggleService
-              ) { }
+              ) { 
+                config.backdrop = 'static';
+                config.keyboard = false;
+              }
 
 
   ngOnInit() {

@@ -98,7 +98,8 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
   formSubmit() {
     this.submitted = true;
-
+    this.msg = '';
+    this.errorMsg = '';
     if (this.customerForm.invalid) {
       return;
     }

@@ -94,5 +94,6 @@
     "Yes":"Ja",
     "entertheemailid":"Geben Sie die E-Mail-ID ein",
     "enternewpassword":"Neues Passwort eingeben",
-    "enterconfirmpwd":"Geben Sie das Passwort ein"
+    "enterconfirmpwd":"Geben Sie das Passwort ein",
+    "browsefile":"Datei durchsuchen"
 }

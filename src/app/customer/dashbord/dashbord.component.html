@@ -73,9 +73,14 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div *ngIf="resetMessage != ''" [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
-            {{resetMessage}}
+        <div class="row">
+            <div class="col text-center">
+                <div *ngIf="resetMessage != ''" [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
+                    {{resetMessage}}
+                </div>
+            </div>
         </div>
+        
         <div class="modal-body">
             <div class="justify-content-center">
                 <form [formGroup]="resetForm">
@@ -97,7 +102,7 @@
                                 class="text-danger">
                                 <div *ngIf="resetForm.controls.newPwd.errors.required">{{'newpasswordrequired'| translate}}</div>
                                 <div *ngIf="resetForm.controls.newPwd.errors.minlength">{{'passwordlength'| translate}}</div>
-                                <div *ngIf="resetForm.hasError('Same')">{{'oldnewpasswordnotsame'| translate}}</div>
+                                <div *ngIf="passwordOlNewMatcher">{{'oldnewpasswordnotsame'| translate}}</div>
                             </div>
                             <!-- <div class="progress">
                         <div class="progress-bar bg-danger" [style.width.%]="passwordStrength"></div>

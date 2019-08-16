@@ -51,6 +51,8 @@ export class PasswordUpdateComponent implements OnInit {
 
   updatePassword() {
     this.submitted = true;
+    this.successMsg = '';
+    this.errorMsg = '';
     if (this.passwordUpdate.invalid) {
       return;
     } else {
