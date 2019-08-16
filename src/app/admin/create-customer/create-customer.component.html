@@ -85,7 +85,7 @@
                 <div class="col">
                     <div class="form-group custom_form-group">
                         <label for="">{{'countryName'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" [disabled]="isAdmin===1"
+                        <input type="text" class="form-control" disabled formControlName="country" [(ngModel)]="country" [disabled]="isAdmin===1"
                             (click)="countryclear()" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5"
                             max="200" required />
                         <datalist id="codes">
@@ -160,7 +160,7 @@
                 <div class="col">
                         <div class="form-group custom_form-group">
                         <label for="">{{'usertype'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="usertype" [(ngModel)]='usertype' (click)="clear()"
+                        <input type="text" class="form-control" disabled formControlName="usertype" [(ngModel)]='usertype' (click)="clear()"
                             placeholder="{{'usertype'| translate}}" list="usertypecodes" step="5" min="5" max="200" required />
                         <datalist id="usertypecodes">
                             <select class="scrollbar">
@@ -199,8 +199,8 @@
         <button class="btn btn-secondary" (click)="getPerticularUser(smailId)" [disabled]="!smailId">{{'search'| translate}}</button>
         </div>
         <div class="col-md-2 offset-md-6 text-center">
-                <button class="btn-orange"(click)="download()" [disabled]="!data || data.length <=0"><i class="fa fa-download"></i></button>
-            </div>
+                <a class="download_btn" *ngIf="data || data.length > 0" (click)="download()"></a>
+        </div>
         
         </div>
         

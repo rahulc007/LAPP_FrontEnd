@@ -1,1 +1,11 @@
-
+.download_btn{
+    background: url(/assets/images/menu_icons/download.png) no-repeat;
+    background-size: auto 70%;
+    background-position: 5px 5px;
+    padding: 16px;
+    float: left; 
+    color: orange;   
+  }
+.inpWidth input {
+  width: 300px;
+}

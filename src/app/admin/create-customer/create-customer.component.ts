@@ -56,7 +56,14 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    
+    this.usertypeData = UserType;
+    this.countryData = Countries;
+    this.userData = data;
+    this.loadUsers();
+   this.initial();
+
+  }
+  initial() {
     this.customerForm = this.formBuilder.group({
       fname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       lname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
@@ -70,12 +77,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       usertype: ['', Validators.required]
     });
     this.submitted = false;
-    this.usertypeData = UserType;
-    this.countryData = Countries;
-    this.userData = data;
-    this.loadUsers();
-   
-
   }
 
   loadUsers() {
@@ -89,7 +90,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
         this.isAdmin=0
 
-        const arraylist=[];
+       let arraylist=[];
         arraylist=response.userProfileList;
 
         arraylist.forEach(list=>{
@@ -133,7 +134,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
       this.objService.Get('getUserByCreated?emailId=' + emailId, this.params).subscribe(response => {
         
-        const arraylist=[];
+        let arraylist=[];
         arraylist=response.userProfileList;
 
         arraylist.forEach(list=>{
@@ -187,7 +188,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       
       if (datas.status === 200 && datas.successMessage != null) {
         this.loadUsers();
-        this.submitted = false;
+        this.initial();
         this.msg = datas.successMessage;
       }
       else if (datas.status === 200 && datas.errorMessage != null) {
