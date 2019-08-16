@@ -87,7 +87,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     if (objUserDetails.userType === userTypes.superAdmin) {
       this.customerForm.reset();
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
-
+        this.isAdmin=0
 
         const arraylist=[];
         arraylist=response.userProfileList;
