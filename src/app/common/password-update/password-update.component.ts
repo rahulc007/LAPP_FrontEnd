@@ -70,7 +70,7 @@ export class PasswordUpdateComponent implements OnInit {
           this.flag= true;
         }
         else if(res.statusMessage === 'error') {
-          this.errorMsg= "Fail to update Password";
+          this.errorMsg= "Failed to update Password";
           this.flag= false;
         }
       },

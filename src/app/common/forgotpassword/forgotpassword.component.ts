@@ -38,7 +38,7 @@ export class ForgotpasswordComponent implements OnInit {
        // this.router.navigate(['login/passwordupdate', this.forgotPassword.value.email]);
       }
       else if(datas.statusMessage === 'error'){
-        this.errorMsg = 'E-mail ID is not Registered';
+        this.errorMsg = 'Email Id is not registered';
       }
     })
   }
