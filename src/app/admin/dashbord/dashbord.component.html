@@ -7,7 +7,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col col-md-3 col-sm-12">
-                            <span [routerLink]="['upload']">
+                            <span [routerLink]="['/admin/upload']">
                                 <div class="cntnt_box box1">
                                     <div class="dashboard_icon upload"></div>
                                     <h5>{{'upload'| translate}}</h5>
@@ -15,7 +15,7 @@
                             </span>
                         </div>
                         <div class="col">
-                            <span [routerLink]="['neworders']">
+                            <span [routerLink]="['/admin/neworders']">
                                 <div class="cntnt_box box2">
                                     <div class="dashboard_icon new_order"></div>
                                     <h5>{{'neworders'| translate}}</h5>
@@ -23,7 +23,7 @@
                             </span>
                         </div>
                         <div class="col">
-                            <span [routerLink]="['updatedorders']">
+                            <span [routerLink]="['/admin/updatedorders']">
                                 <div class="cntnt_box box3">
                                     <div class="dashboard_icon updtd_order"></div>
                                     <h5>{{'updateorders'| translate}}</h5>
@@ -47,18 +47,18 @@
                             </div>
                         </div>
                         <div class="col">
-                            <span [routerLink]="['/admin/profile']">
                                 <div class="cntnt_box box2">
                                         <div class="dashboard_icon dwnload"></div>
                                     <h5>{{'DownloadExcel'| translate}}</h5>
                                 </div>
-                            </span>
                         </div>
                         <div class="col">
+                            <span [routerLink]="['/admin/profile']">
                             <div class="cntnt_box box3">
                                     <div class="dashboard_icon prfile"></div>
                                 <h5>{{'profile'| translate}}</h5>
                             </div>
+                            </span>
                         </div>
                         <div class="col">
                             <span [routerLink]="['/admin/createuser']">

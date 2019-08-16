@@ -1,66 +1,87 @@
+
 <div class="row">
-    <div class="col">
-        <div class="dashboard_cntnts">
-            <h2 class="page_heading dashboard">{{'dashboard'| translate}}</h2>
-
-            <div class="row">
-                <div class="col">
-                    <span [routerLink]="['/customer/neworders']">
-                        <div class="cntnt_box box1">
-                            <h5>{{'neworders'| translate}}</h5>
+        <div class="col">
+            <div class="dashboard_cntnts">
+                <h2 class="page_heading dashboard">{{'dashboard'| translate}}</h2>
+    
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <!-- <div class="col col-md-3 col-sm-12">
+                                <span [routerLink]="['/customer/upload']">
+                                    <div class="cntnt_box box1">
+                                        <div class="dashboard_icon upload"></div>
+                                        <h5>{{'upload'| translate}}</h5>
+                                    </div>
+                                </span>
+                            </div> -->
+                            <div class="col">
+                                <span [routerLink]="['/customer/neworders']">
+                                    <div class="cntnt_box box2">
+                                        <div class="dashboard_icon new_order"></div>
+                                        <h5>{{'neworders'| translate}}</h5>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col">
+                                <span [routerLink]="['/customer/updatedorders']">
+                                    <div class="cntnt_box box3">
+                                        <div class="dashboard_icon updtd_order"></div>
+                                        <h5>{{'updateorders'| translate}}</h5>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="col">
+                                <div class="cntnt_box box1">
+                                        <div class="dashboard_icon prcsd_order"></div>
+                                    <h5>{{'processedorders'| translate}}</h5>
+                                </div>
+                            </div>
                         </div>
-                    </span>
-                </div>
-                <div class="col">
-                    <div class="cntnt_box box2">
-                        <h5>{{'updateorders'| translate}}</h5>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="cntnt_box box3">
-                        <h5>{{'processedorders'| translate}}</h5>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="cntnt_box box1">
-                        <h5>{{'previousorders' | translate}}</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">&nbsp;</div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="cntnt_box box1">
-                        <h5>{{'DownloadExcel'| translate}}</h5>
-                    </div>
-                </div>
-                <div class="col">
-                    <span [routerLink]="['/customer/profile']">
-                        <div class="cntnt_box box2">
-                            <h5>{{'profile'| translate}}</h5>
+                        <div class="row">&nbsp;</div>
+    
+                        <div class="row">
+                            <div class="col">
+                                <div class="cntnt_box box1">
+                                        <div class="dashboard_icon prvs_order"></div>
+                                    <h5>{{'previousorders'| translate}}</h5>
+                                </div>
+                            </div>
+                            <div class="col">
+                                    <div class="cntnt_box box2">
+                                            <div class="dashboard_icon dwnload"></div>
+                                        <h5>{{'DownloadExcel'| translate}}</h5>
+                                    </div>
+                            </div>
+                            <div class="col">
+                                <span [routerLink]="['/customer/profile']">
+                                <div class="cntnt_box box3">
+                                        <div class="dashboard_icon prfile"></div>
+                                    <h5>{{'profile'| translate}}</h5>
+                                </div>
+                                </span>
+                            </div>
+                            <!-- <div class="col">
+                                <span [routerLink]="['/customer/createuser']">
+                                    <div class="cntnt_box box1">
+                                            <div class="dashboard_icon custmr_dtls"></div>
+                                        <h5>{{'CreateUsers'| translate}}</h5>
+                                    </div>
+                                </span>
+                            </div> -->
                         </div>
-                    </span>
-                </div>
-                <div class="col">
-                    <div class="cntnt_box box3">
-                        <h5>{{'Userapprovals'| translate}}</h5>
+                    </div>
+                    <div class="col-3">
+                        <img src="../../../assets/images/latest_products.jpg" alt="LAPP" class="img-fluid rounded" />
                     </div>
                 </div>
-                <div class="col">
-                    <div class="cntnt_box box1">
-                        <h5>{{'Createusers' | translate}}</h5>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <img src="../../../assets/images/latest_products.jpg" alt="LAPP" class="img-fluid rounded" />
-                </div>
+    
+    
+    
+    
             </div>
-
         </div>
     </div>
-</div>
 
 <div *ngIf="showResetPopUp" class="dashboard_reset_popup">
     <div class="popup_body">

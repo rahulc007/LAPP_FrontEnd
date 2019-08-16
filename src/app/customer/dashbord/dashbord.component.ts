@@ -73,7 +73,7 @@ export class DashbordComponent implements OnInit {
           this.resetMessage = 'Password Reset done successfully.';
 
         } else {
-          this.resetMessage = 'Something went wrong';
+          this.resetMessage = 'Please Provide Valid Password.';
           this.isErrorMessage = true;
         }
       },
