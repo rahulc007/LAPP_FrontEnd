@@ -87,10 +87,10 @@ private passwordOldNewMatcher(control: FormControl) {
           this.resetMessage = 'Reset done successfully.'
           this.resetForm.reset();
           this.submitted = false;
-          this.strText = "";
+          this.strText = '';
         } else {
           this.isErrorMessage = true;
-          this.resetMessage = 'Something went wrong.'
+          this.resetMessage = 'Please Provide Valid Password.'
         }
       },
         error => {
