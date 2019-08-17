@@ -97,5 +97,7 @@
     "enterconfirmpwd":"Geben Sie das Passwort ein",
     "browsefile":"Datei durchsuchen",
     "updateusers":"Benutzer aktualisieren",
-    "update": "aktualisieren"
+    "update": "aktualisieren",
+    "updatepassword":"Passwort erneuern",
+    "successMessage": "Benutzer erfolgreich erstellt"
 }

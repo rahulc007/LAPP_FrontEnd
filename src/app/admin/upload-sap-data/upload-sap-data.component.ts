@@ -51,6 +51,9 @@ export class UploadSapDataComponent implements OnInit {
 
       if (data.status == 200) {
         this.msg = "show";
+        setTimeout(()=> {
+          this.msg ='';
+     }, 3000);
         this.getUploadedData();
       } else if (data.status == 500) {
         this.errorMsg = "show";

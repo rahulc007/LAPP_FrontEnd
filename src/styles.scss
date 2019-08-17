@@ -99,6 +99,9 @@ input::-webkit-calendar-picker-indicator {
 .h-80{
   height: 80%!important;
 }
+.dropdown-item.active, .dropdown-item:active{
+  background:none;
+}
 /* common styles end */
 
 /* form styles start*/

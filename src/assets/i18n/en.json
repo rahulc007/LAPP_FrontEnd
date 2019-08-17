@@ -102,5 +102,8 @@
     "enterconfirmpwd":"Conform Password",
     "browsefile":"Browse File",
     "updateusers":"Update Users",
-    "update": "Update"
+    "update":"Update",
+    "updatepassword":"Update Password",
+    "successMessage": "User Created Successfully"
+    
 }
