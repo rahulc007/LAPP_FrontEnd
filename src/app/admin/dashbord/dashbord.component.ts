@@ -6,7 +6,7 @@ import { PasswordStrengthService } from '../../common/password-strength/password
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
-  styleUrls: ['./dashbord.component.css']
+  styleUrls: ['./dashbord.component.scss']
 })
 export class DashbordComponent implements OnInit {
   showResetPopUp: boolean = false;

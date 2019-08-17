@@ -18,6 +18,7 @@ import {NgAutoCompleteModule} from 'ng-auto-complete';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { RootSharedModule } from './common/root-shared.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,7 +56,8 @@ export function createTranslateLoader(http: HttpClient) {
       }
   })
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {provide: LocationStrategy, useClass: HashLocationStrategy}],
 
   bootstrap: [AppComponent]
 })
