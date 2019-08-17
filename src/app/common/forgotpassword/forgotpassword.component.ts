@@ -32,10 +32,8 @@ export class ForgotpasswordComponent implements OnInit {
     let params={"emailId":this.forgotPassword.value.email}
 
     this.objService.Post('forgotPassword',params).subscribe(datas => {
-      console.log('data', datas);
       if(datas.status === 200 && datas.statusMessage === 'success'){
         this.successMsg='Password link sent to your registered E-mail ID Successfully !';
-       // this.router.navigate(['login/passwordupdate', this.forgotPassword.value.email]);
       }
       else if(datas.statusMessage === 'error'){
         this.errorMsg = 'Email Id is not registered';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Countries } from '../../../../assets/data/countrydetails';
-import {LappRestService  } from '../../../core/rest-service/LappRestService';
+import { LappRestService } from '../../../core/rest-service/LappRestService';
 @Component({
   selector: 'app-customer-profile',
   templateUrl: './customer-profile.component.html',
@@ -21,6 +21,8 @@ export class CustomerProfileComponent implements OnInit {
   citiesData: any[] = [];
   param: any;
   profileData: any[] = [];
+  msg: any;
+  errorMsg: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class CustomerProfileComponent implements OnInit {
     this.countryData = Countries;
     this.loadUsers();
   }
-  initialForm() {    
+  initialForm() {
     this.profileForm = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
@@ -43,11 +45,9 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   loadUsers() {
-    const userEmail=localStorage.getItem('username');
-    this.objService.Get('getUserProfile?emailId='+ userEmail , this.param).subscribe(response => {
-      console.log("response", response);
-     this.profileData = response.userProfileEntity;
-     console.log("profileData",this.profileData)
+    const userEmail = localStorage.getItem('username');
+    this.objService.Get('getUserProfile?emailId=' + userEmail, this.param).subscribe(response => {
+      this.profileData = response.userProfileEntity;
     })
   }
   getState(event) {
@@ -66,10 +66,9 @@ export class CustomerProfileComponent implements OnInit {
   }
   continue() {
     this.submitted = true;
-    if (this.profileForm.invalid) {  
+    if (this.profileForm.invalid) {
       return;
     }
-    console.log(this.profileForm.value)
     let params = {
       "pid": this.profileData['pid'],
       "emailId": this.profileForm.value.uemailId,
@@ -79,15 +78,20 @@ export class CustomerProfileComponent implements OnInit {
       "city": this.profileForm.value.city,
       "phonenumber": this.profileForm.value.phonenumber
     }
-    console.log("profile params===>", params);
 
     this.objService.Put('updateProfile', params).subscribe(res => {
       console.log('Response Update Profile', res)
+      if (res.status && res.statusMessage === 'success') {
+        this.msg=res.successMessage;
+      }
+      else if(res.errorMessage !== null) {
+        this.errorMsg= res. errorMessage;
+      }
 
     })
   }
-  
-  reset() {  
+
+  reset() {
     this.initialForm();
   }
 

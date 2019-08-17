@@ -71,11 +71,11 @@ export class DashbordComponent implements OnInit {
           this.resetForm.reset();
           this.submitted = false;
           this.resetMessage = 'Password Reset done successfully.';
-          this.strText='';
+          this.strText = '';
         } else {
           this.resetMessage = 'Please Provide Valid Password.';
           this.isErrorMessage = true;
-          this.strText='';
+          this.strText = '';
         }
       },
         error => {

@@ -12,7 +12,7 @@
     "Passwordrequired":"Passwort Erforderlich",
     "passwordminchar":"Passwort mindest 6 Zeichen",
     "Select_Country":"Bitte Land auswählen",
-    "invalidlogin":"Ungültig Nutzername / Passwort /  Land ",
+    "invalidlogin":"Ungültige Anmeldeinformationen ",
     "forgotpassword": "Vergessen Passwort",
     "moderntechnologies":"moderne Technologien",
     "foramodernworld":"für eine moderne Welt.",
@@ -95,5 +95,7 @@
     "entertheemailid":"Geben Sie die E-Mail-ID ein",
     "enternewpassword":"Neues Passwort eingeben",
     "enterconfirmpwd":"Geben Sie das Passwort ein",
-    "browsefile":"Datei durchsuchen"
+    "browsefile":"Datei durchsuchen",
+    "updateusers":"Benutzer aktualisieren",
+    "update": "aktualisieren"
 }

@@ -24,9 +24,9 @@ export class ResetPasswordComponent implements OnInit {
   resetMessage: string = '';
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private config: NgbModalConfig, private modalService: NgbModal, private ps: PasswordStrengthService) {
-      config.backdrop = 'static';
-      config.keyboard = false;
-     }
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   d(template) {
     this.close.emit(template);
@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
     });
 
   }
- 
+
   private progressValue(control: FormControl) {
     if (this.resetForm &&
       (control.value.length != 0)) {
@@ -59,15 +59,15 @@ export class ResetPasswordComponent implements OnInit {
     }
     return null;
   }
-private passwordOldNewMatcher(control: FormControl) {
-  if (
-    this.resetForm &&
-    (control.value === this.resetForm.controls.oldPwd.value)
-  ) {
-    return { passwordMatch: true };
+  private passwordOldNewMatcher(control: FormControl) {
+    if (
+      this.resetForm &&
+      (control.value === this.resetForm.controls.oldPwd.value)
+    ) {
+      return { passwordMatch: true };
+    }
+    return null;
   }
-  return null;
-}
   resetPassword() {
     this.submitted = true;
     if (this.resetForm.invalid) {
@@ -102,15 +102,10 @@ private passwordOldNewMatcher(control: FormControl) {
     this.modalService.dismissAll();
   }
 
-
   scorePassword() {
     let objData = this.ps.scorePassword(this.resetForm.value.newPwd);
     this.strColor = objData.strColor;
     this.strText = objData.strText;
   }
-
-
-
-
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {LappRestService  } from '../../core/rest-service/LappRestService';
-import {Router,ActivatedRoute} from '@angular/router';
+import { LappRestService } from '../../core/rest-service/LappRestService';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-password-update',
@@ -12,35 +12,28 @@ export class PasswordUpdateComponent implements OnInit {
   passwordUpdate: FormGroup;
   submitted: boolean = false;
   errorMsg: string;
-  emailId:any;
+  emailId: any;
   successMsg: string;
-  flag: boolean= false;
+  flag: boolean = false;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService, private route: ActivatedRoute) { }
 
 
   ngOnInit() {
     this.passwordUpdate = this.formBuilder.group({
-      newPwd: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60)] ],
-      confirmPwd: ['', [Validators.required, Validators.minLength(6), this.passwordMatcher.bind(this)] ],
+      newPwd: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60)]],
+      confirmPwd: ['', [Validators.required, Validators.minLength(6), this.passwordMatcher.bind(this)]],
     });
     this.submitted = false;
 
-    // this.route.paramMap.subscribe(params=>{
-    //   this.emailId = params.get('emailId');
-    // });
-
-
-    this.route.queryParams.subscribe(params=>{
+    this.route.queryParams.subscribe(params => {
       this.emailId = params['emailId'];
     })
 
-
-    console.log("email Id ===>", this.emailId)
   }
 
   private passwordMatcher(control: FormControl) {
     if (
-      this.passwordUpdate  &&
+      this.passwordUpdate &&
       (control.value !== this.passwordUpdate.controls.newPwd.value)
     ) {
       return { passwordNotMatch: true };
@@ -56,28 +49,28 @@ export class PasswordUpdateComponent implements OnInit {
     if (this.passwordUpdate.invalid) {
       return;
     } else {
-      console.log(this.passwordUpdate.value)
+
       let objPayload = {
-        "emailId":  this.emailId ,
+        "emailId": this.emailId,
         "password": btoa(this.passwordUpdate.controls.newPwd.value),
-       
+
       }
 
       this.objService.Post('updatePwd', objPayload).subscribe(res => {
-        console.log("reset response", res);
-        if(res.status === 200 && res.statusMessage==='success') {
-          this.successMsg="Password Updated Successfully";
-          this.flag= true;
+
+        if (res.status === 200 && res.statusMessage === 'success') {
+          this.successMsg = "Password Updated Successfully";
+          this.flag = true;
         }
-        else if(res.statusMessage === 'error') {
-          this.errorMsg= "Failed to update Password";
-          this.flag= false;
+        else if (res.statusMessage === 'error') {
+          this.errorMsg = "Failed to update Password";
+          this.flag = false;
         }
       },
         error => {
         });
     }
-  
 
-}
+
+  }
 }

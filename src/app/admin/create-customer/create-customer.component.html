@@ -97,12 +97,12 @@
                 <div class="col">
                     <div class="form-group custom_form-group">
                         <label for="">{{'countryName'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" [disabled]="isAdmin===1"
+                        <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" [attr.disabled]="isAdmin ? true :null"
                             (click)="countryclear()" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5"
                             max="200" required />
                         <datalist id="codes">
-                            <select class="scrollbar" [disabled]="isAdmin===1">
-                                <option *ngFor="let item of countryData" [value]="item.CountryName" [disabled]="isAdmin===1"></option>
+                            <select class="scrollbar">
+                                <option *ngFor="let item of countryData" [value]="item.CountryName"></option>
                             </select>
                         </datalist>
                         <div *ngIf="customerForm.controls.country.invalid && (customerForm.controls.country.dirty || customerForm.controls.country.touched)"
@@ -207,10 +207,10 @@
     <div class="col-md-4 pt-1 inpWidth">
             <input type="text" [(ngModel)]="smailId" class="form-control" (keyup)="search($event)" placeholder="{{'entertheemailid'| translate}}">
     </div>
-    <div class="col-md-2 pl-0">
+    <div class="col-md-2 pl-0 search">
         <button class="btn btn-secondary" (click)="getPerticularUser(smailId)" [disabled]="!smailId">{{'search'| translate}}</button>
         </div>
-        <div class="col-md-2 offset-md-4 text-center">
+        <div class="col-md-1 offset-md-5 text-center">
                 <a class="download_btn" *ngIf="data || data.length > 0" (click)="download()"></a>
         </div>
         

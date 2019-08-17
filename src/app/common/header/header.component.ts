@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core';
-import {Routes, Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import {UserService} from '../../core/services/user.service';
+import { UserService } from '../../core/services/user.service';
 import { NavToggleService } from '../../common/nav-toggle-service/navtoggle.service';
 
 @Component({
@@ -14,8 +14,8 @@ import { NavToggleService } from '../../common/nav-toggle-service/navtoggle.serv
 export class HeaderComponent implements OnInit {
   closeResult: string;
 
-  d(e){
-      this.closeResult = e;
+  d(e) {
+    this.closeResult = e;
   }
 
   resetForm: FormGroup;
@@ -24,17 +24,17 @@ export class HeaderComponent implements OnInit {
   usersId: string;
   userType: any;
   constructor(private router: Router, private route: ActivatedRoute,
-              private config: NgbModalConfig, private modalService: NgbModal,
-              private formBuilder: FormBuilder, private userService:UserService,
-              private navService: NavToggleService
-              ) { 
-                config.backdrop = 'static';
-                config.keyboard = false;
-              }
+    private config: NgbModalConfig, private modalService: NgbModal,
+    private formBuilder: FormBuilder, private userService: UserService,
+    private navService: NavToggleService
+  ) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
 
   ngOnInit() {
-    this.usersId= localStorage.getItem('username');
+    this.usersId = localStorage.getItem('username');
     this.userType = localStorage.getItem('userType');
   }
 
@@ -42,9 +42,9 @@ export class HeaderComponent implements OnInit {
     this.userService.logout();
   }
   resetPwdOpen(resetPWD) {
-      this.modalService.open(resetPWD);
+    this.modalService.open(resetPWD);
   }
- 
+
   resetPassword() {
     this.submitted = true;
     if (this.resetForm.invalid) {
@@ -54,17 +54,9 @@ export class HeaderComponent implements OnInit {
     console.log(this.resetForm.value);
   }
 
-  toggleNav(){
+  toggleNav() {
     this.navService.toggleSideBar();
   }
-  // openProfile() {
-  //   if(this.userType === "1" || this.userType === "2") {
-  //     this.router.navigate(['admin/dashbord/profile']);
-  //   }
-  //     else if(this.userType === "3") {
-  //       this.router.navigate(['customer/dashbord/profile']);
-  //   }
-  // }
 
 }
 

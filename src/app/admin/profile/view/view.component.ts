@@ -19,6 +19,8 @@ export class ViewComponent implements OnInit {
   stateData: any[] = [];
   citiesData: any[] = [];
   userTypeValue: any;
+  msg: any;
+  errorMsg: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
 
@@ -35,9 +37,9 @@ export class ViewComponent implements OnInit {
       // referncecode: ['', Validators.required]
     });
     this.countryData = Countries;
-    this.userTypeValue= localStorage.getItem('userType');
-    console.log("User Type",this.userTypeValue)
-    if(this.userTypeValue !== "1") {
+    this.userTypeValue = localStorage.getItem('userType');
+    console.log("User Type", this.userTypeValue)
+    if (this.userTypeValue !== "1") {
       this.loadUsers();
     }
   }
@@ -61,10 +63,11 @@ export class ViewComponent implements OnInit {
     let cityNames = this.stateData.find(state => state.StateName === this.profileData['state']);
     this.citiesData = cityNames.Cities;
   }
-  
+
   continue() {
     this.submitted = true;
-
+    this.msg = '';
+    this.errorMsg = ''
     // stop here if form is invalid
     if (this.profileForm.invalid) {
       return;
@@ -79,8 +82,14 @@ export class ViewComponent implements OnInit {
       "city": this.profileForm.value.city,
       "phonenumber": this.profileForm.value.phonenumber
     }
-    
-   this.objService.Put('updateProfile', params).subscribe(res => {
+
+    this.objService.Put('updateProfile', params).subscribe(res => {
+      if (res.status && res.statusMessage === 'success') {
+        this.msg = res.successMessage;
+      }
+      else if (res.errorMessage !== null) {
+        this.errorMsg = res.errorMessage;
+      }
       this.loadUsers();
 
     })

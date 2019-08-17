@@ -12,7 +12,7 @@
     "Passwordrequired":"Password  is Required",
     "passwordminchar":"Password minimun 6 Characters",
     "Select_Country":"Please Select Country",
-    "invalidlogin":"Invalid Id / Password / Country",
+    "invalidlogin":"Invalid Credentials",
     "forgotpassword": "Forgot password",
     "moderntechnologies":"Modern technologies",
     "foramodernworld":"for a modern world.",
@@ -99,5 +99,6 @@
     "enternewpassword":"Enter New Password",
     "enterconfirmpwd":"Conform Password",
     "browsefile":"Browse File",
-    "updateusers":"Update Users"
+    "updateusers":"Update Users",
+    "update": "Update"
 }

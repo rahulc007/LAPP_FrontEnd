@@ -5,9 +5,9 @@ import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-tabl
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
 import { LappRestService } from '../../core/rest-service/LappRestService';
-import {userTypes} from '../../common/constants/constants';
+import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
-//const URL= AppConfig.endpoints.uploadApi;
+
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
@@ -38,21 +38,17 @@ export class UploadSapDataComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; 
+    this.uploader.onAfterAddingFile = (file) => {
+    file.withCredentials = false;
       this.msg = '';
       this.errorMsg = '';
     };
-    // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-    //      console.log('ImageUpload:uploaded:', item, status, response);
-    //     //  this.uploadFile.nativeElement.value = '';
-    //     this.getUploadedData();
-    //  };
+
     this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
       this.msg = '';
       this.errorMsg = '';
       let data = JSON.parse(response);
-      // console.log('ImageUpload:uploaded===:', item,"===", status, "===", response, "===", data.status);
-      //  this.uploadFile.nativeElement.value = '';
+
       if (data.status == 200) {
         this.msg = "show";
         this.getUploadedData();
@@ -105,7 +101,6 @@ export class UploadSapDataComponent implements OnInit {
 
   downloadfile() {
 
-    // this.exportToCSV();
     const emailId = localStorage.getItem('username');
 
     window.location.href = 'http://3.17.182.133:8090/downloadSAPData?emailId=' + emailId;
@@ -118,18 +113,13 @@ export class UploadSapDataComponent implements OnInit {
 
   }
 
-
-
   clearSelectedPicture() {
 
   }
 
   removeFile(item) {
     this.uploader.removeFromQueue(item);
-    //this.clearSelectedPicture();
+
   }
-
-
-
 
 }
