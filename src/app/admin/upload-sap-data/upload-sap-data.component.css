@@ -41,7 +41,7 @@
       }
   
       .upload_btn{
-        background: url(/assets/images/menu_icons/upload_hover.png) no-repeat;
+        background: url('../../../assets/images/menu_icons/upload_hover.png') no-repeat;
         background-size: auto 70%;
         background-position: 5px 5px;
         padding: 16px;
