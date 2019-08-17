@@ -86,14 +86,14 @@
 <div *ngIf="showResetPopUp" class="dashboard_reset_popup">
     <div class="popup_body">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">{{'resetpassword'| translate}}</h4>
+            <h4 class="modal-title" id="modal-basic-title">{{'updatepassword'| translate}}</h4>
             <button *ngIf="passwordReseted" type="button" class="close" aria-label="Close" (click)="closePopUp()">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="row">
             <div class="col text-center">
-                <div *ngIf="resetMessage != ''" [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
+                <div *ngIf="resetMessage != ''" class="p-5"  [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
                     {{resetMessage}}
                 </div>
             </div>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center mt-3">
-                            <button class="btn btn-warning" [disabled]="resetForm.pristine || resetForm.invalid" (click)="resetPassword()"> {{'resetpassword'| translate}}</button>
+                            <button class="btn btn-warning" [disabled]="resetForm.pristine || resetForm.invalid" (click)="resetPassword()"> {{'updatepassword'| translate}}</button>
                         </div>
                     </div>
                 </form>
