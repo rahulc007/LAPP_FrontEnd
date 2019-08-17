@@ -16,16 +16,16 @@ const basePath = 'admin';
 const AdminRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent, canActivate: [AuthGuard],
-    children: [{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashbordComponent, canActivate: [AuthGuard] },
-    { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard] },
-    { path: 'neworders', component: NewOrdersComponent, canActivate: [AuthGuard] },
-    { path: 'newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard] },
-    { path: 'updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard] },
-    { path: 'profile', component: ViewComponent, canActivate: [AuthGuard] },
-    { path: 'customerdetails', component: CustomerDetailsComponent, data: {}, canActivate: [AuthGuard] },
-    { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard] }]
+    component: MainpageComponent, canActivate: [AuthGuard],data:{userType:'ADMIN'},
+    children: [{ path: '', redirectTo: 'dashboard', pathMatch: 'full', data:{userType:'ADMIN'} },
+    { path: 'dashboard', component: DashbordComponent, canActivate: [AuthGuard],data:{userType:'ADMIN'} },
+    { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'neworders', component: NewOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'profile', component: ViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'customerdetails', component: CustomerDetailsComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} }]
 
   },
 

@@ -14,14 +14,14 @@ const basePath = 'customer';
 const CustomerRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent, canActivate: [AuthGuard],
-     children: [ { path: '', redirectTo: 'dashboard',pathMatch: 'full' },
-     { path: 'dashboard', component: DashbordComponent },
-     { path: 'neworders', component: ViewComponent },
-     { path: 'neworders/orderedit/:id', component: EditComponent},
-     { path: 'neworders/orderedit/editlegs/:id', component: LegseditComponent},
-     { path: 'neworders/orderedit/editlegs/:id/legstable', component: HandsontableComponent},
-     { path: 'profile', component: CustomerProfileComponent}
+    component: MainpageComponent, canActivate: [AuthGuard], data:{userType:'CUSTOMER'},
+     children: [ { path: '', redirectTo: 'dashboard',pathMatch: 'full', data:{userType:'CUSTOMER'} },
+     { path: 'dashboard', component: DashbordComponent, data:{userType:'CUSTOMER'} },
+     { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
+     { path: 'neworders/orderedit/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
+     { path: 'neworders/orderedit/editlegs/:id', component: LegseditComponent, data:{userType:'CUSTOMER'}},
+     { path: 'neworders/orderedit/editlegs/:id/legstable', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
+     { path: 'profile', component: CustomerProfileComponent, data:{userType:'CUSTOMER'}}
     ]
     
   },
