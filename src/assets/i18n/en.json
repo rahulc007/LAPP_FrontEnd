@@ -98,5 +98,6 @@
     "entertheemailid":"Enter Email Id",
     "enternewpassword":"Enter New Password",
     "enterconfirmpwd":"Conform Password",
-    "browsefile":"Browse File"
+    "browsefile":"Browse File",
+    "updateusers":"Update Users"
 }

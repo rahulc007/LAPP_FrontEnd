@@ -32,6 +32,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   usertypeData: any[] = [];
   countryData: any[] = [];
   citiesData: any[] = [];
+  editData:any;
   usertype: any;
   state: any;
   city: any;
@@ -352,6 +353,10 @@ selectedReset() {
   {
 
     this.editflag =1;
+    
+    this.msg="";
+    this.errorMsg="";
+
     this.firstname = row.firstname
     this.lastname = row.lastname
     this.emailId = row.uemailId
@@ -360,6 +365,7 @@ selectedReset() {
     this.state = row.state
     this.city = row.city
     this.phone = row.phonenumber
+    this.editData = row;
 
     let usercode = this.usertypeData.find(usr => usr.value === row.userType);
 
@@ -369,23 +375,37 @@ selectedReset() {
   create()
   {
     this.editflag =0;
+    this.msg="";
+    this.errorMsg="";
     this.customerForm.reset();
   }
 
-  update()
+  updateUser()
   {
+
+    console.log(this.editData);
     let params={
+      "pid":this.editData.pid,
+      "emailId": this.emailId,
       "firstname": this.firstname,
       "lastname": this.lastname,
-      "emailId": this.emailId,
-      "uid": this.uid,
-      "country": this.country,
       "state": this.state,
       "city": this.city,
-      "phone": this.phone,
-      "usertype": this.usertype
+      "phonenumber": this.phone
     }
 
-    this.objService.Put('updateUsers', params).subscribe(res=>{})
+    this.objService.Put('updateProfile', params).subscribe(res=>{
+
+      if(res.status==200 && res.statusMessage == "success")
+      {
+        
+      this.loadUsers();
+      this.msg = res.successMessage;
+      }
+      else if(res.status==200 && res.statusMessage == "error"){
+          
+      }
+
+    })
   }
 }
