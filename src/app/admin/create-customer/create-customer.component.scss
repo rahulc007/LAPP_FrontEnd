@@ -1,14 +1,16 @@
 .download_btn{
-    background: url(/assets/images/menu_icons/download.png) no-repeat;
+    background: url('../../../assets/images/menu_icons/download.png') no-repeat #f58122;
     background-size: auto 70%;
-    background-position: 5px 5px;
-    padding: 16px;
-    float: left; 
-    color: orange;   
+    background-position: 10px 5px;
+    padding: 4px 15px 4px 35px;
+    float: left;
   }
 .inpWidth input {
   width: 300px;
 }
 .search {
   margin-left: -40px;
+}
+#search_bar input{
+width: 250px;
 }

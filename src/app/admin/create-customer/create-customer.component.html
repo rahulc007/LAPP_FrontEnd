@@ -1,262 +1,280 @@
 <div class="row">
-        <div class="col" *ngIf="editflag===0">
-            <h2 class="page_heading dashboard">{{'Createusers'| translate}}</h2>
-            <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
-                <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-                <span id="alertMsg">{{msg}}</span>
-            </div>
-            <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
-                <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-                <span id="alertErrMsg">{{errorMsg}}</span>
-            </div>
+    <div class="col" *ngIf="editflag===0">
+        <h2 class="page_heading dashboard">{{'Createusers'| translate}}</h2>
+        <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+            <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+            <span id="alertMsg">{{msg}}</span>
         </div>
-        <div class="col" *ngIf="editflag===1">
-            <h2 class="page_heading dashboard">{{'updateusers'| translate}}</h2>
-            <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
-                <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-                <span id="alertMsg">{{msg}}</span>
-            </div>
-            <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
-                <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-                <span id="alertErrMsg">{{errorMsg}}</span>
-            </div>
+        <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+            <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+            <span id="alertErrMsg">{{errorMsg}}</span>
         </div>
     </div>
-    
-    
-    
-    <form [formGroup]="customerForm" #form="ngForm">
-    
-            <div class="row">
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'firstname'| translate}}</label>
-                        <input type="text" id="" placeholder="{{'firstname'| translate}}" formControlName="fname"  [(ngModel)]="firstname"  maxlength="60"
-                            class="form-control" required />
-                        <div *ngIf="customerForm.controls.fname.invalid && (customerForm.controls.fname.dirty || customerForm.controls.fname.touched)"
-                            class="text-danger">
-                            <div *ngIf="customerForm.controls.fname.errors.required" class="custom">
-                                {{'firstnamerequired'| translate}}
-                            </div>
-                            <div *ngIf="customerForm.controls.fname.errors.pattern" class="custom">
-                                    {{'characters'| translate}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'lastname'| translate}}</label>
-                        <input type="text" class="form-control" id="" placeholder="{{'lastname'| translate}}" formControlName="lname" [(ngModel)]="lastname"
-                            maxlength="60" required />
-                        <div *ngIf="customerForm.controls.lname.invalid && (customerForm.controls.lname.dirty || customerForm.controls.lname.touched)"
-                            class="text-danger">
-                            <div *ngIf="customerForm.controls.lname.errors.required" class="custom">
-                                {{'lastnamerequired'| translate}}
-                            </div>
-                            <div *ngIf="customerForm.controls.lname.errors.pattern" class="custom">
-                                {{'characters'| translate}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row">
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'emailid'| translate}}</label>
-                        <input placeholder="{{'emailid'| translate}}" formControlName="email" class="form-control" [(ngModel)]="emailId"  maxlength="60" type="text" [attr.disabled]="editflag?true:null"
-                            required />
-                        <div *ngIf="customerForm.controls.email.invalid && (customerForm.controls.email.dirty || customerForm.controls.email.touched)"
-                            class="text-danger">
-                            <div *ngIf="customerForm.controls.email.errors.required" class="custom">
-                                {{'emailrequired'| translate}}
-                            </div>
-                            <div *ngIf="customerForm.controls.email.errors.email" class="custom">{{'emailvalid'| translate}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'userid'| translate}}</label>
-                        <input placeholder="{{'userid'| translate}}" type="text" class="form-control" maxlength="60"  [(ngModel)]="uid"  formControlName="userid" [attr.disabled]="editflag?true:null"
-                            required />
-                        <div *ngIf="customerForm.controls.userid.invalid && (customerForm.controls.userid.dirty || customerForm.controls.userid.touched)"
-                            class="text-danger">
-                            <div *ngIf="customerForm.controls.userid.errors.required" class="custom">
-                                {{'useridrequired'| translate}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="row">
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'countryName'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" [attr.disabled]="isAdmin ? true :null"
-                            (click)="countryclear()" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5"
-                            max="200" required />
-                        <datalist id="codes">
-                            <select class="scrollbar">
-                                <option *ngFor="let item of countryData" [value]="item.CountryName"></option>
-                            </select>
-                        </datalist>
-                        <div *ngIf="customerForm.controls.country.invalid && (customerForm.controls.country.dirty || customerForm.controls.country.touched)"
-                        class="text-danger">
-                        <div *ngIf="customerForm.controls.country.errors.required" class="custom">
-                            {{'selectcountry'| translate}}
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'state'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="State" [(ngModel)]="state"
-                            (click)="stateClear()" (change)="getCities()" placeholder="{{'state'| translate}}" list="statecodes" step="5" min="5"
-                            max="200" required />
-                        <datalist id="statecodes">
-                            <select class="scrollbar">
-                                <option *ngFor="let item of stateData" [value]="item.StateName"></option>
-                            </select>
-                        </datalist>
-                        <div *ngIf="customerForm.controls.State.invalid && (customerForm.controls.State.dirty || customerForm.controls.State.touched)"
-                        class="text-danger">
-                        <div *ngIf="customerForm.controls.State.errors.required" class="custom">
-                            {{'selectstate'| translate}}
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group custom_form-group">
-                        <label for="">{{'city'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" (click)="cityClear()"
-                            placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200"   required />
-                        <datalist id="citycodes">
-                            <select class="scrollbar">
-                                <option *ngFor="let item of citiesData" [value]="item"></option>
-                            </select>
-                        </datalist>
-                        <div *ngIf="customerForm.controls.City.invalid && (customerForm.controls.City.dirty || customerForm.controls.City.touched)"
-                        class="text-danger">
-                        <div *ngIf="customerForm.controls.City.errors.required" class="custom">
-                            {{'selectcity'| translate}}
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        
-               
-            <div class="row">
-                <div class="col">
-                        <div class="form-group custom_form-group">
-                                <label for="">{{'phone'| translate}}</label>
-                                <input placeholder="{{'phone'| translate}}" type="text" [(ngModel)]="phone" class="form-control" maxlength="12" formControlName="phone" required />
-                                <div *ngIf="customerForm.controls.phone.invalid && (customerForm.controls.phone.dirty || customerForm.controls.phone.touched)"
-                                    class="text-danger">
-                                    <div *ngIf="customerForm.controls.phone.errors.required" class="custom">
-                                        {{'phonenumberrequired'| translate}}</div>
-                                    <div *ngIf="customerForm.controls.phone.errors.pattern" class="custom">
-                                        {{'phonenumbervalid' | translate}}</div>
-                                    <div *ngIf="customerForm.controls.phone.errors.minlength" class="custom">
-                                        {{'phonenumberdigit'| translate}}</div>
-                                </div>
-                            </div>
-                </div>
-                <div class="col">
-                        <div class="form-group custom_form-group">
-                        <label for="">{{'usertype'| translate}}</label>
-                        <input type="text" class="form-control" formControlName="usertype" [(ngModel)]='usertype' (click)="clear()" [attr.disabled]="editflag?true:null"
-                            placeholder="{{'usertype'| translate}}" list="usertypecodes" step="5" min="5" max="200" required />
-                        <datalist id="usertypecodes">
-                            <select class="scrollbar">
-                                <option *ngFor="let item of usertypeData" [value]="item.type"></option>
-                            </select>
-                        </datalist>
-                        <div *ngIf="customerForm.controls.usertype.invalid && (customerForm.controls.usertype.dirty || customerForm.controls.usertype.touched)"
-                            class="text-danger">
-                            <div *ngIf="customerForm.controls.usertype.errors.required" class="custom">
-                                {{'usertyperequired'| translate}}</div>
-                        </div>
-                        </div>
-                </div>
-            </div>
-        
-        
-            <div id="createUser" class="row">
-                <div class="col" *ngIf="editflag===0">
-                    <button (click)="formSubmit()" [disabled]="customerForm.pristine || customerForm.invalid" class="btn btn-orange">{{'submit'| translate}}</button>
-                </div>
-                <div class="col-md-2" *ngIf="editflag===1">
-                    <button (click)="updateUser()" class="btn btn-orange">{{'update'| translate}}</button>
-                </div>
-                <div class="col-md-2" *ngIf="editflag===1">
-                    <button (click)="create()" class="btn btn-orange">{{'create'| translate}}</button>
-                </div>
-            </div>
-        
-        </form>
-    
-        <div class="row mt-3">
-    <div class="col-md-4 pt-1 inpWidth">
-            <input type="text" [(ngModel)]="smailId" class="form-control" (keyup)="search($event)" placeholder="{{'entertheemailid'| translate}}">
+    <div class="col" *ngIf="editflag===1">
+        <h2 class="page_heading dashboard">{{'updateusers'| translate}}</h2>
+        <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+            <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+            <span id="alertMsg">{{msg}}</span>
+        </div>
+        <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+            <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+            <span id="alertErrMsg">{{errorMsg}}</span>
+        </div>
     </div>
-    <div class="col-md-2 pl-0 search">
-        <button class="btn btn-secondary" (click)="getPerticularUser(smailId)" [disabled]="!smailId">{{'search'| translate}}</button>
-        </div>
-        <div class="col-md-1 offset-md-5 text-center">
-                <a class="download_btn" *ngIf="data || data.length > 0" (click)="download()"></a>
-        </div>
-        
-        </div>
-        
-        <div class="row">
-                <div class="col">
-                    <div class="text-danger" *ngIf="searcherror">
-                        {{searcherror}}
-                    </div>
-                </div>
-        </div>
-    
+</div>
+
+
+
+<form [formGroup]="customerForm" #form="ngForm">
+
     <div class="row">
         <div class="col">
-            <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
-            </app-ngx-easy-table>
-             <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->
+            <div class="form-group custom_form-group">
+                <label for="">{{'firstname'| translate}}</label>
+                <input type="text" id="" placeholder="{{'firstname'| translate}}" formControlName="fname"
+                    [(ngModel)]="firstname" maxlength="60" class="form-control" required />
+                <div *ngIf="customerForm.controls.fname.invalid && (customerForm.controls.fname.dirty || customerForm.controls.fname.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.fname.errors.required" class="custom">
+                        {{'firstnamerequired'| translate}}
+                    </div>
+                    <div *ngIf="customerForm.controls.fname.errors.pattern" class="custom">
+                        {{'characters'| translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'lastname'| translate}}</label>
+                <input type="text" class="form-control" id="" placeholder="{{'lastname'| translate}}"
+                    formControlName="lname" [(ngModel)]="lastname" maxlength="60" required />
+                <div *ngIf="customerForm.controls.lname.invalid && (customerForm.controls.lname.dirty || customerForm.controls.lname.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.lname.errors.required" class="custom">
+                        {{'lastnamerequired'| translate}}
+                    </div>
+                    <div *ngIf="customerForm.controls.lname.errors.pattern" class="custom">
+                        {{'characters'| translate}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
-    <ng-template #verdelete let-row let-rowIndex="rowIndex">
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'emailid'| translate}}</label>
+                <input placeholder="{{'emailid'| translate}}" formControlName="email" class="form-control"
+                    [(ngModel)]="emailId" maxlength="60" type="text" [attr.disabled]="editflag?true:null" required />
+                <div *ngIf="customerForm.controls.email.invalid && (customerForm.controls.email.dirty || customerForm.controls.email.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.email.errors.required" class="custom">
+                        {{'emailrequired'| translate}}
+                    </div>
+                    <div *ngIf="customerForm.controls.email.errors.email" class="custom">{{'emailvalid'| translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'customerid'| translate}}</label>
+                <input placeholder="{{'customerid'| translate}}" type="text" class="form-control" maxlength="60"
+                    [(ngModel)]="uid" formControlName="userid" [attr.disabled]="editflag?true:null" required />
+                <div *ngIf="customerForm.controls.userid.invalid && (customerForm.controls.userid.dirty || customerForm.controls.userid.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.userid.errors.required" class="custom">
+                        {{'customeridrequired'| translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'countryName'| translate}}</label>
+                <input type="text" class="form-control" formControlName="country" [(ngModel)]="country"
+                    [attr.disabled]="isAdmin ? true :null" (click)="countryclear()" (change)="getState()"
+                    placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5" max="200" required />
+                <datalist id="codes">
+                    <select class="scrollbar">
+                        <option *ngFor="let item of countryData" [value]="item.CountryName"></option>
+                    </select>
+                </datalist>
+                <div *ngIf="customerForm.controls.country.invalid && (customerForm.controls.country.dirty || customerForm.controls.country.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.country.errors.required" class="custom">
+                        {{'selectcountry'| translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'state'| translate}}</label>
+                <input type="text" class="form-control" formControlName="State" [(ngModel)]="state"
+                    (click)="stateClear()" (change)="getCities()" placeholder="{{'state'| translate}}" list="statecodes"
+                    step="5" min="5" max="200" required />
+                <datalist id="statecodes">
+                    <select class="scrollbar">
+                        <option *ngFor="let item of stateData" [value]="item.StateName"></option>
+                    </select>
+                </datalist>
+                <div *ngIf="customerForm.controls.State.invalid && (customerForm.controls.State.dirty || customerForm.controls.State.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.State.errors.required" class="custom">
+                        {{'selectstate'| translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'city'| translate}}</label>
+                <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" (click)="cityClear()"
+                    placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200" required />
+                <datalist id="citycodes">
+                    <select class="scrollbar">
+                        <option *ngFor="let item of citiesData" [value]="item"></option>
+                    </select>
+                </datalist>
+                <div *ngIf="customerForm.controls.City.invalid && (customerForm.controls.City.dirty || customerForm.controls.City.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.City.errors.required" class="custom">
+                        {{'selectcity'| translate}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'phone'| translate}}</label>
+                <input placeholder="{{'phone'| translate}}" type="text" [(ngModel)]="phone" class="form-control"
+                    maxlength="12" formControlName="phone" required />
+                <div *ngIf="customerForm.controls.phone.invalid && (customerForm.controls.phone.dirty || customerForm.controls.phone.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.phone.errors.required" class="custom">
+                        {{'phonenumberrequired'| translate}}</div>
+                    <div *ngIf="customerForm.controls.phone.errors.pattern" class="custom">
+                        {{'phonenumbervalid' | translate}}</div>
+                    <div *ngIf="customerForm.controls.phone.errors.minlength" class="custom">
+                        {{'phonenumberdigit'| translate}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group custom_form-group">
+                <label for="">{{'usertype'| translate}}</label>
+                <input type="text" class="form-control" formControlName="usertype" [(ngModel)]='usertype'
+                    (click)="clear()" [attr.disabled]="editflag?true:null" placeholder="{{'usertype'| translate}}"
+                    list="usertypecodes" step="5" min="5" max="200" required />
+                <datalist id="usertypecodes">
+                    <select class="scrollbar">
+                        <option *ngFor="let item of usertypeData" [value]="item.type"></option>
+                    </select>
+                </datalist>
+                <div *ngIf="customerForm.controls.usertype.invalid && (customerForm.controls.usertype.dirty || customerForm.controls.usertype.touched)"
+                    class="text-danger">
+                    <div *ngIf="customerForm.controls.usertype.errors.required" class="custom">
+                        {{'usertyperequired'| translate}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="createUser" class="row">
+        <div class="col" *ngIf="editflag===0">
+            <button (click)="formSubmit()" [disabled]="customerForm.pristine || customerForm.invalid"
+                class="btn btn-orange">{{'submit'| translate}}</button>
+        </div>
+        <div class="col-md-2" *ngIf="editflag===1">
+            <button (click)="updateUser()" class="btn btn-orange">{{'update'| translate}}</button>
+        </div>
+        <div class="col-md-2" *ngIf="editflag===1">
+            <button (click)="create()" class="btn btn-orange">{{'create'| translate}}</button>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="row mt-5">
+    <div class="col">
+        <div class="form-inline" id="search_bar">
+            <div class="form-group mr-1">
+                <input type="text" [(ngModel)]="smailId" class="form-control" (keyup)="search($event)" placeholder="{{'entertheemailid'| translate}}">
+            </div>
+            <button class="btn btn-secondary btn-sm" (click)="getPerticularUser(smailId)"
+        [disabled]="!smailId">{{'search'| translate}}</button>
+        </div>
+    </div>
+    <div class="col">
+        <a class="btn btn-orange download_btn float-right" *ngIf="data || data.length > 0" (click)="download()">Download</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <!-- <div class="col-md-4 pt-1 inpWidth">
+        <input type="text" [(ngModel)]="smailId" class="form-control" (keyup)="search($event)"
+            placeholder="{{'entertheemailid'| translate}}">
+    </div>
+    <div class="col-md-2 pl-0 search">
+        <button class="btn btn-secondary" (click)="getPerticularUser(smailId)"
+            [disabled]="!smailId">{{'search'| translate}}</button>
+    </div>
+    <div class="col-md-1 offset-md-5 text-center">
+        <a class="download_btn" *ngIf="data || data.length > 0" (click)="download()"></a>
+    </div> -->
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="text-danger" *ngIf="searcherror">
+            {{searcherror}}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
+        </app-ngx-easy-table>
+        <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->
+    </div>
+</div>
+
+
+<!-- <ng-template #verdelete let-row let-rowIndex="rowIndex">
         <a class=" ml-4" id="deleteId" (click)="deletefun(row)"><i class="fa fa-trash" aria-hidden="true"></i></a>
-    </ng-template>
-    
-    
-    <ng-template #veredit let-row let-rowIndex="rowIndex">
-        <a class=" ml-4" id="editId" (click)="editfun(row)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-    </ng-template>
-    
-    
-    <!-- Delete Model -->
-    <ng-template #deletecontent let-c="close" let-d="dismiss">
-        <div class="modal-header">
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    </ng-template> -->
+
+
+<ng-template #veredit let-row let-rowIndex="rowIndex">
+    <a class=" ml-4" id="editId" (click)="editfun(row)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+</ng-template>
+
+
+<!-- Delete Model -->
+<ng-template #deletecontent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h5>{{'deleteuser?' | translate}}</h5>
-        </div>
-        <div class="modal-footer justify-content-between">
-          <button type="button" class="btn btn-warning" (click)="d('Cross click')">{{'No' | translate}}</button>
-          <button type="button" class="btn btn-warning" (click)="yesDelete()">{{'Yes' | translate}}</button>
-        </div>
-      </ng-template>
-    
-    
+        </button>
+    </div>
+    <div class="modal-body">
+        <h5>{{'deleteuser?' | translate}}</h5>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-warning" (click)="d('Cross click')">{{'No' | translate}}</button>
+        <button type="button" class="btn btn-warning" (click)="yesDelete()">{{'Yes' | translate}}</button>
+    </div>
+</ng-template>

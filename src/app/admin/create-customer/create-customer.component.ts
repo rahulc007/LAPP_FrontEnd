@@ -16,9 +16,9 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   providers: [ConfigurationService]
 })
 export class CreateCustomerComponent implements OnInit, AfterViewInit {
-  @ViewChild('verdelete', { static: false }) Verdelete: TemplateRef<any>;
+ // @ViewChild('verdelete', { static: false }) Verdelete: TemplateRef<any>;
   @ViewChild('veredit', { static: false }) Veredit: TemplateRef<any>;
-  @ViewChild('deletecontent', { static: false }) deletecontent: TemplateRef<any>;
+  //@ViewChild('deletecontent', { static: false }) deletecontent: TemplateRef<any>;
   firstname: any;
   isAdmin: boolean;
   lastname: any;
@@ -146,7 +146,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
           }
         })
 
-        console.log("get all=>", arraylist)
         this.data = arraylist;
       })
       // this.customerForm.reset();
@@ -221,7 +220,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
           res.userProfileEntity.role = 'Customer';
         }
 
-        console.log("user =>", res.userProfileEntity)
 
         this.data = res.userProfileEntity;
         this.searcherror = '';
@@ -295,13 +293,13 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       this.columns = [
         { key: 'firstname', title: 'First Name' },
         { key: 'lastname', title: 'Last Name' },
-        { key: 'consumerId', title: 'User ID' },
+        { key: 'consumerId', title: 'Customer ID' },
         { key: 'uemailId', title: 'Email ID' },
         { key: 'phonenumber', title: 'Phone Number' },
         { key: 'country', title: 'Country' },
         { key: 'role', title: 'User Type' },
         { key: 'createdBy', title: 'Created By' },
-        { key: 'Delete', title: 'Delete', searchEnabled: false, cellTemplate: this.Verdelete },
+        // { key: 'Delete', title: 'Delete', searchEnabled: false, cellTemplate: this.Verdelete },
         { key: 'Edit', title: 'Edit', searchEnabled: false, cellTemplate: this.Veredit }
       ]
     }
@@ -309,7 +307,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       this.columns = [
         { key: 'firstname', title: 'First Name' },
         { key: 'lastname', title: 'Last Name' },
-        { key: 'consumerId', title: 'User ID' },
+        { key: 'consumerId', title: 'Customer ID' },
         { key: 'uemailId', title: 'Email ID' },
         { key: 'phonenumber', title: 'Phone Number' },
         { key: 'country', title: 'Country' },
@@ -320,10 +318,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
 
-  deletefun(row) {
-    this.deleteData = row;
-    this.modalService.open(this.deletecontent)
-  }
+  // deletefun(row) {
+  //   this.deleteData = row;
+  //   this.modalService.open(this.deletecontent)
+  // }
 
   yesDelete() {
     let params = {
