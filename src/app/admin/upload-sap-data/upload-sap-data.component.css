@@ -41,11 +41,17 @@
       }
   
       .upload_btn{
-        background: url('../../../assets/images/menu_icons/upload_hover.png') no-repeat;
-        background-size: auto 70%;
-        background-position: 5px 5px;
-        padding: 16px;
-        float: left;    
+        background: url('../../../assets/images/menu_icons/upload_white.png') no-repeat #f58122;
+    background-size: auto 70%;
+    background-position: 10px 5px;
+    padding: 11px 20px 11px 40px;
+    float: left;
+    line-height: 8px;
+      }
+      .upload_btn:hover{
+        background: url('../../../assets/images/menu_icons/upload.png') no-repeat #f58122;
+    background-size: auto 70%;
+    background-position: 10px 5px;
       }
 
     @media (max-width: 300px) {

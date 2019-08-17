@@ -1,9 +1,14 @@
 .download_btn{
-    background: url('../../../assets/images/menu_icons/download.png') no-repeat #f58122;
+    background: url('../../../assets/images/menu_icons/download_white.png') no-repeat #f58122;
     background-size: auto 70%;
     background-position: 10px 5px;
     padding: 4px 15px 4px 35px;
     float: left;
+  }
+  .download_btn:hover{
+    background: url('../../../assets/images/menu_icons/download.png') no-repeat #f58122;
+    background-size: auto 70%;
+    background-position: 10px 5px;
   }
 .inpWidth input {
   width: 300px;

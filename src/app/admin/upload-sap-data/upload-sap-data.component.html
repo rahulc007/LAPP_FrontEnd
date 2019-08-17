@@ -13,7 +13,7 @@
   <div class="col-4">
     <div class="input-container">
         <button class="browse-btn" (click)="file.click()">
-          {{'browse'| translate}}
+          {{'Browse'| translate}}
         </button>
       <input type="file" ng2FileSelect [uploader]="uploader" accept="" #file accept=".xlsx, .xls, .csv" placeholder="Select file">
       <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
@@ -22,8 +22,8 @@
     <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
   </div>
   <div class="col">
-    <div class="upload_btn"></div>
-      <button type="button" class="btn btn-s btn-orange " (click)="uploader.uploadAll()"
+    <!-- <div class="upload_btn"></div> -->
+      <button type="button" class="btn btn-s btn-orange upload_btn" (click)="uploader.uploadAll()"
         [disabled]="!uploader.getNotUploadedItems().length">
          {{'upload'| translate}}
       </button>

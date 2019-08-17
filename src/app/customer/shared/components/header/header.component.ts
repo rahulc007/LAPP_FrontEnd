@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     this.userService.logout();
   }
   resetPwdOpen(resetPWD) {
-      this.modalService.open(resetPWD);
+      this.modalService.open(resetPWD, {size: 'sm'});
      
   }
   private passwordMatcher(control: FormControl): { [s: string]: boolean } {
