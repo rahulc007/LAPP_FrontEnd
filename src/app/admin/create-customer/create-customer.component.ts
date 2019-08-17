@@ -106,9 +106,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
           }
         })
 
-        console.log("get all=>", arraylist)
         this.data = arraylist;
-        // this.data = response.userProfileList;
       })
     }
     else if (objUserDetails.userType === userTypes.admin) {

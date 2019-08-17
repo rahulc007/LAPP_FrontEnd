@@ -218,7 +218,7 @@
         </div>
     </div>
     <div class="col">
-        <button class="btn btn-orange download_btn float-right"  (click)="download()">Download</button>
+        <button class="btn btn-orange download_btn float-right" [disabled]="!data || data.length<=0" (click)="download()">Download</button>
     </div>
 </div>
 
