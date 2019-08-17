@@ -8,7 +8,7 @@ import { data } from '../../../assets/data/country_';
 import { AppConfig } from '../../configs/app.config';
 import { userTypes } from '../../common/constants/constants';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import {TranslateService} from'@ngx-translate/core'
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -51,7 +51,8 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   params: any;
   downflag = 0;
   smailId: any;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService, private modalService: NgbModal, ) {
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
+    private modalService: NgbModal, private translate: TranslateService ) {
     this.configuration = ConfigurationService.config;
 
   }
@@ -181,7 +182,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
       if (datas.status === 200 && datas.successMessage != null) {
         this.loadUsers();
-        this.msg = datas.successMessage;
+        this.msg = this.translate.instant('successMessage');
+        setTimeout(()=> {
+          this.msg ='';
+     }, 3000);
         if (objUserDetails.userType === userTypes.admin) {
           this.selectedReset();
         } else {

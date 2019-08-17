@@ -83,6 +83,9 @@ export class CustomerProfileComponent implements OnInit {
       console.log('Response Update Profile', res)
       if (res.status && res.statusMessage === 'success') {
         this.msg=res.successMessage;
+        setTimeout(()=> {
+          this.msg ='';
+     }, 3000);
       }
       else if(res.errorMessage !== null) {
         this.errorMsg= res. errorMessage;
