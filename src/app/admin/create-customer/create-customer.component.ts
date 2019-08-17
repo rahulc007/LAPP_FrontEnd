@@ -383,7 +383,6 @@ selectedReset() {
   updateUser()
   {
 
-    console.log(this.editData);
     let params={
       "pid":this.editData.pid,
       "emailId": this.emailId,

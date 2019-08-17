@@ -79,10 +79,9 @@ export class ViewComponent implements OnInit {
       "city": this.profileForm.value.city,
       "phonenumber": this.profileForm.value.phonenumber
     }
-    console.log("profile params===>", params);
-
-    this.objService.Put('updateProfile', params).subscribe(res => {
-      console.log('Response Update Profile', res)
+    
+   this.objService.Put('updateProfile', params).subscribe(res => {
+      this.loadUsers();
 
     })
 
