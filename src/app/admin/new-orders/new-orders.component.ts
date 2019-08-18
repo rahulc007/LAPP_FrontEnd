@@ -5,10 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { userTypes } from '../../common/constants/constants';
 import { LappRestService } from '../../core/rest-service/LappRestService';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-new-orders',
   templateUrl: './new-orders.component.html',
-  styleUrls: ['./new-orders.component.css']
+  styleUrls: ['./new-orders.component.css'],
+  providers: [DatePipe]
 })
 export class NewOrdersComponent implements OnInit, AfterViewInit {
   @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
@@ -20,7 +22,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
   public data: any[] = [];
   params: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
-    private router: Router, private objService: LappRestService) {
+    private router: Router, private objService: LappRestService, private datePipe: DatePipe) {
     this.configuration = ConfigurationService.config;
   }
 
@@ -35,6 +37,10 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
       this.objService.Get('getOrderDetailsByAdmin?emailId=' + emailId, this.params).subscribe(response => {
           console.log("new order response", response)
           this.data= response.orderInfoList;
+          this.data.forEach(date => {
+            date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+            date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium")
+          })
       })
     }
   }
