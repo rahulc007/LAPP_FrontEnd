@@ -28,7 +28,7 @@ export class UploadSapDataComponent implements OnInit {
   msg: string = '';
   errorMsg: string = '';
   sapData: any;
-
+  fileStatus:boolean;
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
@@ -48,16 +48,19 @@ export class UploadSapDataComponent implements OnInit {
       this.msg = '';
       this.errorMsg = '';
       let data = JSON.parse(response);
-
-      if (data.status == 200) {
+      if (data.status === 200 && data.statusMessage === "success") {
         this.msg = "show";
         setTimeout(()=> {
           this.msg ='';
      }, 3000);
         this.getUploadedData();
-      } else if (data.status == 500) {
+      } else if (data.statusMessage == "error") {
         this.errorMsg = "show";
+        setTimeout(()=> {
+          this.errorMsg ='';
+     }, 3000);
       }
+      
       this.uploader.clearQueue();
       this.getUploadedData();
     };
@@ -73,7 +76,8 @@ export class UploadSapDataComponent implements OnInit {
       { key: 'fileSize', title: 'File Size' },
       { key: 'orderCount', title: 'Order Count' },
       { key: 'uploadedBy', title: 'Uploaded By' },
-      { key: 'createdDate', title: 'Created Date' }
+      { key: 'createdDate', title: 'Created Date' },
+      { key:'fileStatus', title:'Upload Status', searchEnabled: false}
     ]
   }
   getUploadedData() {
@@ -83,7 +87,6 @@ export class UploadSapDataComponent implements OnInit {
     if (objUserDetails.userType === userTypes.superAdmin) {
       this.objService.Get('getSapFileInfo', this.params).subscribe(res => {
         this.data = res.sapFileInofList;
-
       });
     }
     else if (objUserDetails.userType === userTypes.admin) {
@@ -91,13 +94,12 @@ export class UploadSapDataComponent implements OnInit {
       const emailId = localStorage.getItem('username');
       this.objService.Get('getSapFileInfoByUser?emailId=' + emailId, {}).subscribe(res => {
         this.data = res.sapFileInofList;
-
       });
     }
   }
-
+ 
   onUpload() {
-
+    
     this.uploader.uploadAll();
 
   }
@@ -115,7 +117,7 @@ export class UploadSapDataComponent implements OnInit {
     this.fd.append('file', this.file);
 
   }
-
+  
   clearSelectedPicture() {
 
   }
@@ -124,5 +126,7 @@ export class UploadSapDataComponent implements OnInit {
     this.uploader.removeFromQueue(item);
 
   }
-
+  checkStatus() {
+    this.getUploadedData();
+  }
 }

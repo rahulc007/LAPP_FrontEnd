@@ -104,6 +104,11 @@
     "updateusers":"Update Users",
     "update":"Update",
     "updatepassword":"Update Password",
-    "successMessage": "User Created Successfully"
+    "successMessage": "User Created Successfully",
+    "checkstaus":"Check Status",
+    "pleaseuploadwithvalidheaders":"Please Upload File with Valid Headers",
+    "uploading":"Uploading",
+    "inprogress":"In Progress",
+    "uploaded":"Uploaded"
     
 }

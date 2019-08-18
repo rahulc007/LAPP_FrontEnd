@@ -6,7 +6,7 @@
 </div>
 <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
     <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-    <span id="alertErrMsg">{{'pleaseuploadxcel'| translate}}</span>
+    <span id="alertErrMsg">{{'pleaseuploadwithvalidheaders'| translate}}</span>
 </div>
 
 <div class="row">
@@ -15,7 +15,7 @@
         <button class="browse-btn" (click)="file.click()">
           {{'Browse'| translate}}
         </button>
-      <input type="file" ng2FileSelect [uploader]="uploader" accept="" #file accept=".xlsx, .xls, .csv" placeholder="Select file">
+      <input type="file" ng2FileSelect [uploader]="uploader" #file accept=".xlsx, .xls, .csv" (click)="file.value=''" placeholder="Select file">
       <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
     </div>
     <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
@@ -29,7 +29,14 @@
       </button>
   </div>
 </div>
-<div class="row">&nbsp;</div>
+<!-- <div class="row">&nbsp;</div> -->
+<div class="row">
+  <div class="col-md-3 offset-md-9">
+    <button type="button" class="btn btn-s btn-orange upload_btn" (click)="checkStatus()">
+     {{'checkstaus'| translate}}
+  </button>
+  </div>
+</div>
 <div class="row">
   <div class="col text-center">
   </div>
@@ -53,6 +60,11 @@
           <td>{{row.orderCount}}</td>
           <td>{{row.uploadedBy}}</td>
           <td>{{row.createdDate | date:'medium'}}</td>
+          <td [ngSwitch]="row.fileStatus">
+            <div *ngSwitchCase="1">{{'uploading'| translate}}</div>
+            <div *ngSwitchCase="2">{{'inprogress'| translate}}</div>
+            <div *ngSwitchCase="3">{{'uploaded'| translate}}</div>
+          </td>
         </ng-template>
       </ngx-table>
        <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->

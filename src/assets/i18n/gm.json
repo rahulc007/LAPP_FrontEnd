@@ -99,5 +99,10 @@
     "updateusers":"Benutzer aktualisieren",
     "update": "aktualisieren",
     "updatepassword":"Passwort erneuern",
-    "successMessage": "Benutzer erfolgreich erstellt"
+    "successMessage": "Benutzer erfolgreich erstellt",
+    "checkstaus":"Status überprüfen",
+    "pleaseuploadwithvalidheaders":"Bitte laden Sie eine Datei mit gültigen Headern hoch",
+    "uploading":"Hochladen",
+    "inprogress":"In Bearbeitung",
+    "uploaded":"Hochgeladen"
 }
