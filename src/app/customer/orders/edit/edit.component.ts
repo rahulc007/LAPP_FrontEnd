@@ -4,6 +4,7 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import {Routes, Router, ActivatedRoute} from '@angular/router';
 import {UserService} from '../../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
+import {LappRestService} from '../../../core/rest-service/LappRestService';
 
 @Component({
   selector: 'app-edit',
@@ -22,31 +23,44 @@ export class EditComponent implements OnInit , AfterViewInit{
   baseUrl:any;
   data:any[]=[];
   
-  constructor(private UserService: UserService, private http: HttpClient, private router: Router,private route: ActivatedRoute) { }
+  constructor(private UserService: UserService, private objService: LappRestService,private http: HttpClient, private router: Router,private route: ActivatedRoute) { }
   // version 9.1 and below
   ngOnInit() {
+
+
     this.configuration = ConfigurationService.config;
-  //  this.data=this.data;
-    this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
+    this.loadPage();
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'id', title: 'Line Item No' },
-      { key: 'name', title: 'Article Number' }, 
-      { key: 'name', title: ' Art Designation' }, 
-      { key: 'name', title: ' Length' }, 
-      { key: 'name', title: ' Quantity' }, 
+      { key: 'customerNo', title: 'Customer Number' },
+      { key: 'customerPartNo', title: 'Customer Part Number' }, 
+      { key: 'articleNo', title: 'Artical Number' }, 
+      { key: 'length', title: ' Length' }, 
+      { key: 'lineItemId', title: 'Line Item ID' }, 
+      { key: 'lineItemno', title: 'Line Item Number' },
+      { key: 'prodOrderno', title: 'Product Order Number' },
+      { key: 'quantity', title: 'Quantity' },
+      { key: 'updatedBy', title: 'Updated By' },
       {key: 'Actions', title: 'Edit', searchEnabled: false,cellTemplate: this.Ver}
     ];
   }
 
-  private loadPage(page) {
+  private loadPage() {
     // get page of items from api
-    this.http.get<any>(`http://localhost:4000/items?page=${page }`).subscribe(x => {
-        this.pager = x.pager;
-        this.pageOfItems = x.pageOfItems;
-        this.data = this.pageOfItems
-    });
+
+    let i = localStorage.getItem('customerIndex');
+    console.log("res===>", i)
+    let emailId = localStorage.getItem('username');
+
+    this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
+      this.data = response.orderInfoList[i].orderLineItem;
+      
+    })
+
+    console.log("edit data==>",this.data)
+    
+  
   }
 
   
@@ -54,5 +68,9 @@ export class EditComponent implements OnInit , AfterViewInit{
   {
     console.log("row===>",row)
     this.router.navigate(['customer/orderview/orderedit/editlegs',row.id]);
+  }
+
+  goPrevious() {
+    this.router.navigate(['customer/neworders']);
   }
 }
