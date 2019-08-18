@@ -341,15 +341,17 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   editfun(row) {
 
     this.editflag = 1;
-
     this.msg = "";
     this.errorMsg = "";
-
     this.firstname = row.firstname
     this.lastname = row.lastname
     this.emailId = row.uemailId
     this.uid = row.consumerId
-    this.country = row.country
+
+    let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
+    
+    this.country = contrycodedata.CountryName;
+     this.getState();
     this.state = row.state
     this.city = row.city
     this.phone = row.phonenumber
@@ -368,6 +370,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   updateUser() {
+    this.msg="";
+    this.errorMsg="";
+  if(this.customerForm.valid)
+  {
 
     let params = {
       "pid": this.editData.pid,
@@ -387,9 +393,14 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
         this.msg = res.successMessage;
       }
       else if (res.status == 200 && res.statusMessage == "error") {
-
+        this.errorMsg= res.errorMessage;
       }
 
     })
-  }
+  
+}
+else if(this.customerForm.invalid){
+     this.errorMsg = "Failed to update"
+}
+}
 }
