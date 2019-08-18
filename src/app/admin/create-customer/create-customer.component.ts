@@ -348,10 +348,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.emailId = row.uemailId
     this.uid = row.consumerId
 
-    let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
-    
-    this.country = contrycodedata.CountryName;
-     this.getState();
+   // let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
+    this.country = row.country;
+
     this.state = row.state
     this.city = row.city
     this.phone = row.phonenumber
@@ -370,8 +369,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   updateUser() {
-    this.msg="";
-    this.errorMsg="";
+
+    this.msg = '';
+    this.errorMsg = '';
+
   if(this.customerForm.valid)
   {
 

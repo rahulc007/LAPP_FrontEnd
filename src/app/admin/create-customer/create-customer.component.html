@@ -26,8 +26,7 @@
 
 
 <form [formGroup]="customerForm" #form="ngForm">
-<div class="row">
-    <div class="col">
+
     <div class="row">
         <div class="col">
             <div class="form-group custom_form-group">
@@ -95,11 +94,11 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             <div class="form-group custom_form-group">
                 <label for="">{{'countryName'| translate}}</label>
                 <input type="text" class="form-control" formControlName="country" [(ngModel)]="country"
-                    [attr.disabled]="isAdmin ? true :null" (click)="countryclear()" (change)="getState()"
+                     (click)="countryclear()" (change)="getState()"
                     placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5" max="200" required />
                 <datalist id="codes">
                     <select class="scrollbar">
@@ -204,14 +203,9 @@
             <button (click)="create()" class="btn btn-orange">{{'create'| translate}}</button>
         </div>
     </div>
-    
-</div>
-<div class="col-1">&nbsp;</div>
-</div>
 
 </form>
-<br/>
-<hr/>
+
 
 <div class="row mt-5">
     <div class="col">
