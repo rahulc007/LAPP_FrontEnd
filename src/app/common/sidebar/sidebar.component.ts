@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
 
   isAdmin: boolean = false;
   isSuperAdmin: boolean = false;
+  isCustomer: boolean = false;
 
   primarySampleComponent: any;
   constructor(private navService: NavToggleService, private UserService: UserService) {
@@ -22,6 +23,9 @@ export class SidebarComponent implements OnInit {
     }
     if (objUserDetails.userType == userTypes.admin) {
       this.isAdmin = true;
+    }
+    if (objUserDetails.userType == userTypes.customer) {
+      this.isCustomer = true;
     }
   }
 

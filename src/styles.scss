@@ -60,10 +60,6 @@ a{
   font-size: 1.8rem;
   font-weight: bold;
 }
-.page_heading.dashboard{
-  background: url('assets/images/dashboard.png') no-repeat;
-  background-size: contain;
-}
 .card{
   border: none;
 }
@@ -355,3 +351,95 @@ ul ul a {
   color: #f58122;
 }
 /*dashboard first time login reset password popup end*/
+
+    /*sidebar start*/
+    #sidebar .menu_icon{
+      padding: 0 0 0 35px;
+      background-size: contain;
+    }
+    // .page_heading.dashboard{
+    //   background: url('assets/images/dashboard.png') no-repeat;
+    //   background-size: contain;
+    // }
+
+    .menu_icon.dashboard, .page_heading.dashboard{
+      background: url('assets/images/menu_icons/dashboard.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.dashboard:hover, .menu_icon.dashboard.is-active{
+      background: url('assets/images/menu_icons/dashboard_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.upload, .page_heading.upload{
+      background: url('assets/images/menu_icons/upload.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.upload:hover, .menu_icon.upload.is-active{
+      background: url('assets/images/menu_icons/upload_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.new_order, .page_heading.new_order{
+      background: url('assets/images/menu_icons/newordr.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.new_order:hover, .menu_icon.new_order.is-active{
+      background: url('assets/images/menu_icons/newordr_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.updtd_order, .page_heading.updtd_order{
+      background: url('assets/images/menu_icons/updatedordr.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.updtd_order:hover, .menu_icon.updtd_order.is-active{
+      background: url('assets/images/menu_icons/updatedordr_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.prcsd_order, .page_heading.prcsd_order{
+      background: url('assets/images/menu_icons/procesedordr.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.prcsd_order:hover, .menu_icon.prcsd_order.is-active{
+      background: url('assets/images/menu_icons/procesedordr_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.prvs_order, .page_heading.prvs_order{
+      background: url('assets/images/menu_icons/prvsordr.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.prvs_order:hover, .menu_icon.prvs_order.is-active{
+      background: url('assets/images/menu_icons/prvsordr_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.dwnload, .page_heading.dwnload{
+      background: url('assets/images/menu_icons/download.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.dwnload:hover, .menu_icon.dwnload.is-active{
+      background: url('assets/images/menu_icons/download_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.prfile, .page_heading.prfile{
+      background: url('assets/images/menu_icons/prfile.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.prfile:hover, .menu_icon.prfile.is-active{
+      background: url('assets/images/menu_icons/prfile_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.custmr_dtls, .page_heading.custmr_dtls{
+      background: url('assets/images/menu_icons/custmrdtls.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.custmr_dtls:hover, .menu_icon.custmr_dtls.is-active{
+      background: url('assets/images/menu_icons/custmrdtls_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    .menu_icon.creat_usrs, .page_heading.creat_usrs{
+      background: url('assets/images/menu_icons/createusr.png') no-repeat;
+      background-size: contain;
+    }
+    .menu_icon.creat_usrs:hover, .menu_icon.creat_usrs.is-active{
+      background: url('assets/images/menu_icons/createusr_hover.png') no-repeat;
+      color: #f08843 !important;
+    }
+    /*sidebar end*/

@@ -30,7 +30,7 @@
             <li>
                 <a href="#" class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
             </li>
-            <li>
+            <li *ngIf="isCustomer">
                 <a href="#" [routerLink]="['profile']" [routerLinkActive]="['is-active']" class="menu_icon prfile">{{'profile'| translate}}</a>
             </li>
             
