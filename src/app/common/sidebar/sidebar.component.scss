@@ -155,7 +155,9 @@
     //   }
     // }
     /*navigation end*/
-    
+    .is-active {
+      background-color: orange!important;
+  }
     /*sidebar start*/
     #sidebar .menu_icon{
       padding: 0 0 0 35px;
