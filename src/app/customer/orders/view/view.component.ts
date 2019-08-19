@@ -18,13 +18,14 @@ export class ViewComponent implements OnInit, AfterViewInit {
   @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   public configuration: Config;
   public columns: any[] = [];
-  // public columns: Columns[] = 
+  
   pager = {};
+  params={};
   pageOfItems = [];
   baseUrl:any;
   data:any[]=[];
   
-  constructor(private datePipe: DatePipe,private UserService: UserService, private http: HttpClient, private router: Router,private route: ActivatedRoute, private objService: LappRestService) { }
+  constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient, private router: Router,private route: ActivatedRoute, private objService: LappRestService) { }
   // version 9.1 and below
   ngOnInit() {
     this.configuration = ConfigurationService.config;
@@ -58,7 +59,7 @@ export class ViewComponent implements OnInit, AfterViewInit {
 
     let emailId = localStorage.getItem('username');
 
-    this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
+    this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.params).subscribe(response => {
       this.data = response.orderInfoList;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
@@ -72,9 +73,9 @@ export class ViewComponent implements OnInit, AfterViewInit {
   
   orderview(row, rowIndex)
   {
-    console.log("row===>",row)
+    
     localStorage.setItem('customerIndex', rowIndex);
-    this.router.navigate(['customer/orderedit', row.oid]);
+    this.router.navigate(['customer/orderview', row.oid]);
   }
 
   

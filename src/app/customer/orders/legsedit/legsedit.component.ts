@@ -48,7 +48,7 @@ export class LegseditComponent implements OnInit {
     this.rownum = this.legsForm.value.rownum;
 
     sessionStorage.setItem('rownum',this.rownum);
-  this.router.navigate(['customer/dashbord/orderview/orderedit/editlegs/:id/legstable'])
+  this.router.navigate(['customer/orderedit/editlegs/:id/legstable'])
     
     }
   }

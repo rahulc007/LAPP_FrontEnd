@@ -18,6 +18,7 @@ export class EditComponent implements OnInit , AfterViewInit{
   public configuration: Config;
   public columns: any[] = [];
   // public columns: Columns[] = 
+  param={}
   pager = {};
   pageOfItems = [];
   baseUrl:any;
@@ -67,7 +68,7 @@ export class EditComponent implements OnInit , AfterViewInit{
   orderview(row)
   {
     console.log("row===>",row)
-    this.router.navigate(['customer/orderview/orderedit/editlegs',row.id]);
+    this.router.navigate(['customer/orderedit/editlegs',row.id]);
   }
 
   goPrevious() {

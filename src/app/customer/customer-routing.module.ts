@@ -18,9 +18,9 @@ const CustomerRoutes: Routes = [
      children: [ { path: '', redirectTo: 'dashboard',pathMatch: 'full', data:{userType:'CUSTOMER'} },
      { path: 'dashboard', component: DashbordComponent, data:{userType:'CUSTOMER'} },
      { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
-     { path: 'orderedit/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
-     { path: 'neworders/orderedit/editlegs/:id', component: LegseditComponent, data:{userType:'CUSTOMER'}},
-     { path: 'neworders/orderedit/editlegs/:id/legstable', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
+     { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
+     { path: 'orderview/editlegs/:id', component: LegseditComponent, data:{userType:'CUSTOMER'}},
+     { path: 'orderview/editlegs/:id/legstable', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
      { path: 'profile', component: CustomerProfileComponent, data:{userType:'CUSTOMER'}}
     ]
     

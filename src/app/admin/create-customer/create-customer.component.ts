@@ -350,10 +350,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
    // let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
     this.country = row.country;
-
-    this.state = row.state
-    this.city = row.city
-    this.phone = row.phonenumber
+    this.getState();
+    this.state = row.state;
+    this.city = row.city;
+    this.phone = row.phonenumber;
     this.editData = row;
 
     let usercode = this.usertypeData.find(usr => usr.value === row.userType);
