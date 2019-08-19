@@ -1,7 +1,23 @@
+
+<div class="row">
+    
+            <div class="col-md-2 ">
+                    <button type="button" class="btn btn-orange" (click)="goPrevious(0)">Back</button>
+                </div>
+    
+</div>
 <div class="row mt-2">
-    <div class="col-md-12">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
         <hot-table [data]="data" [hotId]="id" [columns]="getColumns" [colHeaders]="true" [rowHeaders]="true"
-            [width]="600" [height]="300" [minRows]=rownum [minCols]=colmin [minSpareRows]="1" [minSpareCols]="1">
+            [width]="600" [height]="300" [minRows]=rownum [minCols]=colmin [minSpareRows]="0" [minSpareCols]="0">
         </hot-table>
     </div>
+</div>
+<br>
+<div class="row">
+<div class="col-md-4"></div>
+<div class="col-md-1 text-center"><button class="btn btn-orange"  (click)="saveData()">Save</button></div>
+<div class="col-md-1"><button class="btn btn-orange" (click)="submitData()">Submit</button></div>
+
 </div>

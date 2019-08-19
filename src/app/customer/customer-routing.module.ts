@@ -20,7 +20,7 @@ const CustomerRoutes: Routes = [
      { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
      { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
      { path: 'orderview/editlegs/:id', component: LegseditComponent, data:{userType:'CUSTOMER'}},
-     { path: 'orderview/editlegs/:id/legstable', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
+     { path: 'orderview/:id/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
      { path: 'profile', component: CustomerProfileComponent, data:{userType:'CUSTOMER'}}
     ]
     

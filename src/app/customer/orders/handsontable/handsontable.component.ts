@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
+import {Route, Router} from '@angular/router';
 
 @Component({
   selector: 'app-handsontable',
@@ -20,15 +21,16 @@ export class HandsontableComponent implements OnInit {
     {data: 'O', title: 'O'},
   ];
   data: any;
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
 
-    this.rownum = sessionStorage.getItem('rownum');
+    this.rownum = localStorage.getItem('legsno');
+    console.log("row number", this.rownum)
 
   }
 
-  mydata(){
+  saveData(){
     var tabledata = this.hotRegisterer.getInstance(this.id).getData();
     console.log("handson table ==>",tabledata)
 }
@@ -36,5 +38,10 @@ export class HandsontableComponent implements OnInit {
 getColumns = (column) => {
   return this.columns[column];
 };
+
+goPrevious()
+{
+  this.router.navigate(['customer/orderview/:id'])
+}
 
 }

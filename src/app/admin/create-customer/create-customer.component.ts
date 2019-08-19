@@ -358,7 +358,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
     let usercode = this.usertypeData.find(usr => usr.value === row.userType);
 
-    this.usertype = usercode.type
+    this.usertype = usercode.type;
   }
 
   create() {

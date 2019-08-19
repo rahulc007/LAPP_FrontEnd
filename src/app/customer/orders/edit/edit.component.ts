@@ -56,6 +56,8 @@ export class EditComponent implements OnInit , AfterViewInit{
 
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
       this.data = response.orderInfoList[i].orderLineItem;
+
+      localStorage.setItem('legsno', this.data[0].lineItemno)
       
     })
 
@@ -68,7 +70,7 @@ export class EditComponent implements OnInit , AfterViewInit{
   orderview(row)
   {
     console.log("row===>",row)
-    this.router.navigate(['customer/orderedit/editlegs',row.id]);
+    this.router.navigate(['customer/orderview/:id/editlegs']);
   }
 
   goPrevious() {
