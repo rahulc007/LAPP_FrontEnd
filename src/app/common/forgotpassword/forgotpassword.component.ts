@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {LappRestService  } from '../../core/rest-service/LappRestService';
 import {Router} from '@angular/router'
-
+import {TranslateService} from'@ngx-translate/core';
 @Component({
   selector: 'app-forgotpassword',
   templateUrl: './forgotpassword.component.html',
@@ -13,7 +13,8 @@ export class ForgotpasswordComponent implements OnInit {
   submitted: boolean = false;
   errorMsg: string;
   successMsg: string;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
+    private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
     this.forgotPassword = this.formBuilder.group({
@@ -33,10 +34,10 @@ export class ForgotpasswordComponent implements OnInit {
 
     this.objService.Post('forgotPassword',params).subscribe(datas => {
       if(datas.status === 200 && datas.statusMessage === 'success'){
-        this.successMsg='Password link sent to your registered E-mail ID Successfully !';
+        this.successMsg = this.translate.instant('passwordlinksent');
       }
       else if(datas.statusMessage === 'error'){
-        this.errorMsg = 'Email Id is not registered';
+        this.errorMsg = this.translate.instant('emailidnotregistered');
       }
     })
   }

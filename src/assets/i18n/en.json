@@ -110,6 +110,12 @@
     "pleaseuploadwithvalidheaders":"Please Upload File with Valid Headers",
     "uploading":"Uploading",
     "inprogress":"In Progress",
-    "uploaded":"Uploaded"
+    "uploaded":"Uploaded",
+    "emailidnotregistered":"Email Id is not registered",
+    "failtoupdate":"Failed to Update",
+    "passwordlinksent":"Password link sent to your registered E-mail ID Successfully !",
+    "passwordupdatedsuccess":"Password Updated Successfully",
+    "failedtoupdatepassword":"Failed to update Password",
+    "providevalidpassword":"Please Provide Valid Password"
     
 }

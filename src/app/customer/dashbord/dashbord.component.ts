@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { PasswordStrengthService } from '../../common/password-strength/password-strength.service';
-
+import {TranslateService} from'@ngx-translate/core';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -17,9 +17,8 @@ export class DashbordComponent implements OnInit {
   passwordReseted: boolean = false;
   isErrorMessage: boolean = false;
   resetMessage: string = '';
-  constructor(private formBuilder: FormBuilder,
-    private objService: LappRestService,
-    private ps: PasswordStrengthService) {
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
+    private ps: PasswordStrengthService, private translate: TranslateService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.showResetPopUp = objUserDetails.firstTimeLogin;
   }
@@ -70,10 +69,10 @@ export class DashbordComponent implements OnInit {
           this.passwordReseted = true;
           this.resetForm.reset();
           this.submitted = false;
-          this.resetMessage = 'Password Reset done successfully.';
+          this.resetMessage = this.translate.instant('passwordupdatedsuccess');
           this.strText = '';
         } else {
-          this.resetMessage = 'Please Provide Valid Password.';
+          this.resetMessage = this.translate.instant('providevalidpassword');
           this.isErrorMessage = true;
           this.strText = '';
         }

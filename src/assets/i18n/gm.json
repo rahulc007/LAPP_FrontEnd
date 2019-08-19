@@ -105,5 +105,11 @@
     "pleaseuploadwithvalidheaders":"Bitte laden Sie eine Datei mit gültigen Headern hoch",
     "uploading":"Hochladen",
     "inprogress":"In Bearbeitung",
-    "uploaded":"Hochgeladen"
+    "uploaded":"Hochgeladen",
+    "emailidnotregistered":"E-Mail-ID ist nicht registriert",
+    "failtoupdate":"Aktualisierung fehlgeschlagen",
+    "passwordlinksent":"Passwort-Link an Ihre registrierte E-Mail-ID gesendet Erfolgreich!",
+    "passwordupdatedsuccess":"Passwort erfolgreich aktualisiert",
+    "failedtoupdatepassword":"Passwort konnte nicht aktualisiert werden",
+    "providevalidpassword":"Bitte geben Sie ein gültiges Passwort an"
 }

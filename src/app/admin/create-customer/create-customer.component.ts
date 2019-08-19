@@ -8,7 +8,7 @@ import { data } from '../../../assets/data/country_';
 import { AppConfig } from '../../configs/app.config';
 import { userTypes } from '../../common/constants/constants';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {TranslateService} from'@ngx-translate/core'
+import {TranslateService} from'@ngx-translate/core';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -227,7 +227,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
         this.searcherror = '';
       }
       else if (res.userProfileEntity === null) {
-        this.searcherror = "Email Id is not registered"
+        this.searcherror = this.translate.instant('emailidnotregistered');
       }
     })
   }
@@ -409,7 +409,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   
 }
 else if(this.customerForm.invalid){
-     this.errorMsg = "Failed to update"
+     this.errorMsg = this.translate.instant('failtoupdate');
 }
 }
 }

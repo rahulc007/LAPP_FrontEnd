@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import {TranslateService} from'@ngx-translate/core';
 @Component({
   selector: 'app-password-update',
   templateUrl: './password-update.component.html',
@@ -15,7 +15,8 @@ export class PasswordUpdateComponent implements OnInit {
   emailId: any;
   successMsg: string;
   flag: boolean = false;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService, private route: ActivatedRoute) { }
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
+    private route: ActivatedRoute, private translate: TranslateService) { }
 
 
   ngOnInit() {
@@ -59,11 +60,11 @@ export class PasswordUpdateComponent implements OnInit {
       this.objService.Post('updatePwd', objPayload).subscribe(res => {
 
         if (res.status === 200 && res.statusMessage === 'success') {
-          this.successMsg = "Password Updated Successfully";
+          this.successMsg = this.translate.instant('passwordupdatedsuccess');
           this.flag = true;
         }
         else if (res.statusMessage === 'error') {
-          this.errorMsg = "Failed to update Password";
+          this.errorMsg = this.translate.instant('failedtoupdatepassword');
           this.flag = false;
         }
       },

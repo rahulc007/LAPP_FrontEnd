@@ -3,7 +3,7 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordStrengthService } from '../password-strength/password-strength.service';
-
+import {TranslateService} from'@ngx-translate/core';
 @Component({
   selector: 'reset-password',
   templateUrl: './reset-password.component.html',
@@ -23,7 +23,8 @@ export class ResetPasswordComponent implements OnInit {
   isErrorMessage: boolean = false;
   resetMessage: string = '';
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
-    private config: NgbModalConfig, private modalService: NgbModal, private ps: PasswordStrengthService) {
+              private config: NgbModalConfig, private modalService: NgbModal,
+              private ps: PasswordStrengthService, private translate: TranslateService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -84,13 +85,13 @@ export class ResetPasswordComponent implements OnInit {
       this.objService.Post('resetPassword', objPayload).subscribe(res => {
         this.isErrorMessage = false;
         if (res.status === 200 && res.statusMessage == 'success') {
-          this.resetMessage = 'Reset done successfully.'
+          this.resetMessage = this.translate.instant('passwordupdatedsuccess');
           this.resetForm.reset();
           this.submitted = false;
           this.strText = '';
         } else {
           this.isErrorMessage = true;
-          this.resetMessage = 'Please Provide Valid Password.'
+          this.resetMessage = this.translate.instant('providevalidpassword');
         }
       },
         error => {

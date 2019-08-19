@@ -88,7 +88,7 @@ export class CustomerProfileComponent implements OnInit {
      }, 3000);
       }
       else if(res.errorMessage !== null) {
-        this.errorMsg= res. errorMessage;
+        this.errorMsg= res.errorMessage;
       }
 
     })
