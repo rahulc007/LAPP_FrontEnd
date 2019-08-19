@@ -62,6 +62,7 @@ export class PasswordUpdateComponent implements OnInit {
         if (res.status === 200 && res.statusMessage === 'success') {
           this.successMsg = this.translate.instant('passwordupdatedsuccess');
           this.flag = true;
+          this.passwordUpdate.reset();
         }
         else if (res.statusMessage === 'error') {
           this.errorMsg = this.translate.instant('failedtoupdatepassword');
