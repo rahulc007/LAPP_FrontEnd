@@ -392,9 +392,17 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
         this.loadUsers();
         this.msg = res.successMessage;
+        setTimeout(()=> {
+          this.msg ='';
+     }, 3000);
+     this.editflag = 0;
+     this.customerForm.reset();
       }
       else if (res.status == 200 && res.statusMessage == "error") {
         this.errorMsg= res.errorMessage;
+        setTimeout(()=> {
+          this.errorMsg ='';
+     }, 3000);
       }
 
     })
