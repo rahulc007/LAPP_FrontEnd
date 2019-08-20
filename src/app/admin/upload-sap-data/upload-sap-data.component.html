@@ -31,19 +31,14 @@
 </div>
 <!-- <div class="row">&nbsp;</div> -->
 <div class="row">
+    <div class="col-md-3 mt-5 float-left" *ngIf="isAdmin===1">
+        <button class="btn btn-orange" (click)="downloadfile()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
+    </div>
   <div class="col mt-5">
     <button type="button" class="btn btn-s btn-orange float-right" (click)="checkStatus()">{{'checkstaus'| translate}}</button>
   </div>
 </div>
-<div class="row">
-  <div class="col text-center">
-  </div>
-  
-  <div class="col-md-3 ml" *ngIf="isAdmin===1">
-      <button class="btn btn-orange" (click)="downloadfile()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
-  </div>
- 
-</div>
+
 
 <div class="clearfix">&nbsp;</div>
 

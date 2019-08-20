@@ -36,9 +36,15 @@ export class ForgotpasswordComponent implements OnInit {
       if(datas.status === 200 && datas.statusMessage === 'success'){
         this.successMsg = this.translate.instant('passwordlinksent');
         this.forgotPassword.reset();
+        setTimeout(()=> {
+          this.successMsg ='';
+     }, 3000);
       }
       else if(datas.statusMessage === 'error'){
         this.errorMsg = this.translate.instant('emailidnotregistered');
+        setTimeout(()=> {
+          this.errorMsg ='';
+     }, 3000);
       }
     })
   }
