@@ -20,6 +20,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   @ViewChild('veredit', { static: false }) Veredit: TemplateRef<any>;
   //@ViewChild('deletecontent', { static: false }) deletecontent: TemplateRef<any>;
   firstname: any;
+
+  cntryflag=1;
+
   isAdmin: boolean;
   lastname: any;
   emailId: any;
@@ -88,6 +91,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
 
     if (objUserDetails.userType === userTypes.superAdmin) {
+            this.cntryflag = 0;
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
         this.isAdmin = false;
 
@@ -111,6 +115,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     }
     else if (objUserDetails.userType === userTypes.admin) {
       this.isAdmin = true;
+      this.cntryflag=1;
       this.firstname = '';
       this.lastname = '';
       this.emailId = '';
@@ -341,6 +346,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   editfun(row) {
 
     this.editflag = 1;
+    this.cntryflag=1;
     this.msg = "";
     this.errorMsg = "";
     this.firstname = row.firstname
@@ -363,6 +369,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
   create() {
     this.editflag = 0;
+    this.cntryflag = 0;
     this.msg = "";
     this.errorMsg = "";
     this.customerForm.reset();
