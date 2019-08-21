@@ -7,19 +7,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="row">
-                            <!-- <div class="col col-md-3 col-sm-12">
-                                <span [routerLink]="['/customer/upload']">
-                                    <div class="cntnt_box box1">
-                                        <div class="dashboard_icon upload"></div>
-                                        <h5>{{'upload'| translate}}</h5>
-                                    </div>
-                                </span>
-                            </div> -->
                             <div class="col">
                                 <span [routerLink]="['/customer/neworders']">
                                     <div class="cntnt_box box2">
                                         <div class="dashboard_icon new_order"></div>
-                                        <h5>{{'neworders'| translate}}</h5>
+                                        <h5>{{'myoders'| translate}}</h5>
                                     </div>
                                 </span>
                             </div>
@@ -41,12 +33,12 @@
                         <div class="row">&nbsp;</div>
     
                         <div class="row">
-                            <div class="col">
+                            <!-- <div class="col">
                                 <div class="cntnt_box box1">
                                         <div class="dashboard_icon prvs_order"></div>
                                     <h5>{{'previousorders'| translate}}</h5>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col">
                                     <div class="cntnt_box box2">
                                             <div class="dashboard_icon dwnload"></div>
@@ -61,14 +53,7 @@
                                 </div>
                                 </span>
                             </div>
-                            <!-- <div class="col">
-                                <span [routerLink]="['/customer/createuser']">
-                                    <div class="cntnt_box box1">
-                                            <div class="dashboard_icon custmr_dtls"></div>
-                                        <h5>{{'CreateUsers'| translate}}</h5>
-                                    </div>
-                                </span>
-                            </div> -->
+                         
                         </div>
                     </div>
                     <div class="col-3">
@@ -93,7 +78,7 @@
         </div>
         <div class="row">
             <div class="col text-center">
-                <div *ngIf="resetMessage != ''" class="p-5"  [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
+                <div *ngIf="resetMessage != ''" class="p-2"  [ngClass]="{'alert alert-success':!isErrorMessage,'alert alert-danger':isErrorMessage}" role="alert">
                     {{resetMessage}}
                 </div>
             </div>

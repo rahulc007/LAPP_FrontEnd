@@ -13,11 +13,9 @@ import { NavToggleService } from '../../common/nav-toggle-service/navtoggle.serv
 })
 export class HeaderComponent implements OnInit {
   closeResult: string;
-
   d(e) {
     this.closeResult = e;
   }
-
   resetForm: FormGroup;
   submitted = false;
   passmsg: string;
@@ -32,7 +30,6 @@ export class HeaderComponent implements OnInit {
     config.keyboard = false;
   }
 
-
   ngOnInit() {
     this.usersId = localStorage.getItem('username');
     this.userType = localStorage.getItem('userType');
@@ -43,15 +40,6 @@ export class HeaderComponent implements OnInit {
   }
   resetPwdOpen(resetPWD) {
     this.modalService.open(resetPWD, {size: 'sm'});
-  }
-
-  resetPassword() {
-    this.submitted = true;
-    if (this.resetForm.invalid) {
-      return;
-    }
-
-    console.log(this.resetForm.value);
   }
 
   toggleNav() {

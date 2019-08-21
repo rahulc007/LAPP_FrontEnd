@@ -23,7 +23,6 @@ export class DashbordComponent implements OnInit {
     this.showResetPopUp = objUserDetails.firstTimeLogin;
   }
 
-
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],

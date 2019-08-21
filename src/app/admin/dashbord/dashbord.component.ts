@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { PasswordStrengthService } from '../../common/password-strength/password-strength.service';
-import {TranslateService} from'@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -23,7 +23,6 @@ export class DashbordComponent implements OnInit {
     this.showResetPopUp = objUserDetails.firstTimeLogin;
   }
 
-
   ngOnInit() {
     this.resetForm = this.formBuilder.group({
       oldPwd: ['', [Validators.required]],
@@ -32,15 +31,15 @@ export class DashbordComponent implements OnInit {
     });
 
   }
- private passwordOldNewMatcher(control: FormControl) {
-  if (
-    this.resetForm &&
-    (control.value === this.resetForm.controls.oldPwd.value)
-  ) {
-    return { passwordMatch: true };
+  private passwordOldNewMatcher(control: FormControl) {
+    if (
+      this.resetForm &&
+      (control.value === this.resetForm.controls.oldPwd.value)
+    ) {
+      return { passwordMatch: true };
+    }
+    return null;
   }
-  return null;
- }
   private passwordMatcher(control: FormControl) {
     if (
       this.resetForm &&
@@ -69,12 +68,12 @@ export class DashbordComponent implements OnInit {
           this.resetForm.reset();
           this.submitted = false;
           this.passwordReseted = true;
-          this.resetMessage =this.translate.instant('passwordupdatedsuccess');
-          this.strText='';
+          this.resetMessage = this.translate.instant('passwordupdatedsuccess');
+          this.strText = '';
         } else {
           this.resetMessage = this.translate.instant('providevalidpassword');
           this.isErrorMessage = true;
-          this.strText='';
+          this.strText = '';
         }
       },
         error => {
@@ -92,6 +91,5 @@ export class DashbordComponent implements OnInit {
   closePopUp() {
     this.showResetPopUp = false;
   }
-
 
 }

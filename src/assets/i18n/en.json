@@ -116,6 +116,8 @@
     "passwordlinksent":"Password link sent to your registered E-mail ID Successfully !",
     "passwordupdatedsuccess":"Password Updated Successfully",
     "failedtoupdatepassword":"Failed to update Password",
-    "providevalidpassword":"Please Provide Valid Password"
+    "providevalidpassword":"Please Provide Valid Password",
+    "allorders":"All Orders",
+    "myoders":"My Orders"
     
 }

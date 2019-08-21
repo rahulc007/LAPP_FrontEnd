@@ -36,13 +36,9 @@ export class LegseditComponent implements OnInit {
   {
 
     this.submitted = true;
-    console.log("on submit")
-    // stop here if form is invalid
     if (this.legsForm.invalid) {
         return;
     }
-
-   
 
     else {
     this.rownum = this.legsForm.value.rownum;
@@ -53,9 +49,6 @@ export class LegseditComponent implements OnInit {
     }
   }
 
-
-
-  
   mydata(){
     var tabledata = this.hotRegisterer.getInstance(this.id).getData();
     console.log("handson table ==>",tabledata)

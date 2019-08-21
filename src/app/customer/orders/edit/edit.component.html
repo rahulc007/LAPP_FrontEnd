@@ -1,9 +1,9 @@
 <div class="col-md-2 ">
-    <button type="button" class="btn btn-orange" (click)="goPrevious(0)">Back</button>
+    <button type="button" class="btn btn-orange" (click)="goPrevious()">Back</button>
 </div>
 <br>
 
-<div class="border p-5">
+<div class="table table-bordered table-striped">
     <ngx-table [configuration]="configuration"
     [data]="data"
     [columns]="columns">

@@ -9,6 +9,7 @@ import { LappRestService } from '../../../core/rest-service/LappRestService';
   styleUrls: ['./view.component.scss']
 })
 export class ViewComponent implements OnInit {
+
   profileForm: FormGroup;
   submitted = false;
   mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
@@ -21,8 +22,8 @@ export class ViewComponent implements OnInit {
   userTypeValue: any;
   msg: any;
   errorMsg: any;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
   ngOnInit() {
     this.profileForm = this.formBuilder.group({
@@ -38,7 +39,6 @@ export class ViewComponent implements OnInit {
     });
     this.countryData = Countries;
     this.userTypeValue = localStorage.getItem('userType');
-    console.log("User Type", this.userTypeValue)
     if (this.userTypeValue !== "1") {
       this.loadUsers();
     }
@@ -68,11 +68,9 @@ export class ViewComponent implements OnInit {
     this.submitted = true;
     this.msg = '';
     this.errorMsg = ''
-    // stop here if form is invalid
     if (this.profileForm.invalid) {
       return;
     }
-
     let params = {
       "pid": this.profileData['pid'],
       "emailId": this.profileForm.value.uemailId,
@@ -82,19 +80,17 @@ export class ViewComponent implements OnInit {
       "city": this.profileForm.value.city,
       "phonenumber": this.profileForm.value.phonenumber
     }
-
     this.objService.Put('updateProfile', params).subscribe(res => {
       if (res.status && res.statusMessage === 'success') {
         this.msg = res.successMessage;
-        setTimeout(()=> {
-          this.msg ='';
-     }, 3000);
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
       }
       else if (res.errorMessage !== null) {
         this.errorMsg = res.errorMessage;
       }
       this.loadUsers();
-
     })
 
   }

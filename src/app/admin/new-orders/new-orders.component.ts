@@ -35,13 +35,12 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
     const emailId = localStorage.getItem('username');
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.objService.Get('getOrderDetailsByAdmin?emailId=' + emailId, this.params).subscribe(response => {
-          console.log("new order response", response)
-          this.data= response.orderInfoList;
-          this.data.forEach(date => {
-            date.createdDate = this.datePipe.transform(date.createdDate, "medium");
-            date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
-            date.orderDate = this.datePipe.transform(date.orderDate, "medium" );
-          })
+        this.data = response.orderInfoList;
+        this.data.forEach(date => {
+          date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+          date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+          date.orderDate = this.datePipe.transform(date.orderDate, "medium");
+        })
       })
     }
   }
@@ -50,15 +49,14 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
       { key: 'userEmailId', title: 'User Email ID' },
       { key: 'oid', title: 'Order ID' },
       { key: 'orderDate', title: 'Order Date' },
-      { key:'productionOrderStatus', title:'Production Ordrer Status'},
-      { key:'productionOrderno', title:'Production Order Number'},
-      { key:'countryCode', title:'Country Code'},
+      { key: 'productionOrderStatus', title: 'Production Ordrer Status' },
+      { key: 'productionOrderno', title: 'Production Order Number' },
+      { key: 'countryCode', title: 'Country Code' },
       { key: 'createdDate', title: 'Created Date' },
-      {key:'modifiedDate', title:'Modified Date'},
-      {key:'createdBy' ,title:'Created By'},
+      { key: 'modifiedDate', title: 'Modified Date' },
+      { key: 'createdBy', title: 'Created By' },
       { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver }
     ]
-
   }
 
   private loadPage(page) {
@@ -71,7 +69,6 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
   }
 
   ordersview(row, rowIndex) {
-    console.log(rowIndex);
     localStorage.setItem('index', rowIndex);
     this.router.navigate(['admin/newordersview', row.oid])
   }

@@ -17,18 +17,15 @@ export class EditComponent implements OnInit , AfterViewInit{
   @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   public configuration: Config;
   public columns: any[] = [];
-  // public columns: Columns[] = 
   param={}
   pager = {};
   pageOfItems = [];
   baseUrl:any;
   data:any[]=[];
   
-  constructor(private UserService: UserService, private objService: LappRestService,private http: HttpClient, private router: Router,private route: ActivatedRoute) { }
-  // version 9.1 and below
+  constructor(private UserService: UserService, private objService: LappRestService,private http: HttpClient,
+    private router: Router,private route: ActivatedRoute) { }
   ngOnInit() {
-
-
     this.configuration = ConfigurationService.config;
     this.loadPage();
   }
@@ -48,28 +45,18 @@ export class EditComponent implements OnInit , AfterViewInit{
   }
 
   private loadPage() {
-    // get page of items from api
 
     let i = localStorage.getItem('customerIndex');
-    console.log("res===>", i)
     let emailId = localStorage.getItem('username');
-
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
       this.data = response.orderInfoList[i].orderLineItem;
-
       localStorage.setItem('legsno', this.data[0].lineItemno)
-      
     })
-
-    console.log("edit data==>",this.data)
-    
-  
   }
 
   
   orderview(row)
   {
-    console.log("row===>",row)
     this.router.navigate(['customer/orderview/:id/editlegs']);
   }
 

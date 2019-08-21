@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole, ViewChild, TemplateRef, ViewEncapsulation, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ɵConsole, ViewChild, TemplateRef, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { Routes, Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { data } from '../../../assets/data/country_';
@@ -12,7 +12,7 @@ import { userTypes } from '../constants/constants';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
 
   @ViewChild('content', { static: false }) content: TemplateRef<any>;
   country: any;
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   countryCode: any;
   selected: string;
   passwordLength: any;
-  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private userService: UserService) { }
+  constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private router: Router,
+    private route: ActivatedRoute, private userService: UserService) { }
 
   ngOnInit() {
     localStorage.clear();
@@ -38,7 +39,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
       country: ['', Validators.required]
     });
     this.userData = data;
-
     this.selected = data[0].name;
   }
   private passwordStrength(control: FormControl) {
@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
       return this.passwordLength = ''
     }
   }
-
 
   getUserIdsFirstWay($event) {
     let userId = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
@@ -80,12 +79,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
     return matches;
   };
-
-
-  ngAfterViewInit() {
-  }
-
-  get f() { return this.loginForm.controls; }
 
   login() {
     this.submitted = true;
@@ -112,13 +105,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.message = data.errorMessage;
       }
 
-
     },
       error => {
-
         this.message = error
         this.loginForm.reset();
-
       });
 
   }

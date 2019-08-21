@@ -8,7 +8,7 @@ import { data } from '../../../assets/data/country_';
 import { AppConfig } from '../../configs/app.config';
 import { userTypes } from '../../common/constants/constants';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {TranslateService} from'@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-create-customer',
   templateUrl: './create-customer.component.html',
@@ -16,13 +16,11 @@ import {TranslateService} from'@ngx-translate/core';
   providers: [ConfigurationService]
 })
 export class CreateCustomerComponent implements OnInit, AfterViewInit {
- // @ViewChild('verdelete', { static: false }) Verdelete: TemplateRef<any>;
+
   @ViewChild('veredit', { static: false }) Veredit: TemplateRef<any>;
-  //@ViewChild('deletecontent', { static: false }) deletecontent: TemplateRef<any>;
+
   firstname: any;
-
-  cntryflag=1;
-
+  cntryflag = 1;
   isAdmin: boolean;
   lastname: any;
   emailId: any;
@@ -54,10 +52,10 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   params: any;
   downflag = 0;
   smailId: any;
-  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
-    private modalService: NgbModal, private translate: TranslateService ) {
-    this.configuration = ConfigurationService.config;
 
+  constructor(private formBuilder: FormBuilder, private objService: LappRestService,
+    private modalService: NgbModal, private translate: TranslateService) {
+    this.configuration = ConfigurationService.config;
   }
 
   ngOnInit() {
@@ -66,7 +64,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     this.userData = data;
     this.loadUsers();
     this.initial();
-
   }
   initial() {
     this.customerForm = this.formBuilder.group({
@@ -85,19 +82,13 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   loadUsers() {
-
-    //const userType = localStorage.getItem('userType');
-
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-
     if (objUserDetails.userType === userTypes.superAdmin) {
-            this.cntryflag = 0;
+      this.cntryflag = 0;
       this.objService.Get('getAllUserDetails', this.param).subscribe(response => {
         this.isAdmin = false;
-
         let arraylist = [];
         arraylist = response.userProfileList;
-
         arraylist.forEach(list => {
           if (list.userType === userTypes.admin) {
             list.role = 'Admin';
@@ -109,13 +100,12 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
             list.role = 'Customer';
           }
         })
-
         this.data = arraylist;
       })
     }
     else if (objUserDetails.userType === userTypes.admin) {
       this.isAdmin = true;
-      this.cntryflag=1;
+      this.cntryflag = 1;
       this.firstname = '';
       this.lastname = '';
       this.emailId = '';
@@ -123,21 +113,16 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       this.state = '';
       this.city = '';
       this.phone = '';
-
       this.usertype = 'Customer';
       let contrycodedata = this.countryData.find(cntry => cntry.countryCode === objUserDetails.countryCode);
       this.country = contrycodedata.CountryName;
-
       this.getState();
       this.downflag = 1;
       this.usertypeData = UserType.filter(itm => itm["value"] != "2")
       const emailId = localStorage.getItem('username');
-
       this.objService.Get('getUserByCreated?emailId=' + emailId, this.params).subscribe(response => {
-
         let arraylist = [];
         arraylist = response.userProfileList;
-
         arraylist.forEach(list => {
           if (list.userType === userTypes.admin) {
             list.role = 'Admin';
@@ -149,25 +134,20 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
             list.role = 'Customer';
           }
         })
-
         this.data = arraylist;
       })
-      // this.customerForm.reset();
     }
-
   }
 
   formSubmit() {
     this.submitted = true;
     this.msg = '';
     this.errorMsg = '';
-
     if (this.customerForm.invalid) {
       return;
     }
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     const uId = localStorage.getItem('username');
-
     const params = {
       "emailId": this.customerForm.value.email,
       "firstname": this.customerForm.value.fname,
@@ -182,13 +162,12 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       "countryCode": this.getcountrycode(this.customerForm.value.country)
     }
     this.objService.Post('createUser', params).subscribe(datas => {
-
       if (datas.status === 200 && datas.successMessage != null) {
         this.loadUsers();
         this.msg = this.translate.instant('successMessage');
-        setTimeout(()=> {
-          this.msg ='';
-     }, 3000);
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
         if (objUserDetails.userType === userTypes.admin) {
           this.selectedReset();
         } else {
@@ -196,7 +175,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
         }
       }
       else if (datas.status === 200 && datas.errorMessage != null) {
-        this.errorMsg = datas.errorMessage
+        this.errorMsg = datas.errorMessage;
       }
     })
 
@@ -214,9 +193,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
     var emailId = email;
     this.objService.Get('getUserProfile?emailId=' + emailId, this.params).subscribe(res => {
-
       if (res.userProfileEntity !== null) {
-
         if (res.userProfileEntity.userType === userTypes.admin) {
           res.userProfileEntity.role = 'Admin';
         }
@@ -226,8 +203,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
         else if (res.userProfileEntity.userType === userTypes.customer) {
           res.userProfileEntity.role = 'Customer';
         }
-
-
         this.data = res.userProfileEntity;
         this.searcherror = '';
       }
@@ -280,7 +255,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     return contrycodedata.countryCode;
   }
 
-
   getusertypeCode(user) {
     let usercode = this.usertypeData.find(usr => usr.type === user);
     return usercode.value;
@@ -288,14 +262,11 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
 
   download() {
     const emailId = localStorage.getItem('username');
-
     window.location.href = 'http://3.17.182.133:8090/downloadCustData?emailId=' + emailId;
-
   }
 
   ngAfterViewInit() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-
     if (objUserDetails.userType === userTypes.superAdmin) {
       this.columns = [
         { key: 'firstname', title: 'First Name' },
@@ -324,7 +295,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   // deletefun(row) {
   //   this.deleteData = row;
   //   this.modalService.open(this.deletecontent)
@@ -337,33 +307,27 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       "uemailId": this.deleteData.uemailId,
       "createdBy": this.deleteData.createdBy
     }
-
     this.objService.Post('deleteUser', params).subscribe(res => {
-
     })
   }
 
   editfun(row) {
-
     this.editflag = 1;
-    this.cntryflag=1;
+    this.cntryflag = 1;
     this.msg = "";
     this.errorMsg = "";
     this.firstname = row.firstname
     this.lastname = row.lastname
     this.emailId = row.uemailId
     this.uid = row.consumerId
-
-   // let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
+    // let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
     this.country = row.country;
     this.getState();
     this.state = row.state;
     this.city = row.city;
     this.phone = row.phonenumber;
     this.editData = row;
-
     let usercode = this.usertypeData.find(usr => usr.value === row.userType);
-
     this.usertype = usercode.type;
   }
 
@@ -376,47 +340,38 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   }
 
   updateUser() {
-
     this.msg = '';
     this.errorMsg = '';
-
-  if(this.customerForm.valid)
-  {
-
-    let params = {
-      "pid": this.editData.pid,
-      "emailId": this.emailId,
-      "firstname": this.firstname,
-      "lastname": this.lastname,
-      "state": this.state,
-      "city": this.city,
-      "phonenumber": this.phone
+    if (this.customerForm.valid) {
+      let params = {
+        "pid": this.editData.pid,
+        "emailId": this.emailId,
+        "firstname": this.firstname,
+        "lastname": this.lastname,
+        "state": this.state,
+        "city": this.city,
+        "phonenumber": this.phone
+      }
+      this.objService.Put('updateProfile', params).subscribe(res => {
+        if (res.status == 200 && res.statusMessage == "success") {
+          this.loadUsers();
+          this.msg = res.successMessage;
+          setTimeout(() => {
+            this.msg = '';
+          }, 3000);
+          this.editflag = 0;
+          this.customerForm.reset();
+        }
+        else if (res.status == 200 && res.statusMessage == "error") {
+          this.errorMsg = res.errorMessage;
+          setTimeout(() => {
+            this.errorMsg = '';
+          }, 3000);
+        }
+      })
     }
-
-    this.objService.Put('updateProfile', params).subscribe(res => {
-
-      if (res.status == 200 && res.statusMessage == "success") {
-
-        this.loadUsers();
-        this.msg = res.successMessage;
-        setTimeout(()=> {
-          this.msg ='';
-     }, 3000);
-     this.editflag = 0;
-     this.customerForm.reset();
-      }
-      else if (res.status == 200 && res.statusMessage == "error") {
-        this.errorMsg= res.errorMessage;
-        setTimeout(()=> {
-          this.errorMsg ='';
-     }, 3000);
-      }
-
-    })
-  
-}
-else if(this.customerForm.invalid){
-     this.errorMsg = this.translate.instant('failtoupdate');
-}
-}
+    else if (this.customerForm.invalid) {
+      this.errorMsg = this.translate.instant('failtoupdate');
+    }
+  }
 }

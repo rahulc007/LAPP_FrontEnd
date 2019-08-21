@@ -16,6 +16,7 @@ import * as XLSX from 'xlsx';
 })
 export class UploadSapDataComponent implements OnInit {
   @ViewChild('uploadFile', { static: false }) uploadFile: any;
+
   isAdmin = 0;
   fd = new FormData();
   configuration: any;
@@ -31,7 +32,6 @@ export class UploadSapDataComponent implements OnInit {
   fileStatus:boolean;
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
-
 
   constructor(private objService: LappRestService) {
     this.configuration = ConfigurationService.config;
@@ -99,33 +99,22 @@ export class UploadSapDataComponent implements OnInit {
   }
  
   onUpload() {
-    
     this.uploader.uploadAll();
-
   }
 
   downloadfile() {
-
     const emailId = localStorage.getItem('username');
-
     window.location.href = 'http://3.17.182.133:8090/downloadSAPData?emailId=' + emailId;
-
   }
 
   public onFileSelected() {
-
     this.fd.append('file', this.file);
-
   }
   
-  clearSelectedPicture() {
-
-  }
-
   removeFile(item) {
     this.uploader.removeFromQueue(item);
-
   }
+  
   checkStatus() {
     this.getUploadedData();
   }

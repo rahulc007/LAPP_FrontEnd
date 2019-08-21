@@ -28,24 +28,5 @@ export class HeaderComponent implements OnInit {
       this.modalService.open(resetPWD, {size: 'sm'});
      
   }
-  private passwordMatcher(control: FormControl): { [s: string]: boolean } {
-    if (
-        this.resetForm &&
-        (control.value !== this.resetForm.controls.newPwd.value)
-    ) {
-        return { passwordNotMatch: true };
-    }
-    return null;
-}
-
-  resetPassword() {
-    this.submitted = true;
-    if (this.resetForm.invalid) {
-      return;
-    }
-
-    console.log(this.resetForm.value);
-  }
-
 }
 

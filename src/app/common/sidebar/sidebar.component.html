@@ -15,8 +15,11 @@
             <li *ngIf="isAdmin || isSuperAdmin">
                 <a href="#" [routerLink]="['upload']" [routerLinkActive]="['is-active']"class="menu_icon upload">{{'upload'| translate}}</a>
             </li>
-            <li>
-                <a href="#" [routerLink]="['neworders']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'neworders'| translate}}</a>
+            <li *ngIf="isAdmin || isSuperAdmin">
+                <a href="#" [routerLink]="['neworders']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'allorders'| translate}}</a>
+            </li>
+            <li *ngIf="isCustomer">
+                <a href="#" [routerLink]="['neworders']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'myoders'| translate}}</a>
             </li>
             <li>
                 <a href="#" [routerLink]="['updatedorders']" [routerLinkActive]="['is-active']" class="menu_icon updtd_order">{{'updateorders'| translate}}</a>
@@ -24,9 +27,9 @@
             <li>
                 <a href="#" class="menu_icon prcsd_order">{{'processedorders'| translate}}</a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#" class="menu_icon prvs_order">{{'previousorders'| translate}}</a>
-            </li>
+            </li> -->
             <li>
                 <a href="#" class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
             </li>

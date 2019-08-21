@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Route, Router} from '@angular/router';
 import { userTypes } from '../../common/constants/constants';
 import { LappRestService } from '../../core/rest-service/LappRestService';
-
 @Component({
   selector: 'app-new-orders-view',
   templateUrl: './new-orders-view.component.html',
@@ -13,7 +12,6 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 })
 export class NewOrdersViewComponent implements OnInit {
  
-
   configuration: any;
   public columns: any[] = [];
   pager = {};
@@ -21,6 +19,7 @@ export class NewOrdersViewComponent implements OnInit {
   baseUrl:any;
   public data :any[]=[];
   params: any;
+
   constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute,
     private router:Router, private objService: LappRestService) {
     this.configuration = ConfigurationService.config;
@@ -32,12 +31,10 @@ export class NewOrdersViewComponent implements OnInit {
   }
  getUploadedOrderDetails() {
    let i= localStorage.getItem('index');
-   console.log('index',i)
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     const emailId = localStorage.getItem('username');
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.objService.Get('getOrderDetailsByAdmin?emailId=' + emailId, this.params).subscribe(response => {
-          console.log("new order view response", response)
           this.data= response.orderInfoList[i].orderLineItem;
       })
     }
@@ -54,7 +51,6 @@ export class NewOrdersViewComponent implements OnInit {
       { key: 'quantity' , title:'Quantity'},
       { key: 'updatedBy' , title:'Updated By'}
     ]
-
   }
 
   private loadPage(page) {

@@ -80,7 +80,6 @@ export class CustomerProfileComponent implements OnInit {
     }
 
     this.objService.Put('updateProfile', params).subscribe(res => {
-      console.log('Response Update Profile', res)
       if (res.status && res.statusMessage === 'success') {
         this.msg=res.successMessage;
         setTimeout(()=> {

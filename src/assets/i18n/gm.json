@@ -111,5 +111,7 @@
     "passwordlinksent":"Passwort-Link an Ihre registrierte E-Mail-ID gesendet Erfolgreich!",
     "passwordupdatedsuccess":"Passwort erfolgreich aktualisiert",
     "failedtoupdatepassword":"Passwort konnte nicht aktualisiert werden",
-    "providevalidpassword":"Bitte geben Sie ein gültiges Passwort an"
+    "providevalidpassword":"Bitte geben Sie ein gültiges Passwort an",
+    "allorders":"Alle Bestellungen",
+    "myoders":"meine Bestellungen"
 }

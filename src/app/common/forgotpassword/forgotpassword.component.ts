@@ -29,9 +29,7 @@ export class ForgotpasswordComponent implements OnInit {
     if(this.forgotPassword.invalid) {
       return;
     }
-   
     let params={"emailId":this.forgotPassword.value.email}
-
     this.objService.Post('forgotPassword',params).subscribe(datas => {
       if(datas.status === 200 && datas.statusMessage === 'success'){
         this.successMsg = this.translate.instant('passwordlinksent');

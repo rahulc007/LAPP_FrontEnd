@@ -6,7 +6,6 @@ import {UserService} from '../../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import {LappRestService} from '../../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
-//import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -25,11 +24,11 @@ export class ViewComponent implements OnInit, AfterViewInit {
   baseUrl:any;
   data:any[]=[];
   
-  constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient, private router: Router,private route: ActivatedRoute, private objService: LappRestService) { }
-  // version 9.1 and below
+  constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
+    private router: Router,private route: ActivatedRoute, private objService: LappRestService) { }
+
   ngOnInit() {
     this.configuration = ConfigurationService.config;
-  //  this.data=this.data;
   //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
   this.loadPage();
   }
@@ -58,26 +57,19 @@ export class ViewComponent implements OnInit, AfterViewInit {
     // });
 
     let emailId = localStorage.getItem('username');
-
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.params).subscribe(response => {
       this.data = response.orderInfoList;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium")
-      })
-      
+      }) 
     })
-
   }
-
   
   orderview(row, rowIndex)
   {
-    
     localStorage.setItem('customerIndex', rowIndex);
     this.router.navigate(['customer/orderview', row.oid]);
   }
-
-  
 
 }
