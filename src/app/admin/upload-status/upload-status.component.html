@@ -1,0 +1,36 @@
+<h2 class="page_heading upload">{{'upload'| translate}}</h2>
+
+<div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertMsg">{{'fileuploadedsuccess'| translate}}</span>
+</div>
+<div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertErrMsg">{{'pleaseuploadwithvalidheaders'| translate}}</span>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <div class="input-container">
+        <button class="browse-btn" (click)="file.click()">
+          {{'Browse'| translate}}
+        </button>
+      <input type="file" ng2FileSelect [uploader]="uploader" #file accept=".xlsx, .xls, .csv" (click)="file.value=''" placeholder="Select file">
+      <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
+    </div>
+    <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
+    <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
+  </div>
+  <div class="col">
+      <button type="button" class="btn btn-s btn-orange upload_btn" (click)="uploader.uploadAll()"
+        [disabled]="!uploader.getNotUploadedItems().length">
+         {{'upload'| translate}}
+      </button>
+  </div>
+</div>
+
+   
+  
+
+
+

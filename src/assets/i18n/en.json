@@ -118,6 +118,7 @@
     "failedtoupdatepassword":"Failed to update Password",
     "providevalidpassword":"Please Provide Valid Password",
     "allorders":"All Orders",
-    "myoders":"My Orders"
+    "myoders":"My Orders",
+    "uploadstatus":"Upload Status"
     
 }

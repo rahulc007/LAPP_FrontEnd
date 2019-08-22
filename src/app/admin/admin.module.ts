@@ -25,11 +25,12 @@ import { TableModule } from 'ngx-easy-table';
 import { TranslateModule } from '@ngx-translate/core';
 import { HotTableModule } from 'ng2-handsontable';
 import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
-import {JwtInterceptor} from '../core/services/jwt.interceptor'
+import {JwtInterceptor} from '../core/services/jwt.interceptor';
+import { UploadStatusComponent } from './upload-status/upload-status.component'
 
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent, UploadStatusComponent],
   imports: [
     CommonModule,
     HotTableModule,

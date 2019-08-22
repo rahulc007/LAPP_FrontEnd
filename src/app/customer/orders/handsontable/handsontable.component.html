@@ -14,6 +14,15 @@
 </div>
 <br>
 <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+            <div *ngIf="errorMessage" class="alert alert-warning alert-dismissible" data-auto-dismiss role="alert">
+                    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+                    <span id="alertMsg">{{errorMessage}}</span>
+                </div>
+    </div>
+    </div>
+<div class="row">
 <div class="col-md-4"></div>
 <div class="col-md-1 text-center"><button class="btn btn-orange"  (click)="saveData()">Save</button></div>
 <div class="col-md-1"><button class="btn btn-orange" (click)="submitData()">Submit</button></div>

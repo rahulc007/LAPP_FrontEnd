@@ -10,6 +10,8 @@ import {Route, Router} from '@angular/router';
 export class HandsontableComponent implements OnInit {
   private hotRegisterer = new HotTableRegisterer();
   rownum:any;
+  tabledata:any;
+  errorMessage:String;
   id = 'hotInstance';
   colmin=3;
   title = 'sampledemo';
@@ -31,8 +33,30 @@ export class HandsontableComponent implements OnInit {
   }
 
   saveData(){
-    var tabledata = this.hotRegisterer.getInstance(this.id).getData();
-    console.log("handson table ==>",tabledata)
+     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
+    //console.log("handson table ==>",tabledata)
+
+  
+    }
+
+submitData()
+{
+  console.log("TABLE data=>", this.tabledata)
+  for(let lineItem of  this.tabledata)
+    {
+      for(let singleValue of lineItem)
+      {
+       console.log("data=>", singleValue)
+
+         if(singleValue === null)
+         {
+          this.errorMessage = "Please Fill All the Fields...!";
+             return;
+         }
+      }
+
+      console.log("single row=>",lineItem)
+}
 }
 
 getColumns = (column) => {
