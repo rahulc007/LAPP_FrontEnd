@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { UserService } from '../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./new-orders.component.css'],
   providers: [DatePipe]
 })
-export class NewOrdersComponent implements OnInit, AfterViewInit {
+export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
   configuration: any;
   public columns: any[] = [];
@@ -22,7 +22,8 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
   public data: any[] = [];
   params: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
-    private router: Router, private objService: LappRestService, private datePipe: DatePipe) {
+    private router: Router, private objService: LappRestService, private datePipe: DatePipe,
+    private cdr: ChangeDetectorRef) {
     this.configuration = ConfigurationService.config;
   }
 
@@ -58,7 +59,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit {
       { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver }
     ]
   }
-
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  } 
   private loadPage(page) {
     // get page of items from api
     this.http.get<any>(`http://localhost:4000/items?page=${page}`).subscribe(x => {

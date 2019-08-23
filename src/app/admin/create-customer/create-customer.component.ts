@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserType } from '../../../assets/data/usertype_';
 import { Countries } from '../../../assets/data/countrydetails';
@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./create-customer.component.scss'],
   providers: [ConfigurationService]
 })
-export class CreateCustomerComponent implements OnInit, AfterViewInit {
+export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('veredit', { static: false }) Veredit: TemplateRef<any>;
 
@@ -54,7 +54,8 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
   smailId: any;
 
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
-    private modalService: NgbModal, private translate: TranslateService) {
+    private modalService: NgbModal, private translate: TranslateService,
+    private cdr: ChangeDetectorRef) {
     this.configuration = ConfigurationService.config;
   }
 
@@ -294,7 +295,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit {
       ]
     }
   }
-
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  } 
   // deletefun(row) {
   //   this.deleteData = row;
   //   this.modalService.open(this.deletecontent)

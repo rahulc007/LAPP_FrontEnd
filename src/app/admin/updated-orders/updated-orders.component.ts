@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, AfterViewChecked  } from '@angular/core';
 import {UserService} from '../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import * as XLSX from 'xlsx';
   templateUrl: './updated-orders.component.html',
   styleUrls: ['./updated-orders.component.css']
 })
-export class UpdatedOrdersComponent implements OnInit , AfterViewInit{
+export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewChecked{
   @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   configuration: any;
   public columns: any[] = [];
@@ -19,7 +19,8 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit{
   pageOfItems = [];
   baseUrl:any;
 
-  constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute) { 
+  constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef) { 
     this.configuration = ConfigurationService.config;
   }
 
@@ -36,7 +37,9 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit{
       {key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
     ];
   }
-
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  } 
   private loadPage(page) {
     // get page of items from api
     this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {

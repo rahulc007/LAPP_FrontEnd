@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import {ConfigurationService} from '../../../common/ngx-easy-table/config-service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
@@ -14,13 +14,13 @@ import {LappRestService} from '../../../core/rest-service/LappRestService';
   styleUrls: ['./edit.component.css'],
   providers:[ConfigurationService]
 })
-export class EditComponent implements OnInit , AfterViewInit{
+export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
 
   @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   @ViewChild('legscontent',{static: false}) legscontent: TemplateRef<any>;
   public configuration: Config;
   legsForm: FormGroup;
-  umericNumberReg= '^-?[0-9]\\d*(\\.\\d{1,2})?$';
+  numericNumberReg= '^-?[0-9]\\d*(\\.\\d{1,2})?$';
   legsnum:any;
   submitted = false;
   public columns: any[] = [];
@@ -31,7 +31,8 @@ export class EditComponent implements OnInit , AfterViewInit{
   data:any[]=[];
   
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
-    private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder,  private modalService: NgbModal) { }
+    private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.configuration = ConfigurationService.config;
@@ -54,7 +55,9 @@ export class EditComponent implements OnInit , AfterViewInit{
       {key: 'Actions', title: 'Edit', searchEnabled: false,cellTemplate: this.Ver}
     ];
   }
-
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  } 
   private loadPage() {
 
     let i = localStorage.getItem('customerIndex');

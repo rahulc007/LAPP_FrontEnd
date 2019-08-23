@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import {ConfigurationService} from '../../../common/ngx-easy-table/config-service'
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 import {Routes, Router, ActivatedRoute} from '@angular/router';
@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./view.component.css'],
   providers:[ConfigurationService, DatePipe]
 })
-export class ViewComponent implements OnInit, AfterViewInit {
+export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   public configuration: Config;
   public columns: any[] = [];
@@ -25,7 +25,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
   data:any[]=[];
   
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
-    private router: Router,private route: ActivatedRoute, private objService: LappRestService) { }
+    private router: Router,private route: ActivatedRoute, private objService: LappRestService,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.configuration = ConfigurationService.config;
@@ -47,7 +48,9 @@ export class ViewComponent implements OnInit, AfterViewInit {
       { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
     ];
   }
-
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  }
   private loadPage() {
     // get page of items from api
     // this.http.get<any>(`http://localhost:4000/items?page=${page }`).subscribe(x => {
@@ -61,7 +64,8 @@ export class ViewComponent implements OnInit, AfterViewInit {
       this.data = response.orderInfoList;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
-        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium")
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+        date.orderDate = this.datePipe.transform(date.orderDate, 'medium');
       }) 
     })
   }
