@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col">
                     <div class="row">
-                        <div class="col col-md-3 col-sm-12">
+                        <div class="col-md-6 col-lg-3">
                             <span [routerLink]="['/admin/upload']">
                                 <div class="cntnt_box box1">
                                     <div class="dashboard_icon upload"></div>
@@ -14,7 +14,7 @@
                                 </div>
                             </span>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6 col-lg-3">
                             <span [routerLink]="['/admin/neworders']">
                                 <div class="cntnt_box box2">
                                     <div class="dashboard_icon new_order"></div>
@@ -22,7 +22,7 @@
                                 </div>
                             </span>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6 col-lg-3">
                             <span [routerLink]="['/admin/updatedorders']">
                                 <div class="cntnt_box box3">
                                     <div class="dashboard_icon updtd_order"></div>
@@ -30,14 +30,13 @@
                                 </div>
                             </span>
                         </div>
-                        <div class="col">
+                        <div class="col-md-6 col-lg-3">
                             <div class="cntnt_box box1">
                                     <div class="dashboard_icon prcsd_order"></div>
                                 <h5>{{'processedorders'| translate}}</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="row">&nbsp;</div>
 
                     <div class="row">
                         <!-- <div class="col">
@@ -46,13 +45,13 @@
                                 <h5>{{'previousorders'| translate}}</h5>
                             </div>
                         </div> -->
-                        <div class="col">
+                        <div class="col-sm-6 col-md-6 col-lg-3">
                                 <div class="cntnt_box box2">
                                         <div class="dashboard_icon dwnload"></div>
                                     <h5>{{'DownloadExcel'| translate}}</h5>
                                 </div>
                         </div>
-                        <div class="col">
+                        <div class="col-sm-6 col-md-6 col-lg-3">
                             <span [routerLink]="['/admin/profile']">
                             <div class="cntnt_box box3">
                                     <div class="dashboard_icon prfile"></div>
@@ -60,7 +59,7 @@
                             </div>
                             </span>
                         </div>
-                        <div class="col">
+                        <div class="col-sm-6 col-md-6 col-lg-3">
                             <span [routerLink]="['/admin/createuser']">
                                 <div class="cntnt_box box1">
                                         <div class="dashboard_icon creat_usrs"></div>
@@ -70,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-3 d-none d-sm-none d-md-none d-lg-block">
                     <img src="assets/images/latest_products.jpg" alt="LAPP" class="img-fluid rounded" />
                 </div>
             </div>

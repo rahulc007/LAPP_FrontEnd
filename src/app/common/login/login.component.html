@@ -1,4 +1,3 @@
-
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">{{'login'| translate}}!
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -16,6 +15,7 @@
 </ng-template>
 
 
+<div class="login_parent">
 <div class="login_holder">
   <div class="container-fluid h-100">
       <!-- header -->
@@ -85,26 +85,29 @@
           </div>
       </div>
 
-      <!-- footer -->
-      <div class="footer">
-          <div class="row">
-              <div class="col">
-                  <div class="text-center">
-                      <ul class="footer_links">
-                          <li>
-                              <a href="https://www.lappgroup.com/nc/contact.html" target="_blank">{{'contact'| translate}}</a>
-                          </li>
-                          <li>
-                              <a href="https://www.lappgroup.com/privacy-policy.html" target="_blank">{{'privacypolicy'| translate}}</a>
-                          </li>
-                          <li>
-                              <a href="https://www.lappgroup.com/imprint.html" target="_blank">{{'imprint'| translate}}</a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
+</div>
+
+</div>
+
+<!-- footer -->
+<div class="footer">
+  <div class="row">
+      <div class="col">
+          <div class="text-center">
+              <ul class="footer_links">
+                  <li>
+                      <a href="https://www.lappgroup.com/nc/contact.html" target="_blank">{{'contact'| translate}}</a>
+                  </li>
+                  <li>
+                      <a href="https://www.lappgroup.com/privacy-policy.html" target="_blank">{{'privacypolicy'| translate}}</a>
+                  </li>
+                  <li>
+                      <a href="https://www.lappgroup.com/imprint.html" target="_blank">{{'imprint'| translate}}</a>
+                  </li>
+              </ul>
           </div>
       </div>
   </div>
+</div>
 
 </div>
