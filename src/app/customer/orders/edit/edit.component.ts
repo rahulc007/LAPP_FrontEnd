@@ -40,6 +40,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
    });
     this.loadPage();
+    this.legsnum = localStorage.getItem('legsaftersave');
   }
   ngAfterViewInit() {
     this.columns = [
@@ -69,8 +70,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   }
 
   
-  orderview(row)
-  {
+  orderview(row) {
     const lineitemId = this.data[0].lineItemId;
     const lineitemno= this.data[0].lineItemno
     localStorage.setItem('lineitemid',lineitemId)
@@ -87,10 +87,10 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     this.router.navigate(['customer/neworders']);
   }
 
-  onSubmit()
-  {
-
+  onSubmit() {
+    
     this.submitted = true;
+    
     if (this.legsForm.invalid) {
         return;
     }
@@ -100,6 +100,16 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       console.log("legs no.:", this.legsnum);
       this.router.navigate(['customer/orderview/:id/editlegs']);
       this.modalService.dismissAll();
+    }
+  }
+  getMatch(event) {
+    
+    const legsvalue = localStorage.getItem('legsaftersave');
+    if(legsvalue === null){
+      return;
+    }
+    else if (legsvalue < event || legsvalue > event ) {
+      alert('You have altered the number of legs please confirm');
     }
   }
 }

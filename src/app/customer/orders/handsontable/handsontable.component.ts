@@ -15,6 +15,7 @@ export class HandsontableComponent implements OnInit {
   msg: string;
   errorMsg: string;
   errorMessage: string;
+  flag: number =1;
   // id = 'hotInstance';
   // colmin = 3;
   // title = 'sampledemo';
@@ -29,8 +30,9 @@ export class HandsontableComponent implements OnInit {
   newAttribute = {};
   items = [];
   params: any;
-  markingTestTempArray = [{}];
+  markingTestTempArray = [];
   markingTextForm: FormGroup;
+  markingTextEditForm: FormGroup
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService) {
     this.markingTextForm = this.fb.group({
       arr: this.fb.array([])
@@ -38,22 +40,35 @@ export class HandsontableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rownum = localStorage.getItem('legsno');
-    console.log("row number", this.rownum)
-    for (let i = 0; i < this.rownum; i++) {
-      this.items.push(this.newAttribute);
-    }
-    this.setFormArray();
     this.getMarkingTextDetails();
+    this.setFormArray();
+  }
+  getMarkingTextDetails() {
+    const lineitemId = localStorage.getItem('lineitemid');
+    this.objService.Get('getMarkingText?lineItemid=' + lineitemId, this.params).subscribe( response => {
+      console.log('response',response);
+      if(response.markingTextList.length === 0) {
+        this.rownum = localStorage.getItem('legsno');
+        console.log("row number", this.rownum)
+        for (let i = 0; i < this.rownum; i++) {
+          this.items.push(this.newAttribute);
+        }
+        this.setFormArray();
+      }
+      else {
+        this.items = response.markingTextList;
+      }
+    })
   }
   setFormArray() {
-    let arr = this.markingTextForm.controls.arr as FormArray;;
-    this.items.forEach(x => {
-      arr.push(this.fb.group({
-        leftText: x.leftText,
-        middleText: x.middleText,
-        rightText: x.rightText
-      }))
+    this.markingTextForm = this.fb.group({
+      arr: this.fb.array(
+        this.items.map(x => this.fb.group({
+          leftText: [x.leftText],
+          middleText: [x.middleText],
+          rightText: [x.rightText]
+        }))
+      )
     })
   }
 
@@ -61,15 +76,14 @@ export class HandsontableComponent implements OnInit {
   //   this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
   //   //console.log("handson table ==>",tabledata)
   // }
-  submit() {
-    console.log(this.markingTextForm.value);
-    const values = this.markingTextForm.value.arr;
-    console.log(values.length)
+  submit(markingTextForm) {
+    const values = markingTextForm.arr;
+    console.log('Values',values.length)
     const lineitemId = localStorage.getItem('lineitemid');
-    console.log('Line item Id', lineitemId);
     const legs = localStorage.getItem('legsno');
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
+
     for (let i = 0; i < values.length; i++) {
       this.markingTestTempArray.push({
         "leftText": values[i].leftText,
@@ -78,7 +92,7 @@ export class HandsontableComponent implements OnInit {
         "notifyUser": "",
         "updatedBy": emailId,
         "lineItemnumber": lineitemno
-      })
+       })
     }
     this.params = {
       "lineItemId": lineitemId,
@@ -104,12 +118,18 @@ export class HandsontableComponent implements OnInit {
         this.getMarkingTextDetails();
       }
     })
+   this.flag = 2;
+   this.items= this.markingTestTempArray;
+   localStorage.setItem('legsaftersave', legs )
   }
-  getMarkingTextDetails() {
-    const lineitemId = localStorage.getItem('lineitemid');
-    this.objService.Get('getMarkingText?lineItemid=' + lineitemId, this.params).subscribe( response => {
-      console.log('response',response);
-    })
+ 
+  edit() {
+    this.items= this.markingTextForm.value.arr;
+    console.log('items',this.items)
+  }
+  editMarkText(i) {
+   console.log(this.markingTextForm.value.arr[i])
+    
   }
   // submitData() {
   //   console.log("TABLE data=>", this.tabledata)

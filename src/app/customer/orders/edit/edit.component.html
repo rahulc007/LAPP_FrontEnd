@@ -47,7 +47,7 @@
                                     <label for="legsnum">{{'enterlegs'| translate}}</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="text" formControlName="legsnum" [(ngModel)]="legsnum" class="form-control" [ngClass]="{ 'is-invalid': submitted && legsForm.controls.legsnum.errors }" required />
+                                    <input type="number" formControlName="legsnum" [(ngModel)]="legsnum" class="form-control" (input)="getMatch($event.target.value)" [ngClass]="{ 'is-invalid': submitted && legsForm.controls.legsnum.errors }" required />
                                 </div>
                                 <div *ngIf="submitted && legsForm.controls.legsnum.errors" class="text-danger">
                                     <div *ngIf="legsForm.controls.legsnum.errors.required">{{'legsrequired'| translate}}</div>
