@@ -1,29 +1,61 @@
-
-<div class="row"> 
-    <div class="col-md-2 ">
-        <button type="button" class="btn btn-orange" (click)="goPrevious(0)">Back</button>
+<div class="row">
+        <div class="col-md-3">
+                <h4>Marking Text Excel</h4>
+            </div>
+    <div class="col-md-2 offset-md-7">
+        <button type="button" class="btn btn-orange" (click)="goPrevious()">Back</button>
     </div>
 </div>
-<div class="row mt-2">
+<!-- <div class="row mt-2">
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <hot-table [data]="data" [hotId]="id" [columns]="getColumns" [colHeaders]="true" [rowHeaders]="true"
-           [colWidths]="200" [width]="700" [height]="300" [minRows]=rownum [minCols]=colmin [minSpareRows]="0" [minSpareCols]="0">
+            [colWidths]="200" [width]="700" [height]="300" [minRows]=rownum [minCols]=colmin [minSpareRows]="0"
+            [minSpareCols]="0">
         </hot-table>
     </div>
-</div>
-<br>
+</div> -->
+<!-- <br>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-            <div *ngIf="errorMessage" class="alert alert-warning alert-dismissible" data-auto-dismiss role="alert">
-                    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-                    <span id="alertMsg">{{errorMessage}}</span>
-                </div>
+        <div *ngIf="errorMessage" class="alert alert-warning alert-dismissible" data-auto-dismiss role="alert">
+            <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+            <span id="alertMsg">{{errorMessage}}</span>
+        </div>
     </div>
+</div> -->
+<!-- <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-1 text-center"><button class="btn btn-orange" (click)="saveData()">Save</button></div>
+    <div class="col-md-1"><button class="btn btn-orange" (click)="submitData()">Submit</button></div>
+</div> -->
+<form class="mt-2" [formGroup]="markingTextForm" (ngSubmit)="submit(markingTextForm.value)">
+        <div formArrayName="arr">
+            <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Left Marking Text</th>
+                            <th>Middle Marking Text</th>
+                            <th>Right Marking Text</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of markingTextForm.controls.arr.controls; let i = index" [formGroupName]="i">
+                            <td><input type="text" formControlName="leftText"></td>
+                            <td><input type="text" formControlName="middleText"></td>
+                            <td><input type="text" formControlName="rightText"></td>
+                        </tr>
+                    </tbody>
+                </table>
+  </div>  
+    <button class="btn btn-orange" type="submit">Save</button>
+</form>
+<div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+        <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+        <span id="alertMsg">{{msg}}</span>
     </div>
-<div class="row">
-<div class="col-md-4"></div>
-<div class="col-md-1 text-center"><button class="btn btn-orange"  (click)="saveData()">Save</button></div>
-<div class="col-md-1"><button class="btn btn-orange" (click)="submitData()">Submit</button></div>
-</div>
+    <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+        <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+        <span id="alertErrMsg">{{errorMsg}}</span>
+    </div>

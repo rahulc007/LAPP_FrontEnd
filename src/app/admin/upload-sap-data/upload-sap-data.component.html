@@ -28,7 +28,29 @@
       </button>
   </div>
 </div>
-
+<div class="row">
+  <div class="col">
+      <h4 class="text-center">Please Upload Excel in the below Format</h4>
+    <div class="table table-borderd border">
+      <thead>
+        <tr>
+          <th>SalesOrder No</th>
+          <th>LineItem</th>
+          <th>OpenQuantity</th>
+          <th>ProductionOrder No</th>
+          <th>Production Order Status</th>
+          <th>ArticleNo</th>
+          <th>Description</th>
+          <th>CustomerPart No</th>
+          <th>EmailID</th>
+          <th>CustomerNo</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+    </div>
+  </div>
+</div>
 <div class="row">
     <div class="col-md-3 mt-5 float-left" *ngIf="isAdmin===1">
         <button class="btn btn-orange" (click)="downloadfile()" [disabled]="!data || data.length <=0">{{'download'| translate}}</button>

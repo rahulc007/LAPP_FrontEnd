@@ -71,7 +71,14 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   
   orderview(row)
   {
-
+    const lineitemId = this.data[0].lineItemId;
+    const lineitemno= this.data[0].lineItemno
+    localStorage.setItem('lineitemid',lineitemId)
+    localStorage.setItem('lineItemNo', lineitemno);
+    console.log('line item no', this.data[0]);
+    this.objService.Get('getMarkingText?lineItemid=' + lineitemId, this.param).subscribe( response => {
+      console.log('response',response);
+    })
     this.modalService.open(this.legscontent)
    
   }

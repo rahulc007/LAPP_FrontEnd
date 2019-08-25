@@ -70,3 +70,6 @@
   .table-bordered {
     border:none !important;
   }
+ tr th {
+   border-right: 1px solid #dee2e6;;
+ }

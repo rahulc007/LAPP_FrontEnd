@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import * as XLSX from 'xlsx';
-
+import { LappRestService } from '../../core/rest-service/LappRestService';
+import { userTypes } from '../../common/constants/constants';
 @Component({
   selector: 'app-updated-orders',
   templateUrl: './updated-orders.component.html',
@@ -18,14 +19,15 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewC
   pager = {};
   pageOfItems = [];
   baseUrl:any;
-
+  params: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef) { 
+    private cdr: ChangeDetectorRef, private objService: LappRestService) { 
     this.configuration = ConfigurationService.config;
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
+    this. getOrderStatusByUser();
   }
 
   ngAfterViewInit() {
@@ -40,6 +42,16 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewC
   ngAfterViewChecked(){
     this.cdr.detectChanges();
   } 
+  getOrderStatusByUser() {
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    const emailId = localStorage.getItem('username');
+    if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin ) {
+      this.objService.Get('getOrderStatusByUser?emailId='+ emailId, this.params).subscribe(response => {
+        console.log("response",response);
+      })
+    }
+  
+  }
   private loadPage(page) {
     // get page of items from api
     this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {
