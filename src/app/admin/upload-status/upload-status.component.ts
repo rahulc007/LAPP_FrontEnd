@@ -31,7 +31,7 @@ export class UploadStatusComponent implements OnInit {
   errorMsg: string = '';
   sapData: any;
   fileStatus:boolean;
-
+  
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
   constructor(private objService: LappRestService) {
@@ -71,7 +71,14 @@ export class UploadStatusComponent implements OnInit {
     this.uploader.options.additionalParameter = {
       emailId: this.currentuser
     };
-    
+    this.columns = [
+      { key: 'fileName', title: 'File Name' },
+      { key: 'fileSize', title: 'File Size' },
+      { key: 'orderCount', title: 'Order Count' },
+      { key: 'uploadedBy', title: 'Uploaded By' },
+      { key: 'createdDate', title: 'Created Date' },
+      { key:'fileStatus', title:'Upload Status', searchEnabled: false}
+    ]
   }
   
   onUpload() {

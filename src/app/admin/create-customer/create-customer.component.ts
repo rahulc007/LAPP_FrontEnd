@@ -176,7 +176,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
         }
       }
       else if (datas.status === 200 && datas.errorMessage != null) {
-        this.errorMsg = datas.errorMessage;
+          this.errorMsg = this.translate.instant('errormessages') ;
       }
     })
 

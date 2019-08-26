@@ -27,7 +27,6 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewC
 
   ngOnInit() {
     this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
-    this. getOrderStatusByUser();
   }
 
   ngAfterViewInit() {
@@ -42,16 +41,7 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewC
   ngAfterViewChecked(){
     this.cdr.detectChanges();
   } 
-  getOrderStatusByUser() {
-    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    const emailId = localStorage.getItem('username');
-    if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin ) {
-      this.objService.Get('getOrderStatusByUser?emailId='+ emailId, this.params).subscribe(response => {
-        console.log("response",response);
-      })
-    }
-  
-  }
+ 
   private loadPage(page) {
     // get page of items from api
     this.http.get<any>(`http://localhost:8081/api/items?page=${page }`).subscribe(x => {

@@ -28,7 +28,28 @@
       </button>
   </div>
 </div>
-
+<div class="row mt-4">
+  <div class="col">
+    <div class="table table-bordered">
+    
+      <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">
+        <ng-template let-row>
+          <td>{{row.fileName}}</td>
+          <td>{{row.fileSize}}</td>
+          <td>{{row.orderCount}}</td>
+          <td>{{row.uploadedBy}}</td>
+          <td>{{row.createdDate | date:'medium'}}</td>
+          <td [ngSwitch]="row.fileStatus">
+            <div *ngSwitchCase="1">{{'uploading'| translate}}</div>
+            <div *ngSwitchCase="2">{{'inprogress'| translate}}</div>
+            <div *ngSwitchCase="3">{{'uploaded'| translate}}</div>
+          </td>
+        </ng-template>
+      </ngx-table>
+       <!-- <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>  -->
+    </div>
+  </div>
+</div>
    
   
 

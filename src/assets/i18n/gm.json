@@ -113,5 +113,6 @@
     "failedtoupdatepassword":"Passwort konnte nicht aktualisiert werden",
     "providevalidpassword":"Bitte geben Sie ein gültiges Passwort an",
     "allorders":"Alle Bestellungen",
-    "myoders":"meine Bestellungen"
+    "myoders":"meine Bestellungen",
+    "errormessages":"EmailId oder Kundennummer existiert bereits ..!"
 }

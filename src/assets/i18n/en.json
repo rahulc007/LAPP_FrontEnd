@@ -119,6 +119,7 @@
     "providevalidpassword":"Please Provide Valid Password",
     "allorders":"All Orders",
     "myoders":"My Orders",
-    "uploadstatus":"Upload Status"
+    "uploadstatus":"Upload Status",
+    "errormessages":"EmailId or Customer ID already exists..!"
     
 }
