@@ -6,7 +6,8 @@
         <button type="button" class="btn btn-orange" (click)="goPrevious()">Back</button>
     </div>
 </div>
-<!-- <div class="row mt-2">
+<div *ngIf="firsttime === 1">
+<div class="row mt-2">
     <div class="col-md-2"></div>
     <div class="col-md-8">
         <hot-table [data]="data" [hotId]="id" [columns]="getColumns" [colHeaders]="true" [rowHeaders]="true"
@@ -14,8 +15,8 @@
             [minSpareCols]="0">
         </hot-table>
     </div>
-</div> -->
-<!-- <br>
+</div>
+<br>
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
@@ -24,13 +25,16 @@
             <span id="alertMsg">{{errorMessage}}</span>
         </div>
     </div>
-</div> -->
-<!-- <div class="row">
+</div>
+<div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-1 text-center"><button class="btn btn-orange" (click)="saveData()">Save</button></div>
     <div class="col-md-1"><button class="btn btn-orange" (click)="submitData()">Submit</button></div>
-</div> -->
-<div class="row">
+</div>
+</div>
+
+<div *ngIf="firsttime===0" >
+<div    class="row">
     <div class="col">
         <form class="mt-2" [formGroup]="markingTextForm" (ngSubmit)="submit(markingTextForm.value)">
             <div formArrayName="arr">
@@ -40,7 +44,7 @@
                             <th>Left Marking Text</th>
                             <th>Middle Marking Text</th>
                             <th>Right Marking Text</th>
-                            <th *ngIf="flag === 2">Edit</th>
+                            <th >Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +52,7 @@
                             <td><input type="text" formControlName="leftText"></td>
                             <td><input type="text" formControlName="middleText"></td>
                             <td><input type="text" formControlName="rightText"></td>
-                            <td *ngIf="flag === 2"><i class="fa fa-edit" (click)="editMarkText($i)"></i></td>
+                            <td ><i class="fa fa-edit" (click)="editMarkText($i)"></i></td>
                             
                         </tr>
                     </tbody>
@@ -58,6 +62,7 @@
             <button class="btn btn-orange" type="submit" *ngIf="flag === 2">Edit</button>
         </form>
     </div>
+</div>
 </div>
 
 

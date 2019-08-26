@@ -19,6 +19,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   @ViewChild('legscontent',{static: false}) legscontent: TemplateRef<any>;
   public configuration: Config;
+  legseditflag=0;
   legsForm: FormGroup;
   numericNumberReg= '^-?[0-9]\\d*(\\.\\d{1,2})?$';
   legsnum:any;
@@ -40,7 +41,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
    });
     this.loadPage();
-    this.legsnum = localStorage.getItem('legsaftersave');
+   // this.legsnum = localStorage.getItem('legsaftersave');
   }
   ngAfterViewInit() {
     this.columns = [
@@ -65,6 +66,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     let emailId = localStorage.getItem('username');
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
       this.data = response.orderInfoList[i].orderLineItem;
+      this.legsnum = this.data[0].legsCount;
       
     })
   }
@@ -72,9 +74,12 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   
   orderview(row) {
     const lineitemId = this.data[0].lineItemId;
-    const lineitemno= this.data[0].lineItemno
-    localStorage.setItem('lineitemid',lineitemId)
+    const lineitemno = this.data[0].lineItemno;
+    
+    localStorage.setItem('lineitemid', lineitemId);
     localStorage.setItem('lineItemNo', lineitemno);
+   
+    
     console.log('line item no', this.data[0]);
     this.objService.Get('getMarkingText?lineItemid=' + lineitemId, this.param).subscribe( response => {
       console.log('response',response);
@@ -96,13 +101,37 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     }
 
     else {
+
+     
+      let flag=0;
+      const legsCount = this.data[0].legsCount;
+
+      if(legsCount === 0 || legsCount === '') {
+        flag=1;
+        localStorage.setItem('legsno',  this.legsnum);
+        localStorage.setItem('hflag', flag);
+      } else {
+        flag=0;
       localStorage.setItem('legsno', this.legsnum);
+      localStorage.setItem('hflag', flag);
+      }
+
       console.log("legs no.:", this.legsnum);
       this.router.navigate(['customer/orderview/:id/editlegs']);
       this.modalService.dismissAll();
     }
   }
   getMatch(event) {
+
+
+    
+    const legsCount = this.data[0].legsCount;
+
+    if(event < legsCount)
+    {
+      this.legseditflag =1;
+      
+    }
     
     const legsvalue = localStorage.getItem('legsaftersave');
     if(legsvalue === null){

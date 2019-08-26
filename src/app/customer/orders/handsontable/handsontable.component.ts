@@ -9,23 +9,24 @@ import { LappRestService } from '../../../core/rest-service/LappRestService';
   styleUrls: ['./handsontable.component.css']
 })
 export class HandsontableComponent implements OnInit {
-  // private hotRegisterer = new HotTableRegisterer();
+   private hotRegisterer = new HotTableRegisterer();
   rownum: any;
-  // tabledata: any;
+  tabledata: any;
   msg: string;
   errorMsg: string;
+  firsttime: number =1;
   errorMessage: string;
   flag: number =1;
-  // id = 'hotInstance';
-  // colmin = 3;
-  // title = 'sampledemo';
-  // col = ['L', 'R', 'O'];
+  id = 'hotInstance';
+  colmin = 3;
+  title = 'sampledemo';
+  col = ['L', 'R', 'O'];
 
-  // columns: object[] = [
-  //   { data: 'L', title: 'L' },
-  //   { data: 'R', title: 'R' },
-  //   { data: 'O', title: 'O' },
-  // ];
+  columns: object[] = [
+    { data: 'L', title: 'L' },
+    { data: 'R', title: 'R' },
+    { data: 'O', title: 'O' },
+  ];
   data: any;
   newAttribute = {};
   items = [];
@@ -40,6 +41,18 @@ export class HandsontableComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const lnum = JSON.parse(localStorage.getItem('legsno'));
+    const hflag = JSON.parse(localStorage.getItem('hflag'));
+console.log('Legs count', this.rownum)
+    if(hflag === 1)
+    {
+      this.firsttime = 1;
+    }
+    else{
+      this.firsttime = 0;
+    }
+   
     this.getMarkingTextDetails();
     this.setFormArray();
   }
@@ -72,10 +85,66 @@ export class HandsontableComponent implements OnInit {
     })
   }
 
-  // saveData() {
-  //   this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
-  //   //console.log("handson table ==>",tabledata)
-  // }
+  saveData() {
+    this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
+    //console.log("handson table ==>",tabledata)
+
+   let harray=[];
+
+this.tabledata.forEach(element => {
+
+    harray.push({"leftText": element[0],"middleText": element[1],"rightText": element[2] })
+  
+});
+
+    console.log("h array=>", harray);
+
+    const lineitemId = localStorage.getItem('lineitemid');
+    const legs = localStorage.getItem('legsno');
+    let emailId = localStorage.getItem('username');
+    const lineitemno = localStorage.getItem('lineItemNo');
+
+    for (let i = 0; i < harray.length; i++) {
+      this.markingTestTempArray.push({
+        "leftText": harray[i].leftText,
+        "rightText": harray[i].middleText,
+        "middleText": harray[i].rightText,
+        "notifyUser": "",
+        "updatedBy": emailId,
+        "lineItemnumber": lineitemno
+       })
+    }
+    this.params = {
+      "lineItemId": lineitemId,
+      "isSubmit": false,
+      "legsCount": legs,
+      "emailId": emailId,
+      "markingTextList": this.markingTestTempArray
+    }
+    this.objService.Post('addMarkingText', this.params).subscribe(response => {
+      console.log('Save', response);
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = response.successMessage;
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+       // this.getMarkingTextDetails();
+      }
+      else if (response.statusMessage === 'error') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+       // this.getMarkingTextDetails();
+      }
+    })
+ 
+   this.items= this.markingTestTempArray;
+   localStorage.setItem('legsaftersave', legs )
+
+}
+
+
   submit(markingTextForm) {
     const values = markingTextForm.arr;
     console.log('Values',values.length)
@@ -118,7 +187,7 @@ export class HandsontableComponent implements OnInit {
         this.getMarkingTextDetails();
       }
     })
-   this.flag = 2;
+ 
    this.items= this.markingTestTempArray;
    localStorage.setItem('legsaftersave', legs )
   }
@@ -131,25 +200,25 @@ export class HandsontableComponent implements OnInit {
    console.log(this.markingTextForm.value.arr[i])
     
   }
-  // submitData() {
-  //   console.log("TABLE data=>", this.tabledata)
-  //   for (let lineItem of this.tabledata) {
-  //     for (let singleValue of lineItem) {
-  //       console.log("data=>", singleValue)
+  submitData() {
+    console.log("TABLE data=>", this.tabledata)
+    for (let lineItem of this.tabledata) {
+      for (let singleValue of lineItem) {
+        console.log("data=>", singleValue)
 
-  //       if (singleValue === null) {
-  //         this.errorMessage = "Please Fill All the Fields...!";
-  //         return;
-  //       }
-  //     }
+        if (singleValue === null) {
+          this.errorMessage = "Please Fill All the Fields...!";
+          return;
+        }
+      }
 
-  //     console.log("single row=>", lineItem)
-  //   }
-  // }
+      console.log("single row=>", lineItem)
+    }
+  }
 
-  // getColumns = (column) => {
-  //   return this.columns[column];
-  // };
+  getColumns = (column) => {
+    return this.columns[column];
+  };
 
   goPrevious() {
     this.router.navigate(['customer/orderview/:id'])
