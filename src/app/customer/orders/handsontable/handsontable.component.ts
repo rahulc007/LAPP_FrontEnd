@@ -9,14 +9,14 @@ import { LappRestService } from '../../../core/rest-service/LappRestService';
   styleUrls: ['./handsontable.component.css']
 })
 export class HandsontableComponent implements OnInit {
-   private hotRegisterer = new HotTableRegisterer();
+  private hotRegisterer = new HotTableRegisterer();
   rownum: any;
   tabledata: any;
   msg: string;
   errorMsg: string;
-  firsttime: number =1;
+  firsttime: number = 1;
   errorMessage: string;
-  flag: number =1;
+  flag: number = 1;
   id = 'hotInstance';
   colmin = 3;
   title = 'sampledemo';
@@ -35,42 +35,31 @@ export class HandsontableComponent implements OnInit {
   markingTextForm: FormGroup;
   markingTextEditForm: FormGroup
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService) {
-    this.markingTextForm = this.fb.group({
-      arr: this.fb.array([])
-    })
+   
   }
 
   ngOnInit() {
-
-    const lnum = JSON.parse(localStorage.getItem('legsno'));
-    const hflag = JSON.parse(localStorage.getItem('hflag'));
-console.log('Legs count', this.rownum)
-    if(hflag === 1)
-    {
-      this.firsttime = 1;
-    }
-    else{
-      this.firsttime = 0;
-    }
-   
+  
     this.getMarkingTextDetails();
-    this.setFormArray();
   }
   getMarkingTextDetails() {
-    const lineitemId = localStorage.getItem('lineitemid');
-    this.objService.Get('getMarkingText?lineItemid=' + lineitemId, this.params).subscribe( response => {
-      console.log('response',response);
-      if(response.markingTextList.length === 0) {
-        this.rownum = localStorage.getItem('legsno');
-        console.log("row number", this.rownum)
-        for (let i = 0; i < this.rownum; i++) {
-          this.items.push(this.newAttribute);
-        }
-        this.setFormArray();
+
+    const lineitemno = localStorage.getItem('lineItemNo');
+    this.objService.Get('getMarkingText?lineItemid=' + lineitemno, this.params).subscribe(response => {
+      console.log('response length', response.markingTextList.length);
+      if (response.markingTextList.length === 0) {
+          this.firsttime = 1;
+          this.rownum = localStorage.getItem('legsno');
       }
       else {
+        this.firsttime = 0;
+        
+        this.markingTextForm = this.fb.group({
+          arr: this.fb.array([])
+        })
         this.items = response.markingTextList;
-      }
+        this.setFormArray();
+      } 
     })
   }
   setFormArray() {
@@ -89,13 +78,13 @@ console.log('Legs count', this.rownum)
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
     //console.log("handson table ==>",tabledata)
 
-   let harray=[];
+    let harray = [];
 
-this.tabledata.forEach(element => {
+    this.tabledata.forEach(element => {
 
-    harray.push({"leftText": element[0],"middleText": element[1],"rightText": element[2] })
-  
-});
+      harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
+
+    });
 
     console.log("h array=>", harray);
 
@@ -112,7 +101,7 @@ this.tabledata.forEach(element => {
         "notifyUser": "",
         "updatedBy": emailId,
         "lineItemnumber": lineitemno
-       })
+      })
     }
     this.params = {
       "lineItemId": lineitemId,
@@ -128,26 +117,24 @@ this.tabledata.forEach(element => {
         setTimeout(() => {
           this.msg = '';
         }, 3000);
-       // this.getMarkingTextDetails();
+        // this.getMarkingTextDetails();
       }
       else if (response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
         setTimeout(() => {
           this.errorMsg = '';
         }, 3000);
-       // this.getMarkingTextDetails();
+        // this.getMarkingTextDetails();
       }
     })
- 
-   this.items= this.markingTestTempArray;
-   localStorage.setItem('legsaftersave', legs )
 
-}
+
+  }
 
 
   submit(markingTextForm) {
     const values = markingTextForm.arr;
-    console.log('Values',values.length)
+    console.log('Values', values.length)
     const lineitemId = localStorage.getItem('lineitemid');
     const legs = localStorage.getItem('legsno');
     let emailId = localStorage.getItem('username');
@@ -161,7 +148,7 @@ this.tabledata.forEach(element => {
         "notifyUser": "",
         "updatedBy": emailId,
         "lineItemnumber": lineitemno
-       })
+      })
     }
     this.params = {
       "lineItemId": lineitemId,
@@ -187,18 +174,16 @@ this.tabledata.forEach(element => {
         this.getMarkingTextDetails();
       }
     })
- 
-   this.items= this.markingTestTempArray;
-   localStorage.setItem('legsaftersave', legs )
+
   }
- 
+
   edit() {
-    this.items= this.markingTextForm.value.arr;
-    console.log('items',this.items)
+    this.items = this.markingTextForm.value.arr;
+    console.log('items', this.items)
   }
   editMarkText(i) {
-   console.log(this.markingTextForm.value.arr[i])
-    
+    console.log(this.markingTextForm.value.arr[i])
+
   }
   submitData() {
     console.log("TABLE data=>", this.tabledata)

@@ -176,7 +176,12 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
         }
       }
       else if (datas.status === 200 && datas.errorMessage != null) {
-          this.errorMsg = this.translate.instant('errormessages') ;
+        if(datas.errorMessage === 'EmailId already exists..!'){
+          this.errorMsg = this.translate.instant('errormessages.0') ;
+        }
+          else if(datas.errorMessage === 'Customer ID already exists..!'){
+            this.errorMsg = this.translate.instant('errormessages.1') ;
+          }
       }
     })
 

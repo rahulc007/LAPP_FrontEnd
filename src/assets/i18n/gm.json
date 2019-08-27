@@ -114,5 +114,5 @@
     "providevalidpassword":"Bitte geben Sie ein gültiges Passwort an",
     "allorders":"Alle Bestellungen",
     "myoders":"meine Bestellungen",
-    "errormessages":"EmailId oder Kundennummer existiert bereits ..!"
+    "errormessages":["EmailId existiert bereits ..!","Kundennummer existiert bereits ..!"]
 }

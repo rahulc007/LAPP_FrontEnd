@@ -120,6 +120,6 @@
     "allorders":"All Orders",
     "myoders":"My Orders",
     "uploadstatus":"Upload Status",
-    "errormessages":"EmailId or Customer ID already exists..!"
+    "errormessages":["EmailId already exists..!","Customer ID already exists..!"]
     
 }

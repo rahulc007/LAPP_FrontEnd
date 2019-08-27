@@ -30,7 +30,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   pageOfItems = [];
   baseUrl:any;
   data:any[]=[];
-  
+  flag: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef) { }
@@ -81,7 +81,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
    
     
     console.log('line item no', this.data[0]);
-    this.objService.Get('getMarkingText?lineItemid=' + lineitemId, this.param).subscribe( response => {
+    this.objService.Get('getMarkingText?lineItemid=' + lineitemno, this.param).subscribe( response => {
       console.log('response',response);
     })
     this.modalService.open(this.legscontent)
@@ -103,17 +103,17 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     else {
 
      
-      let flag=0;
+     this.flag=0;
       const legsCount = this.data[0].legsCount;
 
       if(legsCount === 0 || legsCount === '') {
-        flag=1;
+        this.flag=1;
         localStorage.setItem('legsno',  this.legsnum);
-        localStorage.setItem('hflag', flag);
+        localStorage.setItem('hflag', this.flag);
       } else {
-        flag=0;
+        this.flag=0;
       localStorage.setItem('legsno', this.legsnum);
-      localStorage.setItem('hflag', flag);
+      localStorage.setItem('hflag', this.flag);
       }
 
       console.log("legs no.:", this.legsnum);
@@ -122,23 +122,13 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     }
   }
   getMatch(event) {
-
-
-    
     const legsCount = this.data[0].legsCount;
-
     if(event < legsCount)
     {
-      this.legseditflag =1;
-      
+      this.legseditflag = 1;
     }
-    
-    const legsvalue = localStorage.getItem('legsaftersave');
-    if(legsvalue === null){
-      return;
-    }
-    else if (legsvalue < event || legsvalue > event ) {
-      alert('You have altered the number of legs please confirm');
+    else {
+      this.legseditflag = 0;
     }
   }
 }
