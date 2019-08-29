@@ -120,6 +120,15 @@
     "allorders":"All Orders",
     "myoders":"My Orders",
     "uploadstatus":"Upload Status",
-    "errormessages":["EmailId already exists..!","Customer ID already exists..!"]
+    "errormessages":["EmailId already exists..!","Customer ID already exists..!"],
+    "uploadformat":"Please Upload Excel in the below Format",
+    "back":"Back",
+    "alteredanddelete":"You have altered number of legs remaining rows will be deleted",
+    "Conform":"Conform",
+    "marktextexcel":"Marking Text Excel",
+    "lefttext":"Left Marking Text",
+    "middletext":"Middle Marking Text",
+    "righttext":"Right Marking Text"
+    
     
 }

@@ -114,5 +114,13 @@
     "providevalidpassword":"Bitte geben Sie ein gültiges Passwort an",
     "allorders":"Alle Bestellungen",
     "myoders":"meine Bestellungen",
-    "errormessages":["EmailId existiert bereits ..!","Kundennummer existiert bereits ..!"]
+    "errormessages":["EmailId existiert bereits ..!","Kundennummer existiert bereits ..!"],
+    "uploadformat":"Bitte laden Sie Excel im unten angegebenen Format hoch",
+    "back":"Zurück",
+    "alteredanddelete":"Sie haben die Anzahl der verbleibenden Strecken geändert. Die verbleibenden Reihen werden gelöscht",
+    "Conform":"Anpassen",
+    "marktextexcel":"Text Excel markieren",
+    "lefttext":"Linke Markierung Text",
+    "middletext":"Mittlerer Markierungstext",
+    "righttext":"Rechter Markierungstext"
 }
