@@ -52,7 +52,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
   params: any;
   downflag = 0;
   smailId: any;
-
+  citydisabled =0;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private modalService: NgbModal, private translate: TranslateService,
     private cdr: ChangeDetectorRef) {
@@ -254,6 +254,11 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
     this.citiesData = stateData.Cities;
     if (this.citiesData.length === 0) {
       this.city = "''";
+      this.citydisabled = 1;
+    }
+    else if(this.citiesData.length !== 0){
+      this.citiesData = stateData.Cities;
+      this.citydisabled = 0;
     }
   }
   getcountrycode(country) {
