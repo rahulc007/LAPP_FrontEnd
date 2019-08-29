@@ -48,12 +48,17 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       { key: 'customerNo', title: 'Customer Number' },
       { key: 'customerPartNo', title: 'Customer Part Number' }, 
       { key: 'articleNo', title: 'Artical Number' }, 
+      { key:'description', title:'Description'},
       { key: 'length', title: ' Length' }, 
       { key: 'lineItemId', title: 'Line Item ID' }, 
       { key: 'lineItemno', title: 'Line Item Number' },
-      { key: 'prodOrderno', title: 'Product Order Number' },
+      { key:'productionOrderStatus', title:'Production Order Status'},
+      { key:'productionOrderno', title:'Production Order Number'},
+   //   { key: 'prodOrderno', title: 'Product Order Number' },
       { key: 'quantity', title: 'Quantity' },
       { key: 'updatedBy', title: 'Updated By' },
+      { key:'createdDate', title:'Created Date'},
+      { key:'modifiedDate', title:'Modified Date'},
       {key: 'Actions', title: 'Edit', searchEnabled: false,cellTemplate: this.Ver}
     ];
   }

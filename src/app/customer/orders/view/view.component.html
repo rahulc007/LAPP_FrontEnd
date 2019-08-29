@@ -1,29 +1,30 @@
+<h2 class="page_heading new_order">{{'myoders'| translate}}</h2>
 <div class="table table-bordered table-striped">
-    <ngx-table [configuration]="configuration"
-    [data]="data"
-    [columns]="columns">
-</ngx-table>
-<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">
+    </ngx-table>
+    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
         <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-            <a (click)="loadPage(page=1)"  class="page-link">First</a>
+            <a (click)="loadPage(page=1)" class="page-link">First</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-            <a (click)="loadPage(page= pager.currentPage - 1)"  class="page-link">Previous</a>
+            <a (click)="loadPage(page= pager.currentPage - 1)" class="page-link">Previous</a>
         </li>
-        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-            <a (click)="loadPage(page= page)"  class="page-link">{{page}}</a>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"
+            class="page-item number-item">
+            <a (click)="loadPage(page= page)" class="page-link">{{page}}</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-            <a (click)="loadPage(page= pager.currentPage + 1)"  class="page-link">Next</a>
+            <a (click)="loadPage(page= pager.currentPage + 1)" class="page-link">Next</a>
         </li>
         <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-            <a (click)="loadPage(page= pager.totalPages)"  class="page-link">Last</a>
+            <a (click)="loadPage(page= pager.totalPages)" class="page-link">Last</a>
         </li>
     </ul>
-    </div>
-    
-    <ng-template #ver let-row let-rowIndex="rowIndex">
-                
-        <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row, rowIndex)" ><i class="fa fa-eye" aria-hidden="true"></i></button>
-        
-    </ng-template>
+</div>
+
+<ng-template #ver let-row let-rowIndex="rowIndex">
+    <!-- <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row, rowIndex)" ><i class="fa fa-eye" aria-hidden="true"></i></button> -->
+    <a class="ml-2" (click)="orderview(row, rowIndex)">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+    </a>
+</ng-template>

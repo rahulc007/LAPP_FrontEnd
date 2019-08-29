@@ -7,12 +7,13 @@ import { AppConfig } from '../../configs/app.config';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
   styleUrls: ['./upload-sap-data.component.css'],
-  providers: [ConfigurationService]
+  providers: [ConfigurationService,NgbModal, NgbModalConfig]
 })
 export class UploadSapDataComponent implements OnInit {
   @ViewChild('uploadFile', { static: false }) uploadFile: any;
@@ -33,7 +34,7 @@ export class UploadSapDataComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
-  constructor(private objService: LappRestService) {
+  constructor(private objService: LappRestService,private config: NgbModalConfig, private modalService: NgbModal) {
     this.configuration = ConfigurationService.config;
   }
 
