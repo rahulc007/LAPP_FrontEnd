@@ -42,6 +42,10 @@ export class UploadSapDataComponent implements OnInit {
     file.withCredentials = false;
       this.msg = '';
       this.errorMsg = '';
+
+      let latestFile = this.uploader.queue[this.uploader.queue.length - 1]
+      this.uploader.queue = [];
+      this.uploader.queue.push(latestFile);
     };
 
     this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
