@@ -38,10 +38,9 @@ export class ResetPasswordComponent implements OnInit {
       oldPwd: ['', [Validators.required]],
       newPwd: ['', [Validators.required, Validators.minLength(8), this.passwordOldNewMatcher.bind(this)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
-    });
-
+    }); 
   }
-
+ 
   private progressValue(control: FormControl) {
     if (this.resetForm &&
       (control.value.length != 0)) {
