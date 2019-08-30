@@ -1,4 +1,4 @@
-import { Observable, of, throwError as observableThrowError } from 'rxjs';
+import { Observable, of, throwError as observableThrowError, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
@@ -21,7 +21,14 @@ export class LappRestService {
 
       // TODO: better job of transforming error for user consumption
       // LoggerService.log(`${operation} failed: ${error.message}`);
-
+      let errorMessage = '';
+      if (error.error instanceof ErrorEvent) {
+        errorMessage = `Error: ${error.error.message}`;
+      } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+      window.alert(errorMessage);
+      return throwError(errorMessage);
       if (error.status >= 500) {
         throw error;
       }
@@ -29,9 +36,6 @@ export class LappRestService {
       return of(result as T);
     };
   }
-
-
-
 
   public Get(subUrl: string, params): Observable<any> {   
     return this.http.get<any>(this._BaseUrl + subUrl, { params: params })
