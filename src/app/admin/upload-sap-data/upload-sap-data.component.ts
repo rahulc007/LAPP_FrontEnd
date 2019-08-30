@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 const URL = `http://3.17.182.133:8090/uploadSAPData`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
@@ -7,13 +7,14 @@ import { AppConfig } from '../../configs/app.config';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
-import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
   styleUrls: ['./upload-sap-data.component.css'],
-  providers: [ConfigurationService,NgbModal, NgbModalConfig]
+  providers: [ConfigurationService, NgbModal, NgbModalConfig, NgbTooltipConfig],
+  encapsulation: ViewEncapsulation.None
 })
 export class UploadSapDataComponent implements OnInit {
   @ViewChild('uploadFile', { static: false }) uploadFile: any;
@@ -34,8 +35,10 @@ export class UploadSapDataComponent implements OnInit {
 
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
-  constructor(private objService: LappRestService,private config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(private objService: LappRestService, private config: NgbTooltipConfig,
+    private modalService: NgbModal) {
     this.configuration = ConfigurationService.config;
+    config.triggers = 'click';
   }
 
   ngOnInit() {

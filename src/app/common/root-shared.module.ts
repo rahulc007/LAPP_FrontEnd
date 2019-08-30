@@ -37,7 +37,8 @@ import { LoaderComponent } from './loader/loader.component';
     HeaderComponent,
     ResetPasswordComponent,
     SidebarComponent,
-    LoaderComponent
+    LoaderComponent,
+    NgbModule
   ]
 
 })
