@@ -41,6 +41,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>Index</th>
                             <th>{{'lefttext'| translate}}</th>
                             <th>{{'middletext'| translate}}</th>
                             <th>{{'righttext'| translate}}</th>
@@ -49,6 +50,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let row of items; let $i = index" [formGroupName]="$i">
+                            <td>{{$i + 1}}</td>
                             <td><input type="text" formControlName="leftText"></td>
                             <td><input type="text" formControlName="middleText"></td>
                             <td><input type="text" formControlName="rightText"></td>

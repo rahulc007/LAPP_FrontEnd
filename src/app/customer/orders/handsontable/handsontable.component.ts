@@ -69,9 +69,10 @@ export class HandsontableComponent implements OnInit {
           this.items.push(array[i]);
           }
           else{
-            this.items.push({"leftText":"", "middleText":"", "rightText":""})
+            this.items.push({"leftText":null, "middleText":null, "rightText":null})
           }
         }
+
         this.setFormArray();
       } 
     })
@@ -164,12 +165,16 @@ export class HandsontableComponent implements OnInit {
         "lineItemnumber": lineitemno
       })
     }
+
+    let markingtestArray=[];
+
+    markingtestArray =   this.markingTestTempArray;
     this.params = {
       "lineItemId": lineitemId,
       "isSubmit": false,
       "legsCount": legs,
       "emailId": emailId,
-      "markingTextList": this.markingTestTempArray
+      "markingTextList": markingtestArray 
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       console.log('Save', response);
@@ -196,6 +201,7 @@ export class HandsontableComponent implements OnInit {
     console.log('items', this.items)
   }
   editMarkText(i) {
+    console.log("edit index=>", i)
     console.log(this.markingTextForm.value.arr[i])
 
   }
