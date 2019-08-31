@@ -7,12 +7,12 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {UserService} from '../../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import {LappRestService} from '../../../core/rest-service/LappRestService';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
-  providers:[ConfigurationService]
+  providers:[ConfigurationService, DatePipe]
 })
 export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
 
@@ -33,7 +33,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   flag: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.configuration = ConfigurationService.config;
@@ -71,6 +71,10 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     let emailId = localStorage.getItem('username');
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
       this.data = response.orderInfoList[i].orderLineItem;
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+      }) 
       this.legsnum = this.data[0].legsCount;
       
     })

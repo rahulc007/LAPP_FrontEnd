@@ -27,7 +27,7 @@ import { HotTableModule } from 'ng2-handsontable';
 import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from '../core/services/jwt.interceptor';
 import { UploadStatusComponent } from './upload-status/upload-status.component'
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent, UploadStatusComponent],
@@ -42,7 +42,8 @@ import { UploadStatusComponent } from './upload-status/upload-status.component'
     FormsModule,
     TableModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
     
   ],
   exports:[NgxEasyTableComponent, PaginationComponent],
