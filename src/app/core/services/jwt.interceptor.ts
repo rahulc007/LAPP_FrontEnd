@@ -27,7 +27,10 @@ export class JwtInterceptor implements HttpInterceptor {
                 this.loaderService.hide();
             }
         },
-            (err:Error) => { alert(err); this.loaderService.hide() },
+            (err:Error) => {
+                 alert(err.message);
+                 
+                this.loaderService.hide() },
         ));
 
        

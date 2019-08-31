@@ -51,7 +51,7 @@
                                     <h5>{{'DownloadExcel'| translate}}</h5>
                                 </div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
+                        <div *ngIf="isAdmin" class="col-sm-6 col-md-6 col-lg-3">
                             <span [routerLink]="['/admin/profile']">
                             <div class="cntnt_box box3">
                                     <div class="dashboard_icon prfile"></div>

@@ -38,7 +38,7 @@
                     <a href="#" [routerLink]="['uploadstatus']" [routerLinkActive]="['is-active']" class="menu_icon upload">{{'uploadstatus'| translate}}</a>
                 </li>
 
-            <li *ngIf="isCustomer">
+            <li *ngIf="isAdmin || isCustomer">
                 <a href="#" [routerLink]="['profile']" [routerLinkActive]="['is-active']" class="menu_icon prfile">{{'profile'| translate}}</a>
             </li>
             

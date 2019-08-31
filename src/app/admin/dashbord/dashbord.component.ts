@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { PasswordStrengthService } from '../../common/password-strength/password-strength.service';
 import { TranslateService } from '@ngx-translate/core';
+import { userTypes } from '../../common/constants/constants';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -17,10 +18,22 @@ export class DashbordComponent implements OnInit {
   passwordReseted: boolean = false;
   isErrorMessage: boolean = false;
   resetMessage: string = '';
+  isAdmin: boolean = false;
+  isSuperAdmin: boolean = false;
+  isCustomer: boolean = false;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private passwordStrengthService: PasswordStrengthService, private translate: TranslateService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.showResetPopUp = objUserDetails.firstTimeLogin;
+    if (objUserDetails.userType == userTypes.superAdmin) {
+      this.isSuperAdmin = true;
+    }
+    if (objUserDetails.userType == userTypes.admin) {
+      this.isAdmin = true;
+    }
+    if (objUserDetails.userType == userTypes.customer) {
+      this.isCustomer = true;
+    }
   }
 
   ngOnInit() {

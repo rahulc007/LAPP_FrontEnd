@@ -51,9 +51,9 @@
                     <tbody>
                         <tr *ngFor="let row of items; let $i = index" [formGroupName]="$i">
                             <td>{{$i + 1}}</td>
-                            <td><input type="text" formControlName="leftText"></td>
-                            <td><input type="text" formControlName="middleText"></td>
-                            <td><input type="text" formControlName="rightText"></td>
+                            <td><input type="text" formControlName="leftText" [attr.disabled]="enableRow[$i] ==='yes'?true:null"></td>
+                            <td><input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null"></td>
+                            <td><input type="text" formControlName="rightText" [attr.disabled]="enableRow[$i] ==='yes'?true:null"></td>
                             <td ><i class="fa fa-edit ml-2" (click)="editMarkText($i)"></i></td>
                         </tr>
                     </tbody>

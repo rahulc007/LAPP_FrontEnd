@@ -21,7 +21,7 @@ export class HandsontableComponent implements OnInit {
   colmin = 3;
   title = 'sampledemo';
   col = ['L', 'R', 'O'];
-
+  enableRow=[]
   columns: object[] = [
     { data: 'L', title: 'L' },
     { data: 'R', title: 'R' },
@@ -41,6 +41,10 @@ export class HandsontableComponent implements OnInit {
   ngOnInit() {
   
     this.getMarkingTextDetails();
+    this.rownum = localStorage.getItem('legsno');
+    for(let i=0; i<=this.rownum ; i++) {
+      this.enableRow[i]='yes'
+    }
   }
   getMarkingTextDetails() {
 
@@ -74,6 +78,7 @@ export class HandsontableComponent implements OnInit {
         }
 
         this.setFormArray();
+        // this.disableInputs();
       } 
     })
   }
@@ -88,7 +93,13 @@ export class HandsontableComponent implements OnInit {
       )
     })
   }
-
+  // disableInputs() {
+  //   (<FormArray>this.markingTextForm.get('arr'))
+  //     .controls
+  //     .forEach(control => {
+  //       control.disable();
+  //     })
+  // }
   saveData() {
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
     //console.log("handson table ==>",tabledata)
@@ -196,13 +207,11 @@ export class HandsontableComponent implements OnInit {
 
   }
 
-  edit() {
-    this.items = this.markingTextForm.value.arr;
-    console.log('items', this.items)
-  }
+ 
   editMarkText(i) {
     console.log("edit index=>", i)
-    console.log(this.markingTextForm.value.arr[i])
+    console.log(this.markingTextForm.value.arr[i]);
+    this.enableRow[i] = 'no';
 
   }
   submitData() {

@@ -21,14 +21,14 @@ export class LappRestService {
 
       // TODO: better job of transforming error for user consumption
       // LoggerService.log(`${operation} failed: ${error.message}`);
-      let errorMessage = '';
-      if (error.error instanceof ErrorEvent) {
-        errorMessage = `Error: ${error.error.message}`;
-      } else {
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      }
-      window.alert(errorMessage);
-      return throwError(errorMessage);
+      // let errorMessage = '';
+      // if (error.error instanceof ErrorEvent) {
+      //   errorMessage = `Error: ${error.error.message}`;
+      // } else {
+      //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      // }
+      // window.alert(errorMessage);
+      // return throwError(errorMessage);
       if (error.status >= 500) {
         throw error;
       }

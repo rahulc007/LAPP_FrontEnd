@@ -181,6 +181,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .dashboard_cntnts .cntnt_box h5{
   /* font-weight: bold; */
@@ -206,46 +207,86 @@
 .dashboard_icon{
   display: block;
   width: 100%;
-  height: 50px;
+  height: 45px;
   margin-bottom: 15px;
 }
 .dashboard_icon.upload{
+  background: url('../../../assets/images/menu_icons/upload_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .upload{
   background: url('../../../assets/images/menu_icons/upload.png') no-repeat;
   background-size: contain;
 }
-.dashboard_icon.upload{
-  background: url('../../../assets/images/menu_icons/upload.png') no-repeat;
-  background-size: contain;
-}
+
 .dashboard_icon.new_order{
+  background: url('../../../assets/images/menu_icons/newordr_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .new_order{
   background: url('../../../assets/images/menu_icons/newordr.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.updtd_order{
+  background: url('../../../assets/images/menu_icons/updatedordr_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .updtd_order{
   background: url('../../../assets/images/menu_icons/updatedordr.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.prcsd_order{
+  background: url('../../../assets/images/menu_icons/procesedordr_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .prcsd_order{
   background: url('../../../assets/images/menu_icons/procesedordr.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.prvs_order{
+  background: url('../../../assets/images/menu_icons/prvsordr_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .prvs_order{
   background: url('../../../assets/images/menu_icons/prvsordr.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.dwnload{
+  background: url('../../../assets/images/menu_icons/download_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .dwnload{
   background: url('../../../assets/images/menu_icons/download.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.prfile{
+  background: url('../../../assets/images/menu_icons/prfile_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .prfile{
   background: url('../../../assets/images/menu_icons/prfile.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.custmr_dtls{
+  background: url('../../../assets/images/menu_icons/custmrdtls_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .custmr_dtls{
   background: url('../../../assets/images/menu_icons/custmrdtls.png') no-repeat;
   background-size: contain;
 }
+
 .dashboard_icon.creat_usrs{
+  background: url('../../../assets/images/menu_icons/createusr_white.png') no-repeat;
+  background-size: contain;
+}
+.cntnt_box:hover .creat_usrs{
   background: url('../../../assets/images/menu_icons/createusr.png') no-repeat;
   background-size: contain;
 }
