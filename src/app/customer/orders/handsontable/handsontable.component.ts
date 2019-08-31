@@ -45,7 +45,7 @@ export class HandsontableComponent implements OnInit {
   getMarkingTextDetails() {
 
     const lineitemno = localStorage.getItem('lineItemNo');
-    this.objService.Get('getMarkingText?lineItemid=' + lineitemno, this.params).subscribe(response => {
+    this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
       console.log('response length', response.markingTextList.length);
       if (response.markingTextList.length === 0) {
           this.firsttime = 1;
@@ -56,8 +56,22 @@ export class HandsontableComponent implements OnInit {
         
         this.markingTextForm = this.fb.group({
           arr: this.fb.array([])
-        })
-        this.items = response.markingTextList;
+        });
+        this.rownum = localStorage.getItem('legsno');
+        let array=[];
+        array = response.markingTextList;
+
+        
+        for (let i=0;i< this.rownum;i++)
+        {
+          if(array[i])
+          {
+          this.items.push(array[i]);
+          }
+          else{
+            this.items.push({"leftText":"", "middleText":"", "rightText":""})
+          }
+        }
         this.setFormArray();
       } 
     })
