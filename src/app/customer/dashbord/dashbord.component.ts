@@ -69,9 +69,17 @@ export class DashbordComponent implements OnInit {
           this.resetForm.reset();
           this.submitted = false;
           this.resetMessage = this.translate.instant('passwordupdatedsuccess');
+          setTimeout(()=> {
+            this.resetMessage ='';
+            this.showResetPopUp = false;
+       }, 3000);
           this.strText = '';
         } else {
           this.resetMessage = this.translate.instant('providevalidpassword');
+          setTimeout(()=> {
+            this.resetMessage ='';
+            // this.showResetPopUp = false;
+       }, 3000);
           this.isErrorMessage = true;
           this.strText = '';
         }

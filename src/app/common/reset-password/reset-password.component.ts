@@ -86,11 +86,17 @@ export class ResetPasswordComponent implements OnInit {
         if (res.status === 200 && res.statusMessage == 'success') {
           this.resetMessage = this.translate.instant('passwordupdatedsuccess');
           this.resetForm.reset();
+          setTimeout(()=> {
+            this.resetMessage ='';
+       }, 3000);
           this.submitted = false;
           this.strText = '';
         } else {
           this.isErrorMessage = true;
           this.resetMessage = this.translate.instant('providevalidpassword');
+          setTimeout(()=> {
+            this.resetMessage ='';
+       }, 3000);
         }
       },
         error => {

@@ -25,6 +25,7 @@ export class DashbordComponent implements OnInit {
     private passwordStrengthService: PasswordStrengthService, private translate: TranslateService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.showResetPopUp = objUserDetails.firstTimeLogin;
+   
     if (objUserDetails.userType == userTypes.superAdmin) {
       this.isSuperAdmin = true;
     }
@@ -82,9 +83,17 @@ export class DashbordComponent implements OnInit {
           this.submitted = false;
           this.passwordReseted = true;
           this.resetMessage = this.translate.instant('passwordupdatedsuccess');
+          setTimeout(()=> {
+            this.resetMessage ='';
+            this.showResetPopUp = false
+       }, 3000);
           this.strText = '';
         } else {
           this.resetMessage = this.translate.instant('providevalidpassword');
+          setTimeout(()=> {
+            this.resetMessage ='';
+          //  this.showResetPopUp = false
+       }, 3000);
           this.isErrorMessage = true;
           this.strText = '';
         }

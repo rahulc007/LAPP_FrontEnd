@@ -68,11 +68,11 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   } 
   private loadPage(page) {
     // get page of items from api
-    this.http.get<any>(`http://localhost:4000/items?page=${page }`).subscribe(x => {
-        this.pager = x.pager;
-        this.pageOfItems = x.pageOfItems;
-        this.data = this.pageOfItems
-    });
+    // this.http.get<any>(`http://localhost:4000/items?page=${page }`).subscribe(x => {
+    //     this.pager = x.pager;
+    //     this.pageOfItems = x.pageOfItems;
+    //     this.data = this.pageOfItems
+    // });
   }
   goPrevious() {
     this.router.navigate(['admin/neworders']);
