@@ -32,7 +32,7 @@ export class UploadSapDataComponent implements OnInit {
   errorMsg: string = '';
   sapData: any;
   fileStatus:boolean;
-
+  errMsg: any;
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
   constructor(private objService: LappRestService, private config: NgbTooltipConfig,
@@ -64,6 +64,7 @@ export class UploadSapDataComponent implements OnInit {
         this.getUploadedData();
       } else if (data.statusMessage == "error") {
         this.errorMsg = "show";
+        this.errMsg = data.errorMessage;
         setTimeout(()=> {
           this.errorMsg ='';
      }, 3000);

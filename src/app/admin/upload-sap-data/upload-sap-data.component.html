@@ -6,7 +6,8 @@
 </div>
 <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
     <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-    <span id="alertErrMsg">{{'pleaseuploadwithvalidheaders'| translate}}</span>
+    <span>{{errMsg}}</span>
+    <span class="ml-2" id="alertErrMsg">{{'pleaseuploadwithvalidheaders'| translate}}</span>
 </div>
 
 <div class="row">
