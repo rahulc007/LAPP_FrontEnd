@@ -1,11 +1,10 @@
 <div class="row">
-    <div class="col-md-3">
-        <h4>{{'marktextexcel'| translate}}</h4>
-    </div>
-    <div class="col-md-2 offset-md-7">
-        <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
+    <div class="col">
+        <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
+        <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>  
     </div>
 </div>
+
 <div *ngIf="firsttime === 1">
 <div class="row mt-2">
     <div class="col-md-2"></div>

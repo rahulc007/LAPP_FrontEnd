@@ -7,7 +7,7 @@ import { AppConfig } from '../../configs/app.config';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
-
+import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 @Component({
   selector: 'app-upload-status',
   templateUrl: './upload-status.component.html',
@@ -35,7 +35,7 @@ export class UploadStatusComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
   constructor(private objService: LappRestService) {
-    this.configuration = ConfigurationService.config;
+    this.configuration = DefaultConfig;
   }
 
   ngOnInit() {

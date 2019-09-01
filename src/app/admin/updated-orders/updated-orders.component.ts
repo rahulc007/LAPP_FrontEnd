@@ -6,6 +6,7 @@ import {ConfigurationService} from '../../common/ngx-easy-table/config-service';
 import * as XLSX from 'xlsx';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
+import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 @Component({
   selector: 'app-updated-orders',
   templateUrl: './updated-orders.component.html',
@@ -22,7 +23,7 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewC
   params: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private cdr: ChangeDetectorRef, private objService: LappRestService) { 
-    this.configuration = ConfigurationService.config;
+    this.configuration = DefaultConfig;
   }
 
   ngOnInit() {

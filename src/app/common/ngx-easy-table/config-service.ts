@@ -25,7 +25,7 @@ export class ConfigurationService {
     checkboxes: false,
     resizeColumn: true,
     fixedColumnWidth: false,
-    horizontalScroll: false,
+    horizontalScroll: true,
     draggable: false,
     logger: false,
     showDetailsArrow: false,

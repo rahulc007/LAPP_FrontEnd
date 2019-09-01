@@ -8,7 +8,7 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
 import { NgbModal, NgbModalConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-
+import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
@@ -37,7 +37,7 @@ export class UploadSapDataComponent implements OnInit {
 
   constructor(private objService: LappRestService, private config: NgbTooltipConfig,
     private modalService: NgbModal) {
-    this.configuration = ConfigurationService.config;
+    this.configuration = DefaultConfig;
     config.triggers = 'click';
   }
 
