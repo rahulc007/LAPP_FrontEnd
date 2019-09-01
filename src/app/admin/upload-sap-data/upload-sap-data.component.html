@@ -26,12 +26,15 @@
         [disabled]="!uploader.getNotUploadedItems().length">
          {{'upload'| translate}}
       </button>
+      <button type="button" class="btn p-2 ml-2" placement="bottom" [ngbTooltip]="tipContent" tooltipClass="my-custom-class" container="body">
+        <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 16px;"></i>
+      </button>
   </div>
 </div>
 <ng-template #tipContent>
     <div class="row">
-        <p class="pl-4">Please Upload Excel in the below Format</p>
-        <div class="col">
+        <div class="col-12">
+          <p class="m-0 p-0 text-center">Please Upload Excel in the below Format</p>
             <table class="table">
                 <thead>
                   <tr class="d-flex">
@@ -53,9 +56,7 @@
         </div>
         </div>
 </ng-template>
-<button type="button" class="btn btn-xs btn-orange px-2 mt-5" placement="right" [ngbTooltip]="tipContent" tooltipClass="my-custom-class" container="body">
-  Info
-</button>
+
 
 <div class="row mt-2">
     <div class="col-md-3 mt-5 float-left" *ngIf="isAdmin===1">

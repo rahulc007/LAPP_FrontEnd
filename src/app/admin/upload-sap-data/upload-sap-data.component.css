@@ -53,6 +53,11 @@
     background-size: auto 70%;
     background-position: 10px 5px;
       }
+      .upload_btn:disabled:hover{
+        background: url('../../../assets/images/menu_icons/upload_white.png') no-repeat #f58122;
+    background-size: auto 70%;
+    background-position: 10px 5px;
+      }
 
     @media (max-width: 300px) {
     button {
@@ -85,4 +90,5 @@
   background-color: white;
   color:black;
   font-size: 10px;
+  max-width: 100%;
  }

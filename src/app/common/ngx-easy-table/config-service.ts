@@ -31,7 +31,7 @@ export class ConfigurationService {
     showDetailsArrow: false,
     showContextMenu: false,
     persistState: false,
-    //paginationMaxSize: 5,
+    paginationMaxSize: 5,
     threeWaySort: false,
     tableLayout: {
       style: STYLE.NORMAL, // or STYLE.BIG or STYLE.TINY

@@ -1,6 +1,6 @@
 
   <div id="sidebar" *ngIf="navService.showSideBar" >
-     
+        <div class="menu_cntnr">
         <div class="sidebar-header">
             
             <div class="logo">
@@ -25,13 +25,13 @@
                 <a href="#" [routerLink]="['updatedorders']" [routerLinkActive]="['is-active']" class="menu_icon updtd_order">{{'updateorders'| translate}}</a>
             </li>
             <li>
-                <a href="#" class="menu_icon prcsd_order">{{'processedorders'| translate}}</a>
+                <a class="menu_icon prcsd_order">{{'processedorders'| translate}}</a>
             </li>
             <!-- <li>
                 <a href="#" class="menu_icon prvs_order">{{'previousorders'| translate}}</a>
             </li> -->
             <li>
-                <a href="#" class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
+                <a class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
             </li>
 
             <li *ngIf="isAdmin || isSuperAdmin">
@@ -45,9 +45,10 @@
             <li *ngIf="isAdmin || isSuperAdmin">
                 <a href="#" [routerLink]="['createuser']" [routerLinkActive]="['is-active']" class="menu_icon creat_usrs">{{'CreateUsers'| translate}}</a>
             </li>
-            <li >
-                <a href="#" [routerLink]="['login']" [routerLinkActive]="['is-active']" class="menu_icon logout">{{'logout'| translate}}</a>
-            </li>
         </ul>
-    
+    </div>
+    <div class="sidebar_bottom">
+        <button class="btn btn-orange logout_btn" [routerLink]="['login']">{{'logout'| translate}}</button>
+        <p class="text-center">Powered by <a href="https://www.lappgroup.com/" target="_blank">LAPP</a></p>
+    </div>
     </div>

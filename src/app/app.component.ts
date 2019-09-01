@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';;
 import {environment} from '../environments/environment';
+import { NavToggleService } from '../app/common/nav-toggle-service/navtoggle.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,11 @@ export class AppComponent implements OnInit{
   title = 'lapp';
   language = environment.defaultLang;
 
-  constructor(private translateService: TranslateService){}
+  constructor(private translateService: TranslateService, private navToggleService: NavToggleService){
+    if(window.innerWidth<768){
+      this.navToggleService.showSideBar = false;
+    }
+  }
 
   ngOnInit() {
     console.log(`LANGUAGE =${this.language}`);
@@ -20,4 +25,6 @@ export class AppComponent implements OnInit{
     this.translateService.use(this.language);
 
   }
+
+
 }

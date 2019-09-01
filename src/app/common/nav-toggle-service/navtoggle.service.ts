@@ -10,16 +10,18 @@ export class NavToggleService {
 
     showSideBar:boolean = true;
     screenWidth;
+    resolutionChanged:boolean = false;
     
     toggleSideBar(){
-      this.showSideBar = !this.showSideBar;
-        this.screenWidth = window.innerWidth;
-        console.log("--",this.showSideBar);
-        if(this.screenWidth < 768){
-          console.log("iff--",this.showSideBar);
-          document.getElementById('sidebar').classList.add("active");
-        } else {
-          console.log("elsee--",this.showSideBar);
-        }
+      // if(!this.resolutionChanged && window.innerWidth<768){
+      //   console.log("sidebar--",this.showSideBar);
+      //   this.showSideBar = true;
+      //   this.resolutionChanged = true;
+      // } else {
+        this.showSideBar = !this.showSideBar;
+      // }
+
+
+
     }
 }

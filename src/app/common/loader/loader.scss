@@ -19,6 +19,14 @@ svg {
     background: rgba(255, 255, 255, 0.7);
     z-index: 99999;
 }
+
+.loader_cntnr img{
+	width: 100px;
+    height: 100px;
+    position: absolute;
+    margin: 40vh 47%;
+    display: block;
+}
 .spinner {
 	width: 66px; 
 	height: 66px;	
