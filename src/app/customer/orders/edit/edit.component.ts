@@ -8,6 +8,7 @@ import {UserService} from '../../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import {LappRestService} from '../../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
+import {userTypes} from '../../../common/constants/constants';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -31,6 +32,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   baseUrl:any;
   data:any[]=[];
   flag: any;
+  mflag=0;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -71,12 +73,32 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     let emailId = localStorage.getItem('username');
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
       this.data = response.orderInfoList[i].orderLineItem;
+      let dt= this.data[0].createdDate;
+     
+      let date1 = new Date(dt);
+
+      date1.setDate(date1.getDate() + userTypes.markingtextExpire);
+
+      let today = new Date();
+      
+     
+      let diffDays = date1.getDate() - today.getDate(); 
+     
+     console.log("diffDays",diffDays)
+      if(diffDays==0)
+      {
+        this.mflag=1; //model falg
+      }
+
+
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       }) 
+
+    
       this.legsnum = this.data[0].legsCount;
-      
+     
     })
   }
 
@@ -89,12 +111,29 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     localStorage.setItem('lineItemNo', lineitemno);
    
     
-    console.log('line item no', this.data[0]);
+  
     this.objService.Get('getMarkingText?lineItemid=' + lineitemno, this.param).subscribe( response => {
-      console.log('response',response);
+    
     })
+
+    if(this.mflag!=1)
+
+    {
     this.modalService.open(this.legscontent)
-   
+    }
+    // else{
+    //   const legsCount = this.data[0].legsCount;
+    //   console.log("legs count=>", legsCount)
+    //   localStorage.setItem('legsno =>', legsCount);
+    //   if(legsCount ==0)
+    //   {
+    //     this.flag=1;
+    //   }
+    //   else{
+    //     this.flag=0;
+    //   }
+    //   this.router.navigate(['customer/orderview/:id/editlegs']);
+    // }
   }
 
   goPrevious() {

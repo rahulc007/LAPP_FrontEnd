@@ -36,7 +36,7 @@
               <div class="login_cntnr">
                   <h2 class="text-center font-weight-bold">{{'login' | translate}}</h2>
                   <br />
-                  <form [formGroup]="loginForm" (ngSubmit)="login()">
+                  <form [formGroup]="loginForm" (ngSubmit)="login()" (keydown.enter)="keyDownFunction($event)">
                       <div class="form-group">
                           
                           <input formControlName="username" class="form-control" maxlength="60" type="text" placeholder="{{'username' | translate}}" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />

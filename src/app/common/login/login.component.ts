@@ -59,6 +59,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  keyDownFunction(event) {
+
+    console.log("entered the key")
+    if(event.keyCode == 13) {
+      this.login();
+    }
+  }
+
   getUserIdsFirstWay($event) {
     let userId = (<HTMLInputElement>document.getElementById('userIdFirstWay')).value;
     this.userList1 = [];
