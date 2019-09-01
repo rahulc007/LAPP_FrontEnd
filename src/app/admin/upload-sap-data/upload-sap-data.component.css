@@ -3,6 +3,7 @@
       border-bottom: 1px solid #DFDFDF;
       height: 35px;
       margin-bottom: 3px;
+      position: relative;
     }
     .upload_msg{
       font-size: 12px;
@@ -15,8 +16,10 @@
     }
     
     .file-info {
-    font-size: 0.9em;
-    padding: 10px;
+      font-size: 1em;
+      padding: 8px 0 0;
+      position: absolute;
+      top: 4px;
     }
     .ml {
       margin-right: -84px;
@@ -91,4 +94,10 @@
   color:black;
   font-size: 10px;
   max-width: 100%;
+ }
+ @media (max-width: 576px) {
+  .uploadBtn_sctn{
+    float: right;
+    padding: 0 15px 0 0;
+  }
  }
