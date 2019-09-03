@@ -36,13 +36,13 @@ export class ForgotpasswordComponent implements OnInit {
         this.forgotPassword.reset();
         setTimeout(()=> {
           this.successMsg ='';
-     }, 3000);
+     }, 7000);
       }
       else if(datas.statusMessage === 'error'){
         this.errorMsg = this.translate.instant('emailidnotregistered');
         setTimeout(()=> {
           this.errorMsg ='';
-     }, 3000);
+     }, 5000);
       }
     })
   }

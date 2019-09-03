@@ -160,7 +160,6 @@ export class HandsontableComponent implements OnInit {
 
   submit(markingTextForm) {
     const values = markingTextForm.arr;
-    console.log('Values', values.length)
     const lineitemId = localStorage.getItem('lineitemid');
     const legs = localStorage.getItem('legsno');
     let emailId = localStorage.getItem('username');
@@ -177,31 +176,25 @@ export class HandsontableComponent implements OnInit {
       })
     }
 
-    let markingtestArray=[];
-
-    markingtestArray =   this.markingTestTempArray;
     this.params = {
       "lineItemId": lineitemId,
       "isSubmit": false,
       "legsCount": legs,
       "emailId": emailId,
-      "markingTextList": markingtestArray 
+      "markingTextList": this.markingTestTempArray
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
-      console.log('Save', response);
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = response.successMessage;
         setTimeout(() => {
           this.msg = '';
         }, 3000);
-        this.getMarkingTextDetails();
       }
       else if (response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
         setTimeout(() => {
           this.errorMsg = '';
         }, 3000);
-        this.getMarkingTextDetails();
       }
     })
 
