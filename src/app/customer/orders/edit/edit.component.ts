@@ -85,7 +85,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       let diffDays = date1.getDate() - today.getDate(); 
      
      console.log("diffDays",diffDays)
-      if(diffDays==0)
+      if(diffDays <=0 )
       {
         this.mflag=1; //model falg
       }

@@ -21,22 +21,22 @@
             <li *ngIf="isCustomer">
                 <a href="#" [routerLink]="['neworders']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'myoders'| translate}}</a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#" [routerLink]="['updatedorders']" [routerLinkActive]="['is-active']" class="menu_icon updtd_order">{{'updateorders'| translate}}</a>
-            </li>
+            </li> -->
             <li>
                 <a class="menu_icon prcsd_order">{{'processedorders'| translate}}</a>
             </li>
             <!-- <li>
                 <a href="#" class="menu_icon prvs_order">{{'previousorders'| translate}}</a>
             </li> -->
-            <li>
+            <!-- <li>
                 <a class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
-            </li>
+            </li> -->
 
-            <li *ngIf="isAdmin || isSuperAdmin">
+            <!-- <li *ngIf="isAdmin || isSuperAdmin">
                     <a href="#" [routerLink]="['uploadstatus']" [routerLinkActive]="['is-active']" class="menu_icon upload">{{'uploadstatus'| translate}}</a>
-                </li>
+                </li> -->
 
             <li *ngIf="isAdmin || isCustomer">
                 <a href="#" [routerLink]="['profile']" [routerLinkActive]="['is-active']" class="menu_icon prfile">{{'profile'| translate}}</a>
