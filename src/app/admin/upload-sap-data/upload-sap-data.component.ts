@@ -38,6 +38,7 @@ export class UploadSapDataComponent implements OnInit {
   constructor(private objService: LappRestService, private config: NgbTooltipConfig,
     private modalService: NgbModal) {
     this.configuration = DefaultConfig;
+    this.configuration.searchEnabled = true;
     config.triggers = 'click';
   }
 
@@ -81,11 +82,11 @@ export class UploadSapDataComponent implements OnInit {
     };
     this.getUploadedData();
     this.columns = [
-      { key: 'fileName', title: 'File Name' },
-      { key: 'fileSize', title: 'File Size' },
-      { key: 'orderCount', title: 'Order Count' },
-      { key: 'uploadedBy', title: 'Uploaded By' },
-      { key: 'createdDate', title: 'Created Date' },
+      { key: 'fileName', title: 'File Name', searchEnabled: true },
+      { key: 'fileSize', title: 'File Size', searchEnabled: true },
+      { key: 'orderCount', title: 'Order Count', searchEnabled: true },
+      { key: 'uploadedBy', title: 'Uploaded By' , searchEnabled: true},
+      { key: 'createdDate', title: 'Created Date', searchEnabled: true },
       { key:'fileStatus', title:'Upload Status', searchEnabled: false}
     ]
   }
