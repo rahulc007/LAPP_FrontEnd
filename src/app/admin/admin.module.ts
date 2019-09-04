@@ -28,9 +28,10 @@ import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common
 import {JwtInterceptor} from '../core/services/jwt.interceptor';
 import { UploadStatusComponent } from './upload-status/upload-status.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent, UploadStatusComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent],
   imports: [
     CommonModule,
     HotTableModule,

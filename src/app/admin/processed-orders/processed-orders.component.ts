@@ -8,13 +8,12 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-new-orders',
-  templateUrl: './new-orders.component.html',
-  styleUrls: ['./new-orders.component.css'],
+  selector: 'app-processed-orders',
+  templateUrl: './processed-orders.component.html',
+  styleUrls: ['./processed-orders.component.css'],
   providers: [DatePipe]
 })
-export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
+export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
   configuration: any;
   public columns: any[] = [];
   pager = {};
@@ -23,14 +22,14 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   public data: any[] = [];
   params: any;
   arr: any[] = [];
+
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
-    private cdr: ChangeDetectorRef) {
-    this.configuration = ConfigurationService.config;
-  }
+    private cdr: ChangeDetectorRef) { 
+      this.configuration = ConfigurationService.config;
+    }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.getUploadedOrderDetails();
   }
   getUploadedOrderDetails() {
@@ -40,8 +39,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       this.objService.Get('getOrderDetailsByAdmin?emailId=' + emailId, this.params).subscribe(response => {
       
           for(let i=0; i<response.orderInfoList.length; i++) {
-            if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
-              this.arr.push(response.orderInfoList[i]);
+            if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Not Released") {
+              console.log('status',response.orderInfoList[i].orderLineItem[0].productionOrderStatus)
+              this.arr.push(response.orderInfoList[i].orderLineItem[0]);
             }
           }
         this.data = this.arr;
@@ -55,35 +55,16 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'userEmailId', title: 'User Email ID' },
-      { key: 'oid', title: 'Order ID' },
-      { key: 'orderDate', title: 'Order Date' },
-      { key: 'orderStatus', title: 'Ordrer Status' },
+      { key: 'customerNo', title: 'Customer Number' },
+      { key: 'customerPartNo', title: 'Customer Part Number'},
+      { key: 'productionOrderno', title: 'Production Order Number' },
+      { key:'productionOrderStatus', title:'Production Order Status'},
       { key: 'salesOrderno', title: 'Sales Order Number' },
-      { key: 'countryCode', title: 'Country Code' },
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
-      { key: 'createdBy', title: 'Created By' },
-      { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver }
     ]
   }
   ngAfterViewChecked(){
     this.cdr.detectChanges();
   } 
-  private loadPage(page) {
-    // get page of items from api
-    // this.http.get<any>(`http://localhost:4000/items?page=${page}`).subscribe(x => {
-    //   this.pager = x.pager;
-    //   this.pageOfItems = x.pageOfItems;
-    //   this.data = this.pageOfItems
-    // });
-  }
-
-  ordersview(row, rowIndex) {
-    console.log('id',row.oid)
-    localStorage.setItem('oid', row.oid)
-    localStorage.setItem('index', rowIndex);
-    this.router.navigate(['admin/newordersview', row.oid])
-  }
-
 }

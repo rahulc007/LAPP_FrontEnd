@@ -35,7 +35,7 @@
 <div *ngIf="firsttime===0" >
 <div    class="row">
     <div class="col">
-        <form class="mt-2" [formGroup]="markingTextForm" (ngSubmit)="submit(markingTextForm.value)">
+        <form class="mt-2" [formGroup]="markingTextForm">
             <div formArrayName="arr">
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -58,7 +58,8 @@
                     </tbody>
                 </table>
             </div>
-            <button class="btn btn-orange" type="submit">{{'save'| translate}}</button>
+            <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'save'| translate}}</button>
+            <button class="btn btn-orange ml-2" type="submit"  (click)="submitMarkingText(markingTextForm.value)">{{'submit'| translate}}</button>
         </form>
     </div>
 </div>

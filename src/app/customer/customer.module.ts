@@ -19,9 +19,10 @@ import { HandsontableComponent } from './orders/handsontable/handsontable.compon
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
 import {RootSharedModule} from '../common/root-shared.module';
 import { ResetPasswordComponent } from 'src/app/common/reset-password/reset-password.component';
+import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

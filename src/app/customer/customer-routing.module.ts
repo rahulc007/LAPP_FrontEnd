@@ -8,6 +8,7 @@ import {EditComponent} from './orders/edit/edit.component';
 import {LegseditComponent} from './orders/legsedit/legsedit.component';
 import {HandsontableComponent} from './orders/handsontable/handsontable.component';
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
+import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 
 const basePath = 'customer';
 
@@ -21,6 +22,7 @@ const CustomerRoutes: Routes = [
      { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
      { path: 'orderview/editlegs/:id', component: LegseditComponent, data:{userType:'CUSTOMER'}},
      { path: 'orderview/:id/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
+     { path: 'processedorders', component:ProcessedOrdersComponent, data:{userType:'CUSTOMER'}},
      { path: 'profile', component: CustomerProfileComponent, data:{userType:'CUSTOMER'}}
     ]
     

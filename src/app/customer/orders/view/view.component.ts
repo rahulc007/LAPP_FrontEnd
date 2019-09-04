@@ -23,7 +23,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   pageOfItems = [];
   baseUrl:any;
   data:any[]=[];
-  
+  arr: any[] = [];
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router,private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) { }
@@ -60,7 +60,12 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     let emailId = localStorage.getItem('username');
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.params).subscribe(response => {
-      this.data = response.orderInfoList;
+      for(let i=0; i<response.orderInfoList.length; i++) {
+        if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
+          this.arr.push(response.orderInfoList[i]);
+        }
+      }
+      this.data = this.arr;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
@@ -69,8 +74,8 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
     })
   }
   
-  orderview(row, rowIndex)
-  {
+  orderview(row, rowIndex) {
+    localStorage.setItem('oid', row.oid);
     localStorage.setItem('customerIndex', rowIndex);
     this.router.navigate(['customer/orderview', row.oid]);
   }

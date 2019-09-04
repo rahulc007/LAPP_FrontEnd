@@ -33,6 +33,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   data:any[]=[];
   flag: any;
   mflag=0;
+  array: any[]=[];
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -68,11 +69,17 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
     this.cdr.detectChanges();
   } 
   private loadPage() {
-
+    let orderId=parseInt(localStorage.getItem('oid'));
+    console.log(orderId)
     let i = localStorage.getItem('customerIndex');
     let emailId = localStorage.getItem('username');
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
-      this.data = response.orderInfoList[i].orderLineItem;
+      for(let i=0; i<response.orderInfoList.length; i++) {
+        if(orderId === response.orderInfoList[i].oid) {
+          this.array=response.orderInfoList[i].orderLineItem
+        }
+      }
+      this.data= this.array;
       let dt= this.data[0].createdDate;
      
       let date1 = new Date(dt);
