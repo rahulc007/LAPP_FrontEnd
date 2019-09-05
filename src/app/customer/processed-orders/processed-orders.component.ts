@@ -6,7 +6,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { userTypes } from '../../common/constants/constants';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
-
+import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 @Component({
   selector: 'app-processed-orders',
   templateUrl: './processed-orders.component.html',
@@ -26,7 +26,8 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
-      this.configuration = ConfigurationService.config;
+      this.configuration = DefaultConfig;
+      this.configuration.searchEnabled = true;
      }
 
   ngOnInit() {
