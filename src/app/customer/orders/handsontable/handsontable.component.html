@@ -27,8 +27,8 @@
 </div>
 <div class="row">
     <div class="col-md-4"></div>
-    <div class="col-md-1 text-center"><button class="btn btn-orange" (click)="saveData()">{{'save'| translate}}</button></div>
-    <div class="col-md-1"><button class="btn btn-orange" (click)="submitData()">{{'submit'| translate}}</button></div>
+    <div class="col-md-1"><button class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button></div>
+    <div class="col-md-1 ml-2"><button class="btn btn-md btn-orange" (click)="submitData()">{{'submit'| translate}}</button></div>
 </div>
 </div>
 
@@ -58,7 +58,7 @@
                     </tbody>
                 </table>
             </div>
-            <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'save'| translate}}</button>
+            <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'update'| translate}}</button>
             <button class="btn btn-orange ml-2" type="submit"  (click)="submitMarkingText(markingTextForm.value)">{{'submit'| translate}}</button>
         </form>
     </div>

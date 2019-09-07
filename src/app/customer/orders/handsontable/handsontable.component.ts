@@ -21,7 +21,7 @@ export class HandsontableComponent implements OnInit {
   colmin = 3;
   title = 'sampledemo';
   col = ['L', 'R', 'O'];
-  enableRow=[]
+  enableRow = []
   columns: object[] = [
     { data: 'L', title: 'L' },
     { data: 'R', title: 'R' },
@@ -33,26 +33,26 @@ export class HandsontableComponent implements OnInit {
   params: any;
   markingTestTempArray = [];
   markingTextForm: FormGroup;
-  markingTextEditForm: FormGroup
+  markingTextEditForm: FormGroup;
+
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService) {
-   
+
   }
 
   ngOnInit() {
-  
+
     this.getMarkingTextDetails();
     this.rownum = localStorage.getItem('legsno');
-    for(let i=0; i<=this.rownum ; i++) {
-      this.enableRow[i]='yes'
+    for (let i = 0; i <= this.rownum; i++) {
+      this.enableRow[i] = 'yes'
     }
   }
   getMarkingTextDetails() {
     const lineitemno = localStorage.getItem('lineItemNo');
     this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
-      console.log('response length', response.markingTextList.length);
       if (response.markingTextList.length === 0) {
-          this.firsttime = 1;
-          this.rownum = localStorage.getItem('legsno');
+        this.firsttime = 1;
+        this.rownum = localStorage.getItem('legsno');
       }
       else {
         this.firsttime = 0;
@@ -60,20 +60,18 @@ export class HandsontableComponent implements OnInit {
           arr: this.fb.array([])
         });
         this.rownum = localStorage.getItem('legsno');
-        let array=[];
+        let array = [];
         array = response.markingTextList;
-        for (let i=0;i< this.rownum;i++)
-        {
-          if(array[i])
-          {
-          this.items.push(array[i]);
+        for (let i = 0; i < this.rownum; i++) {
+          if (array[i]) {
+            this.items.push(array[i]);
           }
-          else{
-            this.items.push({"leftText":null, "middleText":null, "rightText":null})
+          else {
+            this.items.push({ "leftText": null, "middleText": null, "rightText": null })
           }
         }
         this.setFormArray();
-      } 
+      }
     })
   }
   setFormArray() {
@@ -87,7 +85,7 @@ export class HandsontableComponent implements OnInit {
       )
     })
   }
- 
+
   saveData() {
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
     let harray = [];
@@ -117,24 +115,66 @@ export class HandsontableComponent implements OnInit {
       "markingTextList": this.markingTestTempArray
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
-      console.log('Save', response);
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = response.successMessage;
         setTimeout(() => {
           this.msg = '';
         }, 3000);
-        // this.getMarkingTextDetails();
       }
       else if (response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
         setTimeout(() => {
           this.errorMsg = '';
         }, 3000);
-        // this.getMarkingTextDetails();
       }
     })
   }
+  submitData() {
+    const lineitemId = localStorage.getItem('lineitemid');
+    const legs = localStorage.getItem('legsno');
+    let emailId = localStorage.getItem('username');
+    const lineitemno = localStorage.getItem('lineItemNo');
 
+    if (this.markingTestTempArray.length === 0) {
+      this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
+      let harray = [];
+      this.tabledata.forEach(element => {
+        harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
+      });
+      for (let i = 0; i < harray.length; i++) {
+        this.markingTestTempArray.push({
+          "leftText": harray[i].leftText,
+          "rightText": harray[i].middleText,
+          "middleText": harray[i].rightText,
+          "notifyUser": "",
+          "updatedBy": emailId,
+          "lineItemnumber": lineitemno
+        })
+      }
+    }
+
+    this.params = {
+      "lineItemId": lineitemId,
+      "isSubmit": true,
+      "legsCount": legs,
+      "emailId": emailId,
+      "markingTextList": this.markingTestTempArray
+    }
+    this.objService.Post('addMarkingText', this.params).subscribe(response => {
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = 'Marking Text Submitted Successfully';
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+      }
+      else if (response.statusMessage === null || response.statusMessage === 'error') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+    })
+  }
 
   editMarkingText(markingTextForm) {
     const values = markingTextForm.arr;
@@ -163,7 +203,7 @@ export class HandsontableComponent implements OnInit {
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = response.successMessage;
+        this.msg = 'Marking Text Labels Edited successfully';
         setTimeout(() => {
           this.msg = '';
         }, 3000);
@@ -192,7 +232,7 @@ export class HandsontableComponent implements OnInit {
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = response.successMessage;
+        this.msg = 'Marking Text Submitted Successfully';
         setTimeout(() => {
           this.msg = '';
         }, 3000);
@@ -205,55 +245,11 @@ export class HandsontableComponent implements OnInit {
       }
     })
   }
- 
+
   editMarkText(i) {
     console.log("edit index=>", i)
     console.log(this.markingTextForm.value.arr[i]);
     this.enableRow[i] = 'no';
-
-  }
-  submitData() {
-    // console.log("TABLE data=>", this.tabledata)
-    // for (let lineItem of this.tabledata) {
-    //   for (let singleValue of lineItem) {
-    //     console.log("data=>", singleValue)
-
-    //     if (singleValue === null) {
-    //       this.errorMessage = "Please Fill All the Fields...!";
-    //       return;
-    //     }
-    //   }
-
-    //   console.log("single row=>", lineItem)
-    // }
-    const lineitemId = localStorage.getItem('lineitemid');
-    const legs = localStorage.getItem('legsno');
-    let emailId = localStorage.getItem('username');
-    const lineitemno = localStorage.getItem('lineItemNo');
-
-    this.params = {
-      "lineItemId": lineitemId,
-      "isSubmit": true,
-      "legsCount": legs,
-      "emailId": emailId,
-      "markingTextList": this.markingTestTempArray
-    }
-    this.objService.Post('addMarkingText', this.params).subscribe(response => {
-      console.log('Save', response);
-      if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = response.successMessage;
-        setTimeout(() => {
-          this.msg = '';
-        }, 3000);
-      }
-      else if (response.statusMessage === 'error') {
-        this.errorMsg = response.errorMessage;
-        setTimeout(() => {
-          this.errorMsg = '';
-        }, 3000);
-      }
-    })
-    
   }
 
   getColumns = (column) => {

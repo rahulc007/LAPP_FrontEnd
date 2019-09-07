@@ -39,7 +39,7 @@
                   <form [formGroup]="loginForm" (ngSubmit)="login()" (keydown.enter)="keyDownFunction($event)">
                       <div class="form-group">
                           
-                          <input formControlName="username" class="form-control" maxlength="60" type="text" placeholder="{{'username' | translate}}" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
+                          <input autofocus formControlName="username" class="form-control" maxlength="60" type="text" placeholder="{{'username' | translate}}" [ngClass]="{ 'is-invalid': submitted && loginForm.controls.username.errors }" required />
                           <div *ngIf="submitted && loginForm.controls.username.errors" class="text-danger">
                             <div *ngIf="loginForm.controls.username.errors.required">{{'Unamerequired' | translate}}</div>
                           </div>
