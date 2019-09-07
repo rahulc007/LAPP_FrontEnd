@@ -45,8 +45,9 @@
                             <tr>
                                 <th>Index</th>
                                 <th>{{'lefttext'| translate}}</th>
-                                <th>{{'middletext'| translate}}</th>
+                             
                                 <th>{{'righttext'| translate}}</th>
+                                <th>{{'middletext'| translate}}</th>
                                 <th>{{'edit'| translate}}</th>
                             </tr>
                         </thead>
@@ -56,11 +57,12 @@
                                 <td>
                                     <input type="text" formControlName="leftText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
-                                <td>
-                                    <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
-                                </td>
+                               
                                 <td>
                                     <input type="text" formControlName="rightText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
+                                </td>
+                                <td>
+                                    <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
                                 <td>
                                     <i class="fa fa-edit ml-2" (click)="editMarkText($i)"></i>

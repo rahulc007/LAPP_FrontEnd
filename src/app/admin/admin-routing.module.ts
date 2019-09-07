@@ -18,7 +18,7 @@ const basePath = 'admin';
 const AdminRoutes: Routes = [
   {
     path: basePath,
-    component: MainpageComponent, canActivate: [AuthGuard],data:{userType:'ADMIN'},
+    component: MainpageComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'},
     children: [{ path: '', redirectTo: 'dashboard', pathMatch: 'full', data:{userType:'ADMIN'} },
     { path: 'dashboard', component: DashbordComponent, canActivate: [AuthGuard],data:{userType:'ADMIN'} },
     { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
@@ -26,7 +26,7 @@ const AdminRoutes: Routes = [
     { path: 'newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'uploadstatus', component: UploadStatusComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
-    { path: 'processedorders', component:ProcessedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},
+    { path: 'processedorders', component: ProcessedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},
     { path: 'profile', component: ViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'customerdetails', component: CustomerDetailsComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} }]

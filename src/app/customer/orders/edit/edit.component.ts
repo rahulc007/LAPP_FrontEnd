@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import {LappRestService} from '../../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
 import {userTypes} from '../../../common/constants/constants';
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -34,6 +35,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   flag: any;
   mflag=0;
   array: any[]=[];
+
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -70,7 +72,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   } 
   private loadPage() {
     let orderId=parseInt(localStorage.getItem('oid'));
-    console.log(orderId)
+
     let i = localStorage.getItem('customerIndex');
     let emailId = localStorage.getItem('username');
     this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.param).subscribe(response => {
@@ -91,7 +93,7 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
      
       let diffDays = date1.getDate() - today.getDate(); 
      
-     console.log("diffDays",diffDays)
+     
       if(diffDays <=0 )
       {
         this.mflag=1; //model falg
@@ -113,19 +115,23 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
   orderview(row) {
     const lineitemId = this.data[0].lineItemId;
     const lineitemno = this.data[0].lineItemno;
+    this.legsnum = this.data[0].legsCount;
     
     localStorage.setItem('lineitemid', lineitemId);
     localStorage.setItem('lineItemNo', lineitemno);
    
-    
+    this.param = {
+      "lineItemid":lineitemno
+    };
   
-    this.objService.Get('getMarkingText?lineItemid=' + lineitemno, this.param).subscribe( response => {
+    // this.objService.Get('getMarkingText', this.param).subscribe( response => {
     
-    })
+    // })
 
     if(this.mflag!=1)
 
     {
+      this.legseditflag=0;
     this.modalService.open(this.legscontent)
     }
     // else{
@@ -171,11 +177,11 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       localStorage.setItem('hflag', this.flag);
       }
 
-      console.log("legs no.:", this.legsnum);
       this.router.navigate(['customer/orderview/:id/editlegs']);
       this.modalService.dismissAll();
     }
   }
+  
   getMatch(event) {
     const legsCount = this.data[0].legsCount;
     if(event < legsCount)
@@ -186,4 +192,10 @@ export class EditComponent implements OnInit , AfterViewInit, AfterViewChecked{
       this.legseditflag = 0;
     }
   }
+
+  closeModel()
+  {
+    this.legseditflag = 0;
+  }
+  
 }

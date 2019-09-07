@@ -45,9 +45,9 @@ export class HandsontableComponent implements OnInit {
 
     this.getMarkingTextDetails();
     this.rownum = localStorage.getItem('legsno');
-    for (let i = 0; i <= this.rownum; i++) {
-      this.enableRow[i] = 'yes'
-    }
+    // for (let i = 0; i <= this.rownum; i++) {
+    //   this.enableRow[i] = 'yes'
+    // }
   }
   getMarkingTextDetails() {
     const lineitemno = localStorage.getItem('lineItemNo');
@@ -58,6 +58,9 @@ export class HandsontableComponent implements OnInit {
       }
       else {
         this.firsttime = 0;
+        for (let i = 0; i <= this.rownum; i++) {
+          this.enableRow[i] = 'yes'
+        }
         this.markingTextForm = this.fb.group({
           arr: this.fb.array([])
         });
