@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
 import { Route, Router } from '@angular/router';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
 import { LappRestService } from '../../../core/rest-service/LappRestService';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-handsontable',
   templateUrl: './handsontable.component.html',
   styleUrls: ['./handsontable.component.css']
 })
 export class HandsontableComponent implements OnInit {
+  @ViewChild('submitConfirm',{static: false}) submitConfirm: TemplateRef<any>;
   private hotRegisterer = new HotTableRegisterer();
   rownum: any;
   tabledata: any;
@@ -34,8 +36,8 @@ export class HandsontableComponent implements OnInit {
   markingTestTempArray = [];
   markingTextForm: FormGroup;
   markingTextEditForm: FormGroup;
-
-  constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService) {
+  values: any;
+  constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal) {
 
   }
 
@@ -166,6 +168,7 @@ export class HandsontableComponent implements OnInit {
         setTimeout(() => {
           this.msg = '';
         }, 3000);
+        this.modalService.open(this.submitConfirm);
       }
       else if (response.statusMessage === null || response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
@@ -217,12 +220,28 @@ export class HandsontableComponent implements OnInit {
     })
 
   }
+  openModel(markingTextForm) {
+    this.values = markingTextForm.arr;
+    this.modalService.open(this.submitConfirm);
+  }
   submitMarkingText(markingTextForm) {
-    const values = markingTextForm.arr;
+    
     const lineitemId = localStorage.getItem('lineitemid');
     const legs = localStorage.getItem('legsno');
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
+    if(this.markingTestTempArray.length === 0) {
+      for (let i = 0; i < this.values.length; i++) {
+        this.markingTestTempArray.push({
+          "leftText": this.values[i].leftText,
+          "rightText": this.values[i].middleText,
+          "middleText": this.values[i].rightText,
+          "notifyUser": "",
+          "updatedBy": emailId,
+          "lineItemnumber": lineitemno
+        })
+      }
+    }
     this.params = {
       "lineItemId": lineitemId,
       "isSubmit": true,
@@ -237,13 +256,14 @@ export class HandsontableComponent implements OnInit {
           this.msg = '';
         }, 3000);
       }
-      else if (response.statusMessage === 'error') {
+      else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
         setTimeout(() => {
           this.errorMsg = '';
         }, 3000);
       }
     })
+    this.modalService.dismissAll();
   }
 
   editMarkText(i) {
