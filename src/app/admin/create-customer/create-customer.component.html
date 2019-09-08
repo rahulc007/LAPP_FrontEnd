@@ -100,7 +100,7 @@
         <div class="col-6">
             <div class="form-group custom_form-group">
                 <label for="">{{'countryName'| translate}}</label>
-                <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" (click)="countryclear()" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5" max="200" [attr.disabled]="cntryflag ===1?true:null" required />
+                <input type="text" class="form-control" formControlName="country" [(ngModel)]="country" (click)="countryclear()"  onmousedown="value = '';" (change)="getState()" placeholder="{{'countryName'| translate}}" list="codes" step="5" min="5" max="200" [attr.disabled]="cntryflag ===1?true:null" required />
                 <datalist id="codes">
                     <select class="scrollbar">
                         <option *ngFor="let item of countryData" [value]="item.CountryName"></option>

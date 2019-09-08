@@ -230,7 +230,6 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
   }
 
   countryclear() {
-    this.country = '';
     this.state = '';
     this.city = '';
   }
