@@ -37,7 +37,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     const emailId = localStorage.getItem('username');
   
-      this.objService.Get('getOrderDetailsByUser?emailId=' + emailId, this.params).subscribe(response => {
+      this.objService.Get('getProcessedOrderByUser?emailId=' + emailId, this.params).subscribe(response => {
       
           for(let i=0; i<response.orderInfoList.length; i++) {
             if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Not Released") {

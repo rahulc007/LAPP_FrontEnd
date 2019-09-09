@@ -48,6 +48,9 @@ export class CustomerProfileComponent implements OnInit {
     const userEmail = localStorage.getItem('username');
     this.objService.Get('getUserProfile?emailId=' + userEmail, this.param).subscribe(response => {
       this.profileData = response.userProfileEntity;
+
+      let countryData = this.countryData.find(cntry => cntry.countryCode === this.profileData['countryCode']);
+      this.profileData['country']= countryData.CountryName;
     })
   }
   getState(event) {

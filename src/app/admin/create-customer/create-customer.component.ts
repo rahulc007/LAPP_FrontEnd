@@ -332,8 +332,9 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
     this.lastname = row.lastname
     this.emailId = row.uemailId
     this.uid = row.consumerId
-    // let contrycodedata = this.countryData.find(cntry => cntry.countryCode === row.country);
-    this.country = row.country;
+    let contrydata = this.countryData.find(cntry => cntry.countryCode === row.country);
+
+    this.country = contrydata.CountryName;
     this.getState();
     this.state = row.state;
     this.city = row.city;

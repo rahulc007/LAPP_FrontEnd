@@ -11,8 +11,14 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HandsontableComponent implements OnInit {
   @ViewChild('submitConfirm',{static: false}) submitConfirm: TemplateRef<any>;
+  @ViewChild('deleteConfirm',{static: false}) deleteConfirm : TemplateRef<any>;
+  @ViewChild('editModel',{static: false}) editModel : TemplateRef<any>;
+
   private hotRegisterer = new HotTableRegisterer();
   rownum: any;
+  editObj={"leftmarking":"","rightmarking":"","middlemarking":"","markingId":""}
+  deleteData:any;
+  legsCount:any;
   tabledata: any;
   msg: string;
   errorMsg: string;
@@ -45,6 +51,7 @@ export class HandsontableComponent implements OnInit {
 
     this.getMarkingTextDetails();
     this.rownum = localStorage.getItem('legsno');
+    this.legsCount = localStorage.getItem('legsno');
     // for (let i = 0; i <= this.rownum; i++) {
     //   this.enableRow[i] = 'yes'
     // }
@@ -52,7 +59,7 @@ export class HandsontableComponent implements OnInit {
   getMarkingTextDetails() {
     const lineitemno = localStorage.getItem('lineItemNo');
     this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
-      if (response.markingTextList.length === 0) {
+      if (response.markingTextList.length === 0 && this.firsttime) {
         this.firsttime = 1;
         this.rownum = localStorage.getItem('legsno');
       }
@@ -64,7 +71,8 @@ export class HandsontableComponent implements OnInit {
         this.markingTextForm = this.fb.group({
           arr: this.fb.array([])
         });
-        this.rownum = localStorage.getItem('legsno');
+       // this.rownum = localStorage.getItem('legsno');
+        this.rownum = this.legsCount;
         let array = [];
         array = response.markingTextList;
         for (let i = 0; i < this.rownum; i++) {
@@ -85,7 +93,8 @@ export class HandsontableComponent implements OnInit {
         this.items.map(x => this.fb.group({
           leftText: [x.leftText],
           middleText: [x.middleText],
-          rightText: [x.rightText]
+          rightText: [x.rightText],
+          markingId: [x.markingId]
         }))
       )
     })
@@ -98,7 +107,7 @@ export class HandsontableComponent implements OnInit {
       harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
     });
     const lineitemId = localStorage.getItem('lineitemid');
-    const legs = localStorage.getItem('legsno');
+    const legs = this.legsCount;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
 
@@ -136,7 +145,7 @@ export class HandsontableComponent implements OnInit {
   }
   submitData() {
     const lineitemId = localStorage.getItem('lineitemid');
-    const legs = localStorage.getItem('legsno');
+    const legs = this.legsCount;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
 
@@ -189,11 +198,14 @@ export class HandsontableComponent implements OnInit {
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
 
+    
+
     for (let i = 0; i < values.length; i++) {
       this.markingTestTempArray.push({
         "leftText": values[i].leftText,
         "rightText": values[i].middleText,
         "middleText": values[i].rightText,
+        "markingId": values[i].markingId,
         "notifyUser": "",
         "updatedBy": emailId,
         "lineItemnumber": lineitemno
@@ -202,12 +214,12 @@ export class HandsontableComponent implements OnInit {
 
     this.params = {
       "lineItemId": lineitemId,
-      "isSubmit": false,
+      "isSubmit": true,
       "legsCount": legs,
       "emailId": emailId,
       "markingTextList": this.markingTestTempArray
     }
-    this.objService.Post('addMarkingText', this.params).subscribe(response => {
+    this.objService.Post('updateMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = 'Marking Text Labels Edited successfully';
         setTimeout(() => {
@@ -223,6 +235,50 @@ export class HandsontableComponent implements OnInit {
     })
 
   }
+
+  deleteMarkTextModel(row)
+  {
+    this.deleteData = row;
+    this.modalService.open(this.deleteConfirm);
+   
+  }
+
+  deleteMarkingText()
+  {
+   
+    const lineitemId = localStorage.getItem('lineitemid');
+    let legs = localStorage.getItem('legsno');
+     this.legsCount= parseInt(legs)-1;
+    let emailId = localStorage.getItem('username');
+    const lineitemno = localStorage.getItem('lineItemNo');
+       
+
+       let params={
+        "lineItemId": lineitemId,
+        "isSubmit":true,
+        "emailId":emailId,
+        "legsCount":this.legsCount,
+        "markingId":this.deleteData.markingId,
+       }
+
+       this.objService.Post('deleteMarkingText', params).subscribe(response => {
+        if (response.status === 200 && response.statusMessage === 'success') {
+          this.msg = 'Marking Text Labels Deleted successfully';
+          this.modalService.dismissAll();
+         // this.getMarkingTextDetails()
+          setTimeout(() => {
+            this.msg = '';
+          }, 3000);
+        }
+        else if (response.statusMessage === 'error') {
+          this.errorMsg = response.errorMessage;
+          setTimeout(() => {
+            this.errorMsg = '';
+          }, 3000);
+        }
+      })
+  }
+
   openModel(markingTextForm) {
     this.values = markingTextForm.arr;
     this.modalService.open(this.submitConfirm);
@@ -269,10 +325,55 @@ export class HandsontableComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  editMarkText(i) {
-    console.log("edit index=>", i)
-    console.log(this.markingTextForm.value.arr[i]);
+  editMarkText(i, row) {
+   
     this.enableRow[i] = 'no';
+    console.log("edit row=>", row)
+
+    this.editObj.rightmarking=row.rightText
+    this.editObj.leftmarking=row.leftText
+    this.editObj.middlemarking=row.middleText;
+   this.editObj.markingId=row.markingId
+
+    this.modalService.open(this.editModel);
+  }
+
+  updateMarkingText()
+  {
+
+    const lineitemId = localStorage.getItem('lineitemid');
+    const legs = this.legsCount;
+    let emailId = localStorage.getItem('username');
+    const lineitemno = localStorage.getItem('lineItemNo');
+
+   let params= {
+      "lineItemId":lineitemId,
+      "isSubmit":true,
+      "emailId":emailId,
+      "legsCount":legs,
+      "markingId":this.editObj.markingId,
+      "leftText":this.editObj.leftmarking,
+      "rightText":this.editObj.rightmarking,
+      "middleText":this.editObj.middlemarking
+      
+      }
+
+      this.objService.Post('updateMarkingText', params).subscribe(response => {
+        if (response.status === 200 && response.statusMessage === 'success') {
+          this.msg = 'Marking Text Submitted Successfully';
+          setTimeout(() => {
+            this.msg = '';
+          }, 3000);
+        }
+        else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
+          this.errorMsg = response.errorMessage;
+          setTimeout(() => {
+            this.errorMsg = '';
+          }, 3000);
+        }
+      })
+      this.modalService.dismissAll();
+
   }
 
   getColumns = (column) => {

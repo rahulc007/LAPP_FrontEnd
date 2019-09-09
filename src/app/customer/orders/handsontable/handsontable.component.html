@@ -49,6 +49,7 @@
                                 <th>{{'righttext'| translate}}</th>
                                 <th>{{'middletext'| translate}}</th>
                                 <th>{{'edit'| translate}}</th>
+                                <th>{{'delete'| translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,7 +66,10 @@
                                     <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
                                 <td>
-                                    <i class="fa fa-edit ml-2" (click)="editMarkText($i)"></i>
+                                    <i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i>
+                                </td>
+                                <td>
+                                    <i class="fa fa-trash ml-2" (click)="deleteMarkTextModel(row)"></i>
                                 </td>
                             </tr>
                         </tbody>
@@ -87,6 +91,25 @@
     <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
     <span id="alertErrMsg">{{errorMsg}}</span>
 </div>
+
+
+<ng-template #deleteConfirm  let-row let-rowIndex="rowIndex" let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <h4>Are you sure want to delete the Data ?</h4>
+      
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">Submit</button>
+    </div>
+</ng-template>
+
+
 <ng-template #ver let-row let-rowIndex="rowIndex">
 
     <!-- <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row)" ><i class="fa fa-pencil" aria-hidden="true"></i></button> -->
@@ -111,3 +134,40 @@
         <button type="button" class="btn btn-danger" (click)="submitMarkingText()">Submit</button>
     </div>
 </ng-template>
+
+
+<ng-template #editModel let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body text-center">
+            <div class="row">
+                <div class="col-md-4">Left Marking Text</div>
+                <div class="col-md-4"><input type="text" [(ngModel)]="editObj.leftmarking"></div>
+            </div>
+            <br>
+            <div class="row">
+                    <div class="col-md-4">Right Marking Text</div>
+                    <div class="col-md-4"><input type="text" [(ngModel)]="editObj.rightmarking"></div>
+                </div>
+                <br>
+                <div class="row">
+                        <div class="col-md-4">Middle Marking Text</div>
+                        <div class="col-md-4"><input type="text" [(ngModel)]="editObj.middlemarking"></div>
+                    </div>
+                    
+                    
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">Cancel</button>
+            <button type="button" class="btn btn-orange" (click)="updateMarkingText()">Update</button>
+        </div>
+    </ng-template>
+
+
+
+
+
+
