@@ -222,6 +222,7 @@ export class HandsontableComponent implements OnInit {
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = 'Marking Text Labels Edited successfully';
+        
         setTimeout(() => {
           this.msg = '';
         }, 3000);
