@@ -219,7 +219,7 @@ export class HandsontableComponent implements OnInit {
       "emailId": emailId,
       "markingTextList": this.markingTestTempArray
     }
-    this.objService.Post('updateMarkingText', this.params).subscribe(response => {
+    this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = 'Marking Text Labels Edited successfully';
         setTimeout(() => {
@@ -269,6 +269,7 @@ export class HandsontableComponent implements OnInit {
           setTimeout(() => {
             this.msg = '';
           }, 3000);
+          this.getMarkingTextData()
         }
         else if (response.statusMessage === 'error') {
           this.errorMsg = response.errorMessage;
@@ -360,10 +361,12 @@ export class HandsontableComponent implements OnInit {
 
       this.objService.Post('updateMarkingText', params).subscribe(response => {
         if (response.status === 200 && response.statusMessage === 'success') {
-          this.msg = 'Marking Text Submitted Successfully';
+          this.msg = 'Marking Text Updated Successfully';
+          
           setTimeout(() => {
             this.msg = '';
           }, 3000);
+          this.getMarkingTextData()
         }
         else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
           this.errorMsg = response.errorMessage;
@@ -375,6 +378,40 @@ export class HandsontableComponent implements OnInit {
       this.modalService.dismissAll();
 
   }
+
+
+  getMarkingTextData()
+  {
+    this.items=[];
+    const lineitemno = localStorage.getItem('lineItemNo');
+    this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
+     
+        this.firsttime = 0;
+        for (let i = 0; i <= this.rownum; i++) {
+          this.enableRow[i] = 'yes'
+        }
+        this.markingTextForm = this.fb.group({
+          arr: this.fb.array([])
+        });
+       // this.rownum = localStorage.getItem('legsno');
+        this.rownum = this.legsCount;
+        let array = [];
+        array = response.markingTextList;
+        for (let i = 0; i < this.rownum; i++) {
+          if (array[i]) {
+            this.items.push(array[i]);
+          }
+          else {
+            this.items.push({ "leftText": null, "middleText": null, "rightText": null })
+          }
+        }
+        this.setFormArray();
+      
+    })
+  }
+
+  
+
 
   getColumns = (column) => {
     return this.columns[column];
