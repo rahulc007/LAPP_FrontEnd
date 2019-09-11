@@ -104,8 +104,8 @@
       
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">Submit</button>
+        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
+        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">{{'Submit'  |translate}}</button>
     </div>
 </ng-template>
 
@@ -130,8 +130,8 @@
         <h4>Once submit data can't be edited again!</h4>
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="submitMarkingText()">Submit</button>
+        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
+        <button type="button" class="btn btn-danger" (click)="submitMarkingText()">{{'Submit'  |translate}}</button>
     </div>
 </ng-template>
 
@@ -144,25 +144,25 @@
         </div>
         <div class="modal-body text-center">
             <div class="row">
-                <div class="col-md-4">Left Marking Text</div>
+                <div class="col-md-4">{{'lefttext' |translate}}</div>
                 <div class="col-md-4"><input type="text" [(ngModel)]="editObj.leftmarking"></div>
             </div>
             <br>
             <div class="row">
-                    <div class="col-md-4">Right Marking Text</div>
+                    <div class="col-md-4">{{'righttext' |translate}}</div>
                     <div class="col-md-4"><input type="text" [(ngModel)]="editObj.rightmarking"></div>
                 </div>
                 <br>
                 <div class="row">
-                        <div class="col-md-4">Middle Marking Text</div>
+                        <div class="col-md-4">{{'middletext' |translate}}</div>
                         <div class="col-md-4"><input type="text" [(ngModel)]="editObj.middlemarking"></div>
                     </div>
                     
                     
         </div>
         <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">Cancel</button>
-            <button type="button" class="btn btn-orange" (click)="updateMarkingText()">Update</button>
+            <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
+            <button type="button" class="btn btn-orange" (click)="updateMarkingText()">{{'Update' |translate  }}</button>
         </div>
     </ng-template>
 

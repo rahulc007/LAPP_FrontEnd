@@ -118,7 +118,7 @@
     "failedtoupdatepassword":"Failed to update Password",
     "providevalidpassword":"Please Provide Valid Password",
     "allorders":"All Orders",
-    "myoders":"My Orders",
+    "myorders":"My Orders",
     "uploadstatus":"Upload Status",
     "errormessages":["EmailId already exists..!","Customer ID already exists..!"],
     "uploadformat":"Please Upload Excel in the below Format",

@@ -331,7 +331,7 @@ export class HandsontableComponent implements OnInit {
 
   editMarkText(i, row) {
    
-    this.enableRow[i] = 'no';
+    //this.enableRow[i] = 'no';
     console.log("edit row=>", row)
 
     this.editObj.rightmarking=row.rightText
