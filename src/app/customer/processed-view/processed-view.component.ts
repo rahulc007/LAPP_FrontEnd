@@ -75,4 +75,9 @@ export class ProcessedViewComponent implements OnInit, AfterViewInit, AfterViewC
 
   }
 
+  goPrevious()
+  {
+    this.router.navigate(['customer/processedorders']);
+  }
+
 }
