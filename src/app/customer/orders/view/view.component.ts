@@ -35,12 +35,12 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'userEmailId', title: 'User Email ID' },
-      { key: 'oid', title: 'Order ID' }, 
+      { key: 'userEmailId', title: 'Email ID' },
+      // { key: 'oid', title: 'Order ID' }, 
       { key: 'orderDate', title: 'Order Date' },
-      { key: 'orderStatus', title: 'Order Status' },
+      // { key: 'orderStatus', title: 'Order Status' },
       { key:'salesOrderno', title:'Sales Order Number'},
-      { key: 'countryCode', title: 'Country Code' }, 
+      // { key: 'countryCode', title: 'Country Code' }, 
       { key: 'createdDate', title: 'Created Date' }, 
       { key: 'modifiedDate', title: 'Modified Date' }, 
       { key: 'createdBy', title: 'Created By' }, 
