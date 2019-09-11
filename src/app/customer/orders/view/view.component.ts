@@ -26,10 +26,12 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   arr: any[] = [];
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router,private route: ActivatedRoute, private objService: LappRestService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef) { this.configuration = DefaultConfig;
+      this.configuration.searchEnabled = true;}
 
   ngOnInit() {
-    this.configuration = ConfigurationService.config;
+    // this.configuration = ConfigurationService.config;
+
   //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
   this.loadPage();
   }

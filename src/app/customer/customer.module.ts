@@ -20,9 +20,10 @@ import { CustomerProfileComponent } from './profile/customer-profile/customer-pr
 import {RootSharedModule} from '../common/root-shared.module';
 import { ResetPasswordComponent } from 'src/app/common/reset-password/reset-password.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
+import { ProcessedViewComponent } from './processed-view/processed-view.component';
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent, ProcessedViewComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

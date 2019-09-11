@@ -14,6 +14,7 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
   providers: [DatePipe]
 })
 export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
+  @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
   configuration: any;
   public columns: any[] = [];
   pager = {};
@@ -39,13 +40,8 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.objService.Get('getProcessedOrderByAdmin?emailId=' + emailId, this.params).subscribe(response => {
       
-          for(let i=0; i<response.orderInfoList.length; i++) {
-            if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Not Released") {
-              console.log('status',response.orderInfoList[i].orderLineItem[0].productionOrderStatus)
-              this.arr.push(response.orderInfoList[i].orderLineItem[0]);
-            }
-          }
-        this.data = this.arr;
+        
+        this.data = response.orderInfoList;
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
@@ -55,17 +51,39 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     }
   }
   ngAfterViewInit() {
+    // this.columns = [
+    //   { key: 'customerNo', title: 'Customer Number' },
+    //   { key: 'customerPartNo', title: 'Customer Part Number'},
+    //   { key: 'productionOrderno', title: 'Production Order Number' },
+    //   { key:'productionOrderStatus', title:'Production Order Status'},
+    //   { key: 'salesOrderno', title: 'Sales Order Number' },
+    //   { key: 'createdDate', title: 'Created Date' },
+    //   { key: 'modifiedDate', title: 'Modified Date' },
+    // ]
+
     this.columns = [
-      { key: 'customerNo', title: 'Customer Number' },
-      { key: 'customerPartNo', title: 'Customer Part Number'},
-      { key: 'productionOrderno', title: 'Production Order Number' },
-      { key:'productionOrderStatus', title:'Production Order Status'},
-      { key: 'salesOrderno', title: 'Sales Order Number' },
-      { key: 'createdDate', title: 'Created Date' },
-      { key: 'modifiedDate', title: 'Modified Date' },
-    ]
+      { key: 'userEmailId', title: 'User Email ID' },
+      // { key: 'oid', title: 'Order ID' }, 
+      { key: 'orderDate', title: 'Order Date' },
+      // { key: 'orderStatus', title: 'Order Status' },
+      { key:'salesOrderno', title:'Sales Order Number'},
+      // { key: 'countryCode', title: 'Country Code' }, 
+      { key: 'createdDate', title: 'Created Date' }, 
+      { key: 'modifiedDate', title: 'Modified Date' }, 
+      { key: 'createdBy', title: 'Created By' }, 
+      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
+    ];
+
+    
   }
   ngAfterViewChecked(){
     this.cdr.detectChanges();
   } 
+
+  porcessedOrder(row, rowIndex)
+  {
+    localStorage.setItem('processedorderId', row.oid);
+    localStorage.setItem('processorderIndex', rowIndex);
+    this.router.navigate(['admin/processedview', row.oid]);
+  }
 }

@@ -1,0 +1,10 @@
+.btn{
+    background-color:    rgb(181,122,40)
+   }
+.table-bordered {
+    border:none !important;
+  }
+  .fa {
+    color: darkorange;
+    font-size: 20px;
+}

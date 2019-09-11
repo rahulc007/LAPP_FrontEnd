@@ -6,6 +6,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { userTypes } from '../../common/constants/constants';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
+import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 
 @Component({
   selector: 'app-new-orders',
@@ -26,7 +27,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
-    this.configuration = ConfigurationService.config;
+    // this.configuration = ConfigurationService.config;
+    this.configuration = DefaultConfig;
+    this.configuration.searchEnabled = true;
   }
 
   ngOnInit() {
@@ -58,9 +61,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       { key: 'userEmailId', title: 'User Email ID' },
       { key: 'oid', title: 'Order ID' },
       { key: 'orderDate', title: 'Order Date' },
-      { key: 'orderStatus', title: 'Ordrer Status' },
+      // { key: 'orderStatus', title: 'Ordrer Status' },
       { key: 'salesOrderno', title: 'Sales Order Number' },
-      { key: 'countryCode', title: 'Country Code' },
+      // { key: 'countryCode', title: 'Country Code' },
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
       { key: 'createdBy', title: 'Created By' },

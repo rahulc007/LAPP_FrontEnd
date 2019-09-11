@@ -131,7 +131,8 @@
     "righttext":"Right Marking Text",
     "updateMessage":"Updated Successfuly",
     "deleteMessage":"deleted Successfully",
-    "deleteData":"Are you sure want to delete the Data ?"
+    "deleteData":"Are you sure want to delete the Data ?",
+    "processedordersview":"Processed Orders View"
     
     
 }

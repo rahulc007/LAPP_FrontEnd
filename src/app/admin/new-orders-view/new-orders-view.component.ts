@@ -61,11 +61,11 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
      // { Key:'legsCount', title:'Legs Count'},
     {key:'productionOrderStatus', title:'Production Order Status'},
     {key:'productionOrderno', title:'Production Order Number'},
-      { key: 'length', title: 'Length' },
+      // { key: 'length', title: 'Length' },
       { key: 'lineItemId', title: 'Line Item ID' },
       { key: 'lineItemno', title: 'Line Item Number' },
-      { key: 'quantity' , title:'Quantity'},
-      { key: 'updatedBy' , title:'Updated By'},
+      // { key: 'quantity' , title:'Quantity'},
+      // { key: 'updatedBy' , title:'Updated By'},
       { key:'createdDate', title:'Created Date'},
      { key:'modifiedDate', title:'Modified Date'}
     ]
