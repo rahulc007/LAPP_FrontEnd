@@ -4,6 +4,8 @@ import { Route, Router } from '@angular/router';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
 import { LappRestService } from '../../../core/rest-service/LappRestService';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-handsontable',
   templateUrl: './handsontable.component.html',
@@ -43,7 +45,7 @@ export class HandsontableComponent implements OnInit {
   markingTextForm: FormGroup;
   markingTextEditForm: FormGroup;
   values: any;
-  constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal) {
+  constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal, private translate: TranslateService) {
 
   }
 
@@ -221,7 +223,7 @@ export class HandsontableComponent implements OnInit {
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = 'Marking Text Labels Edited successfully';
+        this.msg = this.translate.instant('updateMessage');
         
         setTimeout(() => {
           this.msg = '';
@@ -264,7 +266,7 @@ export class HandsontableComponent implements OnInit {
 
        this.objService.Post('deleteMarkingText', params).subscribe(response => {
         if (response.status === 200 && response.statusMessage === 'success') {
-          this.msg = 'Marking Text Labels Deleted successfully';
+          this.msg = this.translate.instant('deleteMessage');
           this.modalService.dismissAll();
          // this.getMarkingTextDetails()
           setTimeout(() => {
@@ -362,7 +364,7 @@ export class HandsontableComponent implements OnInit {
 
       this.objService.Post('updateMarkingText', params).subscribe(response => {
         if (response.status === 200 && response.statusMessage === 'success') {
-          this.msg = 'Marking Text Updated Successfully';
+          this.msg = this.translate.instant('updateMessage');
           
           setTimeout(() => {
             this.msg = '';
