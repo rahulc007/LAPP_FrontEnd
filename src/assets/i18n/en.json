@@ -132,7 +132,8 @@
     "updateMessage":"Updated Successfuly",
     "deleteMessage":"deleted Successfully",
     "deleteData":"Are you sure want to delete the Data ?",
-    "processedordersview":"Processed Orders View"
-    
+    "processedordersview":"Processed Orders View",
+    "addNewRow":"New",
+    "saveNewRows":"Save New Rows"
     
 }

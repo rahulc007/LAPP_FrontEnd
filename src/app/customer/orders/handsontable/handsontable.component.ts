@@ -12,15 +12,15 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./handsontable.component.css']
 })
 export class HandsontableComponent implements OnInit {
-  @ViewChild('submitConfirm',{static: false}) submitConfirm: TemplateRef<any>;
-  @ViewChild('deleteConfirm',{static: false}) deleteConfirm : TemplateRef<any>;
-  @ViewChild('editModel',{static: false}) editModel : TemplateRef<any>;
+  @ViewChild('submitConfirm', { static: false }) submitConfirm: TemplateRef<any>;
+  @ViewChild('deleteConfirm', { static: false }) deleteConfirm: TemplateRef<any>;
+  @ViewChild('editModel', { static: false }) editModel: TemplateRef<any>;
 
   private hotRegisterer = new HotTableRegisterer();
   rownum: any;
-  editObj={"leftmarking":"","rightmarking":"","middlemarking":"","markingId":""}
-  deleteData:any;
-  legsCount:any;
+  editObj = { "leftmarking": "", "rightmarking": "", "middlemarking": "", "markingId": "" }
+  deleteData: any;
+  legsCount: any;
   tabledata: any;
   msg: string;
   errorMsg: string;
@@ -45,6 +45,7 @@ export class HandsontableComponent implements OnInit {
   markingTextForm: FormGroup;
   markingTextEditForm: FormGroup;
   values: any;
+  blnShowSaveNewRowButton: boolean = false;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal, private translate: TranslateService) {
 
   }
@@ -58,6 +59,7 @@ export class HandsontableComponent implements OnInit {
     //   this.enableRow[i] = 'yes'
     // }
   }
+
   getMarkingTextDetails() {
     const lineitemno = localStorage.getItem('lineItemNo');
     this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
@@ -73,22 +75,18 @@ export class HandsontableComponent implements OnInit {
         this.markingTextForm = this.fb.group({
           arr: this.fb.array([])
         });
-       // this.rownum = localStorage.getItem('legsno');
+        // this.rownum = localStorage.getItem('legsno');
+        this.items = [];
         this.rownum = this.legsCount;
-        let array = [];
-        array = response.markingTextList;
-        for (let i = 0; i < this.rownum; i++) {
-          if (array[i]) {
-            this.items.push(array[i]);
-          }
-          else {
-            this.items.push({ "leftText": null, "middleText": null, "rightText": null })
-          }
+        for (let objRow of response.markingTextList) {
+          objRow["cIsNew"] = false;
+          this.items.push(objRow);
         }
         this.setFormArray();
       }
     })
   }
+
   setFormArray() {
     this.markingTextForm = this.fb.group({
       arr: this.fb.array(
@@ -101,6 +99,8 @@ export class HandsontableComponent implements OnInit {
       )
     })
   }
+
+
 
   saveData() {
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
@@ -145,6 +145,7 @@ export class HandsontableComponent implements OnInit {
       }
     })
   }
+
   submitData() {
     const lineitemId = localStorage.getItem('lineitemid');
     const legs = this.legsCount;
@@ -200,7 +201,7 @@ export class HandsontableComponent implements OnInit {
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
 
-    
+
 
     for (let i = 0; i < values.length; i++) {
       this.markingTestTempArray.push({
@@ -224,7 +225,7 @@ export class HandsontableComponent implements OnInit {
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = this.translate.instant('updateMessage');
-        
+
         setTimeout(() => {
           this.msg = '';
         }, 3000);
@@ -239,61 +240,68 @@ export class HandsontableComponent implements OnInit {
 
   }
 
-  deleteMarkTextModel(row)
-  {
-    this.deleteData = row;
-    this.modalService.open(this.deleteConfirm);
-   
+  deleteMarkTextModel(row) {
+    if (row["cIsNew"] == true) {
+      let iIndex = this.items.indexOf(row);
+      if (iIndex >= 0) {
+        this.items.splice(iIndex, 1);
+        if (!(this.items.find(x => x["cIsNew"] == true))) {
+          this.blnShowSaveNewRowButton = false;
+          this.setFormArray();
+        }
+      }
+    } else {
+      this.deleteData = row;
+      this.modalService.open(this.deleteConfirm);
+    }
   }
 
-  deleteMarkingText()
-  {
-   
+  deleteMarkingText() {
     const lineitemId = localStorage.getItem('lineitemid');
     let legs = localStorage.getItem('legsno');
-     this.legsCount= parseInt(legs)-1;
+    this.legsCount = parseInt(legs) - 1;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
-       
 
-       let params={
-        "lineItemId": lineitemId,
-        "isSubmit":true,
-        "emailId":emailId,
-        "legsCount":this.legsCount,
-        "markingId":this.deleteData.markingId,
-       }
 
-       this.objService.Post('deleteMarkingText', params).subscribe(response => {
-        if (response.status === 200 && response.statusMessage === 'success') {
-          this.msg = this.translate.instant('deleteMessage');
-          this.modalService.dismissAll();
-         // this.getMarkingTextDetails()
-          setTimeout(() => {
-            this.msg = '';
-          }, 3000);
-          this.getMarkingTextData()
-        }
-        else if (response.statusMessage === 'error') {
-          this.errorMsg = response.errorMessage;
-          setTimeout(() => {
-            this.errorMsg = '';
-          }, 3000);
-        }
-      })
+    let params = {
+      "lineItemId": lineitemId,
+      "isSubmit": true,
+      "emailId": emailId,
+      "legsCount": this.legsCount,
+      "markingId": this.deleteData.markingId,
+    }
+
+    this.objService.Post('deleteMarkingText', params).subscribe(response => {
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = this.translate.instant('deleteMessage');
+        this.modalService.dismissAll();
+        // this.getMarkingTextDetails()
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+        this.getMarkingTextDetails()
+      }
+      else if (response.statusMessage === 'error') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+    })
   }
 
   openModel(markingTextForm) {
     this.values = markingTextForm.arr;
     this.modalService.open(this.submitConfirm);
   }
+
   submitMarkingText(markingTextForm) {
-    
     const lineitemId = localStorage.getItem('lineitemid');
     const legs = localStorage.getItem('legsno');
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
-    if(this.markingTestTempArray.length === 0) {
+    if (this.markingTestTempArray.length === 0) {
       for (let i = 0; i < this.values.length; i++) {
         this.markingTestTempArray.push({
           "leftText": this.values[i].leftText,
@@ -330,90 +338,88 @@ export class HandsontableComponent implements OnInit {
   }
 
   editMarkText(i, row) {
-   
+
     //this.enableRow[i] = 'no';
     console.log("edit row=>", row)
 
-    this.editObj.rightmarking=row.rightText
-    this.editObj.leftmarking=row.leftText
-    this.editObj.middlemarking=row.middleText;
-   this.editObj.markingId=row.markingId
+    this.editObj.rightmarking = row.rightText
+    this.editObj.leftmarking = row.leftText
+    this.editObj.middlemarking = row.middleText;
+    this.editObj.markingId = row.markingId
 
     this.modalService.open(this.editModel);
   }
 
-  updateMarkingText()
-  {
+  updateMarkingText() {
 
     const lineitemId = localStorage.getItem('lineitemid');
     const legs = this.legsCount;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
 
-   let params= {
-      "lineItemId":lineitemId,
-      "isSubmit":true,
-      "emailId":emailId,
-      "legsCount":legs,
-      "markingId":this.editObj.markingId,
-      "leftText":this.editObj.leftmarking,
-      "rightText":this.editObj.rightmarking,
-      "middleText":this.editObj.middlemarking
-      
-      }
+    let params = {
+      "lineItemId": lineitemId,
+      "isSubmit": true,
+      "emailId": emailId,
+      "legsCount": legs,
+      "markingId": this.editObj.markingId,
+      "leftText": this.editObj.leftmarking,
+      "rightText": this.editObj.rightmarking,
+      "middleText": this.editObj.middlemarking
 
-      this.objService.Post('updateMarkingText', params).subscribe(response => {
-        if (response.status === 200 && response.statusMessage === 'success') {
-          this.msg = this.translate.instant('updateMessage');
-          
-          setTimeout(() => {
-            this.msg = '';
-          }, 3000);
-          this.getMarkingTextData()
-        }
-        else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
-          this.errorMsg = response.errorMessage;
-          setTimeout(() => {
-            this.errorMsg = '';
-          }, 3000);
-        }
-      })
-      this.modalService.dismissAll();
+    }
+
+    this.objService.Post('updateMarkingText', params).subscribe(response => {
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = this.translate.instant('updateMessage');
+
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+        this.getMarkingTextData()
+      }
+      else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+    })
+    this.modalService.dismissAll();
 
   }
 
 
-  getMarkingTextData()
-  {
-    this.items=[];
+  getMarkingTextData() {
+    this.items = [];
     const lineitemno = localStorage.getItem('lineItemNo');
     this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
-     
-        this.firsttime = 0;
-        for (let i = 0; i <= this.rownum; i++) {
-          this.enableRow[i] = 'yes'
+
+      this.firsttime = 0;
+      for (let i = 0; i <= this.rownum; i++) {
+        this.enableRow[i] = 'yes'
+      }
+      this.markingTextForm = this.fb.group({
+        arr: this.fb.array([])
+      });
+      // this.rownum = localStorage.getItem('legsno');
+      this.rownum = this.legsCount;
+      let array = [];
+      array = response.markingTextList;
+      for (let i = 0; i < this.rownum; i++) {
+        if (array[i]) {
+          this.items.push(array[i]);
         }
-        this.markingTextForm = this.fb.group({
-          arr: this.fb.array([])
-        });
-       // this.rownum = localStorage.getItem('legsno');
-        this.rownum = this.legsCount;
-        let array = [];
-        array = response.markingTextList;
-        for (let i = 0; i < this.rownum; i++) {
-          if (array[i]) {
-            this.items.push(array[i]);
-          }
-          else {
-            this.items.push({ "leftText": null, "middleText": null, "rightText": null })
-          }
+        else {
+          this.items.push({ "leftText": null, "middleText": null, "rightText": null })
         }
-        this.setFormArray();
-      
+      }
+      this.setFormArray();
+
     })
   }
 
-  
+
 
 
   getColumns = (column) => {
@@ -423,5 +429,71 @@ export class HandsontableComponent implements OnInit {
   goPrevious() {
     this.router.navigate(['customer/orderview/:id'])
   }
+
+  addNewRow() {
+    let emailId = localStorage.getItem('username');
+    const lineitemno = localStorage.getItem('lineItemNo');
+    let objNewRow = {
+      "leftText": '',
+      "rightText": '',
+      "middleText": '',
+      "notifyUser": "",
+      "updatedBy": emailId,
+      "lineItemnumber": lineitemno,
+      "cIsNew": true
+    }
+    this.enableRow[this.items.length] = 'no';
+    this.items.push(objNewRow);
+    this.blnShowSaveNewRowButton = true;
+    this.setFormArray();
+  }
+
+  onClickSaveNewRow() {
+    const lineitemId = localStorage.getItem('lineitemid');
+    const legs = this.legsCount;
+    let emailId = localStorage.getItem('username');
+    const lineitemno = localStorage.getItem('lineItemNo');
+    let arrNewRow = [];
+    const values = this.markingTextForm.value.arr;
+
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i]["cIsNew"] == true) {
+        arrNewRow.push({
+          "leftText": values[i].leftText,
+          "rightText": values[i].middleText,
+          "middleText": values[i].rightText,
+          "notifyUser": "",
+          "updatedBy": emailId,
+          "lineItemnumber": lineitemno
+        })
+      }
+
+    }
+    this.params = {
+      "lineItemId": lineitemId,
+      "isSubmit": false,
+      "legsCount": this.items.length,
+      "emailId": emailId,
+      "markingTextList": arrNewRow
+    }
+    this.objService.Post('addMarkingText', this.params).subscribe(response => {
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = response.successMessage;
+        this.getMarkingTextDetails();
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+      }
+      else if (response.statusMessage === 'error') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+    })
+
+  }
+
+
 
 }

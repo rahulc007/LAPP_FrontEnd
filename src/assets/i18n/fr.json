@@ -5,5 +5,7 @@
     "Userapprovals": "Approbations des utilisateurs",
     "CreateUsers":"Créer des utilisateurs",
     "customerdetails":"Détails du client",
-    "DownloadExcel":"Télécharger Excel"
+    "DownloadExcel":"Télécharger Excel",
+    "addNewRow":"New",
+    "saveNewRows":"Save New Rows"
 }

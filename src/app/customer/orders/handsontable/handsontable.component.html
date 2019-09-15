@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
+        <button type="button" class="btn btn-orange float-right" (click)="addNewRow()">{{'addNewRow'| translate}}</button> &nbsp;&nbsp;
         <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>
     </div>
 </div>
@@ -66,7 +67,8 @@
                                     <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
                                 <td>
-                                    <i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i>
+                                    <span *ngIf="!row.cIsNew"><i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i></span>
+                                   
                                 </td>
                                 <td>
                                     <i class="fa fa-trash ml-2" (click)="deleteMarkTextModel(row)"></i>
@@ -77,6 +79,7 @@
                 </div>
                 <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'update'| translate}}</button>
                 <button class="btn btn-orange ml-2" type="submit" (click)="openModel(markingTextForm.value)">{{'submit'| translate}}</button>
+                <button *ngIf="blnShowSaveNewRowButton" type="button" class="btn btn-orange pull-right" (click)="onClickSaveNewRow()">{{'saveNewRows' |translate  }}</button>
             </form>
         </div>
     </div>
@@ -163,6 +166,7 @@
         <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
             <button type="button" class="btn btn-orange" (click)="updateMarkingText()">{{'Update' |translate  }}</button>
+            
         </div>
     </ng-template>
 

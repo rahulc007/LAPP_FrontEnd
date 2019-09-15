@@ -125,5 +125,7 @@
     "righttext":"Rechter Markierungstext",
     "updateMessage":"Erfolgreich aktualisiert",
     "deleteMessage":"Erfolgreich gelöscht",
-    "deleteData":"Möchten Sie die Daten wirklich löschen?"
+    "deleteData":"Möchten Sie die Daten wirklich löschen?",
+    "addNewRow":"Neu",
+    "saveNewRows":"Save New Rows"
 }
