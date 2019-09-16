@@ -1,8 +1,10 @@
 <div class="row">
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
-        <button *ngIf="firsttime===0" type="button" class="btn btn-orange float-right" (click)="addNewRow()">{{'addNewRow'| translate}}</button> &nbsp;&nbsp;
-        <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>
+        <div class="float-right">
+            <button *ngIf="firsttime===0" type="button" class="btn btn-orange" (click)="addNewRow()">{{'addNewRow'| translate}}</button>&nbsp;
+            <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
+        </div>
     </div>
 </div>
 <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
@@ -53,7 +55,7 @@
                             <tr>
                                 <th>Index</th>
                                 <th>{{'lefttext'| translate}}</th>
-                             
+
                                 <th>{{'righttext'| translate}}</th>
                                 <th>{{'middletext'| translate}}</th>
                                 <th>{{'edit'| translate}}</th>
@@ -66,7 +68,7 @@
                                 <td>
                                     <input type="text" formControlName="leftText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
-                               
+
                                 <td>
                                     <input type="text" formControlName="rightText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
@@ -74,8 +76,10 @@
                                     <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
                                 <td>
-                                    <span *ngIf="!row.cIsNew"><i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i></span>
-                                   
+                                    <span *ngIf="!row.cIsNew">
+                                        <i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i>
+                                    </span>
+
                                 </td>
                                 <td>
                                     <i class="fa fa-trash ml-2" (click)="deleteMarkTextModel(row)"></i>
@@ -86,7 +90,7 @@
                 </div>
                 <!-- <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'update'| translate}}</button> -->
                 <button class="btn btn-orange ml-2" type="submit" (click)="openModel(markingTextForm.value)">{{'submit'| translate}}</button>
-                <button *ngIf="blnShowSaveNewRowButton" type="button" class="btn btn-orange pull-right" (click)="onClickSaveNewRow()">{{'saveNewRows' |translate  }}</button>
+                <button *ngIf="blnShowSaveNewRowButton" type="button" class="btn btn-orange pull-right" (click)="onClickSaveNewRow()">{{'saveNewRows' |translate }}</button>
             </form>
         </div>
     </div>
@@ -96,7 +100,7 @@
 
 
 
-<ng-template #deleteConfirm  let-row let-rowIndex="rowIndex" let-c="close" let-d="dismiss">
+<ng-template #deleteConfirm let-row let-rowIndex="rowIndex" let-c="close" let-d="dismiss">
     <div class="modal-header">
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
@@ -104,11 +108,11 @@
     </div>
     <div class="modal-body text-center">
         <h4>{{'deleteData' |translate }}</h4>
-      
+
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
-        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">{{'Submit'  |translate}}</button>
+        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
+        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">{{'Submit' |translate}}</button>
     </div>
 </ng-template>
 
@@ -133,45 +137,45 @@
         <h4>Once submit data can't be edited again!</h4>
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
-        <button type="button" class="btn btn-danger" (click)="submitMarkingText()">{{'Submit'  |translate}}</button>
+        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
+        <button type="button" class="btn btn-danger" (click)="submitMarkingText()">{{'Submit' |translate}}</button>
     </div>
 </ng-template>
 
 
 <ng-template #editModel let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body text-center">
-            <div class="row">
-                <div class="col-md-4">{{'lefttext' |translate}}</div>
-                <div class="col-md-4"><input type="text" [(ngModel)]="editObj.leftmarking"></div>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <div class="row">
+            <div class="col-md-4">{{'lefttext' |translate}}</div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="editObj.leftmarking">
             </div>
-            <br>
-            <div class="row">
-                    <div class="col-md-4">{{'righttext' |translate}}</div>
-                    <div class="col-md-4"><input type="text" [(ngModel)]="editObj.rightmarking"></div>
-                </div>
-                <br>
-                <div class="row">
-                        <div class="col-md-4">{{'middletext' |translate}}</div>
-                        <div class="col-md-4"><input type="text" [(ngModel)]="editObj.middlemarking"></div>
-                    </div>
-                    
-                    
         </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel'  |translate }}</button>
-            <button type="button" class="btn btn-orange" (click)="updateMarkingText()">{{'Update' |translate  }}</button>
-            
+        <br>
+        <div class="row">
+            <div class="col-md-4">{{'righttext' |translate}}</div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="editObj.rightmarking">
+            </div>
         </div>
-    </ng-template>
+        <br>
+        <div class="row">
+            <div class="col-md-4">{{'middletext' |translate}}</div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="editObj.middlemarking">
+            </div>
+        </div>
 
 
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
+        <button type="button" class="btn btn-orange" (click)="updateMarkingText()">{{'Update' |translate }}</button>
 
-
-
-
+    </div>
+</ng-template>
