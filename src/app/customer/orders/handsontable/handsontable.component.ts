@@ -48,6 +48,7 @@ export class HandsontableComponent implements OnInit {
   blnShowSaveNewRowButton: boolean = false;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal, private translate: TranslateService) {
 
+
   }
 
   ngOnInit() {
@@ -82,6 +83,8 @@ export class HandsontableComponent implements OnInit {
           objRow["cIsNew"] = false;
           this.items.push(objRow);
         }
+        this.items =  this.items.sort((a,b)=>a.markingId - b.markingId);
+        
         this.setFormArray();
       }
     })
@@ -431,7 +434,7 @@ export class HandsontableComponent implements OnInit {
   }
 
   addNewRow() {
-    this.legsCount= this.items.length+1;
+    this.legsCount = this.items.length + 1;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
     let objNewRow = {
@@ -461,8 +464,8 @@ export class HandsontableComponent implements OnInit {
       if (this.items[i]["cIsNew"] == true) {
         arrNewRow.push({
           "leftText": values[i].leftText,
-          "rightText": values[i].middleText,
-          "middleText": values[i].rightText,
+          "rightText": values[i].rightText,
+          "middleText": values[i].middleText,
           "notifyUser": "",
           "updatedBy": emailId,
           "lineItemnumber": lineitemno
@@ -473,21 +476,21 @@ export class HandsontableComponent implements OnInit {
     this.params = {
       "lineItemId": lineitemId,
       "isSubmit": false,
-      "legsCount":legs,
+      "legsCount": legs,
       "emailId": emailId,
       "markingTextList": arrNewRow
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = response.successMessage;
-        // this.getMarkingTextDetails();
+        this.blnShowSaveNewRowButton = false;
         this.getMarkingTextData();
         setTimeout(() => {
           this.msg = '';
         }, 3000);
 
         const legCnt = parseInt(legs);
-        this.enableRow[legCnt-1] = 'yes';
+        this.enableRow[legCnt - 1] = 'yes';
         console.log("item len=>", legs)
       }
       else if (response.statusMessage === 'error') {

@@ -5,7 +5,14 @@
         <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>
     </div>
 </div>
-
+<div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertMsg">{{msg}}</span>
+</div>
+<div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertErrMsg">{{errorMsg}}</span>
+</div>
 <div *ngIf="firsttime === 1">
     <div class="row mt-2">
         <div class="col-md-2"></div>
@@ -77,7 +84,7 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'update'| translate}}</button>
+                <!-- <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'update'| translate}}</button> -->
                 <button class="btn btn-orange ml-2" type="submit" (click)="openModel(markingTextForm.value)">{{'submit'| translate}}</button>
                 <button *ngIf="blnShowSaveNewRowButton" type="button" class="btn btn-orange pull-right" (click)="onClickSaveNewRow()">{{'saveNewRows' |translate  }}</button>
             </form>
@@ -86,14 +93,7 @@
 </div>
 
 
-<div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
-    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-    <span id="alertMsg">{{msg}}</span>
-</div>
-<div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
-    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
-    <span id="alertErrMsg">{{errorMsg}}</span>
-</div>
+
 
 
 <ng-template #deleteConfirm  let-row let-rowIndex="rowIndex" let-c="close" let-d="dismiss">
