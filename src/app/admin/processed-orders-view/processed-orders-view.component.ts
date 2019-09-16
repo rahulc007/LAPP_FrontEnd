@@ -13,7 +13,8 @@ import {userTypes} from '../../common/constants/constants';
 @Component({
   selector: 'app-processed-orders-view',
   templateUrl: './processed-orders-view.component.html',
-  styleUrls: ['./processed-orders-view.component.css']
+  styleUrls: ['./processed-orders-view.component.css'],
+  providers: [DatePipe]
 })
 export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
@@ -24,7 +25,7 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
 
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.configuration = ConfigurationService.config;
@@ -71,6 +72,11 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
         }
       }
       this.data = this.array;
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+        date.orderDate = this.datePipe.transform(date.orderDate, "medium");
+      })
      
     })
 

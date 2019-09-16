@@ -45,7 +45,6 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
-          date.orderDate = this.datePipe.transform(date.orderDate, "medium");
         })
       })
     }

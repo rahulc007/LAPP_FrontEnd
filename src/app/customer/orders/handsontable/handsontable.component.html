@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
-        <button type="button" class="btn btn-orange float-right" (click)="addNewRow()">{{'addNewRow'| translate}}</button> &nbsp;&nbsp;
+        <button *ngIf="firsttime===0" type="button" class="btn btn-orange float-right" (click)="addNewRow()">{{'addNewRow'| translate}}</button> &nbsp;&nbsp;
         <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>
     </div>
 </div>

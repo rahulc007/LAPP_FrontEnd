@@ -70,7 +70,10 @@ export class ProcessedViewComponent implements OnInit, AfterViewInit, AfterViewC
         }
       }
       this.data = this.array;
-     
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+      })
     })
 
   }

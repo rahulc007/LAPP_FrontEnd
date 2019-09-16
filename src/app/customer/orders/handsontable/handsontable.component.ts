@@ -431,6 +431,7 @@ export class HandsontableComponent implements OnInit {
   }
 
   addNewRow() {
+    this.legsCount= this.items.length+1;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
     let objNewRow = {
@@ -472,17 +473,22 @@ export class HandsontableComponent implements OnInit {
     this.params = {
       "lineItemId": lineitemId,
       "isSubmit": false,
-      "legsCount": this.items.length,
+      "legsCount":legs,
       "emailId": emailId,
       "markingTextList": arrNewRow
     }
     this.objService.Post('addMarkingText', this.params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
         this.msg = response.successMessage;
-        this.getMarkingTextDetails();
+        // this.getMarkingTextDetails();
+        this.getMarkingTextData();
         setTimeout(() => {
           this.msg = '';
         }, 3000);
+
+        const legCnt = parseInt(legs);
+        this.enableRow[legCnt-1] = 'yes';
+        console.log("item len=>", legs)
       }
       else if (response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
