@@ -136,6 +136,8 @@
     "addNewRow":"New",
     "saveNewRows":"Save New Rows",
     "others": "Others",
-    "wentwrong":"Something went Wrong, Please Refresh !"
+    "wentwrong":"Something went Wrong, Please Refresh !",
+   "downloadsamplefile":"Download Sample File"
+
     
 }
