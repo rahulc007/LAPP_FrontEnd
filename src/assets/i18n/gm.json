@@ -128,5 +128,7 @@
     "deleteData":"Möchten Sie die Daten wirklich löschen?",
     "addNewRow":"Neu",
     "saveNewRows":"Save New Rows",
-    "others":"Andere"
+    "others":"Andere",
+    "wentwrong":"Etwas ist schief gelaufen, bitte aktualisieren!",
+   "downloadsamplefile":"Beispieldatei herunterladen"
 }
