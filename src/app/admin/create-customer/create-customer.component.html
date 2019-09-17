@@ -117,8 +117,7 @@
         <div class="col">
             <div class="form-group custom_form-group">
                 <label for="">{{'state'| translate}}</label>
-                <input type="text" class="form-control" formControlName="State" [(ngModel)]="state"
-                    (click)="stateClear()" onmousedown="value = '';" (change)="getCities()" placeholder="{{'state'| translate}}" list="statecodes"
+                <input type="text" class="form-control" formControlName="State" [(ngModel)]="state" onmousedown="value = '';" (change)="getCities()" placeholder="{{'state'| translate}}" list="statecodes"
                     step="5" min="5" max="200" required />
                 <datalist id="statecodes">
                     <select class="scrollbar">
@@ -136,7 +135,7 @@
         <div class="col">
             <div class="form-group custom_form-group">
                 <label for="">{{'city'| translate}}</label>
-                <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" (click)="cityClear()" onmousedown="value = '';"
+                <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" onmousedown="value = '';"
                     placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200" [attr.disabled]="citydisabled === 1?true:null" required />
                 <datalist id="citycodes">
                     <select class="scrollbar">

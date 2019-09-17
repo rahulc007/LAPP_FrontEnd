@@ -134,6 +134,8 @@
     "deleteData":"Are you sure want to delete the Data ?",
     "processedordersview":"Processed Orders View",
     "addNewRow":"New",
-    "saveNewRows":"Save New Rows"
+    "saveNewRows":"Save New Rows",
+    "others": "Others",
+    "wentwrong":"Something went Wrong, Please Refresh !"
     
 }

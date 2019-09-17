@@ -234,21 +234,23 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
     this.city = '';
   }
 
-  stateClear() {
-    this.state = '';
-    this.city = '';
-  }
+  // stateClear() {
+  //   this.state = '';
+  //   this.city = '';
+  // }
 
-  cityClear() {
-    this.city = '';
-  }
+  // cityClear() {
+  //   this.city = '';
+  // }
 
   getState() {
+    this.state = '';   
     let contrydata = this.countryData.find(cntry => cntry.CountryName === this.country);
     this.stateData = contrydata.States;
   }
 
   getCities() {
+    this.city = '';
     let stateData = this.stateData.find(state => state.StateName === this.state);
     this.citiesData = stateData.Cities;
     if (this.citiesData.length === 0) {

@@ -46,6 +46,7 @@ export class HandsontableComponent implements OnInit {
   markingTextEditForm: FormGroup;
   values: any;
   blnShowSaveNewRowButton: boolean = false;
+  markinglistlength: any;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal, private translate: TranslateService) {
 
 
@@ -64,13 +65,14 @@ export class HandsontableComponent implements OnInit {
   getMarkingTextDetails() {
     const lineitemno = localStorage.getItem('lineItemNo');
     this.objService.Get('getMarkingText?lineItemid=' + lineitemno, null).subscribe(response => {
+      this.markinglistlength = response.markingTextList.length;
       if (response.markingTextList.length === 0 && this.firsttime) {
         this.firsttime = 1;
         this.rownum = localStorage.getItem('legsno');
       }
       else {
         this.firsttime = 0;
-        for (let i = 0; i <= this.rownum; i++) {
+        for (let i = 0; i <= this.markinglistlength; i++) {
           this.enableRow[i] = 'yes'
         }
         this.markingTextForm = this.fb.group({
@@ -242,7 +244,7 @@ export class HandsontableComponent implements OnInit {
     })
 
   }
-
+ 
   deleteMarkTextModel(row) {
     if (row["cIsNew"] == true) {
       let iIndex = this.items.indexOf(row);
@@ -260,38 +262,70 @@ export class HandsontableComponent implements OnInit {
   }
 
   deleteMarkingText() {
+    // const lineitemId = localStorage.getItem('lineitemid');
+    // let legs = localStorage.getItem('legsno');
+    // let emailId = localStorage.getItem('username');
+    // const lineitemno = localStorage.getItem('lineItemNo');
+
+    // let params = {
+    //   "lineItemId": lineitemId,
+    //   "isSubmit": true,
+    //   "emailId": emailId,
+    //   "legsCount": legs,
+    //   "markingId": this.deleteData.markingId,
+    // }
+
+    // this.objService.Post('deleteMarkingText', params).subscribe(response => {
+    //   if (response.status === 200 && response.statusMessage === 'success') {
+    //     this.msg = this.translate.instant('deleteMessage');
+    //     this.modalService.dismissAll();
+    //     // this.getMarkingTextDetails()
+    //     setTimeout(() => {
+    //       this.msg = '';
+    //     }, 3000);
+    //     this.getMarkingTextDetails()
+    //   }
+    //   else if (response.statusMessage === 'error') {
+    //     this.errorMsg = response.errorMessage;
+    //     setTimeout(() => {
+    //       this.errorMsg = '';
+    //     }, 3000);
+    //   }
+    // })
     const lineitemId = localStorage.getItem('lineitemid');
-    let legs = localStorage.getItem('legsno');
-    this.legsCount = parseInt(legs) - 1;
+    const legs = this.legsCount;
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
 
-
     let params = {
       "lineItemId": lineitemId,
-      "isSubmit": true,
+      "isSubmit": false,
       "emailId": emailId,
-      "legsCount": this.legsCount,
+      "legsCount": legs,
       "markingId": this.deleteData.markingId,
+      "leftText": "",
+      "rightText": "",
+      "middleText": ""
+
     }
 
-    this.objService.Post('deleteMarkingText', params).subscribe(response => {
+    this.objService.Post('updateMarkingText', params).subscribe(response => {
       if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = this.translate.instant('deleteMessage');
-        this.modalService.dismissAll();
-        // this.getMarkingTextDetails()
+        this.msg = this.translate.instant('updateMessage');
+
         setTimeout(() => {
           this.msg = '';
         }, 3000);
-        this.getMarkingTextDetails()
+        this.getMarkingTextData()
       }
-      else if (response.statusMessage === 'error') {
+      else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
         this.errorMsg = response.errorMessage;
         setTimeout(() => {
           this.errorMsg = '';
         }, 3000);
       }
     })
+    this.modalService.dismissAll();
   }
 
   openModel(markingTextForm) {

@@ -6,6 +6,7 @@ import { LoaderService } from '../../common/loader/loader.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+    errorMessage: any;
     constructor(
         private loaderService: LoaderService
     ) { }
@@ -25,11 +26,14 @@ export class JwtInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
                 this.loaderService.hide();
+             localStorage.removeItem('invalidApi');
             }
         },
+            
             (err:Error) => {
-                 alert(err.message);
-                 
+                // alert(err.message);
+                 this.errorMessage = err.message;
+                 localStorage.setItem('invalidApi', this.errorMessage);
                 this.loaderService.hide() },
         ));
 

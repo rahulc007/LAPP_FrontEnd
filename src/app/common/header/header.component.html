@@ -4,6 +4,10 @@
         <i class="fa fa-bars" aria-hidden="true"></i>
         <div class="logo"><img alt="LAPP" src="assets/images/lapp_logo.png" /></div>
     </a>
+        <!-- <div *ngIf="errorMessage" class="alert alert-warning alert-dismissible" data-auto-dismiss role="alert">
+            <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+            <span id="alertMsg">{{errorMessage}}</span>
+        </div> -->
     <ul class="navbar-nav float-right">
         <li class="nav-item">
             <div class="user_cntnt">
@@ -26,4 +30,10 @@
 <!-- Reset Password Modal -->
 <ng-template #resetPWD let-c="close" let-d="dismiss">
     <reset-password (close)="d($event)"></reset-password>
+</ng-template>
+<!-- Invalid Api Modal -->
+<ng-template #invalidApi let-c="close" let-d="dismiss"> 
+        <div class="modal-body text-center">
+          {{'wentwrong'| translate}}
+        </div> 
 </ng-template>

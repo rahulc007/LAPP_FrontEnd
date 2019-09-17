@@ -127,5 +127,6 @@
     "deleteMessage":"Erfolgreich gelöscht",
     "deleteData":"Möchten Sie die Daten wirklich löschen?",
     "addNewRow":"Neu",
-    "saveNewRows":"Save New Rows"
+    "saveNewRows":"Save New Rows",
+    "others":"Andere"
 }

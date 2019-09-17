@@ -57,7 +57,7 @@
                                 <th>{{'lefttext'| translate}}</th>
 
                                 <th>{{'righttext'| translate}}</th>
-                                <th>{{'middletext'| translate}}</th>
+                                <th>{{'others'| translate}}</th>
                                 <th>{{'edit'| translate}}</th>
                                 <th>{{'delete'| translate}}</th>
                             </tr>
@@ -96,10 +96,7 @@
     </div>
 </div>
 
-
-
-
-
+<!-- Delete Pop up Modal -->
 <ng-template #deleteConfirm let-row let-rowIndex="rowIndex" let-c="close" let-d="dismiss">
     <div class="modal-header">
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -112,7 +109,7 @@
     </div>
     <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
-        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">{{'Submit' |translate}}</button>
+        <button type="button" class="btn btn-danger" (click)="deleteMarkingText(row)">{{'Delete' |translate}}</button>
     </div>
 </ng-template>
 
@@ -179,3 +176,4 @@
 
     </div>
 </ng-template>
+
