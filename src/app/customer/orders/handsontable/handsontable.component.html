@@ -2,6 +2,7 @@
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
         <div class="float-right">
+                <a *ngIf="firsttime===1" href="/assets/data/samplemarkingtext.xlsx" target="_self"  class="btn btn-orange" download>{{'download'| translate}}</a>
             <button *ngIf="firsttime===0" type="button" class="btn btn-orange" (click)="addNewRow()">{{'addNewRow'| translate}}</button>&nbsp;
             <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
         </div>
