@@ -24,6 +24,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   baseUrl:any;
   data:any[]=[];
   arr: any[] = [];
+  tempArray: any[] = [];
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router,private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) { this.configuration = DefaultConfig;
@@ -46,6 +47,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
       { key: 'createdDate', title: 'Created Date' }, 
       { key: 'modifiedDate', title: 'Modified Date' }, 
       { key: 'createdBy', title: 'Created By' }, 
+      { key: 'customerNo', title: 'Customer Number'},
       { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
     ];
   }
@@ -65,9 +67,19 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
       for(let i=0; i<response.orderInfoList.length; i++) {
         if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
           this.arr.push(response.orderInfoList[i]);
+          this.tempArray.push({
+            "userEmailId": response.orderInfoList[i].userEmailId,
+            "oid": response.orderInfoList[i].oid,
+            "orderDate": response.orderInfoList[i].orderDate,
+            "createdDate": response.orderInfoList[i].createdDate,
+            "modifiedDate": response.orderInfoList[i].modifiedDate,
+            "salesOrderno": response.orderInfoList[i].salesOrderno,
+            "createdBy": response.orderInfoList[i].createdBy,
+            "customerNo": response.orderInfoList[i].orderLineItem[0].customerNo
+          })
         }
       }
-      this.data = this.arr;
+      this.data = this.tempArray;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
