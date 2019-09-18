@@ -89,4 +89,11 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.router.navigate(['admin/newordersview', row.oid])
   }
 
+  search(event) {
+    if (event.target.value === '') {
+      this.getUploadedOrderDetails();
+     // this.searcherror = ''
+    }
+  }
+
 }

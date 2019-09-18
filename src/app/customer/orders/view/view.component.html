@@ -7,7 +7,7 @@
     <div class="col-md-4"> <div class="col">
             <div class="form-inline" id="search_bar">
                 <div class="form-group mr-1">
-                    <input type="text" [(ngModel)]="customerId" class="form-control" (keyup)="search($event)" placeholder="Enter the Customer Id">
+                    <input type="text" [(ngModel)]="customerId" class="form-control" (keyup)="search($event)" placeholder="Search....">
                 </div>
                 <button class="btn btn-secondary btn-sm" (click)="getPerticularUser(smailId)"
             [disabled]="!customerId">{{'search'| translate}}</button>
