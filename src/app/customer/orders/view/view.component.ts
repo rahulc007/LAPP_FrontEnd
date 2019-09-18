@@ -82,4 +82,11 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.router.navigate(['customer/orderview', row.oid]);
   }
 
+  search(event) {
+    if (event.target.value === '') {
+      this.loadPage();
+     // this.searcherror = ''
+    }
+  }
+
 }
