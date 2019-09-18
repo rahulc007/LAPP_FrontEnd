@@ -5,6 +5,10 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, FormArray } f
 import { LappRestService } from '../../../core/rest-service/LappRestService';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+
+
+const URL = `http://3.17.182.133:8090/uploadOrderStatus`;
 
 @Component({
   selector: 'app-handsontable',
@@ -17,6 +21,9 @@ export class HandsontableComponent implements OnInit {
   @ViewChild('editModel', { static: false }) editModel: TemplateRef<any>;
 
   private hotRegisterer = new HotTableRegisterer();
+  fd = new FormData();
+  file: any;
+  public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
   rownum: any;
   editObj = { "leftmarking": "", "rightmarking": "", "middlemarking": "", "markingId": "" }
   deleteData: any;
@@ -57,10 +64,62 @@ export class HandsontableComponent implements OnInit {
     this.getMarkingTextDetails();
     this.rownum = localStorage.getItem('legsno');
     this.legsCount = localStorage.getItem('legsno');
+    
+    
     // for (let i = 0; i <= this.rownum; i++) {
     //   this.enableRow[i] = 'yes'
     // }
+
+
+
+    this.uploader.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+        this.msg = '';
+        this.errorMsg = '';
+        let latestFile = this.uploader.queue[this.uploader.queue.length-1]
+        this.uploader.queue = []; 
+        this.uploader.queue.push(latestFile);
+      };
+  
+      this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
+        this.msg = '';
+        this.errorMsg = '';
+        let data = JSON.parse(response);
+        if (data.status === 200 && data.statusMessage === "success") {
+          this.msg = "show";
+          setTimeout(()=> {
+            this.msg ='';
+       }, 3000);
+         
+        } else if (data.statusMessage == "error") {
+          this.errorMsg = "show";
+          setTimeout(()=> {
+            this.errorMsg ='';
+       }, 3000);
+        }
+        
+        this.uploader.clearQueue();
+
+        this.uploader.options.additionalParameter = {
+          //emailId: this.currentuser
+        };
+        
   }
+}
+
+onUpload() {
+  this.uploader.uploadAll();
+}
+
+
+
+public onFileSelected() {
+  this.fd.append('file', this.file);
+}
+
+removeFile(item) {
+  this.uploader.removeFromQueue(item);
+}
 
   getMarkingTextDetails() {
     const lineitemno = localStorage.getItem('lineItemNo');

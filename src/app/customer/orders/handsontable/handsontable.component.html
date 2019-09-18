@@ -16,6 +16,29 @@
     <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
     <span id="alertErrMsg">{{errorMsg}}</span>
 </div>
+
+<div class="row">
+        <div class="col-md-4 col-sm-8">
+          <div class="input-container">
+            <button class="browse-btn" (click)="file.click()">
+              {{'Browse'| translate}}
+            </button>
+            <input type="file" ng2FileSelect [uploader]="uploader" #file accept=".xlsx, .xls, .csv" (click)="file.value=''"
+              placeholder="Select file">
+            <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
+          </div>
+          <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
+          <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
+        </div>
+        <div class="col-md-8 col-sm-4 p-0 ">
+          <div class="uploadBtn_sctn">
+            <button type="button" class="btn btn-s btn-orange upload_btn" (click)="uploader.uploadAll()"
+              [disabled]="!uploader.getNotUploadedItems().length">
+              {{'upload'| translate}}
+            </button>
+          </div>
+        </div>
+    </div>
 <div *ngIf="firsttime === 1">
     <div class="row mt-2">
         <div class="col-md-2"></div>

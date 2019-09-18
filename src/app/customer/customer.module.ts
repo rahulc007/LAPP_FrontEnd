@@ -21,6 +21,7 @@ import {RootSharedModule} from '../common/root-shared.module';
 import { ResetPasswordComponent } from 'src/app/common/reset-password/reset-password.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 import { ProcessedViewComponent } from './processed-view/processed-view.component';
+import {FileUploadModule, FileSelectDirective} from 'ng2-file-upload';
 
 @NgModule({
   declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent, ProcessedViewComponent],
@@ -34,7 +35,8 @@ import { ProcessedViewComponent } from './processed-view/processed-view.componen
     HotTableModule ,
     ReactiveFormsModule,
     TranslateModule.forRoot(),
-    RootSharedModule
+    RootSharedModule,
+    FileUploadModule
   ],
   exports:[],
   providers:[ConfigurationService],

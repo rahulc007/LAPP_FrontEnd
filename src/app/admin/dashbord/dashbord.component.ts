@@ -4,6 +4,7 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 import { PasswordStrengthService } from '../../common/password-strength/password-strength.service';
 import { TranslateService } from '@ngx-translate/core';
 import { userTypes } from '../../common/constants/constants';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -22,7 +23,7 @@ export class DashbordComponent implements OnInit {
   isSuperAdmin: boolean = false;
   isCustomer: boolean = false;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
-    private passwordStrengthService: PasswordStrengthService, private translate: TranslateService) {
+    private passwordStrengthService: PasswordStrengthService, private translate: TranslateService, private router:Router) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.showResetPopUp = objUserDetails.firstTimeLogin;
    
@@ -85,7 +86,9 @@ export class DashbordComponent implements OnInit {
           this.resetMessage = this.translate.instant('passwordupdatedsuccess');
           setTimeout(()=> {
             this.resetMessage ='';
-            this.showResetPopUp = false
+            this.showResetPopUp = false;
+            this.router.navigate(['admin/profile']);
+            
        }, 3000);
           this.strText = '';
         } else {

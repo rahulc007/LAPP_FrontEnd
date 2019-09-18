@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { PasswordStrengthService } from '../../common/password-strength/password-strength.service';
 import {TranslateService} from'@ngx-translate/core';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -18,7 +19,7 @@ export class DashbordComponent implements OnInit {
   isErrorMessage: boolean = false;
   resetMessage: string = '';
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
-    private ps: PasswordStrengthService, private translate: TranslateService) {
+    private ps: PasswordStrengthService, private translate: TranslateService, private router:Router) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.showResetPopUp = objUserDetails.firstTimeLogin;
   }
@@ -72,6 +73,7 @@ export class DashbordComponent implements OnInit {
           setTimeout(()=> {
             this.resetMessage ='';
             this.showResetPopUp = false;
+            this.router.navigate(['customer/profile'])
        }, 3000);
           this.strText = '';
         } else {
