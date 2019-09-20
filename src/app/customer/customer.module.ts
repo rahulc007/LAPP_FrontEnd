@@ -14,7 +14,6 @@ import {ConfigurationService} from '../common/ngx-easy-table/config-service';
 
 import { ViewComponent } from './orders/view/view.component';
 import { EditComponent } from './orders/edit/edit.component';
-import { LegseditComponent } from './orders/legsedit/legsedit.component';
 import { HandsontableComponent } from './orders/handsontable/handsontable.component';
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
 import {RootSharedModule} from '../common/root-shared.module';
@@ -24,7 +23,7 @@ import { ProcessedViewComponent } from './processed-view/processed-view.componen
 import {FileUploadModule, FileSelectDirective} from 'ng2-file-upload';
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, LegseditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent, ProcessedViewComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent, ProcessedViewComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

@@ -2,7 +2,7 @@
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
         <div class="float-right">
-                <a *ngIf="firsttime===1" href="/assets/data/samplemarkingtext.xlsx" target="_self"  class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>
+            <a *ngIf="firsttime===1" href="/assets/data/samplemarkingtext.xlsx" target="_self" class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>
             <button *ngIf="firsttime===0" type="button" class="btn btn-orange" (click)="addNewRow()">{{'addNewRow'| translate}}</button>&nbsp;
             <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
         </div>
@@ -17,29 +17,27 @@
     <span id="alertErrMsg">{{errorMsg}}</span>
 </div>
 <div *ngIf="firsttime === 1">
-<div class="row">
+    <div class="row">
         <div class="col-md-4 col-sm-8">
-          <div class="input-container">
-            <button class="browse-btn" (click)="file.click()">
-              {{'Browse'| translate}}
-            </button>
-            <input type="file" ng2FileSelect [uploader]="uploader" #file accept=".xlsx, .xls, .csv" (click)="file.value=''"
-              placeholder="Select file">
-            <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
-          </div>
-          <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
-          <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
+            <div class="input-container">
+                <button class="browse-btn" (click)="file.click()">
+                    {{'Browse'| translate}}
+                </button>
+                <input type="file" ng2FileSelect [uploader]="uploader" #file accept=".xlsx, .xls, .csv" (click)="file.value=''" placeholder="Select file">
+                <span class="file-info" *ngFor="let item of uploader.queue">{{ item?.file?.name }}</span>
+            </div>
+            <p class="upload_msg">{{'filenameshould'| translate}}
+                <b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
+            <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
         </div>
         <div class="col-md-8 col-sm-4 p-0 ">
-          <div class="uploadBtn_sctn">
-            <button type="button" class="btn btn-s btn-orange upload_btn" (click)="uploader.uploadAll()"
-              [disabled]="!uploader.getNotUploadedItems().length">
-              {{'upload'| translate}}
-            </button>
-          </div>
+            <div class="uploadBtn_sctn">
+                <button type="button" class="btn btn-s btn-orange upload_btn" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    {{'upload'| translate}}
+                </button>
+            </div>
         </div>
     </div>
-
     <div class="row mt-2">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -79,7 +77,6 @@
                             <tr>
                                 <th>Index</th>
                                 <th>{{'lefttext'| translate}}</th>
-
                                 <th>{{'righttext'| translate}}</th>
                                 <th>{{'others'| translate}}</th>
                                 <th>{{'edit'| translate}}</th>
@@ -103,7 +100,6 @@
                                     <span *ngIf="!row.cIsNew">
                                         <i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i>
                                     </span>
-
                                 </td>
                                 <td>
                                     <i class="fa fa-trash ml-2" (click)="deleteMarkTextModel(row)"></i>
@@ -129,7 +125,6 @@
     </div>
     <div class="modal-body text-center">
         <h4>{{'deleteData' |translate }}</h4>
-
     </div>
     <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
@@ -139,8 +134,6 @@
 
 
 <ng-template #ver let-row let-rowIndex="rowIndex">
-
-    <!-- <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row)" ><i class="fa fa-pencil" aria-hidden="true"></i></button> -->
     <a class="ml-2" (click)="orderview(row)">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
@@ -162,7 +155,6 @@
         <button type="button" class="btn btn-danger" (click)="submitMarkingText()">{{'Submit' |translate}}</button>
     </div>
 </ng-template>
-
 
 <ng-template #editModel let-c="close" let-d="dismiss">
     <div class="modal-header">
@@ -191,13 +183,9 @@
                 <input type="text" [(ngModel)]="editObj.middlemarking">
             </div>
         </div>
-
-
     </div>
     <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
         <button type="button" class="btn btn-orange" (click)="updateMarkingText()">{{'Update' |translate }}</button>
-
     </div>
 </ng-template>
-

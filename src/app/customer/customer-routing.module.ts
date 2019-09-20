@@ -5,7 +5,6 @@ import {AuthGuard} from '../core/services/auth.guard';
 import {MainpageComponent} from './shared/pages/mainpage/mainpage.component';
 import {ViewComponent} from './orders/view/view.component';
 import {EditComponent} from './orders/edit/edit.component';
-import {LegseditComponent} from './orders/legsedit/legsedit.component';
 import {HandsontableComponent} from './orders/handsontable/handsontable.component';
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
@@ -21,7 +20,6 @@ const CustomerRoutes: Routes = [
      { path: 'dashboard', component: DashbordComponent, data:{userType:'CUSTOMER'} },
      { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
      { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
-     { path: 'orderview/editlegs/:id', component: LegseditComponent, data:{userType:'CUSTOMER'}},
      { path: 'orderview/:id/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedorders', component:ProcessedOrdersComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedview/:id', component:ProcessedViewComponent, data:{userType:'CUSTOMER'}},
