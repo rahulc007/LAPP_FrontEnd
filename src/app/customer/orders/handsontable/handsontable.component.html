@@ -21,9 +21,24 @@
     <div class="row mt-2">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <hot-table [data]="data" [hotId]="id" [columns]="getColumns" [colHeaders]="true" [rowHeaders]="true" [colWidths]="200" [width]="700"
+            <hot-table [data]="data" [hotId]="id" [columns]="getColumns" [colHeaders]="true" [rowHeaders]="true" [colWidths]="200" [width]="650"
                 [height]="300" [startRows]=rownum [minCols]=colmin [minSpareRows]="0" [minSpareCols]="0">
             </hot-table>
+        </div>
+        <div class="col-md-2">
+                <table class="table table-bordered text-center ">
+                    <thead>
+                        <tr>
+                            <th>L : Left Text</th>
+                        </tr>
+                        <tr>
+                            <th>R : Right Text</th>
+                        </tr>
+                        <tr>
+                            <th>O : Others</th>
+                        </tr>
+                    </thead>
+                </table>
         </div>
     </div>
     <br>
@@ -166,6 +181,6 @@
     </div>
     <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
-        <button type="button" class="btn btn-orange" (click)="updateMarkingText()">{{'Update' |translate }}</button>
+        <button type="button" class="btn btn-orange" (click)="updateMarkingTextData()">{{'Update' |translate }}</button>
     </div>
 </ng-template>

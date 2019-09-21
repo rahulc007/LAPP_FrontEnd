@@ -107,7 +107,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
 
       let diffDays = date1.getDate() - today.getDate();
-
+console.log('dif dates',diffDays);
 
       if (diffDays <= 0) {
         this.mflag = 1; //model falg
@@ -139,7 +139,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       "lineItemid": lineitemno
     };
     if (this.legsnum > 0) {
-      this.router.navigate(['customer/orderview/:id/editlegs']);
+      this.router.navigate(['customer/orderview/editlegs']);
     }
     else if (this.mflag != 1) {
       this.legseditflag = 0;
@@ -176,7 +176,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
         localStorage.setItem('hflag', this.flag);
       }
 
-      this.router.navigate(['customer/orderview/:id/editlegs']);
+      this.router.navigate(['customer/orderview/editlegs']);
       this.modalService.dismissAll();
     }
   }

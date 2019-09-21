@@ -22,7 +22,7 @@ const CustomerRoutes: Routes = [
      { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
      { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
     
-     { path: 'orderview/:id/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
+     { path: 'orderview/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedorders', component:ProcessedOrdersComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedview/:id', component:ProcessedViewComponent, data:{userType:'CUSTOMER'}},
      { path: 'uploadexcel', component: ExceluploadComponent, data:{userType:'CUSTOMER'}},

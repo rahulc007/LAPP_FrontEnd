@@ -64,88 +64,107 @@ export class HandsontableComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    
-    this.rownum = localStorage.getItem('legsno');
     this.legsCount = localStorage.getItem('legsno');
+    this.rownum = this.legsCount;
     this.lineitemno = localStorage.getItem('lineItemNo');
     this.lineitemId = localStorage.getItem('lineitemid');
-    this.emailId =  localStorage.getItem('username');
+    this.emailId = localStorage.getItem('username');
     this.getMarkingTextDetails();
 
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
-        this.msg = '';
-        this.errorMsg = '';
-        let latestFile = this.uploader.queue[this.uploader.queue.length-1]
-        this.uploader.queue = []; 
-        this.uploader.queue.push(latestFile);
+      this.msg = '';
+      this.errorMsg = '';
+      let latestFile = this.uploader.queue[this.uploader.queue.length - 1]
+      this.uploader.queue = [];
+      this.uploader.queue.push(latestFile);
+    };
+
+    this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
+      this.msg = '';
+      this.errorMsg = '';
+      let data = JSON.parse(response);
+      if (data.status === 200 && data.statusMessage === "success") {
+        this.msg = "show";
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+
+      } else if (data.statusMessage == "error") {
+        this.errorMsg = "show";
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+
+      this.uploader.clearQueue();
+
+      this.uploader.options.additionalParameter = {
+
       };
-  
-      this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
-        this.msg = '';
-        this.errorMsg = '';
-        let data = JSON.parse(response);
-        if (data.status === 200 && data.statusMessage === "success") {
-          this.msg = "show";
-          setTimeout(()=> {
-            this.msg ='';
-       }, 3000);
-         
-        } else if (data.statusMessage == "error") {
-          this.errorMsg = "show";
-          setTimeout(()=> {
-            this.errorMsg ='';
-       }, 3000);
-        }
-        
-        this.uploader.clearQueue();
 
-        this.uploader.options.additionalParameter = {
-          
-        };
-        
+    }
   }
-}
 
-onUpload() {
-  this.uploader.uploadAll();
-}
-
+  onUpload() {
+    this.uploader.uploadAll();
+  }
 
 
-public onFileSelected() {
-  this.fd.append('file', this.file);
-}
 
-removeFile(item) {
-  this.uploader.removeFromQueue(item);
-}
-addMarkingTextApi(params) {
-  this.objService.Post('addMarkingText', params).subscribe(response => {
-    if (response.status === 200 && response.statusMessage === 'success') {
-      this.msg = response.successMessage;
-      setTimeout(() => {
-        this.msg = '';
-      }, 3000);
-    }
-    else if (response.statusMessage === null || response.statusMessage === 'error' || response.errorMessage === 'Invalid request..!') {
-      this.errorMsg = response.errorMessage;
-      setTimeout(() => {
-        this.errorMsg = '';
-      }, 3000);
-    }
-  })
-}
+  public onFileSelected() {
+    this.fd.append('file', this.file);
+  }
+
+  removeFile(item) {
+    this.uploader.removeFromQueue(item);
+  }
+  addMarkingTextApi(params) {
+    this.objService.Post('addMarkingText', params).subscribe(response => {
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = response.successMessage;
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+        if (this.firsttime === 0) {
+          this.getMarkingTextDetails();
+        }
+      }
+      else if (response.statusMessage === null || response.statusMessage === 'error' || response.errorMessage === 'Invalid request..!') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+    })
+  }
+  updateMarkingTextApi(params) {
+    this.objService.Post('updateMarkingText', params).subscribe(response => {
+      if (response.status === 200 && response.statusMessage === 'success') {
+        this.msg = this.translate.instant('updateMessage');
+        this.getMarkingTextDetails();
+        setTimeout(() => {
+          this.msg = '';
+        }, 3000);
+      }
+      else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
+        this.errorMsg = response.errorMessage;
+        setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
+    })
+  }
   getMarkingTextDetails() {
-   
-    this.objService.Get('getMarkingText?lineItemid=' + this.lineitemno, null).subscribe(response => {
+    let Params = {
+      "lineItemid": this.lineitemno
+    }
+    this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
-      console.log('marking Array', this.markingtextId);
       this.markinglistlength = response.markingTextList.length;
       if (response.markingTextList.length === 0 && this.firsttime) {
         this.firsttime = 1;
-        this.rownum = localStorage.getItem('legsno');
+        this.rownum = this.legsCount;
       }
       else {
         this.firsttime = 0;
@@ -155,14 +174,14 @@ addMarkingTextApi(params) {
         this.markingTextForm = this.fb.group({
           arr: this.fb.array([])
         });
-       
+
         this.items = [];
         this.rownum = this.legsCount;
         for (let objRow of response.markingTextList) {
           objRow["cIsNew"] = false;
           this.items.push(objRow);
         }
-        this.items =  this.items.sort((a,b)=>a.markingId - b.markingId);
+        this.items = this.items.sort((a, b) => a.markingId - b.markingId);
         this.setFormArray();
       }
     })
@@ -180,8 +199,6 @@ addMarkingTextApi(params) {
       )
     })
   }
-
-
 
   saveData() {
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
@@ -202,23 +219,27 @@ addMarkingTextApi(params) {
     this.params = {
       "lineItemId": this.lineitemId,
       "isSubmit": false,
-      "legsCount": this.legsCount,
+      "legsCount": harray.length,
       "emailId": this.emailId,
       "markingTextList": this.markingTestTempArray
     }
- 
+
     this.addMarkingTextApi(this.params);
 
-    this.objService.Get('getMarkingText?lineItemid=' + this.lineitemno, null).subscribe(response => {
+    let Params = {
+      "lineItemid": this.lineitemno
+    }
+
+    this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
-      console.log('marking Array', this.markingtextId);
+      this.markinglistlength = response.markingTextList.length;
     })
   }
 
   submitData() {
-    this.modalService.open(this.submitConfirm); 
+    this.modalService.open(this.submitConfirm);
   }
- 
+
   deleteMarkTextModel(row) {
     if (row["cIsNew"] == true) {
       let iIndex = this.items.indexOf(row);
@@ -236,7 +257,7 @@ addMarkingTextApi(params) {
   }
 
   deleteMarkingText() {
-    
+
     let params = {
       "lineItemId": this.lineitemId,
       "isSubmit": false,
@@ -247,22 +268,7 @@ addMarkingTextApi(params) {
       "rightText": "",
       "middleText": ""
     }
-
-    this.objService.Post('updateMarkingText', params).subscribe(response => {
-      if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = this.translate.instant('updateMessage');
-
-        setTimeout(() => {
-          this.msg = '';
-        }, 3000);
-      }
-      else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
-        this.errorMsg = response.errorMessage;
-        setTimeout(() => {
-          this.errorMsg = '';
-        }, 3000);
-      }
-    })
+    this.updateMarkingTextApi(params);
     this.modalService.dismissAll();
   }
 
@@ -274,11 +280,11 @@ addMarkingTextApi(params) {
   submitMarkingText() {
     this.getMarkingTextDetails();
     let passed = true;
-    if(this.values){
+    if (this.values) {
       for (let i = 0; i < this.markingtextId.length; i++) {
         this.params = {
           "lineItemId": this.lineitemId,
-          "isSubmit": false,
+          "isSubmit": true,
           "legsCount": this.legsCount,
           "emailId": this.emailId,
           "markingId": this.markingtextId[i].markingId,
@@ -286,47 +292,7 @@ addMarkingTextApi(params) {
           "rightText": this.values[i].rightText,
           "middleText": this.values[i].middleText
         }
-  
-        this.objService.Post('updateMarkingText', this.params).subscribe(response => {
-          if (response.statusMessage === 'error') {
-            passed = false
-          }
-        })
-      }
-      if (passed) {
-        this.msg = 'Marking Text Updated Successfully';
-        setTimeout(() => {
-          this.msg = '';
-        }, 3000);
-      }
-      else {
-        this.errorMsg = 'Marking Text Updation failed';
-        setTimeout(() => {
-          this.errorMsg = '';
-        }, 3000);
-      }
-    this.modalService.dismissAll();
-    }
-  
-   else {
-     if(this.markingtextId.length !== 0) {
-      let harray = [];
-      this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
-      this.tabledata.forEach(element => {
-        harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
-      });
-      for (let i = 0; i < harray.length; i++) {
-        this.params = {
-          "lineItemId": this.lineitemId,
-          "isSubmit": true,
-          "legsCount": this.legsCount,
-          "emailId": this.emailId,
-          "markingId": this.markingtextId[i].markingId,
-          "leftText": harray[i].leftText,
-          "rightText": harray[i].rightText,
-          "middleText": harray[i].middleText
-        }
-  
+
         this.objService.Post('updateMarkingText', this.params).subscribe(response => {
           if (response.statusMessage === 'error') {
             passed = false
@@ -346,35 +312,75 @@ addMarkingTextApi(params) {
         }, 3000);
       }
       this.modalService.dismissAll();
-     }
-     else {
-      let harray = [];
-      this.markingTestTempArray = [];
-      this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
-      this.tabledata.forEach(element => {
-        harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
-      });
-      for (let i = 0; i < harray.length; i++) {
-        this.markingTestTempArray.push({
-          "leftText": harray[i].leftText,
-          "rightText": harray[i].middleText,
-          "middleText": harray[i].rightText,
-          "notifyUser": "",
-          "updatedBy": this.emailId,
-          "lineItemnumber": this.lineitemno
-        })
-      }
-       this.params = {
-      "lineItemId": this.lineitemId,
-      "isSubmit": true,
-      "legsCount": this.legsCount,
-      "emailId": this.emailId,
-      "markingTextList": this.markingTestTempArray
     }
-    this.addMarkingTextApi(this.params)
-    this.modalService.dismissAll();
-   }
- }   
+
+    else {
+      if (this.markingtextId.length !== 0) {
+        let harray = [];
+        this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
+        this.tabledata.forEach(element => {
+          harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
+        });
+        for (let i = 0; i < harray.length; i++) {
+          this.params = {
+            "lineItemId": this.lineitemId,
+            "isSubmit": true,
+            "legsCount": harray.length,
+            "emailId": this.emailId,
+            "markingId": this.markingtextId[i].markingId,
+            "leftText": harray[i].leftText,
+            "rightText": harray[i].rightText,
+            "middleText": harray[i].middleText
+          }
+
+          this.objService.Post('updateMarkingText', this.params).subscribe(response => {
+            if (response.statusMessage === 'error') {
+              passed = false
+            }
+          })
+        }
+        if (passed) {
+          this.msg = 'Marking Text Updated Successfully';
+          setTimeout(() => {
+            this.msg = '';
+          }, 3000);
+        }
+        else {
+          this.errorMsg = 'Marking Text Updation failed';
+          setTimeout(() => {
+            this.errorMsg = '';
+          }, 3000);
+        }
+        this.modalService.dismissAll();
+      }
+      else {
+        let harray = [];
+        this.markingTestTempArray = [];
+        this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
+        this.tabledata.forEach(element => {
+          harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
+        });
+        for (let i = 0; i < harray.length; i++) {
+          this.markingTestTempArray.push({
+            "leftText": harray[i].leftText,
+            "rightText": harray[i].middleText,
+            "middleText": harray[i].rightText,
+            "notifyUser": "",
+            "updatedBy": this.emailId,
+            "lineItemnumber": this.lineitemno
+          })
+        }
+        this.params = {
+          "lineItemId": this.lineitemId,
+          "isSubmit": true,
+          "legsCount": harray.length,
+          "emailId": this.emailId,
+          "markingTextList": this.markingTestTempArray
+        }
+        this.addMarkingTextApi(this.params)
+        this.modalService.dismissAll();
+      }
+    }
   }
 
   editMarkText(i, row) {
@@ -385,7 +391,7 @@ addMarkingTextApi(params) {
     this.modalService.open(this.editModel);
   }
 
-  updateMarkingText() {
+  updateMarkingTextData() {
 
     let params = {
       "lineItemId": this.lineitemId,
@@ -398,56 +404,10 @@ addMarkingTextApi(params) {
       "middleText": this.editObj.middlemarking
 
     }
-
-    this.objService.Post('updateMarkingText', params).subscribe(response => {
-      if (response.status === 200 && response.statusMessage === 'success') {
-        this.msg = this.translate.instant('updateMessage');
-
-        setTimeout(() => {
-          this.msg = '';
-        }, 3000);
-      }
-      else if (response.errorMessage === 'Invalid request..!' || response.statusMessage === 'error') {
-        this.errorMsg = response.errorMessage;
-        setTimeout(() => {
-          this.errorMsg = '';
-        }, 3000);
-      }
-    })
+    this.updateMarkingTextApi(params);
     this.modalService.dismissAll();
 
   }
-
-
-  getMarkingTextData() {
-    this.items = [];
-    this.objService.Get('getMarkingText?lineItemid=' + this.lineitemno, null).subscribe(response => {
-      this.firsttime = 0;
-      for (let i = 0; i <= this.rownum; i++) {
-        this.enableRow[i] = 'yes'
-      }
-      this.markingTextForm = this.fb.group({
-        arr: this.fb.array([])
-      });
-      
-      this.rownum = this.legsCount;
-      let array = [];
-      array = response.markingTextList;
-      for (let i = 0; i < this.rownum; i++) {
-        if (array[i]) {
-          this.items.push(array[i]);
-        }
-        else {
-          this.items.push({ "leftText": null, "middleText": null, "rightText": null })
-        }
-      }
-      this.setFormArray();
-
-    })
-  }
-
-
-
 
   getColumns = (column) => {
     return this.columns[column];
@@ -475,7 +435,7 @@ addMarkingTextApi(params) {
   }
 
   onClickSaveNewRow() {
-   
+
     let arrNewRow = [];
     const values = this.markingTextForm.value.arr;
 
@@ -499,14 +459,12 @@ addMarkingTextApi(params) {
       "emailId": this.emailId,
       "markingTextList": arrNewRow
     }
- 
+
     this.addMarkingTextApi(this.params);
-   
-      this.blnShowSaveNewRowButton = false;
-      this.getMarkingTextDetails();
-      const legCnt = parseInt(this.legsCount);
-      this.enableRow[legCnt - 1] = 'yes';
-     
+    this.blnShowSaveNewRowButton = false;
+    const legCnt = parseInt(this.legsCount);
+    this.enableRow[legCnt - 1] = 'yes';
+
   }
 
 }

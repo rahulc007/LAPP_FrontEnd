@@ -154,7 +154,7 @@ export class ExceluploadComponent implements OnInit {
         this.params = {
           "lineItemId": lineitemId,
           "isSubmit": true,
-          "legsCount": legs,
+          "legsCount": harray.length,
           "emailId": emailId,
           "markingTextList": this.markingTestTempArray
         }
