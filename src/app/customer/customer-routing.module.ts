@@ -9,6 +9,7 @@ import {HandsontableComponent} from './orders/handsontable/handsontable.componen
 import { CustomerProfileComponent } from './profile/customer-profile/customer-profile.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 import {ProcessedViewComponent} from './processed-view/processed-view.component';
+import { ExceluploadComponent } from './orders/excelupload/excelupload.component';
 
 const basePath = 'customer';
 
@@ -20,10 +21,11 @@ const CustomerRoutes: Routes = [
      { path: 'dashboard', component: DashbordComponent, data:{userType:'CUSTOMER'} },
      { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
      { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
+    
      { path: 'orderview/:id/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedorders', component:ProcessedOrdersComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedview/:id', component:ProcessedViewComponent, data:{userType:'CUSTOMER'}},
-
+     { path: 'uploadexcel', component: ExceluploadComponent, data:{userType:'CUSTOMER'}},
      { path: 'profile', component: CustomerProfileComponent, data:{userType:'CUSTOMER'}}
     ]
     

@@ -19,6 +19,7 @@ import { userTypes } from '../../../common/constants/constants';
 export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
+  @ViewChild('uploadExcel', { static: false }) uplodExl: TemplateRef<any>;
   @ViewChild('legscontent', { static: false }) legscontent: TemplateRef<any>;
   public configuration: Config;
   legseditflag = 0;
@@ -27,7 +28,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   legsnum: any;
   submitted = false;
   public columns: any[] = [];
-  param = {}
+  param = {};
   pager = {};
   pageOfItems = [];
   baseUrl: any;
@@ -35,6 +36,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   flag: any;
   mflag = 0;
   array: any[] = [];
+  uploadFlag: boolean;
 
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
@@ -64,7 +66,9 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // { key: 'updatedBy', title: 'Updated By' },
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
-      { key: 'Actions', title: 'Edit', searchEnabled: false, cellTemplate: this.Ver }
+      { key: 'Actions', title: 'Edit', searchEnabled: false, cellTemplate: this.Ver },
+      { key: 'Upload', title: 'Upload', searchEnabled: false, cellTemplate: this.uplodExl }
+   
     ];
   }
   ngAfterViewChecked() {
@@ -78,10 +82,21 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.objService.Get('getOrderDetailsByUser?emailId=' + emailId, this.param).subscribe(response => {
       for (let i = 0; i < response.orderInfoList.length; i++) {
         if (orderId === response.orderInfoList[i].oid) {
-          this.array = response.orderInfoList[i].orderLineItem
+          this.array = response.orderInfoList[i].orderLineItem;
         }
       }
+      
       this.data = this.array;
+
+      const lineitemId = this.data[0].lineItemId;
+      const lineitemno = this.data[0].lineItemno;
+      this.legsnum = this.data[0].legsCount;
+  
+      localStorage.setItem('lineitemid', lineitemId);
+      localStorage.setItem('lineItemNo', lineitemno);
+      localStorage.setItem('legsno', this.legsnum);
+      
+      this.uploadFlag=this.data[0].legsCount>0 ?true:false;
       let dt = this.data[0].createdDate;
 
       let date1 = new Date(dt);
@@ -179,5 +194,10 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   closeModel() {
     this.legseditflag = 0;
   }
+
+  uploadMarkupTextExl() {
+    this.router.navigate(['customer/uploadexcel']);
+  }
+
 
 }

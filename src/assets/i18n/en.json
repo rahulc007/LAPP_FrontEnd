@@ -125,7 +125,7 @@
     "back":"Back",
     "alteredanddelete":"You have altered number of legs remaining rows will be deleted",
     "Confirm":"Confirm",
-    "marktextexcel":"Marking Text Excel",
+    "marktextexcel":"Enter Marking Text Excel",
     "lefttext":"Left Marking Text",
     "middletext":"Middle Marking Text",
     "righttext":"Right Marking Text",
@@ -137,7 +137,8 @@
     "saveNewRows":"Save New Rows",
     "others": "Others",
     "wentwrong":"Something went Wrong, Please Refresh !",
-   "downloadsamplefile":"Download Sample File"
+   "downloadsamplefile":"Download Sample File",
+   "uploadmarktextexcel":"Upload Marking Text Excel"
 
     
 }

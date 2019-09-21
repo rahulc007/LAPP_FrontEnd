@@ -21,9 +21,10 @@ import { ResetPasswordComponent } from 'src/app/common/reset-password/reset-pass
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 import { ProcessedViewComponent } from './processed-view/processed-view.component';
 import {FileUploadModule, FileSelectDirective} from 'ng2-file-upload';
+import { ExceluploadComponent } from './orders/excelupload/excelupload.component';
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent, ProcessedViewComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, HandsontableComponent, CustomerProfileComponent, ProcessedOrdersComponent, ProcessedViewComponent, ExceluploadComponent],
   imports: [
     CommonModule,
     CustomerRoutingModule,

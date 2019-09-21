@@ -1,0 +1,98 @@
+<div class="row">
+        <div class="col">
+            <h2 class="page_heading new_order float-left">{{'uploadmarktextexcel'| translate}}</h2>
+            <div class="float-right">
+                    <a  href="/assets/data/samplemarkingtext.xlsx" target="_self"  class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>
+              
+                <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="msg" class="alert alert-success alert-dismissible" data-auto-dismiss role="alert">
+        <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+        <span id="alertMsg">{{msg}}</span>
+    </div>
+    <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+        <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+        <span id="alertErrMsg">{{errorMsg}}</span>
+    </div>
+   
+    <div class="row">
+            <div class="col-md-4 col-sm-8">
+              <div class="input-container">
+                <button class="browse-btn" (click)="file.click()">
+                  {{'Browse'| translate}}
+                </button>
+                <input type="file"  #file accept=".xlsx, .xls, .csv" (change)="OnLoadFile($event)"
+                  placeholder="Select file">
+                <span class="file-info" >{{filename}}</span>
+              </div>
+              <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
+              <p class="upload_msg">{{'pleaseuploadxcel'| translate}}</p>
+            </div>
+          
+        </div>
+    
+        <div class="row mt-2">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <hot-table [data]="dataset" [hotId]="id" [columns]="getColumns" [colHeaders]="true" [rowHeaders]="true" [colWidths]="200" [width]="700"
+                    [height]="300" [startRows]=rownum [minCols]=colmin [minSpareRows]="0" [minSpareCols]="0">
+                    <hot-column data="L" title="L"></hot-column>
+                    <hot-column data="R" title="R"></hot-column>
+                    <hot-column data="O" title="O"></hot-column>
+                </hot-table>
+                
+    
+                <div id="example4" class="hot handsontable htColumnHeaders"></div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div *ngIf="errorMessage" class="alert alert-warning alert-dismissible" data-auto-dismiss role="alert">
+                    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+                    <span id="alertMsg">{{errorMessage}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-1">
+                <button class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button>
+            </div>
+            <div class="col-md-1 ml-2">
+                <button class="btn btn-md btn-orange" (click)="submitMarkingText()">{{'submit'| translate}}</button>
+            </div>
+        </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <ng-template #submitConfirm let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body text-center">
+            <h4>Are you sure want to Submit the Data ?</h4>
+            <h4>Once submit data can't be edited again!</h4>
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
+            <button type="button" class="btn btn-danger" (click)="submitData()">{{'Submit' |translate}}</button>
+        </div>
+    </ng-template>
+    
+
+    
+  
+    
+    
