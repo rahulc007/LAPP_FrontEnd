@@ -101,13 +101,17 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
       let date1 = new Date(dt);
 
+      let sdate:any = date1;
       date1.setDate(date1.getDate() + userTypes.markingtextExpire);
 
+      let exdate:any = date1;
       let today = new Date();
 
+      let difDate:any = date1.getTime() - today.getTime();
+      difDate = difDate / (1000 * 3600 * 24);
 
-      let diffDays = date1.getDate() - today.getDate();
-console.log('dif dates',diffDays);
+      //let diffDays = date1.getDate() - today.getDate();
+      let diffDays = Math.floor(difDate);
 
       if (diffDays <= 0) {
         this.mflag = 1; //model falg
@@ -139,7 +143,7 @@ console.log('dif dates',diffDays);
       "lineItemid": lineitemno
     };
     if (this.legsnum > 0) {
-      this.router.navigate(['customer/orderview/editlegs']);
+      this.router.navigate(['customer/editlegs']);
     }
     else if (this.mflag != 1) {
       this.legseditflag = 0;
@@ -176,7 +180,7 @@ console.log('dif dates',diffDays);
         localStorage.setItem('hflag', this.flag);
       }
 
-      this.router.navigate(['customer/orderview/editlegs']);
+      this.router.navigate(['customer/editlegs']);
       this.modalService.dismissAll();
     }
   }
