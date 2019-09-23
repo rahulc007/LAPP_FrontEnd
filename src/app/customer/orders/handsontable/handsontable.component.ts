@@ -169,7 +169,7 @@ export class HandsontableComponent implements OnInit {
       else {
         this.firsttime = 0;
         for (let i = 0; i <= this.markinglistlength; i++) {
-          this.enableRow[i] = 'yes'
+          this.enableRow[i] = 'yes';
         }
         this.markingTextForm = this.fb.group({
           arr: this.fb.array([])
@@ -232,7 +232,6 @@ export class HandsontableComponent implements OnInit {
 
     this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
-      this.markinglistlength = response.markingTextList.length;
     })
   }
 
@@ -332,7 +331,6 @@ export class HandsontableComponent implements OnInit {
             "rightText": harray[i].rightText,
             "middleText": harray[i].middleText
           }
-
           this.objService.Post('updateMarkingText', this.params).subscribe(response => {
             if (response.statusMessage === 'error') {
               passed = false
@@ -381,6 +379,7 @@ export class HandsontableComponent implements OnInit {
         this.modalService.dismissAll();
       }
     }
+    this.flag = 0;
   }
 
   editMarkText(i, row) {
@@ -395,7 +394,7 @@ export class HandsontableComponent implements OnInit {
 
     let params = {
       "lineItemId": this.lineitemId,
-      "isSubmit": true,
+      "isSubmit": false,
       "emailId": this.emailId,
       "legsCount": this.legsCount,
       "markingId": this.editObj.markingId,

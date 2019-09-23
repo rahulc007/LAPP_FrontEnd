@@ -24,6 +24,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   params: any;
   arr: any[] = [];
   array: any[]=[];
+  emailId: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -32,13 +33,18 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
      }
 
   ngOnInit() {
+    this.emailId = localStorage.getItem('username');
     this.getUploadedOrderDetails();
   }
   getUploadedOrderDetails() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    const emailId = localStorage.getItem('username');
-  
-      this.objService.Get('getProcessedOrderByUser?emailId=' + emailId, this.params).subscribe(response => {
+    //const emailId = localStorage.getItem('username');
+    this.params = {
+      "emailId": this.emailId,
+      "startLimit": 0,
+      "endLimit": 100
+    }
+      this.objService.Get('getProcessedOrderByUser',this.params).subscribe(response => {
           
         this.data = response.orderInfoList;
         this.data.forEach(date => {

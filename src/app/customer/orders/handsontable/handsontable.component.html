@@ -2,8 +2,7 @@
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'marktextexcel'| translate}}</h2>
         <div class="float-right">
-
-            <button *ngIf="firsttime===0" type="button" class="btn btn-orange" (click)="addNewRow()">{{'addNewRow'| translate}}</button>&nbsp;
+            <button *ngIf="firsttime===0 && flag === 1" type="button" class="btn btn-orange" (click)="addNewRow()">{{'addNewRow'| translate}}</button>&nbsp;
             <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
         </div>
     </div>
@@ -54,10 +53,10 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-1">
-            <button class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button>
+            <button *ngIf="flag === 1"  class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button>
         </div>
         <div class="col-md-1 ml-2">
-            <button class="btn btn-md btn-orange" (click)="submitData()">{{'submit'| translate}}</button>
+            <button *ngIf="flag === 1" class="btn btn-md btn-orange" (click)="submitData()">{{'submit'| translate}}</button>
         </div>
     </div>
 </div>
@@ -104,7 +103,7 @@
                     </table>
                 </div>
                 <!-- <button class="btn btn-orange" type="submit" (click)="editMarkingText(markingTextForm.value)">{{'update'| translate}}</button> -->
-                <button class="btn btn-orange ml-2" type="submit" (click)="openModel(markingTextForm.value)">{{'submit'| translate}}</button>
+                <button *ngIf="flag === 1" class="btn btn-orange ml-2" type="submit" (click)="openModel(markingTextForm.value)">{{'submit'| translate}}</button>
                 <button *ngIf="blnShowSaveNewRowButton" type="button" class="btn btn-orange pull-right" (click)="onClickSaveNewRow()">{{'saveNewRows' |translate }}</button>
             </form>
         </div>
@@ -127,14 +126,14 @@
     </div>
 </ng-template>
 
-
+<!-- Row Edit button Modal -->
 <ng-template #ver let-row let-rowIndex="rowIndex">
     <a class="ml-2" (click)="orderview(row)">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
 </ng-template>
 
-
+<!-- Submit Confirm Modal -->
 <ng-template #submitConfirm let-c="close" let-d="dismiss">
     <div class="modal-header">
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -151,6 +150,7 @@
     </div>
 </ng-template>
 
+<!-- Row Update Modal -->
 <ng-template #editModel let-c="close" let-d="dismiss">
     <div class="modal-header">
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">

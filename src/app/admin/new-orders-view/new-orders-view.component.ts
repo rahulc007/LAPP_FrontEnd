@@ -22,23 +22,28 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   public data :any[]=[];
   params: any;
   array:any[]=[];
+  emailId: any;
   constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute,
     private router:Router, private objService: LappRestService, private cdr: ChangeDetectorRef, private datePipe: DatePipe) {
     this.configuration = ConfigurationService.config;
   }
 
   ngOnInit() {
+    this.emailId = localStorage.getItem('username');
     this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.getUploadedOrderDetails();
   }
  getUploadedOrderDetails() {
    
    let orderId=parseInt(localStorage.getItem('oid'));
-   console.log(orderId)
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    const emailId = localStorage.getItem('username');
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
-      this.objService.Get('getOrderDetailsByAdmin?emailId=' + emailId, this.params).subscribe(response => {
+      this.params = {
+        "emailId": this.emailId,
+        "startLimit": 0,
+        "endLimit": 100 
+      }
+      this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
         for(let i=0; i<response.orderInfoList.length; i++) {
           if(orderId === response.orderInfoList[i].oid) {
             this.array=response.orderInfoList[i].orderLineItem

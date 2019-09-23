@@ -25,6 +25,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   data:any[]=[];
   arr: any[] = [];
   tempArray: any[] = [];
+  emailId : any;
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router,private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) { this.configuration = DefaultConfig;
@@ -32,7 +33,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   ngOnInit() {
     // this.configuration = ConfigurationService.config;
-
+    this.emailId = localStorage.getItem('username');
   //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
   this.loadPage();
   }
@@ -63,7 +64,12 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
     // });
 
     let emailId = localStorage.getItem('username');
-    this.objService.Get('getOrderDetailsByUser?emailId='+emailId, this.params).subscribe(response => {
+    this.params = {
+      "emailId": emailId,
+      "startLimit": 0,
+      "endLimit" :100  
+    }
+    this.objService.Get('getOrderDetailsByUser', this.params).subscribe(response => {
       for(let i=0; i<response.orderInfoList.length; i++) {
         if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
           this.arr.push(response.orderInfoList[i]);
@@ -97,8 +103,26 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   search(event) {
     if (event.target.value === '') {
       this.loadPage();
-     // this.searcherror = ''
     }
   }
-
+  getPerticularSalesNo(salesOrderNo){
+    this.params = {
+      "salesOrderno": salesOrderNo,
+      "userEmailId": this.emailId,
+      "createdBy":""
+    }
+    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.data = response.orderInfoList;
+    })
+  }
+  getPerticularProductionNo(productionNo){
+    this.params = {
+      "salesOrderno": productionNo,
+      "userEmailId": this.emailId,
+      "createdBy":""
+    }
+    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.data = response.orderInfoList;
+    })
+  }
 }

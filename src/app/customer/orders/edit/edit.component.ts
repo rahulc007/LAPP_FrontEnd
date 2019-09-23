@@ -37,7 +37,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mflag = 0;
   array: any[] = [];
   uploadFlag: boolean;
-
+  salesOrderNo: any
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -48,7 +48,6 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
     });
     this.loadPage();
-    // this.legsnum = localStorage.getItem('legsaftersave');
   }
   ngAfterViewInit() {
     this.columns = [
@@ -74,12 +73,17 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
+
   private loadPage() {
     let orderId = parseInt(localStorage.getItem('oid'));
-
     let i = localStorage.getItem('customerIndex');
     let emailId = localStorage.getItem('username');
-    this.objService.Get('getOrderDetailsByUser?emailId=' + emailId, this.param).subscribe(response => {
+    this.param = {
+    "emailId": emailId,
+    "startLimit": 0,
+    "endLimit" : 100 
+    }
+    this.objService.Get('getOrderDetailsByUser', this.param).subscribe(response => {
       for (let i = 0; i < response.orderInfoList.length; i++) {
         if (orderId === response.orderInfoList[i].oid) {
           this.array = response.orderInfoList[i].orderLineItem;
@@ -109,36 +113,27 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
       let difDate:any = date1.getTime() - today.getTime();
       difDate = difDate / (1000 * 3600 * 24);
-
-      //let diffDays = date1.getDate() - today.getDate();
       let diffDays = Math.floor(difDate);
-
       if (diffDays <= 0) {
         this.mflag = 1; //model falg
       }
-
-
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       })
-
-
       this.legsnum = this.data[0].legsCount;
-
     })
   }
 
 
   orderview(row) {
-    const lineitemId = this.data[0].lineItemId;
-    const lineitemno = this.data[0].lineItemno;
-    this.legsnum = this.data[0].legsCount;
-
+    console.log('row', row)
+    const lineitemId = row.lineItemId;
+    const lineitemno = row.lineItemno;
+    this.legsnum = row.legsCount;
     localStorage.setItem('lineitemid', lineitemId);
     localStorage.setItem('lineItemNo', lineitemno);
     localStorage.setItem('legsno', this.legsnum);
-
     this.param = {
       "lineItemid": lineitemno
     };
@@ -146,7 +141,6 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.router.navigate(['customer/editlegs']);
     }
     else if (this.mflag != 1) {
-      this.legseditflag = 0;
       this.modalService.open(this.legscontent)
     }
 
@@ -165,11 +159,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
 
     else {
-
-
       this.flag = 0;
-      const legsCount = this.data[0].legsCount;
-
+      const legsCount = this.legsnum;;
       if (legsCount === 0 || legsCount === '') {
         this.flag = 1;
         localStorage.setItem('legsno', this.legsnum);
@@ -185,19 +176,19 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
   }
 
-  getMatch(event) {
-    const legsCount = this.data[0].legsCount;
-    if (event < legsCount) {
-      this.legseditflag = 1;
-    }
-    else {
-      this.legseditflag = 0;
-    }
-  }
+  // getMatch(event) {
+  //   const legsCount = this.data[0].legsCount;
+  //   if (event < legsCount) {
+  //     this.legseditflag = 1;
+  //   }
+  //   else {
+  //     this.legseditflag = 0;
+  //   }
+  // }
 
-  closeModel() {
-    this.legseditflag = 0;
-  }
+  // closeModel() {
+  //   this.legseditflag = 0;
+  // }
 
   uploadMarkupTextExl() {
     this.router.navigate(['customer/uploadexcel']);

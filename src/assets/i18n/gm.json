@@ -130,5 +130,7 @@
     "saveNewRows":"Save New Rows",
     "others":"Andere",
     "wentwrong":"Etwas ist schief gelaufen, bitte aktualisieren!",
-   "downloadsamplefile":"Beispieldatei herunterladen"
+   "downloadsamplefile":"Beispieldatei herunterladen",
+   "searchbysalesno":"Suche nach Kundenauftrag Nr",
+    "searchbyproductionno":"Suche nach Fertigungsauftrag Nr"
 }

@@ -14,7 +14,7 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
   providers: [DatePipe]
 })
 export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
+  @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
   configuration: any;
   public columns: any[] = [];
   pager = {};
@@ -23,24 +23,27 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   public data: any[] = [];
   params: any;
   arr: any[] = [];
-
+  emailId: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
-    private cdr: ChangeDetectorRef) { 
-      this.configuration = DefaultConfig;
-      this.configuration.searchEnabled = true;
-    }
+    private cdr: ChangeDetectorRef) {
+    this.configuration = DefaultConfig;
+    this.configuration.searchEnabled = true;
+  }
 
   ngOnInit() {
+    this.emailId = localStorage.getItem('username');
     this.getUploadedOrderDetails();
   }
   getUploadedOrderDetails() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    const emailId = localStorage.getItem('username');
+    this.params = {
+      "emailId": this.emailId,
+      "startLimit": 0,
+      "endLimit": 100
+    }
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
-      this.objService.Get('getProcessedOrderByAdmin?emailId=' + emailId, this.params).subscribe(response => {
-      
-        
+      this.objService.Get('getProcessedOrderByAdmin',this.params).subscribe(response => {
         this.data = response.orderInfoList;
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
@@ -65,22 +68,21 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       // { key: 'oid', title: 'Order ID' }, 
       { key: 'orderDate', title: 'Order Date' },
       // { key: 'orderStatus', title: 'Order Status' },
-      { key:'salesOrderno', title:'Sales Order Number'},
+      { key: 'salesOrderno', title: 'Sales Order Number' },
       // { key: 'countryCode', title: 'Country Code' }, 
-      { key: 'createdDate', title: 'Created Date' }, 
-      { key: 'modifiedDate', title: 'Modified Date' }, 
-      { key: 'createdBy', title: 'Created By' }, 
-      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
+      { key: 'createdDate', title: 'Created Date' },
+      { key: 'modifiedDate', title: 'Modified Date' },
+      { key: 'createdBy', title: 'Created By' },
+      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver }
     ];
 
-    
-  }
-  ngAfterViewChecked(){
-    this.cdr.detectChanges();
-  } 
 
-  porcessedOrder(row, rowIndex)
-  {
+  }
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
+  }
+
+  porcessedOrder(row, rowIndex) {
     localStorage.setItem('processedorderId', row.oid);
     localStorage.setItem('processorderIndex', rowIndex);
     this.router.navigate(['admin/processedview', row.oid]);

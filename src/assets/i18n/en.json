@@ -138,7 +138,8 @@
     "others": "Others",
     "wentwrong":"Something went Wrong, Please Refresh !",
    "downloadsamplefile":"Download Sample File",
-   "uploadmarktextexcel":"Upload Marking Text Excel"
-
+   "uploadmarktextexcel":"Upload Marking Text Excel",
+    "searchbysalesno":" Search by Sales Order No",
+    "searchbyproductionno":"Search by Production Order No"
     
 }

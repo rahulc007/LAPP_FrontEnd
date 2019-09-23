@@ -24,6 +24,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   public data: any[] = [];
   params: any;
   arr: any[] = [];
+  emailId : any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -34,13 +35,21 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
 
   ngOnInit() {
     this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
+    this.emailId = localStorage.getItem('username');
     this.getUploadedOrderDetails();
+    
   }
   getUploadedOrderDetails() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    const emailId = localStorage.getItem('username');
+    // const emailId = localStorage.getItem('username');
+   
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
-      this.objService.Get('getOrderDetailsByAdmin?emailId=' + emailId, this.params).subscribe(response => {
+      this.params = {
+        "emailId": this.emailId,
+        "startLimit": 0,
+        "endLimit": 100 
+      }
+      this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
       
           for(let i=0; i<response.orderInfoList.length; i++) {
             if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
@@ -92,8 +101,28 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   search(event) {
     if (event.target.value === '') {
       this.getUploadedOrderDetails();
-     // this.searcherror = ''
     }
   }
-
+  getPerticularSalesNo(salesOrderNo) {
+    this.params = {
+      "salesOrderno": salesOrderNo,
+      "createdBy": this.emailId,
+      "userEmailId": ""
+    }
+    this.objService.Get('getOrderBySales', this.params).subscribe(response =>{
+      console.log('response', response)
+     this.data = response.orderInfoList;
+    })
+  }
+  getPerticularProductionNo(productionOrderNo) {
+    this.params = {
+      "productionOrderno": productionOrderNo,
+      "createdBy": this.emailId,
+      "userEmailId": ""
+    }
+    this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response =>{
+      console.log('response', response)
+     this.data = response.orderInfoList;
+    })
+  }
 }
