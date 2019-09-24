@@ -25,6 +25,8 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   params: any;
   arr: any[] = [];
   emailId : any;
+  customerId: any;
+  productionNo: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -104,6 +106,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     }
   }
   getPerticularSalesNo(salesOrderNo) {
+    this.productionNo = '';
     this.params = {
       "salesOrderno": salesOrderNo,
       "createdBy": this.emailId,
@@ -115,6 +118,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     })
   }
   getPerticularProductionNo(productionOrderNo) {
+    this.customerId = '';
     this.params = {
       "productionOrderno": productionOrderNo,
       "createdBy": this.emailId,

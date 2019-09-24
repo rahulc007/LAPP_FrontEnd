@@ -7,7 +7,6 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
-
 const URL = `http://3.17.182.133:8090/uploadOrderStatus`;
 
 @Component({
@@ -40,9 +39,9 @@ export class HandsontableComponent implements OnInit {
   col = ['L', 'R', 'O'];
   enableRow = []
   columns: object[] = [
-    { data: 'L', title: 'L' },
-    { data: 'R', title: 'R' },
-    { data: 'O', title: 'O' },
+    { data: 'L', title: 'L: Left Text' },
+    { data: 'R', title: 'R: Right Text' },
+    { data: 'O', title: 'O: Others' },
   ];
   data: any;
   newAttribute = {};
@@ -58,6 +57,7 @@ export class HandsontableComponent implements OnInit {
   lineitemno: any;
   lineitemId: any;
   emailId: any;
+  isDisable = false;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal,
     private translate: TranslateService) {
 
@@ -109,8 +109,6 @@ export class HandsontableComponent implements OnInit {
   onUpload() {
     this.uploader.uploadAll();
   }
-
-
 
   public onFileSelected() {
     this.fd.append('file', this.file);
@@ -182,7 +180,7 @@ export class HandsontableComponent implements OnInit {
           this.items.push(objRow);
         }
         this.items = this.items.sort((a, b) => a.markingId - b.markingId);
-        this.setFormArray();
+       this.setFormArray();
       }
     })
   }
@@ -229,7 +227,6 @@ export class HandsontableComponent implements OnInit {
     let Params = {
       "lineItemid": this.lineitemno
     }
-
     this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
     })
@@ -277,82 +274,9 @@ export class HandsontableComponent implements OnInit {
   }
 
   submitMarkingText() {
-    this.getMarkingTextDetails();
-    let passed = true;
-    if (this.values) {
-      for (let i = 0; i < this.markingtextId.length; i++) {
-        this.params = {
-          "lineItemId": this.lineitemId,
-          "isSubmit": true,
-          "legsCount": this.legsCount,
-          "emailId": this.emailId,
-          "markingId": this.markingtextId[i].markingId,
-          "leftText": this.values[i].leftText,
-          "rightText": this.values[i].rightText,
-          "middleText": this.values[i].middleText
-        }
-
-        this.objService.Post('updateMarkingText', this.params).subscribe(response => {
-          if (response.statusMessage === 'error') {
-            passed = false
-          }
-        })
-      }
-      if (passed) {
-        this.msg = 'Marking Text Updated Successfully';
-        setTimeout(() => {
-          this.msg = '';
-        }, 3000);
-      }
-      else {
-        this.errorMsg = 'Marking Text Updation failed';
-        setTimeout(() => {
-          this.errorMsg = '';
-        }, 3000);
-      }
-      this.modalService.dismissAll();
-    }
-
-    else {
-      if (this.markingtextId.length !== 0) {
-        let harray = [];
-        this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
-        this.tabledata.forEach(element => {
-          harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
-        });
-        for (let i = 0; i < harray.length; i++) {
-          this.params = {
-            "lineItemId": this.lineitemId,
-            "isSubmit": true,
-            "legsCount": harray.length,
-            "emailId": this.emailId,
-            "markingId": this.markingtextId[i].markingId,
-            "leftText": harray[i].leftText,
-            "rightText": harray[i].rightText,
-            "middleText": harray[i].middleText
-          }
-          this.objService.Post('updateMarkingText', this.params).subscribe(response => {
-            if (response.statusMessage === 'error') {
-              passed = false
-            }
-          })
-        }
-        if (passed) {
-          this.msg = 'Marking Text Updated Successfully';
-          setTimeout(() => {
-            this.msg = '';
-          }, 3000);
-        }
-        else {
-          this.errorMsg = 'Marking Text Updation failed';
-          setTimeout(() => {
-            this.errorMsg = '';
-          }, 3000);
-        }
-        this.modalService.dismissAll();
-      }
-      else {
-        let harray = [];
+   
+    if (this.markingtextId.length === 0) {
+      let harray = [];
         this.markingTestTempArray = [];
         this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
         this.tabledata.forEach(element => {
@@ -375,11 +299,23 @@ export class HandsontableComponent implements OnInit {
           "emailId": this.emailId,
           "markingTextList": this.markingTestTempArray
         }
-        this.addMarkingTextApi(this.params)
+        this.addMarkingTextApi(this.params);
         this.modalService.dismissAll();
-      }
+    }
+    else {
+        this.markingTestTempArray = [];
+        this.params = {
+          "lineItemId": this.lineitemId,
+          "isSubmit": true,
+          "legsCount": this.legsCount,
+          "emailId": this.emailId,
+          "markingTextList": this.markingTestTempArray
+        }
+        this.addMarkingTextApi(this.params);
+        this.modalService.dismissAll();
     }
     this.flag = 0;
+    this.isDisable = true;
   }
 
   editMarkText(i, row) {
@@ -431,6 +367,7 @@ export class HandsontableComponent implements OnInit {
     this.items.push(objNewRow);
     this.blnShowSaveNewRowButton = true;
     this.setFormArray();
+   
   }
 
   onClickSaveNewRow() {
@@ -449,7 +386,6 @@ export class HandsontableComponent implements OnInit {
           "lineItemnumber": this.lineitemno
         })
       }
-
     }
     this.params = {
       "lineItemId": this.lineitemId,
@@ -458,7 +394,6 @@ export class HandsontableComponent implements OnInit {
       "emailId": this.emailId,
       "markingTextList": arrNewRow
     }
-
     this.addMarkingTextApi(this.params);
     this.blnShowSaveNewRowButton = false;
     const legCnt = parseInt(this.legsCount);

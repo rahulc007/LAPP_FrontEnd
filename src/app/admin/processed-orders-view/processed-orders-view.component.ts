@@ -22,13 +22,15 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   data:any[]=[];
   public configuration: Config;
   array: any[]=[];
-
+  emailId: any;
+  params: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.configuration = ConfigurationService.config;
+    this.emailId = localStorage.getItem('username');
     this.loadPage();
   }
 
@@ -59,13 +61,15 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   {
     let pId=parseInt(localStorage.getItem('processedorderId'));
     let i = localStorage.getItem('customerIndex');
-    let emailId = localStorage.getItem('username');
+  //  let emailId = localStorage.getItem('username');
 
-    let params={
-     "emailId":emailId
+    this.params = {
+      "emailId": this.emailId,
+      "startLimit": 0,
+      "endLimit": 100
     }
 
-    this.objService.Get('getProcessedOrderByAdmin' , params).subscribe(response => {
+    this.objService.Get('getProcessedOrderByAdmin' , this.params).subscribe(response => {
       for(let i=0; i<response.orderInfoList.length; i++) {
         if(pId=== response.orderInfoList[i].oid) {
           this.array=response.orderInfoList[i].orderLineItem

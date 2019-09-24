@@ -90,12 +90,12 @@
                                 <td>
                                     <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
-                                <td>
+                                <td  [ngClass]="{'disabled': isDisable}">
                                     <span *ngIf="!row.cIsNew">
                                         <i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i>
                                     </span>
                                 </td>
-                                <td>
+                                <td [ngClass]="{'disabled': isDisable}">
                                     <i class="fa fa-trash ml-2" (click)="deleteMarkTextModel(row)"></i>
                                 </td>
                             </tr>

@@ -26,6 +26,8 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   arr: any[] = [];
   tempArray: any[] = [];
   emailId : any;
+  productionNo: any;
+  customerId: any;
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router,private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) { this.configuration = DefaultConfig;
@@ -106,6 +108,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
   }
   getPerticularSalesNo(salesOrderNo){
+    this.productionNo = '';
     this.params = {
       "salesOrderno": salesOrderNo,
       "userEmailId": this.emailId,
@@ -116,6 +119,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
     })
   }
   getPerticularProductionNo(productionNo){
+    this.customerId = '';
     this.params = {
       "salesOrderno": productionNo,
       "userEmailId": this.emailId,

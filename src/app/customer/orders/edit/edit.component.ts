@@ -37,7 +37,11 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   mflag = 0;
   array: any[] = [];
   uploadFlag: boolean;
-  salesOrderNo: any
+  salesOrderNo: any;
+  buttonFlag: any;
+  lineitemId: any;
+  lineitemno: any;
+  emailId: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -47,6 +51,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.legsForm = this.formBuilder.group({
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
     });
+    this.emailId = localStorage.getItem('username');
     this.loadPage();
   }
   ngAfterViewInit() {
@@ -77,9 +82,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   private loadPage() {
     let orderId = parseInt(localStorage.getItem('oid'));
     let i = localStorage.getItem('customerIndex');
-    let emailId = localStorage.getItem('username');
     this.param = {
-    "emailId": emailId,
+    "emailId": this.emailId,
     "startLimit": 0,
     "endLimit" : 100 
     }
@@ -91,59 +95,44 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }
       
       this.data = this.array;
-
-      const lineitemId = this.data[0].lineItemId;
-      const lineitemno = this.data[0].lineItemno;
-      this.legsnum = this.data[0].legsCount;
-  
-      localStorage.setItem('lineitemid', lineitemId);
-      localStorage.setItem('lineItemNo', lineitemno);
-      localStorage.setItem('legsno', this.legsnum);
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+      })
       
       this.uploadFlag=this.data[0].legsCount>0 ?true:false;
+
       let dt = this.data[0].createdDate;
-
       let date1 = new Date(dt);
-
       let sdate:any = date1;
       date1.setDate(date1.getDate() + userTypes.markingtextExpire);
-
       let exdate:any = date1;
       let today = new Date();
-
       let difDate:any = date1.getTime() - today.getTime();
       difDate = difDate / (1000 * 3600 * 24);
       let diffDays = Math.floor(difDate);
       if (diffDays <= 0) {
         this.mflag = 1; //model falg
       }
-      this.data.forEach(date => {
-        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
-        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
-      })
-      this.legsnum = this.data[0].legsCount;
     })
   }
 
 
   orderview(row) {
     console.log('row', row)
-    const lineitemId = row.lineItemId;
-    const lineitemno = row.lineItemno;
+    this.lineitemId = row.lineItemId;
+    this.lineitemno = row.lineItemno;
     this.legsnum = row.legsCount;
-    localStorage.setItem('lineitemid', lineitemId);
-    localStorage.setItem('lineItemNo', lineitemno);
+    localStorage.setItem('lineitemid', this.lineitemId);
+    localStorage.setItem('lineItemNo', this.lineitemno);
     localStorage.setItem('legsno', this.legsnum);
-    this.param = {
-      "lineItemid": lineitemno
-    };
+    
     if (this.legsnum > 0) {
       this.router.navigate(['customer/editlegs']);
     }
     else if (this.mflag != 1) {
       this.modalService.open(this.legscontent)
     }
-
   }
 
   goPrevious() {
@@ -151,26 +140,20 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   onSubmit() {
-
     this.submitted = true;
-
     if (this.legsForm.invalid) {
       return;
     }
-
     else {
       this.flag = 0;
       const legsCount = this.legsnum;;
       if (legsCount === 0 || legsCount === '') {
         this.flag = 1;
         localStorage.setItem('legsno', this.legsnum);
-        localStorage.setItem('hflag', this.flag);
       } else {
         this.flag = 0;
         localStorage.setItem('legsno', this.legsnum);
-        localStorage.setItem('hflag', this.flag);
       }
-
       this.router.navigate(['customer/editlegs']);
       this.modalService.dismissAll();
     }

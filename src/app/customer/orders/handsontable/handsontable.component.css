@@ -58,7 +58,11 @@
   background-size: auto 70%;
   background-position: 10px 5px;
     }
-
+  .disabled{
+      cursor: not-allowed;
+      opacity:0.5;
+      pointer-events:none;
+    }
   @media (max-width: 300px) {
   button {
   width: 100%;
