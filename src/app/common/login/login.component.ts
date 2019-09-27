@@ -29,8 +29,23 @@ export class LoginComponent implements OnInit {
   countryCode: any;
   selected: string;
   passwordLength: any;
+ 
   constructor(private modalService: NgbModal, private formBuilder: FormBuilder, private router: Router,
-    private route: ActivatedRoute, private userService: UserService) { }
+    private route: ActivatedRoute, private userService: UserService) { 
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+if(currentUser && currentUser.token)
+ {
+      if (currentUser.userType == userTypes.superAdmin || currentUser.userType == userTypes.admin) {
+        this.router.navigate(['admin']);
+      } else if (currentUser.userType == userTypes.customer) {
+        this.router.navigate(['customer']);
+      }
+    }
+    else{
+      this.router.navigate(['login'])
+    }
+
+    }
 
   ngOnInit() {
     localStorage.clear();

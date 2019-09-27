@@ -16,7 +16,7 @@ export class ExceluploadComponent implements OnInit {
   rownum=1;
   errorMsg:any;
   msg:any;
-  dataset:any;
+  dataset:any[]=[];
   tabledata: any;
   id = 'hotInstance';
   
@@ -32,13 +32,23 @@ export class ExceluploadComponent implements OnInit {
 
     let dataObj=[{L:"",R:"",O:""}]
 
-    this.getExceldata(dataObj)
+    this.getExceldata(null)
   }
 
   getExceldata(dataObj)
   {
+
+  //  dataObj=[];
     
-    this.dataset = dataObj;
+    // this.dataset = dataObj;
+if(dataObj)
+{
+   dataObj.forEach(element => {
+     console.log(element)
+     this.dataset.push({'L': element['Left Marking Text (L)'], 'O': element['Others (O)'], 'R': element['Right Marking Text  (R)'],})
+   });
+  }
+   // console.log("Excel data=>", data)
 
  }
 
@@ -48,6 +58,8 @@ export class ExceluploadComponent implements OnInit {
 
   OnLoadFile(ev) {
 
+    this.dataset=[];
+    this.filename='';
     this.filename= ev.target.files[0].name
     const reader = new FileReader();
     let workBook = null;
@@ -67,8 +79,8 @@ export class ExceluploadComponent implements OnInit {
      
       
   this.getExceldata(dataObj.Sheet1)
-      this.rownum=this.dataset.length;
-      console.log("list=>", this.dataset);
+      this.rownum=dataObj.length;
+      console.log("list=>", dataObj);
       console.log("len=>", this.rownum)
       //this.setDownload(dataString);
     }

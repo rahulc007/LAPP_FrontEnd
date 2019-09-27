@@ -3,12 +3,13 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, Htt
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, retry } from 'rxjs/operators';
 import { LoaderService } from '../../common/loader/loader.service';
-
+import {Router} from '@angular/router';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     errorMessage: any;
     constructor(
-        private loaderService: LoaderService
+        private loaderService: LoaderService,
+        private router:Router
     ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with jwt token if available
@@ -21,6 +22,9 @@ export class JwtInterceptor implements HttpInterceptor {
                         Authorization: `Bearer ${currentUser.token}`
                     }
                 });
+        }
+        else{
+       this.router.navigate(['login']);
         }
 
         return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
