@@ -14,50 +14,50 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
   styleUrls: ['./new-orders.component.css'],
   providers: [DatePipe]
 })
+
 export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
+
   @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
+
   configuration: any;
   public columns: any[] = [];
-  pager = {};
-  pageOfItems = [];
-  baseUrl: any;
   public data: any[] = [];
+  pager: any = {};
   params: any;
   arr: any[] = [];
-  emailId : any;
+  emailId: any;
   customerId: any;
   productionNo: any;
+
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
-    // this.configuration = ConfigurationService.config;
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.emailId = localStorage.getItem('username');
+    // this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.getUploadedOrderDetails();
-    
+
   }
+
   getUploadedOrderDetails() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    // const emailId = localStorage.getItem('username');
-   
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.params = {
         "emailId": this.emailId,
         "startLimit": 0,
-        "endLimit": 100 
+        "endLimit": 100
       }
       this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
-      
-          for(let i=0; i<response.orderInfoList.length; i++) {
-            if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
-              this.arr.push(response.orderInfoList[i]);
-            }
+
+        for (let i = 0; i < response.orderInfoList.length; i++) {
+          if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
+            this.arr.push(response.orderInfoList[i]);
           }
+        }
         this.data = this.arr;
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
@@ -81,23 +81,30 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver }
     ]
   }
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
-  } 
+  }
   private loadPage(page) {
-    // get page of items from api
-    // this.http.get<any>(`http://localhost:4000/items?page=${page}`).subscribe(x => {
-    //   this.pager = x.pager;
-    //   this.pageOfItems = x.pageOfItems;
-    //   this.data = this.pageOfItems
-    // });
+    this.params = {
+      "emailId": this.emailId,
+      "startLimit": 0,
+      "endLimit": 100
+    }
+    this.objService.Get(`getOrderDetailsByAdmin?`, this.params).subscribe(x => {
+      for (let i = 0; i < x.orderInfoList.length; i++) {
+        if (x.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
+          this.arr.push(x.orderInfoList[i]);
+        }
+      }
+      this.data = this.arr;
+    });
+
   }
 
   ordersview(row, rowIndex) {
-    console.log('id',row.oid)
     localStorage.setItem('oid', row.oid)
     localStorage.setItem('index', rowIndex);
-    this.router.navigate(['admin/newordersview', row.oid])
+    this.router.navigate(['admin/newordersview', row.oid]);
   }
 
   search(event) {
@@ -112,9 +119,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       "createdBy": this.emailId,
       "userEmailId": ""
     }
-    this.objService.Get('getOrderBySales', this.params).subscribe(response =>{
+    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       console.log('response', response)
-     this.data = response.orderInfoList;
+      this.data = response.orderInfoList;
     })
   }
   getPerticularProductionNo(productionOrderNo) {
@@ -124,9 +131,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       "createdBy": this.emailId,
       "userEmailId": ""
     }
-    this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response =>{
+    this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response => {
       console.log('response', response)
-     this.data = response.orderInfoList;
+      this.data = response.orderInfoList;
     })
   }
 }

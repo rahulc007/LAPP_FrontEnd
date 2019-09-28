@@ -16,7 +16,7 @@
     <span id="alertErrMsg">{{errorMsg}}</span>
 </div>
 <div *ngIf="firsttime === 1">
-  
+
     <div class="row mt-2">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -25,19 +25,19 @@
             </hot-table>
         </div>
         <div class="col-md-2">
-                <table class="table table-bordered text-center ">
-                    <thead>
-                        <tr>
-                            <th>L : Left Text</th>
-                        </tr>
-                        <tr>
-                            <th>R : Right Text</th>
-                        </tr>
-                        <tr>
-                            <th>O : Others</th>
-                        </tr>
-                    </thead>
-                </table>
+            <table class="table table-bordered text-center ">
+                <thead>
+                    <tr>
+                        <th>L : Left Text</th>
+                    </tr>
+                    <tr>
+                        <th>R : Right Text</th>
+                    </tr>
+                    <tr>
+                        <th>O : Others</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
     <br>
@@ -51,12 +51,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-1">
-            <button *ngIf="flag === 1"  class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button>
-        </div>
-        <div class="col-md-1 ml-2">
-            <button *ngIf="flag === 1" class="btn btn-md btn-orange" (click)="submitData()">{{'submit'| translate}}</button>
+        <div class="col text-center">
+            <div class="float-center">
+                <button *ngIf="flag === 1" class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button> &nbsp;
+                <button *ngIf="flag === 1" class="btn btn-md btn-orange" (click)="submitData()">{{'submit'| translate}}</button>
+            </div>
         </div>
     </div>
 </div>
@@ -90,7 +89,7 @@
                                 <td>
                                     <input type="text" formControlName="middleText" [attr.disabled]="enableRow[$i] ==='yes'?true:null">
                                 </td>
-                                <td  [ngClass]="{'disabled': isDisable}">
+                                <td [ngClass]="{'disabled': isDisable}">
                                     <span *ngIf="!row.cIsNew">
                                         <i class="fa fa-edit ml-2" (click)="editMarkText($i, row)"></i>
                                     </span>

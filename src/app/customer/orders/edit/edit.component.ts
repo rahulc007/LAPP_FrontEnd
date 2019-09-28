@@ -42,11 +42,13 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   lineitemId: any;
   lineitemno: any;
   emailId: any;
+  oid: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.oid = localStorage.getItem('oid');
     this.configuration = ConfigurationService.config;
     this.legsForm = this.formBuilder.group({
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
@@ -128,7 +130,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     localStorage.setItem('legsno', this.legsnum);
     
     if (this.legsnum > 0) {
-      this.router.navigate(['customer/editlegs']);
+      this.router.navigate(['customer/neworders/'+ this.oid + '/editlegs']);
     }
     else if (this.mflag != 1) {
       this.modalService.open(this.legscontent)
@@ -154,7 +156,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.flag = 0;
         localStorage.setItem('legsno', this.legsnum);
       }
-      this.router.navigate(['customer/editlegs']);
+      this.router.navigate(['customer/neworders/'+ this.oid + '/editlegs']);
       this.modalService.dismissAll();
     }
   }

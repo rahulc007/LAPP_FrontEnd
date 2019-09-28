@@ -80,7 +80,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
 
     localStorage.setItem('processedorderId', row.oid);
     localStorage.setItem('processorderIndex', rowIndex);
-    this.router.navigate(['customer/processedview', row.oid]);
+    this.router.navigate(['customer/processedorders', row.oid]);
    
 
   }

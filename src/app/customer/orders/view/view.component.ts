@@ -1,43 +1,43 @@
-import { Component, OnInit,ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
-import {ConfigurationService} from '../../../common/ngx-easy-table/config-service'
+import { Component, OnInit, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { ConfigurationService } from '../../../common/ngx-easy-table/config-service'
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
-import {Routes, Router, ActivatedRoute} from '@angular/router';
-import {UserService} from '../../../core/services/user.service';
+import { Routes, Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../core/services/user.service';
 import { HttpClient } from '@angular/common/http';
-import {LappRestService} from '../../../core/rest-service/LappRestService';
+import { LappRestService } from '../../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css'],
-  providers:[ConfigurationService, DatePipe]
+  providers: [ConfigurationService, DatePipe]
 })
 export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
-  @ViewChild('ver',{static: false}) Ver: TemplateRef<any>;
+  @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
+
   public configuration: Config;
   public columns: any[] = [];
-  
+  data: any[] = [];
   pager = {};
-  params={};
+  params = {};
   pageOfItems = [];
-  baseUrl:any;
-  data:any[]=[];
   arr: any[] = [];
   tempArray: any[] = [];
-  emailId : any;
+  emailId: any;
   productionNo: any;
   customerId: any;
-  constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
-    private router: Router,private route: ActivatedRoute, private objService: LappRestService,
-    private cdr: ChangeDetectorRef) { this.configuration = DefaultConfig;
-      this.configuration.searchEnabled = true;}
 
+  constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
+    private router: Router, private route: ActivatedRoute, private objService: LappRestService,
+    private cdr: ChangeDetectorRef) {
+      this.configuration = DefaultConfig;
+      this.configuration.searchEnabled = true;
+  }
   ngOnInit() {
-    // this.configuration = ConfigurationService.config;
     this.emailId = localStorage.getItem('username');
-  //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
-  this.loadPage();
+    //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
+    this.loadPage();
   }
   ngAfterViewInit() {
     this.columns = [
@@ -45,16 +45,16 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // { key: 'oid', title: 'Order ID' }, 
       { key: 'orderDate', title: 'Order Date' },
       // { key: 'orderStatus', title: 'Order Status' },
-      { key:'salesOrderno', title:'Sales Order Number'},
+      { key: 'salesOrderno', title: 'Sales Order Number' },
       // { key: 'countryCode', title: 'Country Code' }, 
-      { key: 'createdDate', title: 'Created Date' }, 
-      { key: 'modifiedDate', title: 'Modified Date' }, 
-      { key: 'createdBy', title: 'Created By' }, 
-      { key: 'customerNo', title: 'Customer Number'},
-      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver}
+      { key: 'createdDate', title: 'Created Date' },
+      { key: 'modifiedDate', title: 'Modified Date' },
+      { key: 'createdBy', title: 'Created By' },
+      { key: 'customerNo', title: 'Customer Number' },
+      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver }
     ];
   }
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
   private loadPage() {
@@ -69,11 +69,11 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.params = {
       "emailId": emailId,
       "startLimit": 0,
-      "endLimit" :100  
+      "endLimit": 100
     }
     this.objService.Get('getOrderDetailsByUser', this.params).subscribe(response => {
-      for(let i=0; i<response.orderInfoList.length; i++) {
-        if(response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
+      for (let i = 0; i < response.orderInfoList.length; i++) {
+        if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
           this.arr.push(response.orderInfoList[i]);
           this.tempArray.push({
             "userEmailId": response.orderInfoList[i].userEmailId,
@@ -92,14 +92,14 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
         date.orderDate = this.datePipe.transform(date.orderDate, 'medium');
-      }) 
+      })
     })
   }
-  
+
   orderview(row, rowIndex) {
     localStorage.setItem('oid', row.oid);
     localStorage.setItem('customerIndex', rowIndex);
-    this.router.navigate(['customer/orderview', row.oid]);
+    this.router.navigate(['customer/neworders', row.oid]);
   }
 
   search(event) {
@@ -107,23 +107,23 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.loadPage();
     }
   }
-  getPerticularSalesNo(salesOrderNo){
+  getPerticularSalesNo(salesOrderNo) {
     this.productionNo = '';
     this.params = {
       "salesOrderno": salesOrderNo,
       "userEmailId": this.emailId,
-      "createdBy":""
+      "createdBy": ""
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.data = response.orderInfoList;
     })
   }
-  getPerticularProductionNo(productionNo){
+  getPerticularProductionNo(productionNo) {
     this.customerId = '';
     this.params = {
       "salesOrderno": productionNo,
       "userEmailId": this.emailId,
-      "createdBy":""
+      "createdBy": ""
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.data = response.orderInfoList;

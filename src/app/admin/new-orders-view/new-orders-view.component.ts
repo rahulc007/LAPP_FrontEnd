@@ -87,7 +87,7 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
     // });
   }
   goPrevious() {
-    this.router.navigate(['admin/neworders']);
+    this.router.navigate(['admin/newordersview']);
   }
 
 }

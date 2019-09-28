@@ -20,11 +20,11 @@ const CustomerRoutes: Routes = [
      children: [ { path: '', redirectTo: 'dashboard',pathMatch: 'full', data:{userType:'CUSTOMER'} },
      { path: 'dashboard', component: DashbordComponent, data:{userType:'CUSTOMER'} },
      { path: 'neworders', component: ViewComponent, data:{userType:'CUSTOMER'} },
-     { path: 'orderview/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
+     { path: 'neworders/:id', component: EditComponent, data:{userType:'CUSTOMER'}},
     
-     { path: 'editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
+     { path: 'neworders/:id/editlegs', component: HandsontableComponent, data:{userType:'CUSTOMER'}},
      { path: 'processedorders', component:ProcessedOrdersComponent, data:{userType:'CUSTOMER'}},
-     { path: 'processedview/:id', component:ProcessedViewComponent, data:{userType:'CUSTOMER'}},
+     { path: 'processedorders/:id', component:ProcessedViewComponent, data:{userType:'CUSTOMER'}},
      { path: 'uploadexcel', component: ExceluploadComponent, data:{userType:'CUSTOMER'}},
      { path: 'profile', component: CustomerProfileComponent, data:{userType:'CUSTOMER'}}
     ]
