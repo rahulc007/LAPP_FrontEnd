@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 const URL = `http://3.17.182.133:8090/uploadOrderStatus`;
+//const URL = `http://localhost:8090/uploadOrderStatus`;
 
 @Component({
   selector: 'app-handsontable',
@@ -55,7 +56,7 @@ export class HandsontableComponent implements OnInit {
   markinglistlength: any;
   markingtextId: any;
   lineitemno: any;
-  lineitemId: any;
+  lineitemId: number;
   emailId: any;
   isDisable = false;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal,
@@ -67,7 +68,7 @@ export class HandsontableComponent implements OnInit {
     this.legsCount = localStorage.getItem('legsno');
     this.rownum = this.legsCount;
     this.lineitemno = localStorage.getItem('lineItemNo');
-    this.lineitemId = localStorage.getItem('lineitemid');
+    this.lineitemId = parseInt(localStorage.getItem('lineitemid'));
     this.emailId = localStorage.getItem('username');
     this.getMarkingTextDetails();
 
@@ -155,7 +156,7 @@ export class HandsontableComponent implements OnInit {
   }
   getMarkingTextDetails() {
     let Params = {
-      "lineItemid": this.lineitemno
+      "lineItemid": this.lineitemId
     }
     this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
@@ -211,7 +212,7 @@ export class HandsontableComponent implements OnInit {
         "middleText": harray[i].rightText,
         "notifyUser": "",
         "updatedBy": this.emailId,
-        "lineItemnumber": this.lineitemno
+        "textItemid": this.lineitemId
       })
     }
     this.params = {
@@ -225,7 +226,7 @@ export class HandsontableComponent implements OnInit {
     this.addMarkingTextApi(this.params);
 
     let Params = {
-      "lineItemid": this.lineitemno
+      "lineItemid": this.lineitemId
     }
     this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
@@ -289,7 +290,7 @@ export class HandsontableComponent implements OnInit {
             "middleText": harray[i].rightText,
             "notifyUser": "",
             "updatedBy": this.emailId,
-            "lineItemnumber": this.lineitemno
+            "textItemid": this.lineitemId
           })
         }
         this.params = {
@@ -329,7 +330,7 @@ export class HandsontableComponent implements OnInit {
   updateMarkingTextData() {
 
     let params = {
-      "lineItemId": this.lineitemId,
+      "textItemid": this.lineitemId,
       "isSubmit": false,
       "emailId": this.emailId,
       "legsCount": this.legsCount,
@@ -360,7 +361,7 @@ export class HandsontableComponent implements OnInit {
       "middleText": '',
       "notifyUser": "",
       "updatedBy": this.emailId,
-      "lineItemnumber": this.lineitemno,
+      "textItemid": this.lineitemId,
       "cIsNew": true
     }
     this.enableRow[this.items.length] = 'no';
@@ -383,7 +384,7 @@ export class HandsontableComponent implements OnInit {
           "middleText": values[i].middleText,
           "notifyUser": "",
           "updatedBy": this.emailId,
-          "lineItemnumber": this.lineitemno
+          "textItemid": this.lineitemId
         })
       }
     }
