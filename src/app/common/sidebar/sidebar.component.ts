@@ -14,8 +14,6 @@ export class SidebarComponent implements OnInit {
   isAdmin: boolean = false;
   isSuperAdmin: boolean = false;
   isCustomer: boolean = false;
-
-  primarySampleComponent: any;
   constructor(private navService: NavToggleService, private UserService: UserService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType == userTypes.superAdmin) {

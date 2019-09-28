@@ -58,12 +58,14 @@ export class HandsontableComponent implements OnInit {
   lineitemId: any;
   emailId: any;
   isDisable = false;
+  oid: any;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal,
     private translate: TranslateService) {
 
   }
 
   ngOnInit() {
+    this.oid = localStorage.getItem('oid');
     this.legsCount = localStorage.getItem('legsno');
     this.rownum = this.legsCount;
     this.lineitemno = localStorage.getItem('lineItemNo');
@@ -349,7 +351,7 @@ export class HandsontableComponent implements OnInit {
   };
 
   goPrevious() {
-    this.router.navigate(['customer/orderview/:id'])
+    this.router.navigate(['customer/neworders', this.oid]);
   }
 
   addNewRow() {

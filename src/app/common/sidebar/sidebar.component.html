@@ -16,7 +16,7 @@
                 <a href="#" [routerLink]="['upload']" [routerLinkActive]="['is-active']"class="menu_icon upload">{{'upload'| translate}}</a>
             </li>
             <li *ngIf="isAdmin || isSuperAdmin">
-                <a href="#" [routerLink]="['neworders']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'myorders'| translate}}</a>
+                <a href="#" [routerLink]="['newordersview']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'myorders'| translate}}</a>
             </li>
             <li *ngIf="isCustomer">
                 <a href="#" [routerLink]="['neworders']" [routerLinkActive]="['is-active']" class="menu_icon new_order">{{'myorders'| translate}}</a>
