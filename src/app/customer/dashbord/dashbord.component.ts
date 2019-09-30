@@ -18,10 +18,14 @@ export class DashbordComponent implements OnInit {
   passwordReseted: boolean = false;
   isErrorMessage: boolean = false;
   resetMessage: string = '';
+  firstTime: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private ps: PasswordStrengthService, private translate: TranslateService, private router:Router) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    this.showResetPopUp = objUserDetails.firstTimeLogin;
+    let firstTimeLogin = JSON.parse(localStorage.getItem('firstTimeLogin'));
+    if(firstTimeLogin === true) {
+      this.showResetPopUp = true
+    }
   }
 
   ngOnInit() {
@@ -100,6 +104,8 @@ export class DashbordComponent implements OnInit {
 
   closePopUp() {
     this.showResetPopUp = false;
+    this.firstTime = false;
+    localStorage.setItem('firstTimeLogin', this.firstTime);
   }
 
 }

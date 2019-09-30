@@ -10,6 +10,7 @@ import { LappRestService } from '../../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
 import { userTypes } from '../../../common/constants/constants';
 
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -43,6 +44,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   lineitemno: any;
   emailId: any;
   oid: any;
+  submitFlag: any;
+  
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -128,6 +131,14 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     localStorage.setItem('lineitemid', this.lineitemId);
     localStorage.setItem('lineItemNo', this.lineitemno);
     localStorage.setItem('legsno', this.legsnum);
+    if(row.submit === true) {
+      this.submitFlag = 0
+      localStorage.setItem('submitflag', this.submitFlag);
+    }
+    else {
+      this.submitFlag = 1
+      localStorage.setItem('submitflag', this.submitFlag);
+    }
     
     if (this.legsnum > 0) {
       this.router.navigate(['customer/neworders/'+ this.oid + '/editlegs']);

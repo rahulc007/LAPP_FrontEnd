@@ -121,11 +121,11 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   getPerticularProductionNo(productionNo) {
     this.customerId = '';
     this.params = {
-      "salesOrderno": productionNo,
+      "productionOrderno": productionNo,
       "userEmailId": this.emailId,
       "createdBy": ""
     }
-    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+    this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response => {
       this.data = response.orderInfoList;
     })
   }

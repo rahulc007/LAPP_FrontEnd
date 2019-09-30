@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 const URL = `http://3.17.182.133:8090/uploadOrderStatus`;
-//const URL = `http://localhost:8090/uploadOrderStatus`;
 
 @Component({
   selector: 'app-handsontable',
@@ -66,12 +65,21 @@ export class HandsontableComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.oid = localStorage.getItem('oid');
     this.legsCount = localStorage.getItem('legsno');
     this.rownum = this.legsCount;
     this.lineitemno = localStorage.getItem('lineItemNo');
     this.lineitemId = parseInt(localStorage.getItem('lineitemid'));
     this.emailId = localStorage.getItem('username');
+    if (parseInt(localStorage.getItem('submitflag')) === 0) {
+      this.flag = 0;
+      this.isDisable = true;
+    }
+    else {
+      this.flag = 1
+      this.isDisable = false;
+    }
     this.getMarkingTextDetails();
 
     this.uploader.onAfterAddingFile = (file) => {
@@ -157,6 +165,7 @@ export class HandsontableComponent implements OnInit {
     })
   }
   getMarkingTextDetails() {
+
     let Params = {
       "lineItemid": this.lineitemId
     }
@@ -183,7 +192,7 @@ export class HandsontableComponent implements OnInit {
           this.items.push(objRow);
         }
         this.items = this.items.sort((a, b) => a.markingId - b.markingId);
-       this.setFormArray();
+        this.setFormArray();
       }
     })
   }
@@ -277,45 +286,45 @@ export class HandsontableComponent implements OnInit {
   }
 
   submitMarkingText() {
-   
+
     if (this.markingtextId.length === 0) {
       let harray = [];
-        this.markingTestTempArray = [];
-        this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
-        this.tabledata.forEach(element => {
-          harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
-        });
-        for (let i = 0; i < harray.length; i++) {
-          this.markingTestTempArray.push({
-            "leftText": harray[i].leftText,
-            "rightText": harray[i].middleText,
-            "middleText": harray[i].rightText,
-            "notifyUser": "",
-            "updatedBy": this.emailId,
-            "textItemid": this.lineitemId
-          })
-        }
-        this.params = {
-          "lineItemId": this.lineitemId,
-          "isSubmit": true,
-          "legsCount": harray.length,
-          "emailId": this.emailId,
-          "markingTextList": this.markingTestTempArray
-        }
-        this.addMarkingTextApi(this.params);
-        this.modalService.dismissAll();
+      this.markingTestTempArray = [];
+      this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
+      this.tabledata.forEach(element => {
+        harray.push({ "leftText": element[0], "middleText": element[1], "rightText": element[2] })
+      });
+      for (let i = 0; i < harray.length; i++) {
+        this.markingTestTempArray.push({
+          "leftText": harray[i].leftText,
+          "rightText": harray[i].middleText,
+          "middleText": harray[i].rightText,
+          "notifyUser": "",
+          "updatedBy": this.emailId,
+          "textItemid": this.lineitemId
+        })
+      }
+      this.params = {
+        "lineItemId": this.lineitemId,
+        "isSubmit": true,
+        "legsCount": harray.length,
+        "emailId": this.emailId,
+        "markingTextList": this.markingTestTempArray
+      }
+      this.addMarkingTextApi(this.params);
+      this.modalService.dismissAll();
     }
     else {
-        this.markingTestTempArray = [];
-        this.params = {
-          "lineItemId": this.lineitemId,
-          "isSubmit": true,
-          "legsCount": this.legsCount,
-          "emailId": this.emailId,
-          "markingTextList": this.markingTestTempArray
-        }
-        this.addMarkingTextApi(this.params);
-        this.modalService.dismissAll();
+      this.markingTestTempArray = [];
+      this.params = {
+        "lineItemId": this.lineitemId,
+        "isSubmit": true,
+        "legsCount": this.legsCount,
+        "emailId": this.emailId,
+        "markingTextList": this.markingTestTempArray
+      }
+      this.addMarkingTextApi(this.params);
+      this.modalService.dismissAll();
     }
     this.flag = 0;
     this.isDisable = true;
@@ -370,7 +379,7 @@ export class HandsontableComponent implements OnInit {
     this.items.push(objNewRow);
     this.blnShowSaveNewRowButton = true;
     this.setFormArray();
-   
+
   }
 
   onClickSaveNewRow() {

@@ -22,11 +22,14 @@ export class DashbordComponent implements OnInit {
   isAdmin: boolean = false;
   isSuperAdmin: boolean = false;
   isCustomer: boolean = false;
+  firstTime: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private passwordStrengthService: PasswordStrengthService, private translate: TranslateService, private router:Router) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    this.showResetPopUp = objUserDetails.firstTimeLogin;
-   
+    let firstTimeLogin = JSON.parse(localStorage.getItem('firstTimeLogin'));
+    if(firstTimeLogin === true) {
+      this.showResetPopUp = true
+    }
     if (objUserDetails.userType == userTypes.superAdmin) {
       this.isSuperAdmin = true;
     }
@@ -115,6 +118,8 @@ export class DashbordComponent implements OnInit {
 
   closePopUp() {
     this.showResetPopUp = false;
+    this.firstTime = false;
+    localStorage.setItem('firstTimeLogin', this.firstTime);
   }
 
 }
