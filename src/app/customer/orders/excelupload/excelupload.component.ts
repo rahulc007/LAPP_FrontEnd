@@ -164,13 +164,13 @@ if(dataObj)
               "middleText": harray[i].rightText,
               "notifyUser": "",
               "updatedBy": emailId,
-              "lineItemnumber": lineitemno
+              "textItemid": this.lineitemId
             })
           }
         }
     
         this.params = {
-          "lineItemId": lineitemId,
+          "lineItemId": this.lineitemId,
           "isSubmit": true,
           "legsCount": harray.length,
           "emailId": emailId,
