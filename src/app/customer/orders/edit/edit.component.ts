@@ -45,7 +45,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   emailId: any;
   oid: any;
   submitFlag: any;
-  
+  editFlag = false;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -100,6 +100,11 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }
       
       this.data = this.array;
+      this.lineitemId = this.data[0].lineItemId;
+      localStorage.setItem('lineitemid', this.lineitemId);
+      if(this.data[0].submit === true) {
+        this.editFlag = true
+      }
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

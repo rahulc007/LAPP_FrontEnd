@@ -28,7 +28,7 @@ export class ExceluploadComponent implements OnInit {
   constructor(private objService: LappRestService, private router:Router, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.lineitemId=localStorage.getItem('lineitemid');
+    this.lineitemId=JSON.parse(localStorage.getItem('lineitemid'));
 
     let dataObj=[{L:"",R:"",O:""}]
 
@@ -53,7 +53,7 @@ if(dataObj)
  }
 
  goPrevious() {
-  this.router.navigate(['customer/orderview/:id'])
+  this.router.navigate(['customer/neworders/:id'])
 }
 
   OnLoadFile(ev) {
@@ -108,7 +108,7 @@ if(dataObj)
             "middleText": harray[i].rightText,
             "notifyUser": "",
             "updatedBy": emailId,
-            "lineItemnumber": lineitemno
+            "textItemid": this.lineitemId
           })
         }
         this.params = {
@@ -132,13 +132,19 @@ if(dataObj)
             }, 3000);
           }
         })
+        // let Params = {
+        //   "lineItemid": this.lineitemId
+        // }
+        // this.objService.Get('getMarkingText', Params).subscribe(response => {
+        //   this.markingtextId = response.markingTextList;
+        // })
       }
 
       
       submitData() {
         this.markingTestTempArray=[];
         const lineitemId = localStorage.getItem('lineitemid');
-        console.log("line item id=>", )
+        console.log("line item id=>",  lineitemId)
 
         let emailId = localStorage.getItem('username');
         const lineitemno = localStorage.getItem('lineItemNo');

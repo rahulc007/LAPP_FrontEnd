@@ -34,7 +34,7 @@
 <ng-template #ver let-row let-rowIndex="rowIndex">
 
     <!-- <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row)" ><i class="fa fa-pencil" aria-hidden="true"></i></button> -->
-    <a class="ml-2" (click)="orderview(row)">
+    <a class="ml-2" (click)="orderview(row)" [ngClass]="{'disabled': editFlag}">
         <i class="fa fa-pencil" aria-hidden="true"></i>
     </a>
 </ng-template>
