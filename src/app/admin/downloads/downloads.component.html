@@ -1,1 +1,57 @@
-<p>downloads works!</p>
+<div class="row">
+    <div class="col-md-4">
+        <h2 class="page_heading dwnload">{{'printdata'| translate}}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <div class="dropdown">
+            Download Options <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
+            <div class="dropdown-menu">
+                <label class="dropdown-item">
+                    <input type="radio" name="options" id="option1" value="Excel" (click)="downloadAll($event)"> Excel
+                </label>
+                <label class="dropdown-item">
+                        <input type="radio" name="options" id="option2" value="Database" (click)="downloadAll($event)"> Database
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <button class="btn btn-md btn-orange">Download {{title}}</button>
+    </div>
+</div>
+<!-- Dropdown -->
+<ng-template #dropDown let-row let-rowIndex="rowIndex">
+        <div class="dropdown">
+                Download Options <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
+                <div class="dropdown-menu">
+                    <label class="dropdown-item">
+                        <input class="custom" type="radio" name="option"  value="Excel" (click)="selectOption(row, $event, rowIndex)"> Excel
+                    </label>
+                    <label class="dropdown-item">
+                            <input class="custom" type="radio" name="option" value="Database" (click)="selectOption(row,$event, rowIndex)"> DataBase
+                    </label>
+                    
+                </div>
+        </div>   
+
+        <!-- <select (change)="selectOption(row, $event, rowIndex)">
+            <option value=''>Please Select Any Option</option>
+            <option value="Excel">
+                Excel
+            </option>
+            <option value="Database">
+                Database
+            </option>
+        </select>  -->
+</ng-template>
+<!-- Download -->
+<ng-template #download let-row let-rowIndex="rowIndex">
+    <button class="btn btn-md btn-orange" (click)="downloadFile()">Download {{row.type}}</button>
+</ng-template>

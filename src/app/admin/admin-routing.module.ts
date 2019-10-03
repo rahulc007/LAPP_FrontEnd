@@ -13,6 +13,7 @@ import { CreateCustomerComponent } from './create-customer/create-customer.compo
 import {UploadStatusComponent} from './upload-status/upload-status.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 import {ProcessedOrdersViewComponent} from './processed-orders-view/processed-orders-view.component';
+import { DownloadsComponent } from './downloads/downloads.component';
 
 const basePath = 'admin';
 
@@ -31,7 +32,8 @@ const AdminRoutes: Routes = [
     { path: 'processedorders/:id', component: ProcessedOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},
     { path: 'profile', component: ViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'customerdetails', component: CustomerDetailsComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
-    { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} }]
+    { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'printdata', component: DownloadsComponent, canActivate:[AuthGuard], data:{userType:'ADMIN'}}]
 
   },
 

@@ -30,10 +30,10 @@
             <!-- <li>
                 <a href="#" class="menu_icon prvs_order">{{'previousorders'| translate}}</a>
             </li> -->
-            <!-- <li>
-                <a class="menu_icon dwnload">{{'DownloadExcel'| translate}}</a>
+            <!-- <li *ngIf="isAdmin || isSuperAdmin">
+                <a [routerLink]="['printdata']" [routerLinkActive]="['is-active']"class="menu_icon dwnload">{{'printdata'| translate}}</a>
             </li> -->
-
+ 
             <li *ngIf="isAdmin || isSuperAdmin">
                     <a href="#" [routerLink]="['uploadstatus']" [routerLinkActive]="['is-active']" class="menu_icon upload">{{'uploadstatus'| translate}}</a>
                 </li>

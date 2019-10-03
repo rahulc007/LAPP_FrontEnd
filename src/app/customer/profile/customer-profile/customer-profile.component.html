@@ -17,11 +17,11 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="">{{'firstname'| translate}}</label>
-                    <input type="text" class="form-control" placeholder="{{'firstname'| translate}}" formControlName="firstname"  [(ngModel)]="profileData.firstname" maxlength="60" required />
+                    <input type="text" class="form-control" placeholder="{{'firstname'| translate}}" formControlName="firstname"  [(ngModel)]="profileData.firstname" maxlength="60"/>
                     <div *ngIf="profileForm.controls.firstname.invalid && (profileForm.controls.firstname.dirty || profileForm.controls.firstname.touched)" class="text-danger">
-                        <div *ngIf="profileForm.controls.firstname.errors.required" class="custom">
+                        <!-- <div *ngIf="profileForm.controls.firstname.errors.required" class="custom">
                             {{'firstnamerequired'| translate}}
-                        </div>
+                        </div> -->
                         <div *ngIf="profileForm.controls.firstname.errors.pattern" class="custom">
                                 {{'characters'| translate}}
                         </div>
@@ -32,11 +32,11 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="">{{'lastname'| translate}}</label>
-                    <input type="text" class="form-control" id="" placeholder="{{'lastname'| translate}}" formControlName="lastname" [(ngModel)]="profileData.lastname" maxlength="60" required />
+                    <input type="text" class="form-control" id="" placeholder="{{'lastname'| translate}}" formControlName="lastname" [(ngModel)]="profileData.lastname" maxlength="60"/>
                     <div *ngIf="profileForm.controls.lastname.invalid && (profileForm.controls.lastname.dirty || profileForm.controls.lastname.touched)" class="text-danger">
-                        <div *ngIf="profileForm.controls.lastname.errors.required" class="custom">
+                        <!-- <div *ngIf="profileForm.controls.lastname.errors.required" class="custom">
                                 {{'lastnamerequired'|translate}}
-                        </div>
+                        </div> -->
                         <div *ngIf="profileForm.controls.lastname.errors.pattern" class="custom">
                                 {{'characters'| translate}}
                         </div>
@@ -81,17 +81,17 @@
                 <div class="form-group custom_form-group">
                     <label for="state">{{'state'| translate}}</label>
                     <input type="text" class="form-control" formControlName="state" [(ngModel)]="profileData.state"
-                    (click)="getState($event)" onmousedown="value = '';" placeholder="{{'state'| translate}}" list="statecodes" step="5" min="5" max="200" required />
+                    (click)="getState($event)" onmousedown="value = '';" placeholder="{{'state'| translate}}" list="statecodes" step="5" min="5" max="200"/>
                     <datalist id="statecodes">
                         <select class="scrollbar">
                             <option *ngFor="let item of stateData" [value]="item.StateName"></option>
                         </select>
                     </datalist>
-                    <div *ngIf="profileForm.controls.state.invalid && (profileForm.controls.state.dirty || profileForm.controls.state.touched)" class="text-danger">
+                    <!-- <div *ngIf="profileForm.controls.state.invalid && (profileForm.controls.state.dirty || profileForm.controls.state.touched)" class="text-danger">
                             <div *ngIf="profileForm.controls.state.errors.required" class="custom">
                                     {{'selectstate'|translate}}
                             </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     
@@ -99,17 +99,17 @@
                 <div class="form-group custom_form-group">
                     <label for="city">{{'city'| translate}}</label>
                     <input type="text" class="form-control" formControlName="city" [(ngModel)]="profileData.city"
-                    (click)="getCity($event)" onmousedown="value = '';" placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200" required />
+                    (click)="getCity($event)" onmousedown="value = '';" placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200"  />
                     <datalist id="citycodes">
                         <select class="scrollbar">
                             <option *ngFor="let item of citiesData" [value]="item"></option>
                         </select>
                     </datalist>
-                    <div *ngIf="profileForm.controls.city.invalid && (profileForm.controls.city.dirty || profileForm.controls.city.touched)" class="text-danger">
+                    <!-- <div *ngIf="profileForm.controls.city.invalid && (profileForm.controls.city.dirty || profileForm.controls.city.touched)" class="text-danger">
                             <div *ngIf="profileForm.controls.city.errors.required" class="custom">
                                     {{'selectcity'|translate}}
                             </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -118,8 +118,8 @@
             <div class="col">
                 <div class="form-group custom_form-group">
                     <label for="exampleInputEmail1">{{'phone'| translate}}</label>
-                    <input placeholder="{{'phone'| translate}}" type="text" class="form-control" formControlName="phonenumber" [(ngModel)]="profileData.phonenumber" required>
-                    <div *ngIf="profileForm.controls.phonenumber.invalid && (profileForm.controls.phonenumber.dirty || profileForm.controls.phonenumber.touched)" class="text-danger">
+                    <input placeholder="{{'phone'| translate}}" type="text" class="form-control" formControlName="phonenumber" [(ngModel)]="profileData.phonenumber">
+                    <!-- <div *ngIf="profileForm.controls.phonenumber.invalid && (profileForm.controls.phonenumber.dirty || profileForm.controls.phonenumber.touched)" class="text-danger">
                         <div *ngIf="profileForm.controls.phonenumber.errors.required" class="custom">
                             {{'phonenumberrequired'| translate}}</div>
                         <div *ngIf="profileForm.controls.phonenumber.errors.pattern" class="custom">
@@ -127,7 +127,7 @@
                         </div>
                         <div *ngIf="profileForm.controls.phonenumber.errors.minlength" class="custom">
                             {{'phonenumberdigit'| translate}}</div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     
@@ -138,8 +138,7 @@
     
         <div class="row">
             <div class="col">
-                <button (click)="continue()" [disabled]="profileForm.pristine || profileForm.invalid"
-                    class="btn btn-orange">{{'update'| translate}}</button>&nbsp;
+                <button (click)="continue()" class="btn btn-orange">{{'update'| translate}}</button>&nbsp;
             </div>
         </div>
     

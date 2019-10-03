@@ -32,7 +32,7 @@ import { ProcessedOrdersComponent } from './processed-orders/processed-orders.co
 import { ProcessedOrdersViewComponent } from './processed-orders-view/processed-orders-view.component';
 
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent],
+  declarations: [DashbordComponent, ViewComponent, EditComponent, UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent, UpdatedOrdersComponent, UpdatedOrderViewComponent, DownloadsComponent, CustomerDetailsComponent, CustomerDetailsEditComponent, CreateCustomerComponent, CreateAdminComponent,NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent,DownloadsComponent],
   imports: [
     CommonModule,
     HotTableModule,

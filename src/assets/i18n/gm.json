@@ -132,5 +132,7 @@
     "wentwrong":"Etwas ist schief gelaufen, bitte aktualisieren!",
    "downloadsamplefile":"Beispieldatei herunterladen",
    "searchbysalesno":"Suche nach Kundenauftrag Nr",
-    "searchbyproductionno":"Suche nach Fertigungsauftrag Nr"
+    "searchbyproductionno":"Suche nach Fertigungsauftrag Nr",
+    "downloadexcel": "Laden Sie Excel herunter",
+    "printdata": "Daten drucken"
 }

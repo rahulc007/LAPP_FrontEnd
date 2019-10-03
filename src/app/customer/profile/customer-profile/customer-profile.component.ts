@@ -32,14 +32,14 @@ export class CustomerProfileComponent implements OnInit {
   }
   initialForm() {
     this.profileForm = this.formBuilder.group({
-      firstname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
-      lastname: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      firstname: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
+      lastname: ['', [Validators.pattern('^[a-zA-Z ]*$')]],
       uemailId: ['', [Validators.required, Validators.email]],
       consumerId: ['', Validators.required],
       country: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      phonenumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern(this.mobnumPattern)]]
+      phonenumber: ['', [Validators.pattern(this.mobnumPattern)]]
     });
     this.submitted = false;
   }
@@ -69,9 +69,9 @@ export class CustomerProfileComponent implements OnInit {
   }
   continue() {
     this.submitted = true;
-    if (this.profileForm.invalid) {
-      return;
-    }
+    // if (this.profileForm.invalid) {
+    //   return;
+    // }
     let params = {
       "pid": this.profileData['pid'],
       "emailId": this.profileForm.value.uemailId,

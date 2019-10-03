@@ -80,6 +80,8 @@ export class DashbordComponent implements OnInit {
             this.router.navigate(['customer/profile'])
        }, 3000);
           this.strText = '';
+          this.firstTime = false;
+          localStorage.setItem('firstTimeLogin', this.firstTime);
         } else {
           this.resetMessage = this.translate.instant('providevalidpassword');
           setTimeout(()=> {

@@ -140,6 +140,8 @@
    "downloadsamplefile":"Download Sample File",
    "uploadmarktextexcel":"Upload Marking Text Excel",
     "searchbysalesno":" Search by Sales Order No",
-    "searchbyproductionno":"Search by Production Order No"
+    "searchbyproductionno":"Search by Production Order No",
+    "downloadexcel": "Download Excel",
+    "printdata": "Print Data"
     
 }
