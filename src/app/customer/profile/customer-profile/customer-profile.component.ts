@@ -11,7 +11,7 @@ export class CustomerProfileComponent implements OnInit {
 
   profileForm: FormGroup;
   submitted: boolean = false;
-  mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
+  mobnumPattern = '^[- +()]*[0-9][- +()0-9]*$';
   country: string;
   State: string;
   City: string;
@@ -39,7 +39,7 @@ export class CustomerProfileComponent implements OnInit {
       country: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      phonenumber: ['', [Validators.pattern(this.mobnumPattern)]]
+      phonenumber: ['', [Validators.minLength(13), Validators.pattern(this.mobnumPattern)]]
     });
     this.submitted = false;
   }

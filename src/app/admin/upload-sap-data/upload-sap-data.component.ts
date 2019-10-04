@@ -9,6 +9,8 @@ import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
 import { NgbModal, NgbModalConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+
+import { LoaderService } from '../../common/loader/loader.service';
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
@@ -33,10 +35,12 @@ export class UploadSapDataComponent implements OnInit {
   sapData: any;
   fileStatus:boolean;
   errMsg: any;
+  show = false;
+  
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
   constructor(private objService: LappRestService, private config: NgbTooltipConfig,
-    private modalService: NgbModal) {
+    private modalService: NgbModal, private loaderService: LoaderService) {
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
     config.triggers = 'click';
@@ -58,12 +62,19 @@ export class UploadSapDataComponent implements OnInit {
       this.errorMsg = '';
       let data = JSON.parse(response);
       if (data.status === 200 && data.statusMessage === "success") {
+         this.loaderService.getStatus().subscribe((value: boolean) => {
+          this.show = value;
+         })
         this.msg = "show";
         setTimeout(()=> {
           this.msg ='';
      }, 3000);
+     
         this.getUploadedData();
       } else if (data.statusMessage == "error") {
+         this.loaderService.getStatus().subscribe((value: boolean) => {
+          this.show = value;
+         })
         this.errorMsg = "show";
         this.errMsg = data.errorMessage;
         setTimeout(()=> {
@@ -128,4 +139,5 @@ export class UploadSapDataComponent implements OnInit {
   checkStatus() {
     this.getUploadedData();
   }
+
 }

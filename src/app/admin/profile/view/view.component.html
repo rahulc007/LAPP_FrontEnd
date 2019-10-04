@@ -120,15 +120,15 @@
                 <label for="exampleInputEmail1">{{'phone'| translate}}</label>
                 <input placeholder="{{'phone'| translate}}" type="text" class="form-control" formControlName="phonenumber"
                     [(ngModel)]="profileData.phonenumber" required>
-                <!-- <div *ngIf="profileForm.controls.phonenumber.invalid && (profileForm.controls.phonenumber.dirty || profileForm.controls.phonenumber.touched)" class="text-danger">
-                    <div *ngIf="profileForm.controls.phonenumber.errors.required" class="custom">
-                        {{'phonenumberrequired'| translate}}</div>
+                <div *ngIf="profileForm.controls.phonenumber.invalid && (profileForm.controls.phonenumber.dirty || profileForm.controls.phonenumber.touched)" class="text-danger">
+                    <!-- <div *ngIf="profileForm.controls.phonenumber.errors.required" class="custom">
+                        {{'phonenumberrequired'| translate}}</div> -->
                     <div *ngIf="profileForm.controls.phonenumber.errors.pattern" class="custom">
                         {{'phonenumbervalid'| translate}}
                     </div>
-                    <div *ngIf="profileForm.controls.phonenumber.errors.minlength" class="custom">
-                        {{'phonenumberdigit'| translate}}</div>
-                </div> -->
+                    <!-- <div *ngIf="profileForm.controls.phonenumber.errors.minlength" class="custom">
+                        {{'phonenumberdigit'| translate}}</div> -->
+                </div>
             </div>
         </div>
 

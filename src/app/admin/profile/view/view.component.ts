@@ -12,7 +12,7 @@ export class ViewComponent implements OnInit {
 
   profileForm: FormGroup;
   submitted = false;
-  mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
+  mobnumPattern = '^[- +()]*[0-9][- +()0-9]*$'; 
   countryData: any[] = [];
   selectedCountry: string;
   profileData: any[] = [];

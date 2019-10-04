@@ -47,7 +47,7 @@
     "useridrequired":"Benutzer-ID ist erforderlich",
     "phonenumberrequired":"Telefonnummer ist erforderlich",
     "phonenumbervalid":"Telefonnummer nicht gültig",
-    "phonenumberdigit":"Die Telefonnummer muss mindestens 10-stellig sein",
+    "phonenumberdigit":"Die Telefonnummer muss mindestens 13-stellig sein",
     "usertyperequired":"Benutzertyp ist erforderlich",
     "edit":"Bearbeiten",
     "orderdetails":"Bestelldetails",
