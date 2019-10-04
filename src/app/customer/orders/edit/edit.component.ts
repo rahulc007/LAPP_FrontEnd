@@ -37,7 +37,6 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   flag: any;
   mflag = 0;
   array: any[] = [];
-  uploadFlag: boolean;
   salesOrderNo: any;
   buttonFlag: any;
   lineitemId: any;
@@ -45,7 +44,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   emailId: any;
   oid: any;
   submitFlag: any;
-  editFlag = false;
+  editFlag = [false, false];
+  uploadFlag = [false,false];
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -100,18 +100,21 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       }
       
       this.data = this.array;
-      this.lineitemId = this.data[0].lineItemId;
-      localStorage.setItem('lineitemid', this.lineitemId);
-      if(this.data[0].submit === true) {
-        this.editFlag = true
-      }
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       })
+     for(let i=0; i< this.data.length; i++) {
+       if(this.data[i].legsCount) {
+         this.uploadFlag[i] = true;
+       }
+       if(this.data[i].submit === true) {
+        this.editFlag[i] = true
+      }
+     }
       
-      this.uploadFlag=this.data[0].legsCount>0 ?true:false;
-
+     
+     
       let dt = this.data[0].createdDate;
       let date1 = new Date(dt);
       let sdate:any = date1;
@@ -191,7 +194,10 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //   this.legseditflag = 0;
   // }
 
-  uploadMarkupTextExl() {
+  uploadMarkupTextExl(index) {
+    this.lineitemId = this.data[index].lineItemId;
+    console.log('LineId',this.lineitemId)
+      localStorage.setItem('lineitemid', this.lineitemId);
     this.router.navigate(['customer/uploadexcel']);
   }
 
