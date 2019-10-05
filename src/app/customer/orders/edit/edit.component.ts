@@ -29,7 +29,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   legsnum: any;
   submitted = false;
   public columns: any[] = [];
-  param = {};
+  params = {};
   pager = {};
   pageOfItems = [];
   baseUrl: any;
@@ -45,18 +45,18 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   oid: any;
   submitFlag: any;
   editFlag = [false, false];
-  uploadFlag = [false,false];
+  uploadFlag = [false, false];
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
 
   ngOnInit() {
-    this.oid = localStorage.getItem('oid');
     this.configuration = ConfigurationService.config;
     this.legsForm = this.formBuilder.group({
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
     });
     this.emailId = localStorage.getItem('username');
+    this.salesOrderNo = localStorage.getItem('salesOrderNo');
     this.loadPage();
   }
   ngAfterViewInit() {
@@ -77,7 +77,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       { key: 'modifiedDate', title: 'Modified Date' },
       { key: 'Actions', title: 'Edit', searchEnabled: false, cellTemplate: this.Ver },
       { key: 'Upload', title: 'Upload', searchEnabled: false, cellTemplate: this.uplodExl }
-   
+
     ];
   }
   ngAfterViewChecked() {
@@ -85,43 +85,32 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   private loadPage() {
-    let orderId = parseInt(localStorage.getItem('oid'));
-    let i = localStorage.getItem('customerIndex');
-    this.param = {
-    "emailId": this.emailId,
-    "startLimit": 0,
-    "endLimit" : 100 
+    this.params = {
+      "salesOrderno": this.salesOrderNo,
+      "userEmailId": this.emailId,
+      "createdBy": ""
     }
-    this.objService.Get('getOrderDetailsByUser', this.param).subscribe(response => {
-      for (let i = 0; i < response.orderInfoList.length; i++) {
-        if (orderId === response.orderInfoList[i].oid) {
-          this.array = response.orderInfoList[i].orderLineItem;
-        }
-      }
-      
-      this.data = this.array;
+    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.data = response.orderInfoList[0].orderLineItem;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       })
-     for(let i=0; i< this.data.length; i++) {
-       if(this.data[i].legsCount) {
-         this.uploadFlag[i] = true;
-       }
-       if(this.data[i].submit === true) {
-        this.editFlag[i] = true
+      for (let i = 0; i < this.data.length; i++) {
+        if (this.data[i].legsCount > 0) {
+          this.uploadFlag[i] = true;
+        }
+        if (this.data[i].submit === true) {
+          this.editFlag[i] = true
+        }
       }
-     }
-      
-     
-     
       let dt = this.data[0].createdDate;
       let date1 = new Date(dt);
-      let sdate:any = date1;
+      let sdate: any = date1;
       date1.setDate(date1.getDate() + userTypes.markingtextExpire);
-      let exdate:any = date1;
+      let exdate: any = date1;
       let today = new Date();
-      let difDate:any = date1.getTime() - today.getTime();
+      let difDate: any = date1.getTime() - today.getTime();
       difDate = difDate / (1000 * 3600 * 24);
       let diffDays = Math.floor(difDate);
       if (diffDays <= 0) {
@@ -130,16 +119,14 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     })
   }
 
-
   orderview(row) {
-    console.log('row', row)
     this.lineitemId = row.lineItemId;
     this.lineitemno = row.lineItemno;
     this.legsnum = row.legsCount;
     localStorage.setItem('lineitemid', this.lineitemId);
     localStorage.setItem('lineItemNo', this.lineitemno);
     localStorage.setItem('legsno', this.legsnum);
-    if(row.submit === true) {
+    if (row.submit === true) {
       this.submitFlag = 0
       localStorage.setItem('submitflag', this.submitFlag);
     }
@@ -147,9 +134,9 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.submitFlag = 1
       localStorage.setItem('submitflag', this.submitFlag);
     }
-    
+
     if (this.legsnum > 0) {
-      this.router.navigate(['customer/neworders/'+ this.oid + '/editlegs']);
+      this.router.navigate(['customer/neworders/' + this.oid + '/editlegs']);
     }
     else if (this.mflag != 1) {
       this.modalService.open(this.legscontent)
@@ -175,7 +162,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
         this.flag = 0;
         localStorage.setItem('legsno', this.legsnum);
       }
-      this.router.navigate(['customer/neworders/'+ this.oid + '/editlegs']);
+      this.router.navigate(['customer/neworders/' + this.oid + '/editlegs']);
       this.modalService.dismissAll();
     }
   }
@@ -196,8 +183,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   uploadMarkupTextExl(index) {
     this.lineitemId = this.data[index].lineItemId;
-    console.log('LineId',this.lineitemId)
-      localStorage.setItem('lineitemid', this.lineitemId);
+    console.log('LineId', this.lineitemId)
+    localStorage.setItem('lineitemid', this.lineitemId);
     this.router.navigate(['customer/uploadexcel']);
   }
 

@@ -1,14 +1,16 @@
-import { Component, OnInit , ViewChild, TemplateRef} from '@angular/core';
+import { Component, OnInit , ViewChild, TemplateRef, ViewEncapsulation} from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
 import {Router} from '@angular/router';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LappRestService } from '../../../core/rest-service/LappRestService';
 import * as XLSX from 'ts-xlsx';
 
 @Component({
   selector: 'app-excelupload',
   templateUrl: './excelupload.component.html',
-  styleUrls: ['./excelupload.component.css']
+  styleUrls: ['./excelupload.component.css'],
+  providers: [NgbModal, NgbModalConfig, NgbTooltipConfig],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ExceluploadComponent implements OnInit {
   @ViewChild('submitConfirm', { static: false }) submitConfirm: TemplateRef<any>;
@@ -25,7 +27,10 @@ export class ExceluploadComponent implements OnInit {
   markingTestTempArray = [];
   lineitemId:any;
   params: any;
-  constructor(private objService: LappRestService, private router:Router, private modalService: NgbModal) { }
+  constructor(private objService: LappRestService, private router:Router, private modalService: NgbModal,
+    private config: NgbTooltipConfig) {
+    config.triggers = 'click';
+     }
 
   ngOnInit() {
     this.lineitemId=JSON.parse(localStorage.getItem('lineitemid'));

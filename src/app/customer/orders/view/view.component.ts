@@ -97,12 +97,12 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   orderview(row, rowIndex) {
-    localStorage.setItem('oid', row.oid);
-    localStorage.setItem('customerIndex', rowIndex);
+    localStorage.setItem('salesOrderNo', row.salesOrderno);
     this.router.navigate(['customer/neworders', row.oid]);
   }
 
   search(event) {
+    this.tempArray =[];
     if (event.target.value === '') {
       this.loadPage();
     }

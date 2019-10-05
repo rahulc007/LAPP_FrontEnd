@@ -102,12 +102,12 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   }
 
   ordersview(row, rowIndex) {
-    localStorage.setItem('oid', row.oid)
-    localStorage.setItem('index', rowIndex);
+    localStorage.setItem('salesOrderNo', row.salesOrderno)
     this.router.navigate(['admin/newordersview', row.oid]);
   }
 
   search(event) {
+    this.arr = []
     if (event.target.value === '') {
       this.getUploadedOrderDetails();
     }

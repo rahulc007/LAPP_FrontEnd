@@ -11,14 +11,12 @@
 <div class="row">
     <div class="col-md-6 text-center">
         <div class="dropdown">
-            Download Options <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
+            Download Options
+            <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
             <div class="dropdown-menu">
-                <label class="dropdown-item">
-                    <input type="radio" name="options" id="option1" value="Excel" (click)="downloadAll($event)"> Excel
-                </label>
-                <label class="dropdown-item">
-                        <input type="radio" name="options" id="option2" value="Database" (click)="downloadAll($event)"> Database
-                </label>
+                <a class="dropdown-item">Option 1</a>
+                <a class="dropdown-item">Option 2</a>
+                <a class="dropdown-item">Option 3</a>
             </div>
         </div>
     </div>
@@ -26,30 +24,41 @@
         <button class="btn btn-md btn-orange">Download {{title}}</button>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <label>
+            <input type="radio" name="options" id="option1" value="Excel" (click)="downloadAll($event)"> Excel
+        </label>
+        <label class="pl-2">
+            <input type="radio" name="options" id="option2" value="Database" (click)="downloadAll($event)"> Database
+        </label>
+    </div>
+</div>
 <!-- Dropdown -->
 <ng-template #dropDown let-row let-rowIndex="rowIndex">
-        <div class="dropdown">
-                Download Options <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
-                <div class="dropdown-menu">
-                    <label class="dropdown-item">
-                        <input class="custom" type="radio" name="option"  value="Excel" (click)="selectOption(row, $event, rowIndex)"> Excel
-                    </label>
-                    <label class="dropdown-item">
-                            <input class="custom" type="radio" name="option" value="Database" (click)="selectOption(row,$event, rowIndex)"> DataBase
-                    </label>
-                    
-                </div>
-        </div>   
+    <div class="dropdown">
+        Download Options
+        <i class="fa fa-chevron-down " aria-hidden="true" data-toggle="dropdown"></i>
+        <div class="dropdown-menu">
+            <label class="dropdown-item">
+                <input class="custom" type="radio" name="option" value="Excel" (click)="selectOption(row, $event, rowIndex)"> Excel
+            </label>
+            <label class="dropdown-item">
+                <input class="custom" type="radio" name="option" value="Database" (click)="selectOption(row,$event, rowIndex)"> DataBase
+            </label>
 
-        <!-- <select (change)="selectOption(row, $event, rowIndex)">
-            <option value=''>Please Select Any Option</option>
-            <option value="Excel">
-                Excel
-            </option>
-            <option value="Database">
-                Database
-            </option>
-        </select>  -->
+        </div>
+    </div>
+
+    <select (change)="selectOption(row, $event, rowIndex)">
+        <option value=''>Please Select Any Option</option>
+        <option value="Excel">
+            Excel
+        </option>
+        <option value="Database">
+            Database
+        </option>
+    </select>
 </ng-template>
 <!-- Download -->
 <ng-template #download let-row let-rowIndex="rowIndex">

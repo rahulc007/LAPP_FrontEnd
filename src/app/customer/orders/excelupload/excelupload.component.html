@@ -2,6 +2,10 @@
     <div class="col">
         <h2 class="page_heading new_order float-left">{{'uploadmarktextexcel'| translate}}</h2>
         <div class="float-right">
+            <button type="button" class="btn p-2 ml-2" placement="bottom" [ngbTooltip]="tipContent"
+                tooltipClass="my-custom" container="body">
+                <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 16px;"></i>
+            </button>
             <a href="/assets/data/samplemarkingtext.xlsx" target="_self" class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>
 
             <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
@@ -107,3 +111,28 @@
         <button type="button" class="btn btn-danger" (click)="submitData()">{{'Submit' |translate}}</button>
     </div>
 </ng-template>
+
+<ng-template #tipContent>
+        <div class="row">
+          <div class="col-12">
+            <p class="m-0 p-0 text-center">Please Upload Excel in the below Format</p>
+            <table class="table">
+              <thead>
+                <tr class="d-flex">
+                  <th class="leftOnly">
+                    <div style="width: 115px;">Left Marking Text (L)</div>
+                  </th>
+                  
+                  <th>
+                    <div style="width: 115px;">Right Marking Text  (R)</div>
+                  </th>
+                  <th>
+                    <div style="width: 115px;">Others (O)</div>
+                  </th>
+                 
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </ng-template>

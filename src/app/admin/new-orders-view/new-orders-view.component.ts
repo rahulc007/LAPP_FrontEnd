@@ -23,6 +23,7 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   params: any;
   array:any[]=[];
   emailId: any;
+  salesOrderNo: any;
   constructor(private UserService:UserService,private http: HttpClient, private route: ActivatedRoute,
     private router:Router, private objService: LappRestService, private cdr: ChangeDetectorRef, private datePipe: DatePipe) {
     this.configuration = ConfigurationService.config;
@@ -30,31 +31,25 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-    this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
+    this.salesOrderNo = localStorage.getItem('salesOrderNo')
+    // this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.getUploadedOrderDetails();
   }
  getUploadedOrderDetails() {
-   
-   let orderId=parseInt(localStorage.getItem('oid'));
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.params = {
-        "emailId": this.emailId,
-        "startLimit": 0,
-        "endLimit": 100 
+        "salesOrderno": this.salesOrderNo,
+        "createdBy": this.emailId,
+        "userEmailId": ""
       }
-      this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
-        for(let i=0; i<response.orderInfoList.length; i++) {
-          if(orderId === response.orderInfoList[i].oid) {
-            this.array=response.orderInfoList[i].orderLineItem
-          }
-        }
-          this.data= this.array;
-          this.data.forEach(date => {
-            date.createdDate = this.datePipe.transform(date.createdDate, "medium");
-            date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
-          })
+      this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.data = response.orderInfoList[0].orderLineItem;
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       })
+      })    
     }
   }
   ngAfterViewInit() {

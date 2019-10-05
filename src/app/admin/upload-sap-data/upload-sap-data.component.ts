@@ -62,9 +62,6 @@ export class UploadSapDataComponent implements OnInit {
       this.errorMsg = '';
       let data = JSON.parse(response);
       if (data.status === 200 && data.statusMessage === "success") {
-         this.loaderService.getStatus().subscribe((value: boolean) => {
-          this.show = value;
-         })
         this.msg = "show";
         setTimeout(()=> {
           this.msg ='';
@@ -72,9 +69,6 @@ export class UploadSapDataComponent implements OnInit {
      
         this.getUploadedData();
       } else if (data.statusMessage == "error") {
-         this.loaderService.getStatus().subscribe((value: boolean) => {
-          this.show = value;
-         })
         this.errorMsg = "show";
         this.errMsg = data.errorMessage;
         setTimeout(()=> {
