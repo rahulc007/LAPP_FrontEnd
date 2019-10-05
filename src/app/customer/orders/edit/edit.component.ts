@@ -57,6 +57,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     });
     this.emailId = localStorage.getItem('username');
     this.salesOrderNo = localStorage.getItem('salesOrderNo');
+    this.oid = localStorage.getItem('oid');
+    console.log( 'orderId', this.oid)
     this.loadPage();
   }
   ngAfterViewInit() {

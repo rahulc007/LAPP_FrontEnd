@@ -98,6 +98,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   orderview(row, rowIndex) {
     localStorage.setItem('salesOrderNo', row.salesOrderno);
+    localStorage.setItem('oid', row.oid);
     this.router.navigate(['customer/neworders', row.oid]);
   }
 

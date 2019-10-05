@@ -65,7 +65,6 @@ export class HandsontableComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.oid = localStorage.getItem('oid');
     this.legsCount = localStorage.getItem('legsno');
     this.rownum = this.legsCount;

@@ -103,6 +103,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
 
   ordersview(row, rowIndex) {
     localStorage.setItem('salesOrderNo', row.salesOrderno)
+    localStorage.setItem('oid', row.oid);
     this.router.navigate(['admin/newordersview', row.oid]);
   }
 
