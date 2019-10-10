@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URL = `http://3.17.182.133:8090/uploadSAPData`;
+const URL = `http://18.222.218.117:8090/uploadSAPData`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
@@ -119,7 +119,7 @@ export class UploadSapDataComponent implements OnInit {
 
   downloadfile() {
     const emailId = localStorage.getItem('username');
-    window.location.href = 'http://3.17.182.133:8090/downloadSAPData?emailId=' + emailId;
+    window.location.href = 'http://18.222.218.117:8090/downloadSAPData?emailId=' + emailId;
   }
 
   public onFileSelected() {

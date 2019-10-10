@@ -274,7 +274,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
 
   download() {
     const emailId = localStorage.getItem('username');
-    window.location.href = 'http://3.17.182.133:8090/downloadCustData?emailId=' + emailId;
+    window.location.href = 'http://18.222.218.117:8090/downloadCustData?emailId=' + emailId;
   }
 
   ngAfterViewInit() {
