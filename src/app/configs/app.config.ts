@@ -12,9 +12,9 @@ export const AppConfig: any = {
     error404: '404'
   },
   endpoints: {  
-       baseUrl: `http://18.222.218.117:8090`,
-      loginApi: `http://18.222.218.117:8090/validateUser`,
-      uploadApi: `http://18.222.218.117:8090/uploadSAPData`
+       baseUrl: `http://3.231.152.109:8090`,
+      loginApi: `http://3.231.152.109:8090/validateUser`,
+      uploadApi: `http://3.231.152.109:8090/uploadSAPData`
   },
   ok:200,
   error: 'error'

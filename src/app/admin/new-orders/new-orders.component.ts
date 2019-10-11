@@ -34,25 +34,25 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     private cdr: ChangeDetectorRef) {
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
+    this.configuration.paginationEnabled = false;
   }
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-    // this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
-    this.getUploadedOrderDetails();
-
+     this.loadPage(1);
   }
 
-  getUploadedOrderDetails() {
+  loadPage(page) {
+    let startLimit = (page-1)*10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.params = {
         "emailId": this.emailId,
-        "startLimit": 0,
-        "endLimit": 100
+        "startLimit": startLimit,
+        "endLimit": 9
       }
       this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
-
+        this.arr=[]
         for (let i = 0; i < response.orderInfoList.length; i++) {
           if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
             this.arr.push(response.orderInfoList[i]);
@@ -84,22 +84,6 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
-  private loadPage(page) {
-    this.params = {
-      "emailId": this.emailId,
-      "startLimit": 0,
-      "endLimit": 100
-    }
-    this.objService.Get(`getOrderDetailsByAdmin?`, this.params).subscribe(x => {
-      for (let i = 0; i < x.orderInfoList.length; i++) {
-        if (x.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
-          this.arr.push(x.orderInfoList[i]);
-        }
-      }
-      this.data = this.arr;
-    });
-
-  }
 
   ordersview(row, rowIndex) {
     localStorage.setItem('salesOrderNo', row.salesOrderno)
@@ -110,7 +94,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   search(event) {
     this.arr = []
     if (event.target.value === '') {
-      this.getUploadedOrderDetails();
+      this.loadPage(1);
     }
   }
   getPerticularSalesNo(salesOrderNo) {

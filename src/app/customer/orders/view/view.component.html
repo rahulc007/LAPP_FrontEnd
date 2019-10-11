@@ -2,44 +2,53 @@
     <div class="col-md-2">
         <h2 class="page_heading new_order">{{'myorders'| translate}}</h2>
     </div>
-    <div class="col-md-5 text-center">
-        <div class="form-inline" id="search_bar">
-            <div class="form-group mr-1">
-                <input type="text" [(ngModel)]="customerId" class="form-control" [style.width.px]="220" (keyup)="search($event)" placeholder="Search by Sales Order Number">
+    <div class="col-md-10">
+        <div class="pull-right">
+            <div class="form-inline" id="search_bar">
+                <div class="form-group mr-1">
+                    <input type="text" [(ngModel)]="customerId" class="form-control" [style.width.px]="220" (keyup)="search($event)" placeholder="Search by Sales Order Number">
+                </div>
+                <button class="btn btn-secondary btn-sm" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId">{{'search'| translate}}</button>
             </div>
-            <button class="btn btn-secondary btn-sm" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId">{{'search'| translate}}</button>
         </div>
-    </div>
-    <div class="col-md-5 text-center">
-        <div class="form-inline ml-3" id="search_bar">
-            <div class="form-group mr-1">
-                <input type="text" [(ngModel)]="productionNo" class="form-control" [style.width.px]="220" (keyup)="search($event)" placeholder="Search by Production Order Number">
+        <!-- <div class="pull-right mr-5">
+            <div class="form-inline ml-3" id="search_bar">
+                <div class="form-group mr-1">
+                    <input type="text" [(ngModel)]="productionNo" class="form-control" [style.width.px]="220" (keyup)="search($event)" placeholder="Search by Production Order Number">
+                </div>
+                <button class="btn btn-secondary btn-sm" (click)="getPerticularProductionNo(productionNo)" [disabled]="!productionNo">{{'search'| translate}}</button>
             </div>
-            <button class="btn btn-secondary btn-sm" (click)="getPerticularProductionNo(productionNo)" [disabled]="!productionNo">{{'search'| translate}}</button>
-        </div>
+        </div> -->
     </div>
 </div>
 <br>
 <div class="table table-bordered table-striped">
     <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">
     </ngx-table>
-    <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-                <a (click)="loadPage(page=1)" class="page-link">First</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-                <a (click)="loadPage(page= pager.currentPage - 1)" class="page-link">Previous</a>
-            </li>
-            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-                <a (click)="loadPage(page= page)" class="page-link">{{page}}</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-                <a (click)="loadPage(page= pager.currentPage + 1)" class="page-link">Next</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-                <a (click)="loadPage(page= pager.totalPages)" class="page-link">Last</a>
-            </li>
+    <ul class="pagination">
+        <!-- <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+            <a (click)="loadPage(page=1)"  class="page-link">First</a>
+        </li> -->
+        <li [ngClass]="{disabled:page === 1}" class="page-item previous-item">
+            <a (click)="loadPage(page = page - 1)" class="page-link">Previous</a>
+        </li>
+        <li [ngClass]="{active:page === 1 }" class="page-item number-item">
+            <a (click)="loadPage(page = 1)" class="page-link">1</a>
+        </li>
+        <li [ngClass]="{active:page === 2}" class="page-item number-item">
+            <a (click)="loadPage(page = 2)" class="page-link">2</a>
+        </li>
+        <li class="page-item next-item">
+            <a (click)="loadPage(page = page + 1)" class="page-link">....</a>
+        </li>
+        <li class="page-item next-item">
+            <a (click)="loadPage(page = page + 1)" class="page-link">Next</a>
+        </li>
+        <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+            <a (click)="loadPage(page= pager.totalPages)"  class="page-link">Last</a>
+        </li> -->
     </ul>
+
 </div>
 
 <ng-template #ver let-row let-rowIndex="rowIndex">

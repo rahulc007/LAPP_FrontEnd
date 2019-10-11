@@ -1,17 +1,23 @@
-<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+<ul  class="pagination">
+    <!-- <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
         <a (click)="loadPage(page=1)"  class="page-link">First</a>
+    </li> -->
+    <li [ngClass]="{disabled:page === 1}" class="page-item previous-item">
+        <a (click)="loadPage(page = page - 1)"  class="page-link">Previous</a>
     </li>
-    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-        <a (click)="loadPage(page= pager.currentPage - 1)"  class="page-link">Previous</a>
+     <li  [ngClass]="{active:page === 1 }" class="page-item number-item">
+        <a (click)="loadPage(page = 1)"  class="page-link">1</a>
+    </li> 
+    <li  [ngClass]="{active:page === 2}" class="page-item number-item">
+            <a (click)="loadPage(page = 2)"  class="page-link">2</a>
+        </li> 
+        <li  class="page-item next-item">
+                <a (click)="loadPage(page = page + 1)"  class="page-link">....</a>
+            </li>
+    <li  class="page-item next-item">
+        <a (click)="loadPage(page = page + 1)"  class="page-link">Next</a>
     </li>
-    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-        <a (click)="loadPage(page= page)"  class="page-link">{{page}}</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-        <a (click)="loadPage(page= pager.currentPage + 1)"  class="page-link">Next</a>
-    </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+    <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
         <a (click)="loadPage(page= pager.totalPages)"  class="page-link">Last</a>
-    </li>
+    </li> -->
 </ul>

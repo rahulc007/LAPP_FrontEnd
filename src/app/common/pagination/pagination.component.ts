@@ -11,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PaginationComponent implements OnInit {
 
-  @Input() pager:number;
+ // @Input() pager:number;
+ page = 1;
   @Output() clicked = new EventEmitter<number>();
   constructor() { }
 

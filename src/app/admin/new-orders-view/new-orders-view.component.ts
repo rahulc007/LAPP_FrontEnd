@@ -91,6 +91,6 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   }
   downloadData(rowdata) {
     console.log('Rowdetails', rowdata);
-    window.location.href = 'http://18.222.218.117:8090/downloadMarkingText?lineItemid='+ rowdata.lineItemId +'&salesOrderno=' + rowdata.salesOrderno + '&productionOrderno='+ rowdata.productionOrderno;
+    window.location.href = 'http://3.231.152.109:8090/downloadMarkingText?lineItemid='+ rowdata.lineItemId +'&salesOrderno=' + rowdata.salesOrderno + '&productionOrderno='+ rowdata.productionOrderno;
   }
 }

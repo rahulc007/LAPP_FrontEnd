@@ -27,17 +27,18 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   emailId: any;
   productionNo: any;
   customerId: any;
-
+  page = 1;
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) {
       this.configuration = DefaultConfig;
       this.configuration.searchEnabled = true;
+      this.configuration.paginationEnabled = false;
   }
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
     //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
-    this.loadPage();
+    this.loadPage(this.page);
   }
   ngAfterViewInit() {
     this.columns = [
@@ -57,21 +58,16 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
-  private loadPage() {
-    // get page of items from api
-    // this.http.get<any>(`http://localhost:4000/items?page=${page }`).subscribe(x => {
-    //     this.pager = x.pager;
-    //     this.pageOfItems = x.pageOfItems;
-    //     this.data = this.pageOfItems
-    // });
-
-    let emailId = localStorage.getItem('username');
+  private loadPage(page) {
+     let emailId = localStorage.getItem('username');
+     let startLimit = (page-1)*10
     this.params = {
       "emailId": emailId,
-      "startLimit": 0,
-      "endLimit": 100
+      "startLimit":startLimit,
+      "endLimit": 9
     }
     this.objService.Get('getOrderDetailsByUser', this.params).subscribe(response => {
+      this.tempArray= [];
       for (let i = 0; i < response.orderInfoList.length; i++) {
         if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
           this.arr.push(response.orderInfoList[i]);
@@ -105,7 +101,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   search(event) {
     this.tempArray =[];
     if (event.target.value === '') {
-      this.loadPage();
+      this.loadPage(1);
     }
   }
   getPerticularSalesNo(salesOrderNo) {
