@@ -327,6 +327,9 @@ export class HandsontableComponent implements OnInit {
     }
     this.flag = 0;
     this.isDisable = true;
+    setTimeout(() => {
+      this.router.navigate(['customer/neworders', this.oid]);
+  }, 5000); 
   }
 
   editMarkText(i, row) {

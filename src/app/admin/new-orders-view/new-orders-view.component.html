@@ -5,6 +5,14 @@
     </div>
 </div>
 <div class="mt-1">
-    <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
-    <app-pagination [pager]=pager (clicked)="loadPage($event)"></app-pagination>
+    <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
+    </app-ngx-easy-table>
+    <app-pagination (clicked)="loadPage($event)"></app-pagination>
 </div>
+<!-- Download Excel Data -->
+
+<ng-template #download let-row let-rowIndex="rowIndex">
+        <button class="btn btn-orange" (click)="downloadData(row)" [disabled]="row.submit === false">
+            Download
+        </button>
+</ng-template>

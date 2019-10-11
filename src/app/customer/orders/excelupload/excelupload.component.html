@@ -6,7 +6,7 @@
                 tooltipClass="my-custom" container="body">
                 <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 16px;"></i>
             </button>
-            <a href="/assets/data/samplemarkingtext.xlsx" target="_self" class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>
+            <a href="/assets/data/samplemarkingtext.xlsx" target="_self" class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>&nbsp;
 
             <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
         </div>
@@ -79,13 +79,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-1">
-        <button class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button>
+    <div class="col text-center">
+    <div class="float-center">
+        <button *ngIf="flag === true" class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button> &nbsp;
+        <button *ngIf="flag === true"  class="btn btn-md btn-orange" (click)="submitMarkingText()">{{'submit'| translate}}</button>
     </div>
-    <div class="col-md-1 ml-2">
-        <button class="btn btn-md btn-orange" (click)="submitMarkingText()">{{'submit'| translate}}</button>
-    </div>
+</div>
 </div>
 
 

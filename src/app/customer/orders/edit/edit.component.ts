@@ -44,8 +44,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   emailId: any;
   oid: any;
   submitFlag: any;
-  editFlag = [false, false];
-  uploadFlag = [false, false];
+  
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -98,14 +97,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       })
-      for (let i = 0; i < this.data.length; i++) {
-        if (this.data[i].legsCount > 0) {
-          this.uploadFlag[i] = true;
-        }
-        if (this.data[i].submit === true) {
-          this.editFlag[i] = true
-        }
-      }
+     
       let dt = this.data[0].createdDate;
       let date1 = new Date(dt);
       let sdate: any = date1;
@@ -183,7 +175,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //   this.legseditflag = 0;
   // }
 
-  uploadMarkupTextExl(index) {
+  uploadMarkupTextExl(index,row) {
     this.lineitemId = this.data[index].lineItemId;
     console.log('LineId', this.lineitemId)
     localStorage.setItem('lineitemid', this.lineitemId);

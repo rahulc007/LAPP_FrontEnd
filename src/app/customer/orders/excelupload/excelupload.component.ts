@@ -21,18 +21,20 @@ export class ExceluploadComponent implements OnInit {
   dataset:any[]=[];
   tabledata: any;
   id = 'hotInstance';
-  
+  flag : boolean = true;
   private hotRegisterer = new HotTableRegisterer();
     
   markingTestTempArray = [];
   lineitemId:any;
   params: any;
+  oid: any;
   constructor(private objService: LappRestService, private router:Router, private modalService: NgbModal,
     private config: NgbTooltipConfig) {
     config.triggers = 'click';
      }
 
   ngOnInit() {
+    this.oid = localStorage.getItem('oid');
     this.lineitemId=JSON.parse(localStorage.getItem('lineitemid'));
 
     let dataObj=[{L:"",R:"",O:""}]
@@ -58,7 +60,7 @@ if(dataObj)
  }
 
  goPrevious() {
-  this.router.navigate(['customer/neworders/:id'])
+  this.router.navigate(['customer/neworders', this.oid])
 }
 
   OnLoadFile(ev) {
@@ -137,12 +139,6 @@ if(dataObj)
             }, 3000);
           }
         })
-        // let Params = {
-        //   "lineItemid": this.lineitemId
-        // }
-        // this.objService.Get('getMarkingText', Params).subscribe(response => {
-        //   this.markingtextId = response.markingTextList;
-        // })
       }
 
       
@@ -184,11 +180,14 @@ if(dataObj)
         this.objService.Post('addMarkingText', this.params).subscribe(response => {
           if (response.status === 200 && response.statusMessage === 'success') {
             this.msg = 'Marking Text Submitted Successfully';
-            this.modalService.dismissAll();
             setTimeout(() => {
               this.msg = '';
             }, 3000);
-          //  this.modalService.open(this.submitConfirm);
+          this.modalService.dismissAll();
+          this.flag = false;
+          setTimeout(() => {
+            this.router.navigate(['customer/neworders', this.oid]);
+        }, 5000); 
           }
           else if (response.statusMessage === null || response.statusMessage === 'error') {
             this.errorMsg = response.errorMessage;

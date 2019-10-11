@@ -32,14 +32,14 @@
 
 
 <ng-template #ver let-row let-rowIndex="rowIndex">
-    <a class="ml-2" (click)="orderview(row)" [ngClass]="{'disabled': editFlag[rowIndex]}">
-        <i class="fa fa-pencil" aria-hidden="true"></i>
-    </a>
+    <button class="btn btn-orange fa fa-pencil" (click)="orderview(row)" [disabled]="row.submit === true">
+        <!-- <i class="fa fa-pencil" aria-hidden="true"></i> -->
+    </button>
 </ng-template>
 
 
 <ng-template #uploadExcel let-row let-rowIndex="rowIndex">
-    <button class="btn btn-orange ml-2 fa fa-upload" (click)="uploadMarkupTextExl(rowIndex)" [disabled]="uploadFlag[rowIndex]">
+    <button class="btn btn-orange ml-2 fa fa-upload" (click)="uploadMarkupTextExl(rowIndex,row)" [disabled]="row.legsCount > 0">
     </button>
 </ng-template>
 
