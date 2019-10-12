@@ -29,18 +29,21 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     private cdr: ChangeDetectorRef) {
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
+    this.configuration.paginationEnabled = false;
   }
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-    this.getUploadedOrderDetails();
+    // this.getUploadedOrderDetails();
+    this.loadPage(1);
   }
-  getUploadedOrderDetails() {
+  loadPage(page) {
+    let startLimit = (page-1)*10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     this.params = {
       "emailId": this.emailId,
-      "startLimit": 0,
-      "endLimit": 100
+      "startLimit": startLimit,
+      "endLimit": 9
     }
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.objService.Get('getProcessedOrderByAdmin',this.params).subscribe(response => {
@@ -84,6 +87,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   }
 
   porcessedOrder(row, rowIndex) {
+    localStorage.setItem('salesOrderNo', row.salesOrderno);
     localStorage.setItem('processedorderId', row.oid);
     localStorage.setItem('processorderIndex', rowIndex);
     this.router.navigate(['admin/processedorders', row.oid]);

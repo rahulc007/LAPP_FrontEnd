@@ -24,6 +24,7 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   array: any[]=[];
   emailId: any;
   params: any;
+  salesOrderNo: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -31,6 +32,7 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   ngOnInit() {
     this.configuration = ConfigurationService.config;
     this.emailId = localStorage.getItem('username');
+    this.salesOrderNo = localStorage.getItem('salesOrderNo')
     this.loadPage();
   }
 
@@ -57,32 +59,22 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
     this.cdr.detectChanges();
   }
 
-  loadPage()
-  {
-    let pId=parseInt(localStorage.getItem('processedorderId'));
-    let i = localStorage.getItem('customerIndex');
-  //  let emailId = localStorage.getItem('username');
-
-    this.params = {
-      "emailId": this.emailId,
-      "startLimit": 0,
-      "endLimit": 100
-    }
-
-    this.objService.Get('getProcessedOrderByAdmin' , this.params).subscribe(response => {
-      for(let i=0; i<response.orderInfoList.length; i++) {
-        if(pId=== response.orderInfoList[i].oid) {
-          this.array=response.orderInfoList[i].orderLineItem
-        }
+  loadPage() {
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
+      this.params = {
+        "salesOrderno": this.salesOrderNo,
+        "createdBy": this.emailId,
+        "userEmailId": ""
       }
-      this.data = this.array;
-      this.data.forEach(date => {
-        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
-        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
-        date.orderDate = this.datePipe.transform(date.orderDate, "medium");
+      this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+        this.data = response.orderInfoList[0].orderLineItem;
+        this.data.forEach(date => {
+          date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+          date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+        })
       })
-     
-    })
+    }
 
   }
 

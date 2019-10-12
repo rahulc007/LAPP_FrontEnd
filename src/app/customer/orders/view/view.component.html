@@ -30,9 +30,9 @@
             <a (click)="loadPage(page=1)"  class="page-link">First</a>
         </li> -->
         <li [ngClass]="{disabled:page === 1}" class="page-item previous-item">
-            <a (click)="loadPage(page = page - 1)" class="page-link">Previous</a>
+            <a (click)="loadPage(page = page - 1)" class="page-link">Previous << </a>
         </li>
-        <li [ngClass]="{active:page === 1 }" class="page-item number-item">
+        <!-- <li [ngClass]="{active:page === 1 }" class="page-item number-item">
             <a (click)="loadPage(page = 1)" class="page-link">1</a>
         </li>
         <li [ngClass]="{active:page === 2}" class="page-item number-item">
@@ -40,9 +40,9 @@
         </li>
         <li class="page-item next-item">
             <a (click)="loadPage(page = page + 1)" class="page-link">....</a>
-        </li>
+        </li> -->
         <li class="page-item next-item">
-            <a (click)="loadPage(page = page + 1)" class="page-link">Next</a>
+            <a (click)="loadPage(page = page + 1)" class="page-link"> >> Next</a>
         </li>
         <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
             <a (click)="loadPage(page= pager.totalPages)"  class="page-link">Last</a>

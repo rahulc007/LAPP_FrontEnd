@@ -175,8 +175,9 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   //   this.legseditflag = 0;
   // }
 
-  uploadMarkupTextExl(index,row) {
-    this.lineitemId = this.data[index].lineItemId;
+  uploadMarkupTextExl(row) {
+    console.log('ROW',row)
+    this.lineitemId = row.lineItemId;
     console.log('LineId', this.lineitemId)
     localStorage.setItem('lineitemid', this.lineitemId);
     this.router.navigate(['customer/uploadexcel']);

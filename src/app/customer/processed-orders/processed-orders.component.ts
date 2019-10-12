@@ -25,27 +25,29 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   arr: any[] = [];
   array: any[]=[];
   emailId: any;
+  page = 1;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
       this.configuration = DefaultConfig;
       this.configuration.searchEnabled = true;
+      this.configuration.paginationEnabled = false;
      }
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-    this.getUploadedOrderDetails();
+    this.loadPage(this.page);
   }
-  getUploadedOrderDetails() {
+  loadPage(page) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    //const emailId = localStorage.getItem('username');
+    let startLimit = (page-1)*10
     this.params = {
       "emailId": this.emailId,
-      "startLimit": 0,
-      "endLimit": 100
+      "startLimit": startLimit,
+      "endLimit": 9
     }
       this.objService.Get('getProcessedOrderByUser',this.params).subscribe(response => {
-          
+          this.data = [];
         this.data = response.orderInfoList;
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
@@ -53,11 +55,8 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
           date.orderDate = this.datePipe.transform(date.orderDate, "medium");
         })
       })
-    
   }
   ngAfterViewInit() {
-   
-
     this.columns = [
       { key: 'userEmailId', title: 'Email ID' },
       // { key: 'oid', title: 'Order ID' }, 
@@ -77,12 +76,10 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
 
   porcessedview(row, rowIndex)
   {
-
+    localStorage.setItem('salesOrderNo', row.salesOrderno);
     localStorage.setItem('processedorderId', row.oid);
     localStorage.setItem('processorderIndex', rowIndex);
     this.router.navigate(['customer/processedorders', row.oid]);
-   
-
   }
 }
 

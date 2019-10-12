@@ -20,13 +20,17 @@ export class ProcessedViewComponent implements OnInit, AfterViewInit, AfterViewC
   data:any[]=[];
   public configuration: Config;
   array: any[]=[];
-
+  salesOrderNo: any;
+  params: any;
+  emailId: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.configuration = ConfigurationService.config;
+    this.salesOrderNo = localStorage.getItem('salesOrderNo');
+    this.emailId = localStorage.getItem('username');
     this.loadPage();
   }
 
@@ -53,29 +57,19 @@ export class ProcessedViewComponent implements OnInit, AfterViewInit, AfterViewC
     this.cdr.detectChanges();
   }
 
-  loadPage()
-  {
-    let pId=parseInt(localStorage.getItem('processedorderId'));
-    let i = localStorage.getItem('customerIndex');
-    let emailId = localStorage.getItem('username');
-
-    let params={
-     "emailId":emailId
+  loadPage() {
+    this.params = {
+      "salesOrderno": this.salesOrderNo,
+      "userEmailId": this.emailId,
+      "createdBy": ""
     }
-
-    this.objService.Get('getProcessedOrderByUser' , params).subscribe(response => {
-      for(let i=0; i<response.orderInfoList.length; i++) {
-        if(pId=== response.orderInfoList[i].oid) {
-          this.array=response.orderInfoList[i].orderLineItem
-        }
-      }
-      this.data = this.array;
+    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.data = response.orderInfoList[0].orderLineItem;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
       })
     })
-
   }
 
   goPrevious()
