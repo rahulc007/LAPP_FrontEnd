@@ -40,7 +40,7 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
   customerForm: FormGroup;
   submitted = false;
   stateData: any[] = [];
-  mobnumPattern = '^((\\+91-?)|0)?[0-9]{10}$';
+  mobnumPattern = '^[- +()]*[0-9][- +()0-9]*$';
   msg: string = '';
   param = '';
   userData: any[] = [];

@@ -46,7 +46,7 @@
         </ul>
     </div>
     <div class="sidebar_bottom">
-        <button class="btn btn-orange logout_btn" [routerLink]="['login']">{{'logout'| translate}}</button>
+        <button class="btn btn-orange logout_btn" (click)="signout()">{{'logout'| translate}}</button>
         <p class="text-center">Powered by <a href="https://www.lappgroup.com/" target="_blank">LAPP</a></p>
     </div>
     </div>

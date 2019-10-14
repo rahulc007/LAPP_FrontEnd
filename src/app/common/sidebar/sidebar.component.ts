@@ -14,7 +14,7 @@ export class SidebarComponent implements OnInit {
   isAdmin: boolean = false;
   isSuperAdmin: boolean = false;
   isCustomer: boolean = false;
-  constructor(private navService: NavToggleService, private UserService: UserService) {
+  constructor(private navService: NavToggleService, private userService: UserService) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType == userTypes.superAdmin) {
       this.isSuperAdmin = true;
@@ -29,5 +29,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  signout() {
+    this.userService.logout();
+  }
 }
