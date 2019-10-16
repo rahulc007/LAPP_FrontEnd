@@ -51,7 +51,7 @@
     "customeridrequired":"Customer Id is required",
     "phonenumberrequired":"Phone Number is required",
     "phonenumbervalid":"Phone Number not valid",
-    "phonenumberdigit":"Phone Number must be at least 13 digit",
+    "phonenumberdigit":"Phone Number must be at least 10 digit",
     "usertyperequired":"User Type is required",
     "edit":"Edit",
     "orderdetails":"Order Details",

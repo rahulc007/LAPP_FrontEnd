@@ -39,7 +39,7 @@ export class CustomerProfileComponent implements OnInit {
       country: ['', Validators.required],
       state: ['', Validators.required],
       city: ['', Validators.required],
-      phonenumber: ['', [Validators.minLength(13), Validators.pattern(this.mobnumPattern)]]
+      phonenumber: ['', [Validators.minLength(10), Validators.pattern(this.mobnumPattern)]]
     });
     this.submitted = false;
   }

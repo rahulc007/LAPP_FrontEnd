@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation, OnDestroy  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 const URL = `http://3.231.152.109:8090/uploadSAPData`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
@@ -9,7 +9,9 @@ import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
 import { NgbModal, NgbModalConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
-
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 import { LoaderService } from '../../common/loader/loader.service';
 @Component({
   selector: 'app-upload-sap-data',
@@ -18,7 +20,7 @@ import { LoaderService } from '../../common/loader/loader.service';
   providers: [ConfigurationService, NgbModal, NgbModalConfig, NgbTooltipConfig],
   encapsulation: ViewEncapsulation.None
 })
-export class UploadSapDataComponent implements OnInit {
+export class UploadSapDataComponent implements OnInit, OnDestroy  {
   @ViewChild('uploadFile', { static: false }) uploadFile: any;
 
   isAdmin = 0;
@@ -35,8 +37,9 @@ export class UploadSapDataComponent implements OnInit {
   sapData: any;
   fileStatus:boolean;
   errMsg: any;
-  show = false;
-  
+  showLoader = false;
+  private subscription: Subscription;
+  private timer: Observable<any>;
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
   constructor(private objService: LappRestService, private config: NgbTooltipConfig,
@@ -58,8 +61,10 @@ export class UploadSapDataComponent implements OnInit {
     };
 
     this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
+      
       this.msg = '';
       this.errorMsg = '';
+      this.setTimer();
       let data = JSON.parse(response);
       if (data.status === 200 && data.statusMessage === "success") {
         this.msg = "show";
@@ -94,6 +99,19 @@ export class UploadSapDataComponent implements OnInit {
       { key: 'createdDate', title: 'Created Date', searchEnabled: true },
       { key:'fileStatus', title:'Upload Status', searchEnabled: false}
     ]
+  }
+ 
+setTimer(){
+    this.showLoader   = true;
+    this.timer = Observable.timer(1000);
+    this.subscription = this.timer.subscribe(() => {
+        this.showLoader = false;
+    });
+  }
+ngOnDestroy() {
+    if ( this.subscription && this.subscription instanceof Subscription) {
+      this.subscription.unsubscribe();
+    }
   }
   getUploadedData() {
 

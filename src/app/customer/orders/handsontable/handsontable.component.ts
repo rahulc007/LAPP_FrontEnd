@@ -241,6 +241,9 @@ export class HandsontableComponent implements OnInit {
     this.objService.Get('getMarkingText', Params).subscribe(response => {
       this.markingtextId = response.markingTextList;
     })
+    setTimeout(() => {
+      this.router.navigate(['customer/neworders', this.oid]);
+  }, 5000); 
   }
 
   submitData() {
