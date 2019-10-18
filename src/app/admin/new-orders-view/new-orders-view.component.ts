@@ -35,7 +35,6 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
     this.salesOrderNo = localStorage.getItem('salesOrderNo')
-    // this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.getUploadedOrderDetails();
   }
   getUploadedOrderDetails() {
@@ -90,7 +89,6 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
     this.router.navigate(['admin/newordersview']);
   }
   downloadData(rowdata) {
-    console.log('Rowdetails', rowdata);
     window.location.href = 'http://3.231.152.109:8090/downloadMarkingText?lineItemid='+ rowdata.lineItemId +'&salesOrderno=' + rowdata.salesOrderno + '&productionOrderno='+ rowdata.productionOrderno;
   }
 }

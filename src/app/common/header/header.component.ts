@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.usersId = localStorage.getItem('username');
     this.userType = localStorage.getItem('userType');
     this.errorMessage = localStorage.getItem('invalidApi');
-   console.log(this.errorMessage);
   }
 
   signout() {

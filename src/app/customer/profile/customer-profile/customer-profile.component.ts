@@ -23,6 +23,9 @@ export class CustomerProfileComponent implements OnInit {
   profileData: any[] = [];
   msg: any;
   errorMsg: any;
+  citydisabled = 0;
+  stateNotFound: any;
+  cityNotFound: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
   ngOnInit() {
@@ -53,19 +56,56 @@ export class CustomerProfileComponent implements OnInit {
       this.profileData['country']= countryData.CountryName;
     })
   }
-  getState(event) {
-    event.target.value = '';
+  getState() {
     this.profileData['city'] = '';
     let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
     this.stateData = stateNames.States;
   }
-
-  getCity(event) {
-    event.target.value = '';
+  filterState(event) {
+    let passed = true
+    this.stateData.forEach(element => {
+      if(event.target.value === element.StateName) {
+        passed = false
+      } 
+    })
+    if(passed) {
+      this.stateNotFound = true;
+      this.profileForm.controls['state'].setErrors({'incorrect': true});
+      this.profileData['city'] ='';
+      this.citydisabled = 1;
+    } else {
+      this.stateNotFound = false;
+      this.citydisabled = 0;
+      this.getCity()
+    }   
+  }
+  filterCity(event) {
+    let passed = true
+    this.citiesData.forEach(element => {
+      if(event.target.value === element) {
+        passed = false
+      } 
+    })
+    if(passed) {
+      this.cityNotFound = true;
+      this.profileForm.controls['city'].setErrors({'incorrect': true});
+    } else {
+      this.cityNotFound = false;
+    } 
+  }
+  getCity() {
     let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
-    this.stateData = stateNames.States;
+    this.stateData = stateNames.States; 
     let cityNames = this.stateData.find(state => state.StateName === this.profileData['state']);
     this.citiesData = cityNames.Cities;
+    if (this.citiesData.length === 0) {
+      this.profileData['city'] = "''";
+      this.citydisabled = 1;
+    }
+    else if(this.citiesData.length !== 0){
+      this.citiesData = cityNames.Cities;
+      this.citydisabled = 0;
+    }
   }
   continue() {
     this.submitted = true;

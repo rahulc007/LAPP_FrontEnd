@@ -22,7 +22,9 @@ export class ViewComponent implements OnInit {
   userTypeValue: any;
   msg: any;
   errorMsg: any;
-
+  stateNotFound: any;
+  citydisabled =0;
+  cityNotFound: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService) { }
 
   ngOnInit() {
@@ -49,19 +51,58 @@ export class ViewComponent implements OnInit {
       this.profileData = response.userProfileEntity;
     })
   }
-  getState(event) {
-    event.target.value = '';
-    this.profileData['city'] = '';
+  getState() {
     let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
-    this.stateData = stateNames.States;
+    this.stateData = stateNames.States; 
+    this.profileData['city'] ='';
   }
 
-  getCity(event) {
-    event.target.value = '';
+  filterState(event) {
+    let passed = true
+    this.stateData.forEach(element => {
+      if(event.target.value === element.StateName) {
+        passed = false
+      } 
+    })
+    if(passed) {
+      this.stateNotFound = true;
+      this.profileForm.controls['state'].setErrors({'incorrect': true});
+      this.profileData['city'] ='';
+      this.citydisabled = 1;
+    } else {
+      this.stateNotFound = false;
+      this.citydisabled = 0;
+      this.getCity()
+    }   
+  }
+  filterCity(event) {
+    let passed = true
+    this.citiesData.forEach(element => {
+      if(event.target.value === element) {
+        passed = false
+      } 
+    })
+    if(passed) {
+      this.cityNotFound = true;
+      this.profileForm.controls['city'].setErrors({'incorrect': true});
+      
+    } else {
+      this.cityNotFound = false;
+    }  
+  }
+  getCity() {
     let stateNames = this.countryData.find(cntry => cntry.CountryName === this.profileData['country']);
-    this.stateData = stateNames.States;
+    this.stateData = stateNames.States; 
     let cityNames = this.stateData.find(state => state.StateName === this.profileData['state']);
     this.citiesData = cityNames.Cities;
+    if (this.citiesData.length === 0) {
+      this.profileData['city'] = "''";
+      this.citydisabled = 1;
+    }
+    else if(this.citiesData.length !== 0){
+      this.citiesData = cityNames.Cities;
+      this.citydisabled = 0;
+    }
   }
 
   continue() {

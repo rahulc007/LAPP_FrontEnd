@@ -8,9 +8,9 @@ import {PasswordUpdateComponent} from './common/password-update/password-update.
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'},
+  { path: 'login', component:LoginComponent },
   { path: 'admin', loadChildren:'./admin/admin.module#AdminModule', canActivate: [AuthGuard], data:{userType:'ADMIN'} },
   { path: 'customer', loadChildren:'./customer/customer.module#CustomerModule', canActivate: [AuthGuard],  data:{userType:'CUSTOMER'} },
-  { path: 'login', component:LoginComponent },
   { path:'login/forgotpassword', component:ForgotpasswordComponent},
   {path:'forgot-password', component:PasswordUpdateComponent},
   { path: '**', redirectTo: 'login', pathMatch: 'full'},

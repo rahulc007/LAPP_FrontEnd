@@ -32,14 +32,15 @@
 
 
 <ng-template #ver let-row let-rowIndex="rowIndex">
-    <button class="btn btn-orange fa fa-pencil" (click)="orderview(row)" [disabled]="row.submit === true">
-        <!-- <i class="fa fa-pencil" aria-hidden="true"></i> -->
+    <button class="btn btn-md btn-outline-warning" (click)="orderview(row)" [disabled]="row.submit === true">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
     </button>
 </ng-template>
 
 
 <ng-template #uploadExcel let-row let-rowIndex="rowIndex">
-    <button class="btn btn-orange ml-2 fa fa-upload" (click)="uploadMarkupTextExl(row)" [disabled]="row.legsCount > 0">
+    <button class="btn btn-md btn-outline-warning ml-2" (click)="uploadMarkupTextExl(row)" [disabled]="row.legsCount > 0">
+        <i class="fa fa-upload" aria-hidden="true"></i>
     </button>
 </ng-template>
 

@@ -11,7 +11,9 @@
 <!-- Download Excel Data -->
 
 <ng-template #download let-row let-rowIndex="rowIndex">
-        <button class="btn btn-sm btn-orange" (click)="downloadData(row)" [disabled]="row.submit === false">
+        <button class="btn btn-md btn-outline-warning" (click)="downloadData(row)" [disabled]="row.submit === false">
             <i class="fa fa-download"></i>
         </button>
+        <!-- <a *ngIf="row.submit === true" (click)="downloadData(row)"><i class="fa fa-download"></i></a>
+        <a *ngIf="row.submit === false" class="disabled"><i class="fa fa-download"></i></a> -->
 </ng-template>

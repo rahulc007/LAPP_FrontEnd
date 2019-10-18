@@ -65,9 +65,6 @@ export class DownloadsComponent implements OnInit, AfterViewInit, AfterViewCheck
   }
 
   selectOption(row, event,rowIndex) {
-    console.log('row',row)
-    console.log('event',event.target.value);
-    console.log('index',rowIndex )
     this.eventValue = event.target.value;
     let index = this.data.indexOf(row) 
     this.data[rowIndex].type = event.target.value; 
@@ -75,12 +72,10 @@ export class DownloadsComponent implements OnInit, AfterViewInit, AfterViewCheck
   downloadFile() {
     if(this.eventValue === '' || this.eventValue === null || this.eventValue === undefined) {
       this.errorMsg = "Please select any Download Options"
-      console.log(this.errorMsg);
     }
     
   }
   downloadAll(event) {
-    console.log(event.target.value)
     this.title = event.target.value;
   }
 }

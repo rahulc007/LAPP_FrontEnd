@@ -53,6 +53,8 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
   downflag = 0;
   smailId: any;
   citydisabled =0;
+  stateNotFound: any
+  cityNotFound: any;
   constructor(private formBuilder: FormBuilder, private objService: LappRestService,
     private modalService: NgbModal, private translate: TranslateService,
     private cdr: ChangeDetectorRef) {
@@ -233,16 +235,38 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
     this.state = '';
     this.city = '';
   }
-
-  // stateClear() {
-  //   this.state = '';
-  //   this.city = '';
-  // }
-
-  // cityClear() {
-  //   this.city = '';
-  // }
-
+  filterState(event) {
+    let passed = true
+    this.stateData.forEach(element => {
+      if(event.target.value === element.StateName) {
+        passed = false
+      } 
+    })
+    if(passed) {
+      this.stateNotFound = true;
+      this.customerForm.controls['State'].setErrors({'incorrect': true});
+      this.city = '';
+      this.citydisabled = 1;
+    } else {
+      this.stateNotFound = false;
+      this.citydisabled = 0;
+      this.getCities();
+    }   
+  }
+  filterCity(event) {
+    let passed = true
+    this.citiesData.forEach(element => {
+      if(event.target.value === element) {
+        passed = false
+      } 
+    })
+    if(passed) {
+      this.cityNotFound = true;
+      this.customerForm.controls['City'].setErrors({'incorrect': true});
+    } else {
+      this.cityNotFound = false;
+    } 
+  }
   getState() {
     this.state = '';   
     let contrydata = this.countryData.find(cntry => cntry.CountryName === this.country);

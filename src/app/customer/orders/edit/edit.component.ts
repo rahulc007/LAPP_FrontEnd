@@ -57,7 +57,6 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.emailId = localStorage.getItem('username');
     this.salesOrderNo = localStorage.getItem('salesOrderNo');
     this.oid = localStorage.getItem('oid');
-    console.log( 'orderId', this.oid)
     this.loadPage();
   }
   ngAfterViewInit() {
@@ -176,9 +175,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   // }
 
   uploadMarkupTextExl(row) {
-    console.log('ROW',row)
     this.lineitemId = row.lineItemId;
-    console.log('LineId', this.lineitemId)
     localStorage.setItem('lineitemid', this.lineitemId);
     this.router.navigate(['customer/uploadexcel']);
   }

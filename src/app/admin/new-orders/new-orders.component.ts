@@ -39,7 +39,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-     this.loadPage(1);
+     this.loadPage(1);     
   }
 
   loadPage(page) {
@@ -105,7 +105,6 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       "userEmailId": ""
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-      console.log('response', response)
       this.data = response.orderInfoList;
     })
   }
@@ -117,7 +116,6 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       "userEmailId": ""
     }
     this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response => {
-      console.log('response', response)
       this.data = response.orderInfoList;
     })
   }

@@ -76,12 +76,12 @@
 
 <div class="row mt-2">
   <div class="col-md-3 mt-5 float-left" *ngIf="isAdmin===1">
-    <button class="btn btn-orange" (click)="downloadfile()"
-      [disabled]="!data || data.length <=0">{{'download'| translate}}</button>
+    <button class="btn btn-md btn-outline-warning" (click)="downloadfile()"
+      [disabled]="!data || data.length <=0"><i class="fa fa-download" aria-hidden="true"></i></button>
   </div>
   <div class="col mt-5">
-    <button type="button" class="btn btn-s btn-orange float-right"
-      (click)="checkStatus()">{{'checkstaus'| translate}}</button>
+    <button type="button" class="btn btn-md btn-outline-warning float-right"
+      (click)="checkStatus()"><i class="fa fa-refresh" aria-hidden="true"></i></button>
   </div>
 </div>
 

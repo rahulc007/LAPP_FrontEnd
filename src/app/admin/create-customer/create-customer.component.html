@@ -117,8 +117,8 @@
         <div class="col">
             <div class="form-group custom_form-group">
                 <label for="">{{'state'| translate}}</label>
-                <input type="text" class="form-control" formControlName="State" [(ngModel)]="state" onmousedown="value = '';" (change)="getCities()" placeholder="{{'state'| translate}}" list="statecodes"
-                    step="5" min="5" max="200" required />
+                <input type="text" class="form-control" formControlName="State" [(ngModel)]="state" onmousedown="value = '';"  placeholder="{{'state'| translate}}" list="statecodes"
+                    step="5" min="5" max="200" (keyup)="filterState($event)" required />
                 <datalist id="statecodes">
                     <select class="scrollbar">
                         <option *ngFor="let item of stateData" [value]="item.StateName"></option>
@@ -129,13 +129,17 @@
                     <div *ngIf="customerForm.controls.State.errors.required" class="custom">
                         {{'selectstate'| translate}}
                     </div>
+                    
+                </div>
+                <div *ngIf="stateNotFound" class="custom text-danger">
+                    State Not Found, Please select from Drop down
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="form-group custom_form-group">
                 <label for="">{{'city'| translate}}</label>
-                <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" onmousedown="value = '';"
+                <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" onmousedown="value = '';" (keyup)="filterCity($event)"
                     placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200" [attr.disabled]="citydisabled === 1?true:null" required />
                 <datalist id="citycodes">
                     <select class="scrollbar">
@@ -147,6 +151,9 @@
                     <div *ngIf="customerForm.controls.City.errors.required" class="custom">
                         {{'selectcity'| translate}}
                     </div>
+                </div>
+                <div *ngIf="cityNotFound" class="custom text-danger">
+                    City Not Found, Please select from Drop down
                 </div>
             </div>
         </div>

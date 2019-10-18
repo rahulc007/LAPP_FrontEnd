@@ -34,7 +34,6 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-    // this.getUploadedOrderDetails();
     this.loadPage(1);
   }
   loadPage(page) {
@@ -57,16 +56,6 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     }
   }
   ngAfterViewInit() {
-    // this.columns = [
-    //   { key: 'customerNo', title: 'Customer Number' },
-    //   { key: 'customerPartNo', title: 'Customer Part Number'},
-    //   { key: 'productionOrderno', title: 'Production Order Number' },
-    //   { key:'productionOrderStatus', title:'Production Order Status'},
-    //   { key: 'salesOrderno', title: 'Sales Order Number' },
-    //   { key: 'createdDate', title: 'Created Date' },
-    //   { key: 'modifiedDate', title: 'Modified Date' },
-    // ]
-
     this.columns = [
       { key: 'userEmailId', title: 'User Email ID' },
       // { key: 'oid', title: 'Order ID' }, 

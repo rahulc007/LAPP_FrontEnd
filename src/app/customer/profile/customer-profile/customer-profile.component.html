@@ -81,7 +81,7 @@
                 <div class="form-group custom_form-group">
                     <label for="state">{{'state'| translate}}</label>
                     <input type="text" class="form-control" formControlName="state" [(ngModel)]="profileData.state"
-                    (click)="getState($event)" onmousedown="value = '';" placeholder="{{'state'| translate}}" list="statecodes" step="5" min="5" max="200"/>
+                    (click)="getState()" onmousedown="value = '';" (keyup)="filterState($event)" placeholder="{{'state'| translate}}" list="statecodes" step="5" min="5" max="200"/>
                     <datalist id="statecodes">
                         <select class="scrollbar">
                             <option *ngFor="let item of stateData" [value]="item.StateName"></option>
@@ -92,6 +92,9 @@
                                     {{'selectstate'|translate}}
                             </div>
                     </div> -->
+                    <div *ngIf="stateNotFound" class="custom text-danger">
+                        State Not Found, Please select from Drop down
+                    </div>
                 </div>
             </div>
     
@@ -99,7 +102,7 @@
                 <div class="form-group custom_form-group">
                     <label for="city">{{'city'| translate}}</label>
                     <input type="text" class="form-control" formControlName="city" [(ngModel)]="profileData.city"
-                    (click)="getCity($event)" onmousedown="value = '';" placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200"  />
+                     onmousedown="value = '';" (click)="getCity()" (keyup)="filterCity($event)" placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200" [attr.disabled]="citydisabled === 1?true:null" />
                     <datalist id="citycodes">
                         <select class="scrollbar">
                             <option *ngFor="let item of citiesData" [value]="item"></option>
@@ -110,6 +113,9 @@
                                     {{'selectcity'|translate}}
                             </div>
                     </div> -->
+                    <div *ngIf="cityNotFound" class="custom text-danger">
+                        City Not Found, Please select from Drop down
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,7 +144,7 @@
     
         <div class="row">
             <div class="col">
-                <button (click)="continue()" class="btn btn-orange">{{'update'| translate}}</button>&nbsp;
+                <button (click)="continue()" class="btn btn-orange" [disabled]="profileForm.controls.state.invalid || profileForm.controls.city.invalid">{{'update'| translate}}</button>&nbsp;
             </div>
         </div>
     

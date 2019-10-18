@@ -76,8 +76,6 @@ if(currentUser && currentUser.token)
   }
 
   keyDownFunction(event) {
-
-    console.log("entered the key")
     if (event.keyCode == 13) {
       this.login();
     }
@@ -145,25 +143,5 @@ if(currentUser && currentUser.token)
   clear() {
     this.selected = '';
   }
-
-  // OnLoadFile(event) {
-  //   let fileReader = new FileReader();
-  //   for (let file of event.target.files) {
-  //     fileReader.onload = () => {
-  //       let arrayBuffer = fileReader.result;
-  //       var workbook = XLSX.read(arrayBuffer, { type: "binary" });
-  //       workbook.SheetNames.forEach(function (sheetName) {
-  //         // Here is your object
-  //         var XL_row_object = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-  //         var json_object = JSON.parse(JSON.stringify(XL_row_object));
-  //         console.log(json_object);
-  //       })
-  //     }
-  //     fileReader.readAsBinaryString(file);
-
-  //   }
-  // }
-
-
 
 }

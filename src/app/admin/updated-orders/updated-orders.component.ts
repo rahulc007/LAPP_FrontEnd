@@ -54,7 +54,7 @@ export class UpdatedOrdersComponent implements OnInit , AfterViewInit,AfterViewC
 
   rowfun(item)
   {
-    console.log("item==>",item)
+    
   }
 
   downloadexcel()

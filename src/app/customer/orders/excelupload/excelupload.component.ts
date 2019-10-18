@@ -48,11 +48,9 @@ export class ExceluploadComponent implements OnInit {
     // this.dataset = dataObj;
     if (dataObj) {
       dataObj.forEach(element => {
-       // console.log(element)
         this.dataset.push({ 'L': element['Left Marking Text (L)'], 'O': element['Others (O)'], 'R': element['Right Marking Text  (R)'], })
       });
     }
-    // console.log("Excel data=>", data)
   }
 
   goPrevious() {
@@ -78,12 +76,9 @@ export class ExceluploadComponent implements OnInit {
       //   const dataString = JSON.stringify(jsonData);
 
       //   let dataObj=JSON.parse(dataString);
-      //  console.log('sheetname', dataObj.Sheet1)
       this.sheets = <any>XLSX.utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[0]]);
       this.getExceldata(this.sheets)
       // this.rownum=dataObj.length;
-      // console.log("list=>", dataObj);
-      // console.log("len=>", this.rownum)
       //this.setDownload(dataString);
     }
     reader.readAsBinaryString(file);
@@ -139,8 +134,6 @@ export class ExceluploadComponent implements OnInit {
   submitData() {
     this.markingTestTempArray = [];
     const lineitemId = localStorage.getItem('lineitemid');
-    console.log("line item id=>", lineitemId)
-
     let emailId = localStorage.getItem('username');
     const lineitemno = localStorage.getItem('lineItemNo');
     let harray = [];
