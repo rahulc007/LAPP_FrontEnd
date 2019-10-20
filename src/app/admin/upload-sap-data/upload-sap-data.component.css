@@ -46,6 +46,18 @@
     font-size: 20px;
     padding: 2px;
   }
+  .download_btn{
+    background: url('../../../assets/images/menu_icons/download_white.png') no-repeat #f58122;
+    background-size: auto 70%;
+    background-position: 10px 5px;
+    padding: 6px 15px 6px 35px;
+    float: right;
+  }
+  .download_btn:hover{
+    background: url('../../../assets/images/menu_icons/download.png') no-repeat #f58122;
+    background-size: auto 70%;
+    background-position: 10px 5px;
+  }
       .upload_btn{
         background: url('../../../assets/images/menu_icons/upload_white.png') no-repeat #f58122;
     background-size: auto 70%;

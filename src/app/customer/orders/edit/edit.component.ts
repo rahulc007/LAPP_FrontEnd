@@ -84,7 +84,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.cdr.detectChanges();
   }
 
-  private loadPage() {
+  loadPage() {
     this.params = {
       "salesOrderno": this.salesOrderNo,
       "userEmailId": this.emailId,

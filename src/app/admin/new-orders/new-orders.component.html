@@ -6,7 +6,7 @@
         <div class="pull-right">
             <div class="form-inline" id="search_bar">
                 <div class="form-group mr-1">
-                    <input type="text" [(ngModel)]="customerId" [style.width.px]="220" [style.height.px] ="35" class="form-control" (keyup)="search($event)" placeholder="Search by Sales Order Number">
+                    <input type="text" [(ngModel)]="customerId" [style.width.px]="220" [style.height.px] ="36" class="form-control" (keyup)="search($event)" placeholder="Search by Sales Order Number">
                 </div>
                 <button class="btn btn-sm btn-outline-warning" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId"><i class="fa fa-search" aria-hidden="true"></i></button>
             </div>
@@ -31,5 +31,11 @@
 <ng-template #ver let-row let-rowIndex="rowIndex">
     <a class="ml-2" (click)="ordersview(row,rowIndex)">
         <i class="fa fa-eye" aria-hidden="true"></i>
+    </a>
+</ng-template>
+
+<ng-template #download let-row let-rowIndex="rowIndex">
+    <a class="ml-2" (click)="downloadSales(row)">
+        <i class="fa fa-download" aria-hidden="true"></i>
     </a>
 </ng-template>

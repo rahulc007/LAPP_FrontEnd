@@ -9,7 +9,7 @@
     <div class="table table-bordered table-striped">
         <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">
         </ngx-table>
-
+<!-- 
         <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
             <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
                 <a (click)="loadPage(page=1)" class="page-link">First</a>
@@ -26,7 +26,7 @@
             <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
                 <a (click)="loadPage(page= pager.totalPages)" class="page-link">Last</a>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </div>
 

@@ -23,7 +23,7 @@
     <p class="upload_msg">{{'filenameshould'| translate}}<b>dd/mm/yyyy hh:mm</b> {{'format'| translate}}</p>
     <p class="upload_msg pb-2">{{'pleaseuploadxcel'| translate}}</p>
   </div>
-  <div class="col-md-8 col-sm-4 p-0 ">
+  <div class="col-md-4 col-sm-4 p-0 ">
     <div class="uploadBtn_sctn">
       <button type="button" class="btn btn-s btn-orange upload_btn" (click)="uploader.uploadAll()"
         [disabled]="!uploader.getNotUploadedItems().length">
@@ -34,6 +34,9 @@
         <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 16px;"></i>
       </button>
     </div>
+  </div>
+  <div class="col-md-4">
+    <a href="/lapp/assets/data/uploadFormat.xlsx" target="_self" class="btn btn-orange download_btn  pull-right" download>Modal Excel File</a>
   </div>
 </div>
 <div class="loader_cntnr" *ngIf="showLoader">

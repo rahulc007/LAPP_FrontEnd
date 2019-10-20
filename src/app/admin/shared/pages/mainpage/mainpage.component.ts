@@ -10,7 +10,7 @@ import {NavToggleService} from '../../../../common/nav-toggle-service/navtoggle.
 export class MainpageComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private navService: NavToggleService
+    public navService: NavToggleService
     ) { }
 
   ngOnInit() {

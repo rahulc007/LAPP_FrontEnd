@@ -18,7 +18,7 @@ import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
 export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
-
+  @ViewChild('download', { static: false }) download: TemplateRef<any>;
   configuration: any;
   public columns: any[] = [];
   public data: any[] = [];
@@ -78,7 +78,8 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
       { key: 'createdBy', title: 'Created By' },
-      { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver }
+      { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver },
+      { key:'download', title:'Download by Sales Order No', searchEnabled: false, cellTemplate : this.download}
     ]
   }
   ngAfterViewChecked() {
@@ -118,5 +119,11 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response => {
       this.data = response.orderInfoList;
     })
+  }
+  downloadSales(row) {
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
+    window.location.href = 'http://52.206.130.36:8090/orderDownloadText?salesOrderno='+ row.salesOrderno;
+    }
   }
 }

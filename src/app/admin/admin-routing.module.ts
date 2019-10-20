@@ -5,10 +5,10 @@ import { AuthGuard } from '../core/services/auth.guard';
 import { MainpageComponent } from './shared/pages/mainpage/mainpage.component';
 import { UploadSapDataComponent } from './upload-sap-data/upload-sap-data.component';
 import { NewOrdersComponent } from './new-orders/new-orders.component';
-import { UpdatedOrdersComponent } from './updated-orders/updated-orders.component';
+
 import { ViewComponent } from './profile/view/view.component';
 import { NewOrdersViewComponent } from './new-orders-view/new-orders-view.component';
-import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import {UploadStatusComponent} from './upload-status/upload-status.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
@@ -26,12 +26,10 @@ const AdminRoutes: Routes = [
     { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'newordersview', component: NewOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
-    { path: 'updatedorders', component: UpdatedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'uploadstatus', component: UploadStatusComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'processedorders', component: ProcessedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},
     { path: 'processedorders/:id', component: ProcessedOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},
     { path: 'profile', component: ViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
-    { path: 'customerdetails', component: CustomerDetailsComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'createuser', component: CreateCustomerComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'printdata', component: DownloadsComponent, canActivate:[AuthGuard], data:{userType:'ADMIN'}}]
 

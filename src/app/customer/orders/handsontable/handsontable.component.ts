@@ -7,7 +7,7 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
-const URL = `http://3.231.152.109:8090/uploadOrderStatus`;
+const URL = `http://52.206.130.36:8090/uploadOrderStatus`;
 
 @Component({
   selector: 'app-handsontable',
@@ -243,7 +243,7 @@ export class HandsontableComponent implements OnInit {
     })
     setTimeout(() => {
       this.router.navigate(['customer/neworders', this.oid]);
-  }, 5000); 
+  }, 3000); 
   }
 
   submitData() {

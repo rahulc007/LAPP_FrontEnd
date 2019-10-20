@@ -15,7 +15,7 @@ export class ViewComponent implements OnInit {
   mobnumPattern = '^[- +()]*[0-9][- +()0-9]*$'; 
   countryData: any[] = [];
   selectedCountry: string;
-  profileData: any[] = [];
+  profileData: any = [];
   param: '';
   stateData: any[] = [];
   citiesData: any[] = [];

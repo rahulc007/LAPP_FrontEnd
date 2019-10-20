@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation, OnDestroy  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URL = `http://3.231.152.109:8090/uploadSAPData`;
+const URL = `http://52.206.130.36:8090/uploadSAPData`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
@@ -46,6 +46,7 @@ export class UploadSapDataComponent implements OnInit, OnDestroy  {
     private modalService: NgbModal, private loaderService: LoaderService) {
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
+    this.configuration.paginationEnabled = true;
     config.triggers = 'click';
   }
 
@@ -137,7 +138,7 @@ ngOnDestroy() {
 
   downloadfile() {
     const emailId = localStorage.getItem('username');
-    window.location.href = 'http://3.231.152.109:8090/downloadSAPData?emailId=' + emailId;
+    window.location.href = 'http://52.206.130.36:8090/downloadSAPData?emailId=' + emailId;
   }
 
   public onFileSelected() {

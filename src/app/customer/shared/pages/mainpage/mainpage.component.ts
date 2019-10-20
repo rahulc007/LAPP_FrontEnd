@@ -9,7 +9,7 @@ import {NavToggleService} from '../../../../common/nav-toggle-service/navtoggle.
 })
 export class MainpageComponent implements OnInit {
 
-  constructor(private navService: NavToggleService ) { }
+  constructor(public navService: NavToggleService ) { }
 
   ngOnInit() {
   }

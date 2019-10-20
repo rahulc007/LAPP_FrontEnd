@@ -6,7 +6,7 @@
         <div class="pull-right">
             <div class="form-inline" id="search_bar">
                 <div class="form-group mr-1">
-                    <input type="text" [(ngModel)]="customerId" class="form-control" [style.width.px]="220" [style.height.px] ="35" (keyup)="search($event)" placeholder="Search by Sales Order Number">
+                    <input type="text" [(ngModel)]="customerId" class="form-control" [style.width.px]="220" [style.height.px] ="36" (keyup)="search($event)" placeholder="Search by Sales Order Number">
                 </div>
                 <button class="btn btn-sm btn-outline-warning" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId"><i class="fa fa-search" aria-hidden="true"></i></button>
             </div>

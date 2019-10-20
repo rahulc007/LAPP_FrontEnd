@@ -20,7 +20,7 @@ export class CustomerProfileComponent implements OnInit {
   countryData: any[] = [];
   citiesData: any[] = [];
   param: any;
-  profileData: any[] = [];
+  profileData: any = [];
   msg: any;
   errorMsg: any;
   citydisabled = 0;

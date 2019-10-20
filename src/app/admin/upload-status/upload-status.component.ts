@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URL = `http://3.231.152.109:8090/uploadOrderStatus`;
+const URL = `http://52.206.130.36:8090/uploadOrderStatus`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
@@ -36,6 +36,8 @@ export class UploadStatusComponent implements OnInit {
 
   constructor(private objService: LappRestService) {
     this.configuration = DefaultConfig;
+    this.configuration.searchEnabled = true;
+    this.configuration.paginationEnabled = true;
   }
 
   ngOnInit() {

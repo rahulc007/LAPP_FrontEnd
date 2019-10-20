@@ -89,6 +89,6 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
     this.router.navigate(['admin/newordersview']);
   }
   downloadData(rowdata) {
-    window.location.href = 'http://3.231.152.109:8090/downloadMarkingText?lineItemid='+ rowdata.lineItemId +'&salesOrderno=' + rowdata.salesOrderno + '&productionOrderno='+ rowdata.productionOrderno;
+    window.location.href = 'http://52.206.130.36:8090/downloadMarkingText?lineItemid='+ rowdata.lineItemId +'&salesOrderno=' + rowdata.salesOrderno + '&productionOrderno='+ rowdata.productionOrderno + '&articleno='+rowdata.articleNo;
   }
 }

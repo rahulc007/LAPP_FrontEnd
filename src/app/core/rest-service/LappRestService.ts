@@ -9,7 +9,7 @@ import { map } from 'rxjs/internal/operators/map';
   providedIn: 'root'
 })
 export class LappRestService {
-  _BaseUrl:string = 'http://3.231.152.109:8090/';
+  _BaseUrl:string = 'http://52.206.130.36:8090/';
 
   constructor(private http: HttpClient) {
   }

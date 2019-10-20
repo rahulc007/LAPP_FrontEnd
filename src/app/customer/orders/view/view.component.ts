@@ -58,7 +58,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
-  private loadPage(page) {
+loadPage(page) {
      let emailId = localStorage.getItem('username');
      let startLimit = (page-1)*10
     this.params = {
