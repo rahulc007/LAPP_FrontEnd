@@ -1,15 +1,45 @@
-<h2 class="page_heading prcsd_order">{{'processedorders'| translate}}</h2>
 <div class="row">
+    <div class="col-md-3">
+        <h2 class="page_heading prcsd_order">{{'processedorders'| translate}}</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-inline">
+            <div class="form-group ml-2">
+                <input type="text" placeholder="Please Click to Select Dates" [style.width.px]="220" [style.height.px]="31" class="form-control"
+                    [(ngModel)]="dates" bsDaterangepicker [bsConfig]="{ showWeekNumbers:false, containerClass: 'theme-orange'}">
+            </div>
+            <button class="ml-2 btn btn-orange" type="button" (click)="getOrdersByRange(dates)" [disabled]="!dates">Get Processed Orders</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <button *ngIf="showBackBtn === true" type="button" class="btn btn-orange" (click)="goBack()">Back</button>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
     <div class="col">
         <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
-        <app-pagination (clicked)="loadPage($event)"></app-pagination>
+        <div class="row">
+            <div class="col-md-3 ml-2">
+                <h3 *ngIf="flag===1">
+                    Total Processed Orders:
+                    <span class="badge badge-warning">{{processedOrderCount}}</span>
+                </h3>
+            </div>
+            <div class="col-md-6">
+                <app-pagination *ngIf="flag===1" (clicked)="loadPage($event)" [data]="dataLength"></app-pagination>
+            </div>
+        </div>
     </div>
 </div>
 
 
 <ng-template #ver let-row let-rowIndex="rowIndex">
-        <!-- <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row, rowIndex)" ><i class="fa fa-eye" aria-hidden="true"></i></button> -->
-        <a class="ml-2" (click)="porcessedOrder(row, rowIndex)">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-        </a>
-    </ng-template>
+    <!-- <button class="btn btn-md btn-primary ml-4" id="verbasedata" (click)="orderview(row, rowIndex)" ><i class="fa fa-eye" aria-hidden="true"></i></button> -->
+    <a class="ml-2" (click)="porcessedOrder(row, rowIndex)">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+    </a>
+</ng-template>

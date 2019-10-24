@@ -29,7 +29,8 @@ import { UploadStatusComponent } from './upload-status/upload-status.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 import { ProcessedOrdersViewComponent } from './processed-orders-view/processed-orders-view.component';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [DashbordComponent, ViewComponent,  UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent,  DownloadsComponent, CreateCustomerComponent, NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent,DownloadsComponent],
   imports: [
@@ -44,7 +45,9 @@ import { ProcessedOrdersViewComponent } from './processed-orders-view/processed-
     TableModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
     
   ],
   exports:[NgxEasyTableComponent, PaginationComponent],

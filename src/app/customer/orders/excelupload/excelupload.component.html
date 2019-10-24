@@ -6,7 +6,7 @@
                 tooltipClass="my-custom" container="body">
                 <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 16px;"></i>
             </button>
-            <a href="/lapp/assets/data/samplemarkingtext.xlsx" target="_self" class="btn btn-orange" download>{{'downloadsamplefile'| translate}}</a>&nbsp;
+            <button class="btn btn-orange" (click)="downloadSample()">{{'downloadsamplefile'| translate}}</button>&nbsp;
 
             <button type="button" class="btn btn-orange" (click)="goPrevious()">{{'back'| translate}}</button>
         </div>
@@ -106,8 +106,8 @@
         <h4>Once submit data can't be edited again!</h4>
     </div>
     <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-danger" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
-        <button type="button" class="btn btn-danger" (click)="submitData()">{{'Submit' |translate}}</button>
+        <button type="button" class="btn btn-orange" ngbAutoFocus (click)="d('Cross click')">{{'Cancel' |translate }}</button>
+        <button type="button" class="btn btn-orange" (click)="submitData()">{{'Submit' |translate}}</button>
     </div>
 </ng-template>
 

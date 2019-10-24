@@ -28,6 +28,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   productionNo: any;
   customerId: any;
   page = 1;
+  dataLength : boolean = false;
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) {
@@ -64,7 +65,7 @@ loadPage(page) {
     this.params = {
       "emailId": emailId,
       "startLimit":startLimit,
-      "endLimit": 9
+      "endLimit": 10
     }
     this.objService.Get('getOrderDetailsByUser', this.params).subscribe(response => {
       this.tempArray= [];
@@ -84,6 +85,11 @@ loadPage(page) {
         }
       }
       this.data = this.tempArray;
+      if(this.data.length === 0) {
+        this.dataLength = true;
+      } else {
+        this.dataLength = false
+      }
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

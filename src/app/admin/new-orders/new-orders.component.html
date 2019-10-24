@@ -1,14 +1,17 @@
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
         <h2 class="page_heading new_order">{{'myorders'| translate}}</h2>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-9">
         <div class="pull-right">
             <div class="form-inline" id="search_bar">
                 <div class="form-group mr-1">
-                    <input type="text" [(ngModel)]="customerId" [style.width.px]="220" [style.height.px] ="36" class="form-control" (keyup)="search($event)" placeholder="Search by Sales Order Number">
+                    <input type="text" [(ngModel)]="customerId" [style.width.px]="220" [style.height.px]="36" class="form-control" (keyup)="search($event)"
+                        placeholder="Search by Sales Order Number">
                 </div>
-                <button class="btn btn-sm btn-outline-warning" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId"><i class="fa fa-search" aria-hidden="true"></i></button>
+                <button class="btn btn-sm btn-outline-warning" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
         <!-- <div class="pull-right mr-5">
@@ -21,10 +24,35 @@
         </div> -->
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="isAdmin">
+    <div class="col-md-6">
+        <div class="form-inline">
+            <div class="form-group ml-2">
+                <input type="text" placeholder="Please Click to Select Dates" [style.width.px]="220" [style.height.px]="31" class="form-control" [(ngModel)]="dates" bsDaterangepicker
+                    [bsConfig]="{ showWeekNumbers:false, containerClass: 'theme-orange'}">
+            </div>
+            <button class="ml-2 btn btn-orange" type="button" (click)="getOrdersByRange(dates)" [disabled]="!dates">Get Orders</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <button *ngIf="showBackBtn === true" type="button" class="btn btn-orange" (click)="goBack()">Back</button>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
     <div class="col">
         <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
-        <app-pagination (clicked)="loadPage($event)"></app-pagination>
+        <div class="row">
+            <div class="col-md-3 ml-2">
+                <h3 *ngIf="flag===1">
+                    Total Orders: <span class="badge badge-warning">{{myOrderCount}}</span>
+                </h3>
+            </div>
+            <div class="col-md-6 pull-left">
+                <app-pagination *ngIf="flag===1" (clicked)="loadPage($event)" [data]="dataLength"></app-pagination>
+            </div>
+        </div>
     </div>
 </div>
 

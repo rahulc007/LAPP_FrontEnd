@@ -4,29 +4,14 @@
         <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>
     </div>
 </div>
-
+<div *ngIf="error" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
+    <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+    <span id="alertErrMsg">{{error}}</span>
+</div>
 <div class="row mt-1">
     <div class="table table-bordered table-striped">
         <ngx-table [configuration]="configuration" [data]="data" [columns]="columns">
         </ngx-table>
-<!-- 
-        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-                <a (click)="loadPage(page=1)" class="page-link">First</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-                <a (click)="loadPage(page= pager.currentPage - 1)" class="page-link">Previous</a>
-            </li>
-            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
-                <a (click)="loadPage(page= page)" class="page-link">{{page}}</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-                <a (click)="loadPage(page= pager.currentPage + 1)" class="page-link">Next</a>
-            </li>
-            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-                <a (click)="loadPage(page= pager.totalPages)" class="page-link">Last</a>
-            </li>
-        </ul> -->
     </div>
 </div>
 

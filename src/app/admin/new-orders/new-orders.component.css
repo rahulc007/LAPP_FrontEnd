@@ -11,3 +11,6 @@
 .form-inline {
     display: inline-flex !important;
 }
+.badge-warning {
+    border-radius: 50%;
+}

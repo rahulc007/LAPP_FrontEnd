@@ -28,42 +28,63 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   emailId: any;
   customerId: any;
   productionNo: any;
-
+  myOrderCount: any;
+  startDate: any;
+  toDate: any;
+  dates: any;
+  showBackBtn = false;
+  countryCode: any;
+  isAdmin: boolean;
+  dataLength: boolean = false;
+  flag = 1;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
     this.configuration.paginationEnabled = false;
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    if (objUserDetails.userType == userTypes.admin) {
+      this.isAdmin = true;
+    }
   }
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-     this.loadPage(1);     
+    this.getMyordersCount();
+    this.loadPage(1);
   }
 
   loadPage(page) {
-    let startLimit = (page-1)*10
+    this.flag = 1;
+    let startLimit = (page - 1) * 10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    this.countryCode = objUserDetails.countryCode;
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.params = {
         "emailId": this.emailId,
         "startLimit": startLimit,
-        "endLimit": 9
+        "endLimit": 10
       }
       this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
-        this.arr=[]
+        this.arr = []
         for (let i = 0; i < response.orderInfoList.length; i++) {
           if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
             this.arr.push(response.orderInfoList[i]);
           }
         }
         this.data = this.arr;
+       if(this.data.length === 0) {
+          this.dataLength = true;
+        } else {
+          this.dataLength = false;
+        }
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
           date.orderDate = this.datePipe.transform(date.orderDate, "medium");
-        })
+        });
+       
       })
     }
   }
@@ -79,7 +100,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       { key: 'modifiedDate', title: 'Modified Date' },
       { key: 'createdBy', title: 'Created By' },
       { key: 'Actions', title: 'View', searchEnabled: false, cellTemplate: this.Ver },
-      { key:'download', title:'Download by Sales Order No', searchEnabled: false, cellTemplate : this.download}
+      { key: 'download', title: 'Download by Sales Order No', searchEnabled: false, cellTemplate: this.download }
     ]
   }
   ngAfterViewChecked() {
@@ -123,7 +144,42 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   downloadSales(row) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
-    window.location.href = 'http://52.206.130.36:8090/orderDownloadText?salesOrderno='+ row.salesOrderno;
+      window.location.href = 'http://52.206.130.36:8090/orderDownloadText?salesOrderno=' + row.salesOrderno;
     }
+  }
+  getMyordersCount() {
+    this.params = {
+      'emailId': this.emailId
+    }
+    this.objService.Get('gerOrderDataCount', this.params).subscribe(response => {
+      this.myOrderCount = response.myOrderCount;
+    })
+  }
+  getOrdersByRange(dates) {
+    this.flag = 0;
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    if (objUserDetails.userType === userTypes.admin) {
+    this.showBackBtn = true;
+    this.startDate = this.datePipe.transform(dates[0], "yyyy-MM-dd");
+    this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
+    this.params = {
+      'countryCode': objUserDetails.countryCode,
+      'emailId': this.emailId,
+      'startDate': this.startDate,
+      'endDate': this.toDate,
+      'tabType': 1
+    }
+    this.objService.Get('getOrderDetailsByDate', this.params).subscribe(response => {
+      console.log('respone', response);
+      this.data = response.orderInfoList;
+    });
+  }
+  this.configuration.paginationEnabled = true;
+  }
+  goBack() {
+    this.loadPage(1);
+    this.dates = '';
+    this.showBackBtn = false;
+    this.configuration.paginationEnabled = false;
   }
 }

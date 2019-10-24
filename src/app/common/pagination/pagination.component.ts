@@ -11,18 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PaginationComponent implements OnInit {
 
- // @Input() pager:number;
- page = 1;
+  @Input() data:boolean;
+  page = 1;
   @Output() clicked = new EventEmitter<number>();
   constructor() { }
 
-  ngOnInit()
-  {
-
+  ngOnInit() {
+    
   }
 
-  loadPage(pno:number){  
-    this.clicked.emit(pno);  
+  loadPage(pno:number) {  
+    this.clicked.emit(pno); 
+    
     } 
   
 }

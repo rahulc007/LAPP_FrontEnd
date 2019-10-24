@@ -44,7 +44,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   emailId: any;
   oid: any;
   submitFlag: any;
-  
+  error: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -128,11 +128,17 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       localStorage.setItem('submitflag', this.submitFlag);
     }
 
-    if (this.legsnum > 0) {
+    if (this.legsnum > 0 && this.mflag !== 1) {
       this.router.navigate(['customer/neworders/' + this.oid + '/editlegs']);
     }
     else if (this.mflag != 1) {
       this.modalService.open(this.legscontent)
+    }
+    else if(this.mflag === 1) {
+      this.error = "Time Period Expired, Cannot Edit the Legs";
+      setTimeout(() => {
+        this.error = '';
+      }, 2000);
     }
   }
 
@@ -177,7 +183,15 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   uploadMarkupTextExl(row) {
     this.lineitemId = row.lineItemId;
     localStorage.setItem('lineitemid', this.lineitemId);
-    this.router.navigate(['customer/uploadexcel']);
+    if (this.mflag != 1) {
+      this.router.navigate(['customer/uploadexcel']);
+    }
+    else {
+        this.error = "Time Period Expired, Cannot Upload Excel file";
+        setTimeout(() => {
+          this.error = '';
+        }, 2000);
+    }
   }
 
 

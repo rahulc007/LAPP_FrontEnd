@@ -26,6 +26,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   array: any[]=[];
   emailId: any;
   page = 1;
+  dataLength : boolean = false
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -44,11 +45,16 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     this.params = {
       "emailId": this.emailId,
       "startLimit": startLimit,
-      "endLimit": 9
+      "endLimit": 10
     }
       this.objService.Get('getProcessedOrderByUser',this.params).subscribe(response => {
           this.data = [];
         this.data = response.orderInfoList;
+        if(this.data.length === 0) {
+          this.dataLength = true;
+        } else {
+          this.dataLength = false
+        }
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

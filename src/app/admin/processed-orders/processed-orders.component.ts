@@ -24,6 +24,14 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   params: any;
   arr: any[] = [];
   emailId: any;
+  processedOrderCount: any;
+  showBackBtn = false;
+  startDate: any;
+  toDate: any;
+  dates: any;
+  countryCode: any;
+  flag = 1;
+  dataLength: boolean = false;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -34,19 +42,27 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
+    this.getProcessedOrdersCount();
     this.loadPage(1);
   }
   loadPage(page) {
+    this.flag = 1;
     let startLimit = (page-1)*10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    this.countryCode = objUserDetails.countryCode;
     this.params = {
       "emailId": this.emailId,
       "startLimit": startLimit,
-      "endLimit": 9
+      "endLimit": 10
     }
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.objService.Get('getProcessedOrderByAdmin',this.params).subscribe(response => {
         this.data = response.orderInfoList;
+        if(this.data.length === 0) {
+          this.dataLength = true;
+        } else {
+          this.dataLength = false;
+        }
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
@@ -80,5 +96,37 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     localStorage.setItem('processedorderId', row.oid);
     localStorage.setItem('processorderIndex', rowIndex);
     this.router.navigate(['admin/processedorders', row.oid]);
+  }
+  getProcessedOrdersCount() {
+    this.params = {
+      'emailId' : this.emailId
+    }
+    this.objService.Get('gerOrderDataCount', this.params).subscribe (response => {
+      this.processedOrderCount = response.processedOrderCount;
+    })
+  }
+  getOrdersByRange(dates) {
+    this.flag = 0;
+    this.showBackBtn = true;
+    this.startDate = this.datePipe.transform(dates[0], "yyyy-MM-dd");
+    this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
+    this.params = {
+      'countryCode':this.countryCode,
+      'emailId': this.emailId,
+      'startDate': this.startDate,
+      'endDate': this.toDate,
+      'tabType': 2
+    }
+    this.objService.Get('getOrderDetailsByDate', this.params).subscribe(response => {
+      console.log('respone', response);
+      this.data = response.orderInfoList;
+    });
+    this.configuration.paginationEnabled = true;
+  }
+  goBack() {
+    this.loadPage(1);
+    this.dates = '';
+    this.showBackBtn = false;
+    this.configuration.paginationEnabled = false;
   }
 }
