@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation, OnDestroy  } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URL = `http://52.206.130.36:8090/uploadSAPData`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
@@ -13,6 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/timer';
 import { LoaderService } from '../../common/loader/loader.service';
+const URL = AppConfig.endpoints.baseUrl + `/uploadSAPData`;
 @Component({
   selector: 'app-upload-sap-data',
   templateUrl: './upload-sap-data.component.html',
@@ -138,7 +138,7 @@ ngOnDestroy() {
 
   downloadfile() {
     const emailId = localStorage.getItem('username');
-    window.location.href = 'http://52.206.130.36:8090/downloadSAPData?emailId=' + emailId;
+    window.location.href = this.objService._BaseUrl + 'downloadSAPData?emailId=' + emailId;
   }
 
   public onFileSelected() {

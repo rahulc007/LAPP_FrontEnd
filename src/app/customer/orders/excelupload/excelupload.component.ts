@@ -189,7 +189,7 @@ export class ExceluploadComponent implements OnInit {
     this.modalService.open(this.submitConfirm)
   }
   downloadSample() {
-    window.location.href = 'http://52.206.130.36:8090/getSampleTemplate'
+    window.location.href = this.objService._BaseUrl + 'getSampleTemplate'
   }
 }
 

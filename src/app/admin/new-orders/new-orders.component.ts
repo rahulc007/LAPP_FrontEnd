@@ -144,7 +144,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   downloadSales(row) {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
-      window.location.href = 'http://52.206.130.36:8090/orderDownloadText?salesOrderno=' + row.salesOrderno;
+      window.location.href = this.objService._BaseUrl + 'orderDownloadText?salesOrderno=' + row.salesOrderno;
     }
   }
   getMyordersCount() {

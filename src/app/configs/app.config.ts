@@ -14,7 +14,7 @@ export const AppConfig: any = {
   endpoints: {  
        baseUrl: `http://52.206.130.36:8090`,
       loginApi: `http://52.206.130.36:8090/validateUser`,
-      uploadApi: `http://52.206.130.36:8090/uploadSAPData`
+      // uploadApi: `http://52.206.130.36:8090/uploadSAPData`
   },
   ok:200,
   error: 'error'

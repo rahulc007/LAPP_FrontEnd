@@ -6,8 +6,8 @@ import { LappRestService } from '../../../core/rest-service/LappRestService';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-
-const URL = `http://52.206.130.36:8090/uploadOrderStatus`;
+import { AppConfig } from '../../../configs/app.config';
+const URL = AppConfig.endpoints.baseUrl + `/uploadOrderStatus`;
 
 @Component({
   selector: 'app-handsontable',

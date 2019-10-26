@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-const URL = `http://52.206.130.36:8090/uploadOrderStatus`;
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
 import { AppConfig } from '../../configs/app.config';
@@ -8,6 +7,7 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+const URL = AppConfig.endpoints.baseUrl + `/uploadOrderStatus`;
 @Component({
   selector: 'app-upload-status',
   templateUrl: './upload-status.component.html',
