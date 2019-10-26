@@ -53,7 +53,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
       { key: 'modifiedDate', title: 'Modified Date' },
       { key: 'createdBy', title: 'Created By' },
       { key: 'customerNo', title: 'Customer Number' },
-      { key: 'Actions', title: 'Actions', searchEnabled: false, cellTemplate: this.Ver }
+      { key: 'Actions', title: '', searchEnabled: false, cellTemplate: this.Ver }
     ];
   }
   ngAfterViewChecked() {

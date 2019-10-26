@@ -14,6 +14,7 @@ import {UploadStatusComponent} from './upload-status/upload-status.component';
 import { ProcessedOrdersComponent } from './processed-orders/processed-orders.component';
 import {ProcessedOrdersViewComponent} from './processed-orders-view/processed-orders-view.component';
 import { DownloadsComponent } from './downloads/downloads.component';
+import { MarkingtextViewComponent } from './markingtext-view/markingtext-view.component';
 
 const basePath = 'admin';
 
@@ -26,6 +27,7 @@ const AdminRoutes: Routes = [
     { path: 'upload', component: UploadSapDataComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'newordersview', component: NewOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'newordersview/:id', component: NewOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
+    { path: 'newordersview/:id/markingtexts', component: MarkingtextViewComponent, canActivate: [AuthGuard], data: {userType:'ADMIN'}},
     { path: 'uploadstatus', component: UploadStatusComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'} },
     { path: 'processedorders', component: ProcessedOrdersComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},
     { path: 'processedorders/:id', component: ProcessedOrdersViewComponent, canActivate: [AuthGuard], data:{userType:'ADMIN'}},

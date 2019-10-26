@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col">
+        <h2 class="page_heading new_order float-left">Marking Texts View</h2>
+        <button type="button" class="btn btn-orange float-right" (click)="goPrevious()">{{'back'| translate}}</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns">
+        </app-ngx-easy-table>
+    </div>
+</div>
+

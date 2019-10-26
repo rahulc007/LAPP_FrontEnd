@@ -16,6 +16,7 @@ import * as XLSX from 'xlsx';
 export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   
   @ViewChild('download', { static: false }) download: TemplateRef<any>;
+  @ViewChild('view', { static: false }) view: TemplateRef<any>;
   configuration: any;
   public columns: any[] = [];
   pager = {};
@@ -26,7 +27,8 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   array: any[] = [];
   emailId: any;
   salesOrderNo: any;
- 
+  lineitemId: any;
+  oid: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private cdr: ChangeDetectorRef, private datePipe: DatePipe) {
     this.configuration = ConfigurationService.config;
@@ -34,7 +36,8 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
-    this.salesOrderNo = localStorage.getItem('salesOrderNo')
+    this.salesOrderNo = localStorage.getItem('salesOrderNo');
+    this.oid = localStorage.getItem('oid');
     this.getUploadedOrderDetails();
   }
   getUploadedOrderDetails() {
@@ -70,7 +73,8 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
       // { key: 'updatedBy' , title:'Updated By'},
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
-      {key:'', title:'Download', searchEnabled: false, cellTemplate: this.download}
+      {key:'', title:'', searchEnabled: false, cellTemplate: this.download},
+      { key:'', title:'', searchEnabled: false, cellTemplate: this.view }
 
     ]
   }
@@ -90,5 +94,10 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   }
   downloadData(rowdata) {
     window.location.href = 'http://52.206.130.36:8090/downloadMarkingText?lineItemid='+ rowdata.lineItemId +'&salesOrderno=' + rowdata.salesOrderno + '&productionOrderno='+ rowdata.productionOrderno + '&articleno='+rowdata.articleNo;
+  }
+  viewMarkingTexts(row) {
+    this.lineitemId = row.lineItemId;
+    localStorage.setItem('lineitemid', this.lineitemId);
+    this.router.navigate(['admin/newordersview/' + this.oid + '/markingtexts']);
   }
 }

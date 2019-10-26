@@ -31,8 +31,9 @@ import { ProcessedOrdersComponent } from './processed-orders/processed-orders.co
 import { ProcessedOrdersViewComponent } from './processed-orders-view/processed-orders-view.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkingtextViewComponent } from './markingtext-view/markingtext-view.component';
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent,  UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent,  DownloadsComponent, CreateCustomerComponent, NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent,DownloadsComponent],
+  declarations: [DashbordComponent, ViewComponent,  UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent,  DownloadsComponent, CreateCustomerComponent, NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent,DownloadsComponent, MarkingtextViewComponent],
   imports: [
     CommonModule,
     HotTableModule,

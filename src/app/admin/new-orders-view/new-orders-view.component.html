@@ -11,9 +11,18 @@
 <!-- Download Excel Data -->
 
 <ng-template #download let-row let-rowIndex="rowIndex">
-        <button class="btn btn-md btn-outline-warning" (click)="downloadData(row)" [disabled]="row.submit === false">
+        <button class="btn btn-md btn-outline-warning btn_icon" (click)="downloadData(row)" [disabled]="row.submit === false" title="Download">
             <i class="fa fa-download"></i>
         </button>
         <!-- <a *ngIf="row.submit === true" (click)="downloadData(row)"><i class="fa fa-download"></i></a>
         <a *ngIf="row.submit === false" class="disabled"><i class="fa fa-download"></i></a> -->
+</ng-template>
+
+<!-- View Marking Texts -->
+<ng-template #view let-row let-rowIndex="rowIndex">
+    <button class="btn btn-md btn-outline-warning btn_icon" (click)="viewMarkingTexts(row)" title="View" [disabled]="row.legsCount === 0">
+        <i class="fa fa-eye"></i>
+    </button>
+    <!-- <a *ngIf="row.submit === true" (click)="downloadData(row)"><i class="fa fa-download"></i></a>
+    <a *ngIf="row.submit === false" class="disabled"><i class="fa fa-download"></i></a> -->
 </ng-template>

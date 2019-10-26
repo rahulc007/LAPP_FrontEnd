@@ -1,12 +1,12 @@
 .fa{
-    font-size: 20px;
-    padding: 2px;
+    font-size: 18px;
+    /* padding: 2px; */
   }
-  .btn{
+  /* .btn{
     padding-right: 20px;
     padding-left: 20px;  
     position: center;
-  }
+  } */
   /* a.disabled {
     opacity: 0.5;
     cursor: not-allowed;

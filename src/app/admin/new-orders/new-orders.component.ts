@@ -170,7 +170,6 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       'tabType': 1
     }
     this.objService.Get('getOrderDetailsByDate', this.params).subscribe(response => {
-      console.log('respone', response);
       this.data = response.orderInfoList;
     });
   }

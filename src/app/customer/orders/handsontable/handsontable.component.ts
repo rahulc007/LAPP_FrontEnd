@@ -59,6 +59,7 @@ export class HandsontableComponent implements OnInit {
   emailId: any;
   isDisable = false;
   oid: any;
+  headingFlag = 0
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal,
     private translate: TranslateService) {
 
@@ -78,6 +79,11 @@ export class HandsontableComponent implements OnInit {
     else {
       this.flag = 1
       this.isDisable = false;
+    }
+    if(parseInt(localStorage.getItem('viewFlag')) === 1) {
+      this.flag = 0;
+      this.headingFlag = 1
+      this.isDisable = true;
     }
     this.getMarkingTextDetails();
 

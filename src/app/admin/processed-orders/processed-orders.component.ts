@@ -118,7 +118,6 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       'tabType': 2
     }
     this.objService.Get('getOrderDetailsByDate', this.params).subscribe(response => {
-      console.log('respone', response);
       this.data = response.orderInfoList;
     });
     this.configuration.paginationEnabled = true;

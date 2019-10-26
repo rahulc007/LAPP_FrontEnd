@@ -45,9 +45,9 @@
         <app-ngx-easy-table [configuration]="configuration" [data]="data" [columns]="columns"></app-ngx-easy-table>
         <div class="row">
             <div class="col-md-3 ml-2">
-                <h3 *ngIf="flag===1">
-                    Total Orders: <span class="badge badge-warning">{{myOrderCount}}</span>
-                </h3>
+                <h5 *ngIf="flag===1">
+                    Total Orders: {{myOrderCount}}
+                </h5>
             </div>
             <div class="col-md-6 pull-left">
                 <app-pagination *ngIf="flag===1" (clicked)="loadPage($event)" [data]="dataLength"></app-pagination>

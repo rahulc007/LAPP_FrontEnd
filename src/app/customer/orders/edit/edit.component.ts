@@ -22,6 +22,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('ver', { static: false }) Ver: TemplateRef<any>;
   @ViewChild('uploadExcel', { static: false }) uplodExl: TemplateRef<any>;
   @ViewChild('legscontent', { static: false }) legscontent: TemplateRef<any>;
+  @ViewChild('view', { static: false}) view: TemplateRef<any>;
   public configuration: Config;
   legseditflag = 0;
   legsForm: FormGroup;
@@ -45,6 +46,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   oid: any;
   submitFlag: any;
   error: any;
+  viewFlag: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -75,8 +77,9 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       // { key: 'updatedBy', title: 'Updated By' },
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
-      { key: 'Actions', title: 'Edit', searchEnabled: false, cellTemplate: this.Ver },
-      { key: 'Upload', title: 'Upload', searchEnabled: false, cellTemplate: this.uplodExl }
+      { key:'view', title:'', searchEnabled: false, cellTemplate: this.view},
+      { key: 'Actions', title: '', searchEnabled: false, cellTemplate: this.Ver },
+      { key: 'Upload', title: '', searchEnabled: false, cellTemplate: this.uplodExl }
 
     ];
   }
@@ -129,6 +132,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     }
 
     if (this.legsnum > 0 && this.mflag !== 1) {
+      this.viewFlag = 0;
+      localStorage.setItem('viewFlag', this.viewFlag)
       this.router.navigate(['customer/neworders/' + this.oid + '/editlegs']);
     }
     else if (this.mflag != 1) {
@@ -193,6 +198,12 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
         }, 2000);
     }
   }
-
+  viewOrders(row) {
+    this.lineitemId = row.lineItemId;
+    localStorage.setItem('lineitemid', this.lineitemId);
+    this.viewFlag = 1;
+    localStorage.setItem('viewFlag', this.viewFlag)
+    this.router.navigate(['customer/neworders/' + this.oid + '/editlegs']);
+  }
 
 }

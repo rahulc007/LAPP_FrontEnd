@@ -204,7 +204,7 @@
                 class="btn btn-orange">{{'submit'| translate}}</button>
         </div>
         <div class="col" *ngIf="editflag===1">
-            <button (click)="updateUser()" class="btn btn-orange float-left">{{'update'| translate}}</button>
+            <button (click)="updateUser()" [disabled]="customerForm.pristine || customerForm.invalid" class="btn btn-orange float-left">{{'update'| translate}}</button>
         </div>
         <div class="col" *ngIf="editflag===1">
             <button (click)="create()" class="btn btn-orange float-right">{{'Createnewuser'| translate}}</button>
