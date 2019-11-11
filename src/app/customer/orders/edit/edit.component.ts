@@ -47,6 +47,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   submitFlag: any;
   error: any;
   viewFlag: any;
+  countryCode: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -57,6 +58,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
     });
     this.emailId = localStorage.getItem('username');
+    this.countryCode = localStorage.getItem('countrycode')
     this.salesOrderNo = localStorage.getItem('salesOrderNo');
     this.oid = localStorage.getItem('oid');
     this.loadPage();
@@ -91,7 +93,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
     this.params = {
       "salesOrderno": this.salesOrderNo,
       "userEmailId": this.emailId,
-      "createdBy": ""
+      "createdBy": "",
+      "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.data = response.orderInfoList[0].orderLineItem;
@@ -137,6 +140,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       this.router.navigate(['customer/neworders/' + this.oid + '/editlegs']);
     }
     else if (this.mflag != 1) {
+      this.viewFlag = 0;
+      localStorage.setItem('viewFlag', this.viewFlag)
       this.modalService.open(this.legscontent)
     }
     else if(this.mflag === 1) {

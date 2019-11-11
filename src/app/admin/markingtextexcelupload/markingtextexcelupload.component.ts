@@ -1,19 +1,20 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewEncapsulation  } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
 import { Router } from '@angular/router';
 import { NgbModalConfig, NgbModal, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
-import { LappRestService } from '../../../core/rest-service/LappRestService';
+import { LappRestService } from '../../core/rest-service/LappRestService';
 import * as XLSX from 'ts-xlsx';
 
 @Component({
-  selector: 'app-excelupload',
-  templateUrl: './excelupload.component.html',
-  styleUrls: ['./excelupload.component.css'],
+  selector: 'app-markingtextexcelupload',
+  templateUrl: './markingtextexcelupload.component.html',
+  styleUrls: ['./markingtextexcelupload.component.css'],
   providers: [NgbModal, NgbModalConfig, NgbTooltipConfig],
   encapsulation: ViewEncapsulation.None,
 })
-export class ExceluploadComponent implements OnInit {
+export class MarkingtextexceluploadComponent implements OnInit {
   @ViewChild('submitConfirm', { static: false }) submitConfirm: TemplateRef<any>;
+
   filename: any;
   rownum = 1;
   errorMsg: any;
@@ -23,7 +24,6 @@ export class ExceluploadComponent implements OnInit {
   id = 'hotInstance';
   flag: boolean = true;
   private hotRegisterer = new HotTableRegisterer();
-
   markingTestTempArray = [];
   lineitemId: any;
   params: any;
@@ -31,21 +31,17 @@ export class ExceluploadComponent implements OnInit {
   sheets: any;
   constructor(private objService: LappRestService, private router: Router, private modalService: NgbModal,
     private config: NgbTooltipConfig) {
-    config.triggers = 'click';
-  }
+      config.triggers = 'click';
+    }
 
   ngOnInit() {
     this.oid = localStorage.getItem('oid');
     this.lineitemId = JSON.parse(localStorage.getItem('lineitemid'));
-
     let dataObj = [{ L: "", R: "", O: "", rmPartnoLeft: "", rmPartnoRight: "", rmPartnomiddle: "" }]
-
     this.getExceldata(null)
   }
-
   getExceldata(dataObj) {
-    //  dataObj=[];
-    // this.dataset = dataObj;
+   
     if (dataObj) {
       dataObj.forEach(element => {
         this.dataset.push({ 'L': element['Left Marking Text (L)'], 'O': element['Others (O)'], 'R': element['Right Marking Text  (R)'],
@@ -55,7 +51,7 @@ export class ExceluploadComponent implements OnInit {
   }
 
   goPrevious() {
-    this.router.navigate(['customer/neworders', this.oid])
+    this.router.navigate(['admin/newordersview', this.oid])
   }
 
   OnLoadFile(ev) {
@@ -69,18 +65,8 @@ export class ExceluploadComponent implements OnInit {
     reader.onload = (event) => {
       const data = reader.result;
       workBook = XLSX.read(data, { type: 'binary' });
-      //   jsonData = workBook.SheetNames.reduce((initial, name) => {
-      //     const sheet = workBook.Sheets[name];
-      //     initial[name] = XLSX.utils.sheet_to_json(sheet);
-      //     return initial;
-      //   }, {});
-      //   const dataString = JSON.stringify(jsonData);
-
-      //   let dataObj=JSON.parse(dataString);
       this.sheets = <any>XLSX.utils.sheet_to_json(workBook.Sheets[workBook.SheetNames[0]]);
       this.getExceldata(this.sheets)
-      // this.rownum=dataObj.length;
-      //this.setDownload(dataString);
     }
     reader.readAsBinaryString(file);
   }
@@ -123,7 +109,7 @@ export class ExceluploadComponent implements OnInit {
           this.msg = '';
         }, 3000);
         setTimeout(() => {
-          this.router.navigate(['customer/neworders', this.oid]);
+          this.router.navigate(['admin/newordersview', this.oid]);
         }, 2000);
       }
       else if (response.statusMessage === 'error') {
@@ -180,7 +166,7 @@ export class ExceluploadComponent implements OnInit {
         this.modalService.dismissAll();
         this.flag = false;
         setTimeout(() => {
-          this.router.navigate(['customer/neworders', this.oid]);
+          this.router.navigate(['admin/newordersview', this.oid]);
         }, 5000);
       }
       else if (response.statusMessage === null || response.statusMessage === 'error') {
@@ -199,8 +185,3 @@ export class ExceluploadComponent implements OnInit {
     window.location.href = this.objService._BaseUrl + 'getSampleTemplate'
   }
 }
-
-
-
-
-

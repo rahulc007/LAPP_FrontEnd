@@ -29,6 +29,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   customerId: any;
   page = 1;
   dataLength : boolean = false;
+  countryCode : any;
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) {
@@ -38,6 +39,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
+    this.countryCode = localStorage.getItem('countrycode');
     //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.loadPage(this.page);
   }
@@ -115,7 +117,8 @@ loadPage(page) {
     this.params = {
       "salesOrderno": salesOrderNo,
       "userEmailId": this.emailId,
-      "createdBy": ""
+      "createdBy": "",
+      "countryCode":this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.data = response.orderInfoList;
@@ -126,7 +129,8 @@ loadPage(page) {
     this.params = {
       "productionOrderno": productionNo,
       "userEmailId": this.emailId,
-      "createdBy": ""
+      "createdBy": "",
+      "countryCode":this.countryCode
     }
     this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response => {
       this.data = response.orderInfoList;

@@ -7,6 +7,8 @@ import { userTypes } from '../../common/constants/constants';
 import { LappRestService } from '../../core/rest-service/LappRestService';
 import { DatePipe } from '@angular/common';
 import * as XLSX from 'xlsx';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-new-orders-view',
   templateUrl: './new-orders-view.component.html',
@@ -17,6 +19,10 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   
   @ViewChild('download', { static: false }) download: TemplateRef<any>;
   @ViewChild('view', { static: false }) view: TemplateRef<any>;
+  @ViewChild('edit', {static:false}) Edit: TemplateRef<any>;
+  @ViewChild('legsEdit', { static: false }) legsEdit: TemplateRef<any>;
+  @ViewChild('uploadExcel',{static: false}) UploadExcel: TemplateRef<any>;
+
   configuration: any;
   public columns: any[] = [];
   pager = {};
@@ -29,16 +35,29 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   salesOrderNo: any;
   lineitemId: any;
   oid: any;
+  countryCode: any;
+  legsForm: FormGroup;
+  numericNumberReg = '^-?[0-9]\\d*(\\.\\d{1,2})?$';
+  submitted: any;
+  legsnum: any;
+  lineitemno: any;
+  submitFlag: any;
+  viewFlag: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
-    private router: Router, private objService: LappRestService, private cdr: ChangeDetectorRef, private datePipe: DatePipe) {
+    private router: Router, private objService: LappRestService, private cdr: ChangeDetectorRef, private datePipe: DatePipe,
+    private modalService: NgbModal, private formBuilder: FormBuilder) {
     this.configuration = ConfigurationService.config;
   }
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
+    this.countryCode = localStorage.getItem('countrycode');
     this.salesOrderNo = localStorage.getItem('salesOrderNo');
     this.oid = localStorage.getItem('oid');
     this.getUploadedOrderDetails();
+    this.legsForm = this.formBuilder.group({
+      legsnum: ['', [Validators.required, Validators.pattern(this.numericNumberReg)]],
+    });
   }
   getUploadedOrderDetails() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
@@ -46,7 +65,8 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
       this.params = {
         "salesOrderno": this.salesOrderNo,
         "createdBy": this.emailId,
-        "userEmailId": ""
+        "userEmailId": "",
+        "countryCode": this.countryCode
       }
       this.objService.Get('getOrderBySales', this.params).subscribe(response => {
         this.data = response.orderInfoList[0].orderLineItem;
@@ -73,9 +93,11 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
       // { key: 'updatedBy' , title:'Updated By'},
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
+      { key:'', title:'', searchEnabled: false, cellTemplate: this.view },
+      { key: '', title: '', searchEnabled: false, cellTemplate: this.Edit},
+      { key: '', title: '', searchEnabled: false, cellTemplate: this.UploadExcel},
       {key:'', title:'', searchEnabled: false, cellTemplate: this.download},
-      { key:'', title:'', searchEnabled: false, cellTemplate: this.view }
-
+      
     ]
   }
   ngAfterViewChecked() {
@@ -99,5 +121,51 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
     this.lineitemId = row.lineItemId;
     localStorage.setItem('lineitemid', this.lineitemId);
     this.router.navigate(['admin/newordersview/' + this.oid + '/markingtexts']);
+  }
+  editData(row) {
+    this.lineitemId = row.lineItemId;
+    this.lineitemno = row.lineItemno;
+    this.legsnum = row.legsCount;
+    localStorage.setItem('lineitemid', this.lineitemId);
+    localStorage.setItem('lineItemNo', this.lineitemno);
+    localStorage.setItem('legsno', this.legsnum);
+    if (row.submit === true) {
+      this.submitFlag = 0
+      localStorage.setItem('submitflag', this.submitFlag);
+    }
+    else {
+      this.submitFlag = 1
+      localStorage.setItem('submitflag', this.submitFlag);
+    }
+    if(row.legsCount === 0) {
+      this.modalService.open(this.legsEdit);
+    }
+    else if(row.legsCount >0) {
+       this.viewFlag = 0;
+      localStorage.setItem('viewFlag', this.viewFlag)
+      this.router.navigate(['admin/newordersview/' + this.oid + '/editlegs']);
+    }
+
+  }
+  onSubmit() {
+    this.submitted = true;
+    if (this.legsForm.invalid) {
+      return;
+    }
+    else {
+      const legsCount = this.legsnum;;
+      if (legsCount === 0 || legsCount === '') {
+        localStorage.setItem('legsno', this.legsnum);
+      } else {
+        localStorage.setItem('legsno', this.legsnum);
+      }
+      this.router.navigate(['admin/newordersview/' + this.oid + '/editlegs']);
+      this.modalService.dismissAll();
+    }
+  }
+  uploadMarkupTextExcel(row) {
+    this.lineitemId = row.lineItemId;
+    localStorage.setItem('lineitemid', this.lineitemId);
+    this.router.navigate(['admin/uploadmarkingtextexcel']);
   }
 }

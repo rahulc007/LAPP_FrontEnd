@@ -32,6 +32,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   countryCode: any;
   flag = 1;
   dataLength: boolean = false;
+  page = 1;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -42,6 +43,8 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
+    let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
+    this.countryCode = localStorage.getItem('countrycode');
     this.getProcessedOrdersCount();
     this.loadPage(1);
   }
@@ -49,13 +52,12 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     this.flag = 1;
     let startLimit = (page-1)*10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    this.countryCode = objUserDetails.countryCode;
     this.params = {
-      "emailId": this.emailId,
+      "countryCode": this.countryCode,
       "startLimit": startLimit,
       "endLimit": 10
     }
-    if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
+    if (objUserDetails.userType === userTypes.admin) {
       this.objService.Get('getProcessedOrderByAdmin',this.params).subscribe(response => {
         this.data = response.orderInfoList;
         if(this.data.length === 0) {
@@ -99,14 +101,15 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   }
   getProcessedOrdersCount() {
     this.params = {
-      'emailId' : this.emailId
+      'countryCode': this.countryCode
     }
     this.objService.Get('gerOrderDataCount', this.params).subscribe (response => {
       this.processedOrderCount = response.processedOrderCount;
     })
   }
-  getOrdersByRange(dates) {
+  getOrdersByRange(dates,page) {
     this.flag = 0;
+    let startLimit = (this.page -1) * 10
     this.showBackBtn = true;
     this.startDate = this.datePipe.transform(dates[0], "yyyy-MM-dd");
     this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
@@ -115,12 +118,19 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       'emailId': this.emailId,
       'startDate': this.startDate,
       'endDate': this.toDate,
+      'startLimit': startLimit,
+      'endLimit': 10,
       'tabType': 2
     }
     this.objService.Get('getOrderDetailsByDate', this.params).subscribe(response => {
       this.data = response.orderInfoList;
+      if(this.data.length === 0) {
+        this.dataLength = true;
+      } else {
+        this.dataLength = false;
+      }
     });
-    this.configuration.paginationEnabled = true;
+    this.configuration.paginationEnabled = false;
   }
   goBack() {
     this.loadPage(1);

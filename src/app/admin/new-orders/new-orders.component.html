@@ -51,6 +51,17 @@
             </div>
             <div class="col-md-6 pull-left">
                 <app-pagination *ngIf="flag===1" (clicked)="loadPage($event)" [data]="dataLength"></app-pagination>
+
+                <ul *ngIf="flag===0" class="pagination">
+                    <li [ngClass]="{disabled:page === 1}" class="page-item previous-item">
+                        <a (click)="getOrdersByRange(dates, page = page - 1)" class="page-link">Previous << </a>
+                    </li>
+                  
+                    <li [ngClass]="{disabled: dataLength}" class="page-item next-item">
+                        <a (click)="getOrdersByRange(dates, page = page + 1)" class="page-link"> >> Next</a>
+                    </li>
+                    
+                </ul>
             </div>
         </div>
     </div>

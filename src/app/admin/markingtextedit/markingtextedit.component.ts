@@ -1,28 +1,22 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit,ViewChild, TemplateRef } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
 import { Route, Router } from '@angular/router';
 import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, FormArray } from '@angular/forms';
-import { LappRestService } from '../../../core/rest-service/LappRestService';
+import { LappRestService } from '../../core/rest-service/LappRestService';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { AppConfig } from '../../../configs/app.config';
-const URL = AppConfig.endpoints.baseUrl + `/uploadOrderStatus`;
-
+import { AppConfig } from '../../configs/app.config';
 @Component({
-  selector: 'app-handsontable',
-  templateUrl: './handsontable.component.html',
-  styleUrls: ['./handsontable.component.css']
+  selector: 'app-markingtextedit',
+  templateUrl: './markingtextedit.component.html',
+  styleUrls: ['./markingtextedit.component.css']
 })
-export class HandsontableComponent implements OnInit {
+export class MarkingtexteditComponent implements OnInit {
   @ViewChild('submitConfirm', { static: false }) submitConfirm: TemplateRef<any>;
   @ViewChild('deleteConfirm', { static: false }) deleteConfirm: TemplateRef<any>;
   @ViewChild('editModel', { static: false }) editModel: TemplateRef<any>;
 
   private hotRegisterer = new HotTableRegisterer();
-  fd = new FormData();
-  file: any;
-  public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
   rownum: any;
   editObj = { "leftmarking": "", "rightmarking": "", "middlemarking": "", "rmPartnoLeft":"", "rmPartnoRight":"", "rmPartnomiddle":"","markingId": "" }
   deleteData: any;
@@ -63,10 +57,8 @@ export class HandsontableComponent implements OnInit {
   isDisable = false;
   oid: any;
   headingFlag = 0
-  constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal,
-    private translate: TranslateService) {
-
-  }
+  constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, 
+    private modalService: NgbModal, private translate: TranslateService) { }
 
   ngOnInit() {
     this.oid = localStorage.getItem('oid');
@@ -89,52 +81,6 @@ export class HandsontableComponent implements OnInit {
       this.isDisable = true;
     }
     this.getMarkingTextDetails();
-
-    this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
-      this.msg = '';
-      this.errorMsg = '';
-      let latestFile = this.uploader.queue[this.uploader.queue.length - 1]
-      this.uploader.queue = [];
-      this.uploader.queue.push(latestFile);
-    };
-
-    this.uploader.onSuccessItem = (item: any, response: string, status: any, headers: any) => {
-      this.msg = '';
-      this.errorMsg = '';
-      let data = JSON.parse(response);
-      if (data.status === 200 && data.statusMessage === "success") {
-        this.msg = "show";
-        setTimeout(() => {
-          this.msg = '';
-        }, 3000);
-
-      } else if (data.statusMessage == "error") {
-        this.errorMsg = "show";
-        setTimeout(() => {
-          this.errorMsg = '';
-        }, 3000);
-      }
-
-      this.uploader.clearQueue();
-
-      this.uploader.options.additionalParameter = {
-
-      };
-
-    }
-  }
-
-  onUpload() {
-    this.uploader.uploadAll();
-  }
-
-  public onFileSelected() {
-    this.fd.append('file', this.file);
-  }
-
-  removeFile(item) {
-    this.uploader.removeFromQueue(item);
   }
   addMarkingTextApi(params) {
     this.objService.Post('addMarkingText', params).subscribe(response => {
@@ -257,7 +203,7 @@ export class HandsontableComponent implements OnInit {
       this.markingtextId = response.markingTextList;
     })
     setTimeout(() => {
-      this.router.navigate(['customer/neworders', this.oid]);
+      this.router.navigate(['admin/newordersview', this.oid]);
   }, 3000); 
   }
 
@@ -282,7 +228,6 @@ export class HandsontableComponent implements OnInit {
   }
 
   deleteMarkingText() {
-
     let params = {
       "lineItemId": this.lineitemId,
       "isSubmit": false,
@@ -306,8 +251,7 @@ export class HandsontableComponent implements OnInit {
   }
 
   submitMarkingText() {
-
-    if (this.markingtextId.length === 0) {
+     if (this.markingtextId.length === 0) {
       let harray = [];
       this.markingTestTempArray = [];
       this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
@@ -352,7 +296,7 @@ export class HandsontableComponent implements OnInit {
     this.flag = 0;
     this.isDisable = true;
     setTimeout(() => {
-      this.router.navigate(['customer/neworders', this.oid]);
+      this.router.navigate(['admin/newordersview', this.oid]);
   }, 5000); 
   }
 
@@ -368,7 +312,6 @@ export class HandsontableComponent implements OnInit {
   }
 
   updateMarkingTextData() {
-
     let params = {
       "textItemid": this.lineitemId,
       "isSubmit": false,
@@ -385,7 +328,6 @@ export class HandsontableComponent implements OnInit {
     }
     this.updateMarkingTextApi(params);
     this.modalService.dismissAll();
-
   }
 
   getColumns = (column) => {
@@ -393,7 +335,7 @@ export class HandsontableComponent implements OnInit {
   };
 
   goPrevious() {
-    this.router.navigate(['customer/neworders', this.oid]);
+    this.router.navigate(['admin/newordersview', this.oid]);
   }
 
   addNewRow() {
@@ -411,14 +353,11 @@ export class HandsontableComponent implements OnInit {
     this.items.push(objNewRow);
     this.blnShowSaveNewRowButton = true;
     this.setFormArray();
-
   }
 
   onClickSaveNewRow() {
-
     let arrNewRow = [];
     const values = this.markingTextForm.value.arr;
-
     for (let i = 0; i < this.items.length; i++) {
       if (this.items[i]["cIsNew"] == true) {
         arrNewRow.push({
@@ -445,7 +384,5 @@ export class HandsontableComponent implements OnInit {
     this.blnShowSaveNewRowButton = false;
     const legCnt = parseInt(this.legsCount);
     this.enableRow[legCnt - 1] = 'yes';
-
   }
-
 }

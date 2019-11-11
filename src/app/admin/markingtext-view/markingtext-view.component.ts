@@ -30,7 +30,10 @@ export class MarkingtextViewComponent implements OnInit{
     this.columns = [
       { key: 'leftText', title: 'Left Text' },
       { key: 'rightText', title: 'Right Text' },
-      { key: 'middleText', title: 'Others' }
+      { key: 'middleText', title: 'Others' },
+      { key: 'rmPartnoLeft', title:'RM Part No L'},
+      { key: 'rmPartnoRight', title: 'RM Part No R'},
+      { key: 'rmPartnomiddle', title: 'RM Part No O'}
     ]
     this.viewMarkingText();
   }

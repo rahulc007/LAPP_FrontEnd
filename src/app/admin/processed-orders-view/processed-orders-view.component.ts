@@ -25,6 +25,7 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   emailId: any;
   params: any;
   salesOrderNo: any;
+  countryCode: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -32,7 +33,8 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   ngOnInit() {
     this.configuration = ConfigurationService.config;
     this.emailId = localStorage.getItem('username');
-    this.salesOrderNo = localStorage.getItem('salesOrderNo')
+    this.salesOrderNo = localStorage.getItem('salesOrderNo');
+    this.countryCode = localStorage.getItem('countrycode');
     this.loadPage();
   }
 
@@ -65,7 +67,8 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
       this.params = {
         "salesOrderno": this.salesOrderNo,
         "createdBy": this.emailId,
-        "userEmailId": ""
+        "userEmailId": "",
+        "countryCode":this.countryCode
       }
       this.objService.Get('getOrderBySales', this.params).subscribe(response => {
         this.data = response.orderInfoList[0].orderLineItem;

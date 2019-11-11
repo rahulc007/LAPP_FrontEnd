@@ -37,6 +37,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   isAdmin: boolean;
   dataLength: boolean = false;
   flag = 1;
+  page = 1;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -51,18 +52,18 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
 
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
+    this.countryCode = localStorage.getItem('countrycode');
     this.getMyordersCount();
     this.loadPage(1);
   }
 
-  loadPage(page) {
+  loadPage(page) { 
     this.flag = 1;
     let startLimit = (page - 1) * 10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    this.countryCode = objUserDetails.countryCode;
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
       this.params = {
-        "emailId": this.emailId,
+        "countryCode": this.countryCode,
         "startLimit": startLimit,
         "endLimit": 10
       }
@@ -124,7 +125,8 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.params = {
       "salesOrderno": salesOrderNo,
       "createdBy": this.emailId,
-      "userEmailId": ""
+      "userEmailId": "",
+      "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.data = response.orderInfoList;
@@ -135,7 +137,8 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.params = {
       "productionOrderno": productionOrderNo,
       "createdBy": this.emailId,
-      "userEmailId": ""
+      "userEmailId": "",
+      "countryCode": this.countryCode
     }
     this.objService.Get('getOrderByProductionOrder', this.params).subscribe(response => {
       this.data = response.orderInfoList;
@@ -149,36 +152,42 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   }
   getMyordersCount() {
     this.params = {
-      'emailId': this.emailId
+      'countryCode': this.countryCode
     }
     this.objService.Get('gerOrderDataCount', this.params).subscribe(response => {
       this.myOrderCount = response.myOrderCount;
     })
   }
-  getOrdersByRange(dates) {
+  getOrdersByRange(dates, page) {
     this.flag = 0;
+    let startLimit = (this.page -1) * 10
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
-    if (objUserDetails.userType === userTypes.admin) {
+    if (objUserDetails.userType === userTypes.admin || objUserDetails.userType === userTypes.superAdmin ) {
     this.showBackBtn = true;
     this.startDate = this.datePipe.transform(dates[0], "yyyy-MM-dd");
     this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
     this.params = {
-      'countryCode': objUserDetails.countryCode,
+      'countryCode': this.countryCode,
       'emailId': this.emailId,
       'startDate': this.startDate,
       'endDate': this.toDate,
+      'startLimit': startLimit,
+      'endLimit': 10,
       'tabType': 1
     }
     this.objService.Get('getOrderDetailsByDate', this.params).subscribe(response => {
       this.data = response.orderInfoList;
+      if(this.data.length === 0) {
+        this.dataLength = true;
+      } else {
+        this.dataLength = false;
+      }
     });
   }
-  this.configuration.paginationEnabled = true;
   }
   goBack() {
     this.loadPage(1);
     this.dates = '';
     this.showBackBtn = false;
-    this.configuration.paginationEnabled = false;
   }
 }

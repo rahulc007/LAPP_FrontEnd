@@ -22,7 +22,7 @@ import {PaginationComponent} from '../common/pagination/pagination.component';
 import {ConfigurationService} from '../common/ngx-easy-table/config-service';
 import { TableModule } from 'ngx-easy-table';
 import { TranslateModule } from '@ngx-translate/core';
-import { HotTableModule } from 'ng2-handsontable';
+import { HotTableModule } from '@handsontable/angular';
 import { HttpClientModule, HttpClient , HTTP_INTERCEPTORS} from '@angular/common/http';
 import {JwtInterceptor} from '../core/services/jwt.interceptor';
 import { UploadStatusComponent } from './upload-status/upload-status.component'
@@ -32,8 +32,10 @@ import { ProcessedOrdersViewComponent } from './processed-orders-view/processed-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkingtextViewComponent } from './markingtext-view/markingtext-view.component';
+import { MarkingtexteditComponent } from './markingtextedit/markingtextedit.component';
+import { MarkingtextexceluploadComponent } from './markingtextexcelupload/markingtextexcelupload.component';
 @NgModule({
-  declarations: [DashbordComponent, ViewComponent,  UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent,  DownloadsComponent, CreateCustomerComponent, NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent,DownloadsComponent, MarkingtextViewComponent],
+  declarations: [DashbordComponent, ViewComponent,  UploadSapDataComponent, NewOrdersComponent, NewOrdersViewComponent,  DownloadsComponent, CreateCustomerComponent, NgxEasyTableComponent,PaginationComponent, UploadStatusComponent, ProcessedOrdersComponent, ProcessedOrdersViewComponent,DownloadsComponent, MarkingtextViewComponent, MarkingtexteditComponent, MarkingtextexceluploadComponent],
   imports: [
     CommonModule,
     HotTableModule,

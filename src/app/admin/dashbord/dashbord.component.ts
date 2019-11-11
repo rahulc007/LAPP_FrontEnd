@@ -47,7 +47,6 @@ export class DashbordComponent implements OnInit {
       newPwd: ['', [Validators.required, Validators.minLength(6), this.passwordOldNewMatcher.bind(this)]],
       confirmPwd: ['', [Validators.required, this.passwordMatcher.bind(this)]]
     });
-
   }
   private passwordOldNewMatcher(control: FormControl) {
     if (
@@ -90,10 +89,11 @@ export class DashbordComponent implements OnInit {
           setTimeout(()=> {
             this.resetMessage ='';
             this.showResetPopUp = false;
-            this.router.navigate(['admin/profile']);
-            
+            this.router.navigate(['admin/profile']); 
        }, 3000);
           this.strText = '';
+          this.firstTime = false;
+          localStorage.setItem('firstTimeLogin', this.firstTime);
         } else {
           this.resetMessage = this.translate.instant('providevalidpassword');
           setTimeout(()=> {
