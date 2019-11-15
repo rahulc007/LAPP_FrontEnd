@@ -48,6 +48,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   error: any;
   viewFlag: any;
   countryCode: any;
+  arr: any;
   constructor(private UserService: UserService, private objService: LappRestService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private modalService: NgbModal,
     private cdr: ChangeDetectorRef, private datePipe: DatePipe) { }
@@ -97,7 +98,13 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-      this.data = response.orderInfoList[0].orderLineItem;
+      this.arr = []
+       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+         if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+           this.arr.push(response.orderInfoList[0].orderLineItem[i])
+         }
+       }
+       this.data= this.arr;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

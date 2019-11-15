@@ -43,6 +43,7 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
   lineitemno: any;
   submitFlag: any;
   viewFlag: any;
+  arr: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private cdr: ChangeDetectorRef, private datePipe: DatePipe,
     private modalService: NgbModal, private formBuilder: FormBuilder) {
@@ -69,7 +70,13 @@ export class NewOrdersViewComponent implements OnInit, AfterViewInit, AfterViewC
         "countryCode": this.countryCode
       }
       this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-        this.data = response.orderInfoList[0].orderLineItem;
+        this.arr = []
+       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+         if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+           this.arr.push(response.orderInfoList[0].orderLineItem[i])
+         }
+       }
+       this.data= this.arr;
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

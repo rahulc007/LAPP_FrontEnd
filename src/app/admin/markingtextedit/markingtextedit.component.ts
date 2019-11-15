@@ -67,14 +67,14 @@ export class MarkingtexteditComponent implements OnInit {
     this.lineitemno = localStorage.getItem('lineItemNo');
     this.lineitemId = parseInt(localStorage.getItem('lineitemid'));
     this.emailId = localStorage.getItem('username');
-    if (parseInt(localStorage.getItem('submitflag')) === 0) {
-      this.flag = 0;
-      this.isDisable = true;
-    }
-    else {
-      this.flag = 1
-      this.isDisable = false;
-    }
+    // if (parseInt(localStorage.getItem('submitflag')) === 0) {
+    //   this.flag = 0;
+    //   this.isDisable = true;
+    // }
+    // else {
+    //   this.flag = 1
+    //   this.isDisable = false;
+    // }
     if(parseInt(localStorage.getItem('viewFlag')) === 1) {
       this.flag = 0;
       this.headingFlag = 1
@@ -293,8 +293,8 @@ export class MarkingtexteditComponent implements OnInit {
       this.addMarkingTextApi(this.params);
       this.modalService.dismissAll();
     }
-    this.flag = 0;
-    this.isDisable = true;
+    // this.flag = 0;
+    // this.isDisable = true;
     setTimeout(() => {
       this.router.navigate(['admin/newordersview', this.oid]);
   }, 5000); 

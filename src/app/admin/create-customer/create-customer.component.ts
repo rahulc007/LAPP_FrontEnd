@@ -132,6 +132,12 @@ export class CreateCustomerComponent implements OnInit, AfterViewInit, AfterView
       this.objService.Get('getUserByCreated?emailId=' + emailId, this.params).subscribe(response => {
         let arraylist = [];
         arraylist = response.userProfileList;
+        arraylist.forEach(contry => {
+          if(contry.country.length === 2) {
+           let countryName= this.countryData.find(code => code.countryCode === contry.country);
+           contry.country = countryName.CountryName
+          }
+         })
         arraylist.forEach(list => {
           if (list.userType === userTypes.admin) {
             list.role = 'Admin';
