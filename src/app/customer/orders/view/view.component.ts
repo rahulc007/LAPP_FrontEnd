@@ -40,21 +40,17 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   ngOnInit() {
     this.emailId = localStorage.getItem('username');
     this.countryCode = localStorage.getItem('countrycode');
-    //  this.route.queryParams.subscribe(x => this.loadPage(x.page || 1));
     this.loadPage(this.page);
   }
   ngAfterViewInit() {
     this.columns = [
       { key: 'userEmailId', title: 'Email ID' },
-      // { key: 'oid', title: 'Order ID' }, 
+      { key: 'oid', title: 'Order ID' }, 
       { key: 'orderDate', title: 'Order Date' },
-      // { key: 'orderStatus', title: 'Order Status' },
       { key: 'salesOrderno', title: 'Sales Order Number' },
-      // { key: 'countryCode', title: 'Country Code' }, 
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
       { key: 'createdBy', title: 'Created By' },
-      { key: 'customerNo', title: 'Customer Number' },
       { key: 'Actions', title: '', searchEnabled: false, cellTemplate: this.Ver }
     ];
   }
@@ -70,23 +66,7 @@ loadPage(page) {
       "endLimit": 10
     }
     this.objService.Get('getOrderDetailsByUser', this.params).subscribe(response => {
-      this.tempArray= [];
-      for (let i = 0; i < response.orderInfoList.length; i++) {
-        if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
-          this.arr.push(response.orderInfoList[i]);
-          this.tempArray.push({
-            "userEmailId": response.orderInfoList[i].userEmailId,
-            "oid": response.orderInfoList[i].oid,
-            "orderDate": response.orderInfoList[i].orderDate,
-            "createdDate": response.orderInfoList[i].createdDate,
-            "modifiedDate": response.orderInfoList[i].modifiedDate,
-            "salesOrderno": response.orderInfoList[i].salesOrderno,
-            "createdBy": response.orderInfoList[i].createdBy,
-            "customerNo": response.orderInfoList[i].orderLineItem[0].customerNo
-          })
-        }
-      }
-      this.data = this.tempArray;
+      this.data = response.orderInfoList
       if(this.data.length === 0) {
         this.dataLength = true;
       } else {
@@ -121,7 +101,14 @@ loadPage(page) {
       "countryCode":this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-      this.data = response.orderInfoList;
+      this.arr = []
+      for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+          this.arr = response.orderInfoList[0];
+        }
+      }
+      this.data =this.arr
+     // this.data = response.orderInfoList;
     })
   }
   getPerticularProductionNo(productionNo) {

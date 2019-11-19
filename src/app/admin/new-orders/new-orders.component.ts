@@ -68,13 +68,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
         "endLimit": 10
       }
       this.objService.Get('getOrderDetailsByAdmin', this.params).subscribe(response => {
-        this.arr = []
-        for (let i = 0; i < response.orderInfoList.length; i++) {
-          if (response.orderInfoList[i].orderLineItem[0].productionOrderStatus === "Released") {
-            this.arr.push(response.orderInfoList[i]);
-          }
-        }
-        this.data = this.arr;
+        this.data = response.orderInfoList;
        if(this.data.length === 0) {
           this.dataLength = true;
         } else {
@@ -118,6 +112,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.arr = []
     if (event.target.value === '') {
       this.loadPage(1);
+      this.configuration.paginationEnabled = false;
     }
   }
   getPerticularSalesNo(salesOrderNo) {
@@ -129,7 +124,13 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-      this.data = response.orderInfoList;
+      this.arr = []
+      for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+          this.arr = response.orderInfoList[0];
+        }
+      }
+      this.data =this.arr;
     })
   }
   getPerticularProductionNo(productionOrderNo) {

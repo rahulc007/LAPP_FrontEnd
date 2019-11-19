@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { NgxEasyTableComponent } from '../../common/ngx-easy-table/ngx-easy-table.component';
 import { ConfigurationService } from '../../common/ngx-easy-table/config-service';
@@ -7,12 +7,14 @@ import { LappRestService } from '../../core/rest-service/LappRestService';
 import { userTypes } from '../../common/constants/constants';
 import * as XLSX from 'xlsx';
 import { Columns, Config, DefaultConfig } from 'ngx-easy-table';
+import { NgbModal, NgbModalConfig, NgbTooltipConfig } from '@ng-bootstrap/ng-bootstrap';
 const URL = AppConfig.endpoints.baseUrl + `/uploadOrderStatus`;
 @Component({
   selector: 'app-upload-status',
   templateUrl: './upload-status.component.html',
   styleUrls: ['./upload-status.component.css'],
-  providers: [ConfigurationService]
+  providers: [ConfigurationService, NgbModal, NgbModalConfig, NgbTooltipConfig],
+  encapsulation: ViewEncapsulation.None
 })
 export class UploadStatusComponent implements OnInit {
 
@@ -31,16 +33,20 @@ export class UploadStatusComponent implements OnInit {
   errorMsg: string = '';
   sapData: any;
   fileStatus:boolean;
-  
+  emailId: any;
   public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'orderData' });
 
-  constructor(private objService: LappRestService) {
+  constructor(private objService: LappRestService, private config: NgbTooltipConfig,
+    private modalService: NgbModal) {
     this.configuration = DefaultConfig;
     this.configuration.searchEnabled = true;
     this.configuration.paginationEnabled = true;
+    config.triggers = 'click';
   }
 
   ngOnInit() {
+    this.emailId = localStorage.getItem('username');
+     this.getUploadedStatus();
     this.uploader.onAfterAddingFile = (file) => {
     file.withCredentials = false;
       this.msg = '';
@@ -68,7 +74,7 @@ export class UploadStatusComponent implements OnInit {
       }
       
       this.uploader.clearQueue();
-     
+     this.getUploadedStatus();
     };
 
     this.currentuser = localStorage.getItem('username')
@@ -79,10 +85,9 @@ export class UploadStatusComponent implements OnInit {
     this.columns = [
       { key: 'fileName', title: 'File Name' },
       { key: 'fileSize', title: 'File Size' },
-      { key: 'orderCount', title: 'Order Count' },
-      { key: 'uploadedBy', title: 'Uploaded By' },
+      { key: 'createdUser', title: 'Created User' },
       { key: 'createdDate', title: 'Created Date' },
-      { key:'fileStatus', title:'Upload Status', searchEnabled: false}
+      { key:'fileStatus', title:'File Status', searchEnabled: false}
     ]
   }
   
@@ -99,7 +104,18 @@ export class UploadStatusComponent implements OnInit {
   removeFile(item) {
     this.uploader.removeFromQueue(item);
   }
+  getUploadedStatus() {
   
+      this.params = {
+        'emailId': this.emailId 
+      }
+      this.objService.Get('getOrderStatusByUser', this.params).subscribe(res => {
+        console.log('resp', res);
+        this.data = res.orderStatusList
+      });
+    }
+   
+ 
   
 
 }

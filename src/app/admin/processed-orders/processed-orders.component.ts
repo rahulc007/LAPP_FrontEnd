@@ -138,4 +138,29 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     this.showBackBtn = false;
     this.configuration.paginationEnabled = false;
   }
+  search(event) {
+    this.arr = []
+    if (event.target.value === '') {
+      this.loadPage(1);
+      this.configuration.paginationEnabled = false;
+    }
+  }
+  getPerticularSalesNo(salesOrderNo) {
+    
+    this.params = {
+      "salesOrderno": salesOrderNo,
+      "createdBy": this.emailId,
+      "userEmailId": "",
+      "countryCode": this.countryCode
+    }
+    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.arr = []
+      for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released") {
+          this.arr = response.orderInfoList[0];
+        }
+      }
+      this.data = this.arr;
+    })
+  }
 }

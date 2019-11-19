@@ -2,6 +2,19 @@
     <div class="col-md-3">
         <h2 class="page_heading prcsd_order">{{'processedorders'| translate}}</h2>
     </div>
+    <div class="col-md-9">
+            <div class="pull-right">
+                <div class="form-inline" id="search_bar">
+                    <div class="form-group mr-1">
+                        <input type="text" [(ngModel)]="salesNo" [style.width.px]="220" [style.height.px]="36" class="form-control" (keyup)="search($event)"
+                            placeholder="Search by Sales Order Number">
+                    </div>
+                    <button class="btn btn-sm btn-outline-warning" (click)="getPerticularSalesNo(salesNo)" [disabled]="!salesNo">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+    </div>
 </div>
 <div class="row">
     <div class="col-md-6">

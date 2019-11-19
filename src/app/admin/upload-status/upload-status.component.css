@@ -53,7 +53,18 @@
   background-size: auto 70%;
   background-position: 10px 5px;
     }
-
+    .download_btn{
+      background: url('../../../assets/images/menu_icons/download_white.png') no-repeat #f58122;
+      background-size: auto 70%;
+      background-position: 10px 5px;
+      padding: 6px 15px 6px 35px;
+      float: right;
+    }
+    .download_btn:hover{
+      background: url('../../../assets/images/menu_icons/download.png') no-repeat #f58122;
+      background-size: auto 70%;
+      background-position: 10px 5px;
+    }
   @media (max-width: 300px) {
   button {
   width: 100%;
@@ -69,4 +80,22 @@
 }
 .table-bordered {
   border:none !important;
+}
+tr th {
+  border-right: 1px solid #dee2e6;
+}
+.leftOnly {
+ border-left: 1px solid #dee2e6;
+}
+.my-custom-class {
+ width: 450px !important; 
+ background-color: white;
+ color:black;
+}
+.tooltip-inner {
+ background-color: white;
+ color:black;
+ font-size: 12px;
+ max-width: 100%;
+ justify-content: center;
 }
