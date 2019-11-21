@@ -29,8 +29,8 @@
         [disabled]="!uploader.getNotUploadedItems().length">
         {{'upload'| translate}}
       </button>
-      <button type="button" class="btn p-2 ml-2" placement="bottom" [ngbTooltip]="tipContent"
-        tooltipClass="my-custom-class" container="body">
+      <button type="button" id="upldStatus" class="btn p-2 ml-2" placement="bottom" [ngbTooltip]="tipContent"
+        tooltipClass="my-tooltip-class" container="body">
         <i class="fa fa-info-circle" aria-hidden="true" style="font-size: 16px;"></i>
       </button>
     </div>

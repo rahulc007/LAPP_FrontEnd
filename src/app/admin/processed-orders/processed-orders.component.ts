@@ -129,6 +129,11 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       } else {
         this.dataLength = false;
       }
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+        date.orderDate = this.datePipe.transform(date.orderDate, "medium");
+      })
     });
     this.configuration.paginationEnabled = false;
   }
@@ -157,10 +162,15 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       this.arr = []
       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
         if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released") {
-          this.arr = response.orderInfoList[0];
+          this.arr = response.orderInfoList;
         }
       }
       this.data = this.arr;
+      this.data.forEach(date => {
+        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+        date.orderDate = this.datePipe.transform(date.orderDate, "medium");
+      })
     })
   }
 }

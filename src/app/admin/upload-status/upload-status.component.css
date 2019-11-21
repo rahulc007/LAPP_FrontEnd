@@ -87,12 +87,12 @@ tr th {
 .leftOnly {
  border-left: 1px solid #dee2e6;
 }
-.my-custom-class {
+.my-tooltip-class {
  width: 450px !important; 
  background-color: white;
  color:black;
 }
-.tooltip-inner {
+#upldStatus .tooltip-inner {
  background-color: white;
  color:black;
  font-size: 12px;
