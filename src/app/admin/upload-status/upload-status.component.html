@@ -6,6 +6,7 @@
 </div>
 <div *ngIf="errorMsg" class="alert alert-danger alert-dismissible" data-auto-dismiss role="alert">
   <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+  <span>{{errMsg}}</span> &nbsp;
   <span id="alertErrMsg">{{'pleaseuploadwithvalidheaders'| translate}}</span>
 </div>
 
@@ -35,7 +36,7 @@
     </div>
   </div>
   <div class="col-md-4">
-      <a href="/lapp/assets/data/uploadstatusFormat.xlsx" target="_self" class="btn btn-orange download_btn  pull-right" download>Modal Excel File</a>
+      <a href="/lapp/assets/data/uploadstatusFormat.xlsx" target="_self" class="btn btn-orange download_btn  pull-right" download>Model Excel File</a>
     </div>
 </div>
 <div class="row mt-4">
