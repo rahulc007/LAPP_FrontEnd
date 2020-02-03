@@ -124,18 +124,24 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-      this.arr = []
-      for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
-          this.arr = response.orderInfoList;
+     
+      if(response.orderInfoList.length !== 0) {
+        this.arr = []
+        for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+          if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+            this.arr = response.orderInfoList;
+          }
         }
+        this.data = this.arr;
+        this.data.forEach(date => {
+          date.createdDate = this.datePipe.transform(date.createdDate, "medium");
+          date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
+          date.orderDate = this.datePipe.transform(date.orderDate, "medium");
+        });
       }
-      this.data = this.arr;
-      this.data.forEach(date => {
-        date.createdDate = this.datePipe.transform(date.createdDate, "medium");
-        date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
-        date.orderDate = this.datePipe.transform(date.orderDate, "medium");
-      });
+      else {
+        this.data = this.arr;
+      }
     })
   }
   getPerticularProductionNo(productionOrderNo) {
