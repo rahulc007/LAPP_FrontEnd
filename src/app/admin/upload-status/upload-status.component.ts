@@ -112,7 +112,6 @@ export class UploadStatusComponent implements OnInit {
         'emailId': this.emailId 
       }
       this.objService.Get('getOrderStatusByUser', this.params).subscribe(res => {
-        console.log('resp', res);
         this.data = res.orderStatusList
       });
     }

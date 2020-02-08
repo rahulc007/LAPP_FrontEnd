@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-9">
             <div class="pull-right">
-                <div class="form-inline" id="search_bar">
+                <div class="form-inline" id="search_bar" (keydown)="keyDownFunction($event)">
                     <div class="form-group mr-1">
                         <input type="text" [(ngModel)]="salesNo" [style.width.px]="220" [style.height.px]="36" class="form-control" (keyup)="search($event)"
                             placeholder="Search by Sales Order Number">

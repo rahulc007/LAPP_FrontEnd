@@ -173,4 +173,9 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       })
     })
   }
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.getPerticularSalesNo(event.target.value);
+    }
+  }
 }

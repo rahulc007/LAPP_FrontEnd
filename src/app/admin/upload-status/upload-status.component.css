@@ -87,15 +87,15 @@ tr th {
 .leftOnly {
  border-left: 1px solid #dee2e6;
 }
-.my-tooltip-class {
- width: 450px !important; 
- background-color: white;
- color:black;
-}
-#upldStatus .tooltip-inner {
- background-color: white;
- color:black;
- font-size: 12px;
- max-width: 100%;
- justify-content: center;
-}
+#upldStatus .my-tooltip-class {
+  width: 450px !important; 
+  background-color: white !important;
+  color:black;
+ }
+  .tooltip-inner {
+  background-color: white !important;
+  color:black;
+  font-size: 12px;
+  max-width: 100%;
+  justify-content: center;
+ }

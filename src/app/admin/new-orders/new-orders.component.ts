@@ -207,4 +207,10 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.dates = '';
     this.showBackBtn = false;
   }
+   keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      this.getPerticularSalesNo(event.target.value);
+    }
+  }
+
 }
