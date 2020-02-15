@@ -29,6 +29,7 @@ export class MarkingtextexceluploadComponent implements OnInit {
   params: any;
   oid: any;
   sheets: any;
+  submitDisable = false;
   constructor(private objService: LappRestService, private router: Router, private modalService: NgbModal,
     private config: NgbTooltipConfig) {
       config.triggers = 'click';
@@ -72,6 +73,7 @@ export class MarkingtextexceluploadComponent implements OnInit {
   }
 
   saveData() {
+    this.submitDisable = true;
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
     let harray = [];
     this.tabledata.forEach(element => {

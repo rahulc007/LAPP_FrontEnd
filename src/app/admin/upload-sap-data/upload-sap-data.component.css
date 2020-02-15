@@ -100,7 +100,7 @@
   border-left: 1px solid #dee2e6;
  }
 .my-custom-class {
-  width: 1000px !important; 
+  /* width: 1000px !important;  */
   background-color: white;
   color:black;
  }

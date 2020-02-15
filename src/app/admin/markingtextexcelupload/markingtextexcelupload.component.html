@@ -91,7 +91,7 @@
     <div class="col text-center">
     <div class="float-center">
         <button *ngIf="flag === true" class="btn btn-md btn-orange" (click)="saveData()">{{'save'| translate}}</button> &nbsp;
-        <button *ngIf="flag === true"  class="btn btn-md btn-orange" (click)="submitMarkingText()">{{'submit'| translate}}</button>
+        <button *ngIf="flag === true"  class="btn btn-md btn-orange"  [disabled] ="submitDisable" (click)="submitMarkingText()">{{'submit'| translate}}</button>
     </div>
 </div>
 </div>

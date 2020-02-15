@@ -62,7 +62,8 @@ export class HandsontableComponent implements OnInit {
   emailId: any;
   isDisable = false;
   oid: any;
-  headingFlag = 0
+  headingFlag = 0;
+  submitDisable = false;
   constructor(private router: Router, private fb: FormBuilder, private objService: LappRestService, private modalService: NgbModal,
     private translate: TranslateService) {
 
@@ -222,6 +223,7 @@ export class HandsontableComponent implements OnInit {
   }
 
   saveData() {
+    this.submitDisable = true;
     this.tabledata = this.hotRegisterer.getInstance(this.id).getData();
     let harray = [];
     this.tabledata.forEach(element => {
