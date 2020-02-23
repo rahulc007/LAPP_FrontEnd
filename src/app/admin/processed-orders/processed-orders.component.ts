@@ -33,6 +33,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   flag = 1;
   dataLength: boolean = false;
   page = 1;
+  salesNo = '';
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -107,7 +108,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       this.processedOrderCount = response.processedOrderCount;
     })
   }
-  getOrdersByRange(dates,page) {
+  getOrdersByRange(dates) {
     this.flag = 0;
     let startLimit = (this.page -1) * 10
     this.showBackBtn = true;
