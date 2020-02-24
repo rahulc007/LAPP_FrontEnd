@@ -23,9 +23,9 @@ export class JwtInterceptor implements HttpInterceptor {
                     }
                 });
         }
-        else{
-       this.router.navigate(['login']);
-        }
+    //     else{
+    //    this.router.navigate(['login']);
+    //     }
 
         return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {

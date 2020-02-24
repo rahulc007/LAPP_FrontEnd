@@ -37,6 +37,9 @@ export class ForgotpasswordComponent implements OnInit {
         setTimeout(()=> {
           this.successMsg ='';
      }, 7000);
+     setTimeout(() => {
+      this.router.navigate(['login']);
+      }, 7000); 
       }
       else if(datas.statusMessage === 'error'){
         this.errorMsg = this.translate.instant('emailidnotregistered');
