@@ -162,7 +162,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.arr = []
       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released") {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Rel" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "REL") {
           this.arr = response.orderInfoList;
         }
       }

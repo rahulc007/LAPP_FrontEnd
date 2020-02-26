@@ -71,7 +71,7 @@ export class UploadSapDataComponent implements OnInit, OnDestroy  {
         this.msg = "show";
         setTimeout(()=> {
           this.msg ='';
-     }, 3000);
+     }, 6000);
      
         this.getUploadedData();
       } else if (data.statusMessage == "error") {
@@ -79,7 +79,7 @@ export class UploadSapDataComponent implements OnInit, OnDestroy  {
         this.errMsg = data.errorMessage;
         setTimeout(()=> {
           this.errorMsg ='';
-     }, 3000);
+     }, 6000);
       }
       
       this.uploader.clearQueue();

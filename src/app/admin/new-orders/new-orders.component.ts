@@ -38,6 +38,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   dataLength: boolean = false;
   flag = 1;
   page = 1;
+  serachError: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -85,9 +86,9 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'userEmailId', title: 'User Email ID' },
       { key: 'oid', title: 'Order ID' },
       { key: 'orderDate', title: 'Order Date' },
+      { key: 'userEmailId', title: 'User Email ID' },
       // { key: 'orderStatus', title: 'Ordrer Status' },
       { key: 'salesOrderno', title: 'Sales Order Number' },
       // { key: 'countryCode', title: 'Country Code' },
@@ -128,7 +129,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
       if(response.orderInfoList.length !== 0) {
         this.arr = []
         for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-          if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+          if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Rel" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "REL") {
             this.arr = response.orderInfoList;
           }
         }
@@ -208,9 +209,15 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.showBackBtn = false;
   }
    keyDownFunction(event) {
-    if (event.keyCode == 13) {
-      this.getPerticularSalesNo(event.target.value);
-    }
+     if(event.target.value === '') {
+       this.serachError = "Please Enter Sales Order No";
+     } else { 
+      this.serachError = '';
+      if (event.keyCode == 13) {
+        this.getPerticularSalesNo(event.target.value);
+      }
+     }
+      
   }
 
 }

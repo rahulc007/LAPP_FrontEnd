@@ -66,12 +66,12 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit() {
     this.columns = [
+      { key: 'lineItemId', title: 'Line Item ID' },
       { key: 'customerNo', title: 'Customer Number' },
       { key: 'customerPartNo', title: 'Customer Part Number' },
       { key: 'articleNo', title: 'Article Number' },
       { key: 'description', title: 'Description' },
       // { key: 'length', title: ' Length' }, 
-      { key: 'lineItemId', title: 'Line Item ID' },
       { key: 'lineItemno', title: 'Line Item Number' },
       { key: 'productionOrderStatus', title: 'Production Order Status' },
       { key: 'productionOrderno', title: 'Production Order Number' },
@@ -98,13 +98,14 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
-      this.arr = []
-       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-         if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
-           this.arr.push(response.orderInfoList[0].orderLineItem[i])
-         }
-       }
-       this.data= this.arr;
+      // this.arr = []
+      //  for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
+      //    if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+      //      this.arr.push(response.orderInfoList[0].orderLineItem[i])
+      //    }
+      //  }
+      //  this.data= this.arr;
+      this.data = response.orderInfoList[0].orderLineItem;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

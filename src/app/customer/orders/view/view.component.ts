@@ -44,9 +44,9 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'userEmailId', title: 'Email ID' },
       { key: 'oid', title: 'Order ID' }, 
       { key: 'orderDate', title: 'Order Date' },
+      { key: 'userEmailId', title: 'Email ID' },
       { key: 'salesOrderno', title: 'Sales Order Number' },
       { key: 'createdDate', title: 'Created Date' },
       { key: 'modifiedDate', title: 'Modified Date' },
@@ -103,7 +103,7 @@ loadPage(page) {
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
       this.arr = []
       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Rel" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "REL") {
           this.arr = response.orderInfoList;
         }
       }

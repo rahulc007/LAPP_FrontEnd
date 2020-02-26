@@ -13,7 +13,11 @@
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>
+            <div *ngIf="serachError" class="text-danger">
+                {{serachError}}
+            </div>
         </div>
+        
         <!-- <div class="pull-right mr-5">
             <div class="form-inline ml-3" id="search_bar">
                 <div class="form-group mr-1">
