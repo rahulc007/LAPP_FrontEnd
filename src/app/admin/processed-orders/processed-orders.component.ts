@@ -34,6 +34,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
   dataLength: boolean = false;
   page = 1;
   salesNo = '';
+  serachError: any;
   constructor(private UserService: UserService, private http: HttpClient, private route: ActivatedRoute,
     private router: Router, private objService: LappRestService, private datePipe: DatePipe,
     private cdr: ChangeDetectorRef) {
@@ -152,7 +153,6 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     }
   }
   getPerticularSalesNo(salesOrderNo) {
-    
     this.params = {
       "salesOrderno": salesOrderNo,
       "createdBy": this.emailId,
@@ -160,9 +160,10 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       "countryCode": this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      if(response.orderInfoList.length !== 0) {
       this.arr = []
       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Rel" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "REL") {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Rel" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "REL") {
           this.arr = response.orderInfoList;
         }
       }
@@ -171,12 +172,22 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
         date.orderDate = this.datePipe.transform(date.orderDate, "medium");
-      })
-    })
+      });
+      this.serachError = '';
+    } else {
+      this.data = this.arr;
+      this.serachError = '';
+    }
+    });
   }
   keyDownFunction(event) {
     if (event.keyCode == 13) {
+      if(event.target.value === '') {
+        this.serachError = "Please Enter Sales Order No";
+      } else { 
       this.getPerticularSalesNo(event.target.value);
+      this.serachError = '';
+    }
     }
   }
 }

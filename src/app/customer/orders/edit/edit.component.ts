@@ -91,13 +91,16 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
 
   loadPage() {
+    // this.params = {
+    //   "salesOrderno": this.salesOrderNo,
+    //   "userEmailId": this.emailId,
+    //   "createdBy": "",
+    //   "countryCode": this.countryCode
+    // }
     this.params = {
-      "salesOrderno": this.salesOrderNo,
-      "userEmailId": this.emailId,
-      "createdBy": "",
-      "countryCode": this.countryCode
+      "salesOrderno": this.salesOrderNo
     }
-    this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+    this.objService.Get('getLineItemByUser', this.params).subscribe(response => {
       // this.arr = []
       //  for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
       //    if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released") {
@@ -105,7 +108,8 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
       //    }
       //  }
       //  this.data= this.arr;
-      this.data = response.orderInfoList[0].orderLineItem;
+      // this.data = response.orderInfoList[0].orderLineItem;
+      this.data = response.orderLineItemList;
       this.data.forEach(date => {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

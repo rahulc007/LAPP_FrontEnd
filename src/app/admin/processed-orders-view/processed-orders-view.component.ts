@@ -65,13 +65,16 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
   loadPage() {
     let objUserDetails = JSON.parse(localStorage.getItem('currentUser'));
     if (objUserDetails.userType === userTypes.superAdmin || objUserDetails.userType === userTypes.admin) {
+      // this.params = {
+      //   "salesOrderno": this.salesOrderNo,
+      //   "createdBy": this.emailId,
+      //   "userEmailId": "",
+      //   "countryCode":this.countryCode
+      // }
       this.params = {
-        "salesOrderno": this.salesOrderNo,
-        "createdBy": this.emailId,
-        "userEmailId": "",
-        "countryCode":this.countryCode
+        "salesOrderno": this.salesOrderNo
       }
-      this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      this.objService.Get('getProcessedItem', this.params).subscribe(response => {
       //   this.arr = []
       //  for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
       //    if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released") {
@@ -79,7 +82,8 @@ export class ProcessedOrdersViewComponent implements OnInit, AfterViewInit, Afte
       //    }
       //  }
       //  this.data= this.arr;
-      this.data = response.orderInfoList[0].orderLineItem;
+      // this.data = response.orderInfoList[0].orderLineItem;
+      this.data = response.orderLineItemList;
         this.data.forEach(date => {
           date.createdDate = this.datePipe.transform(date.createdDate, "medium");
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");

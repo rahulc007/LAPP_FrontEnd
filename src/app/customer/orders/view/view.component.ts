@@ -30,6 +30,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   page = 1;
   dataLength : boolean = false;
   countryCode : any;
+  serachError: any;
   constructor(private datePipe: DatePipe, private UserService: UserService, private http: HttpClient,
     private router: Router, private route: ActivatedRoute, private objService: LappRestService,
     private cdr: ChangeDetectorRef) {
@@ -101,6 +102,7 @@ loadPage(page) {
       "countryCode":this.countryCode
     }
     this.objService.Get('getOrderBySales', this.params).subscribe(response => {
+      if(response.orderInfoList.length !== 0) {
       this.arr = []
       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
         if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Released" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "Rel" || response.orderInfoList[0].orderLineItem[i].productionOrderStatus === "REL") {
@@ -112,8 +114,14 @@ loadPage(page) {
         date.createdDate = this.datePipe.transform(date.createdDate, "medium");
         date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
         date.orderDate = this.datePipe.transform(date.orderDate, 'medium');
-      })
-    })
+      });
+      this.serachError = '';
+    }
+    else {
+      this.data = this.arr;
+      this.serachError = '';
+    }
+    });
   }
   getPerticularProductionNo(productionNo) {
     this.customerId = '';
@@ -127,4 +135,14 @@ loadPage(page) {
       this.data = response.orderInfoList;
     })
   }
+  keyDownFunction(event) {
+    if (event.keyCode == 13) {
+      if(event.target.value === '') {
+        this.serachError = "Please Enter Sales Order No";
+      } else { 
+      this.getPerticularSalesNo(event.target.value);
+      this.serachError = '';
+    }
+   }  
+}
 }

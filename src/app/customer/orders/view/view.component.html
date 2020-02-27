@@ -4,11 +4,14 @@
     </div>
     <div class="col-md-10">
         <div class="pull-right">
-            <div class="form-inline" id="search_bar">
+            <div class="form-inline" id="search_bar" (keydown)="keyDownFunction($event)">
                 <div class="form-group mr-1">
                     <input type="text" [(ngModel)]="customerId" class="form-control" [style.width.px]="220" [style.height.px] ="36" (keyup)="search($event)" placeholder="Search by Sales Order Number">
                 </div>
                 <button class="btn btn-sm btn-outline-warning" (click)="getPerticularSalesNo(customerId)" [disabled]="!customerId"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+            <div *ngIf="serachError" class="text-danger">
+                {{serachError}}
             </div>
         </div>
         <!-- <div class="pull-right mr-5">

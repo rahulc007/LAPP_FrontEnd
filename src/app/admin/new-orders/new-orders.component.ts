@@ -139,9 +139,11 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
           date.modifiedDate = this.datePipe.transform(date.modifiedDate, "medium");
           date.orderDate = this.datePipe.transform(date.orderDate, "medium");
         });
+        this.serachError = '';
       }
       else {
         this.data = this.arr;
+        this.serachError = '';
       }
     })
   }
@@ -209,15 +211,13 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     this.showBackBtn = false;
   }
    keyDownFunction(event) {
-     if(event.target.value === '') {
-       this.serachError = "Please Enter Sales Order No";
-     } else { 
-      this.serachError = '';
       if (event.keyCode == 13) {
+        if(event.target.value === '') {
+          this.serachError = "Please Enter Sales Order No";
+        } else { 
         this.getPerticularSalesNo(event.target.value);
+        this.serachError = '';
       }
-     }
-      
+     }  
   }
-
 }

@@ -13,6 +13,9 @@
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </div>
+                <div *ngIf="serachError" class="text-danger">
+                    {{serachError}}
+                </div>
             </div>
     </div>
 </div>
