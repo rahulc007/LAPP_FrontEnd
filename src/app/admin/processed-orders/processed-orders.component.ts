@@ -163,7 +163,7 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
       if(response.orderInfoList.length !== 0) {
       this.arr = []
       for(let i=0; i< response.orderInfoList[0].orderLineItem.length; i++) {
-        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Rel" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "REL") {
+        if(response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Released" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "Rel" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "REL" && response.orderInfoList[0].orderLineItem[i].productionOrderStatus !== "") {
           this.arr = response.orderInfoList;
         }
       }
