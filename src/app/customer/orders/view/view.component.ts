@@ -45,7 +45,7 @@ export class ViewComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'oid', title: 'Order ID' }, 
+      // { key: 'oid', title: 'Order ID' }, 
       { key: 'orderDate', title: 'Order Date' },
       { key: 'userEmailId', title: 'Email ID' },
       { key: 'salesOrderno', title: 'Sales Order Number' },

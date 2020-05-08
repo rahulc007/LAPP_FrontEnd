@@ -1,5 +1,5 @@
 export const data = [
-    { "name": "Germany", "code": "DE" },
+    // { "name": "Germany", "code": "DE" },
     { "name": "India", "code": "IN" },
     { "name": "All",  "code": "0"},
 

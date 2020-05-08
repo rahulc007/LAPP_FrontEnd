@@ -66,7 +66,7 @@ export class EditComponent implements OnInit, AfterViewInit, AfterViewChecked {
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'lineItemId', title: 'Line Item ID' },
+      // { key: 'lineItemId', title: 'Line Item ID' },
       { key: 'customerNo', title: 'Customer Number' },
       { key: 'customerPartNo', title: 'Customer Part Number' },
       { key: 'articleNo', title: 'Article Number' },

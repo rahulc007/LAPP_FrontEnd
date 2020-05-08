@@ -86,7 +86,7 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
   }
   ngAfterViewInit() {
     this.columns = [
-      { key: 'oid', title: 'Order ID' },
+      // { key: 'oid', title: 'Order ID' },
       { key: 'orderDate', title: 'Order Date' },
       { key: 'userEmailId', title: 'User Email ID' },
       // { key: 'orderStatus', title: 'Ordrer Status' },
@@ -180,7 +180,10 @@ export class NewOrdersComponent implements OnInit, AfterViewInit, AfterViewCheck
     if (objUserDetails.userType === userTypes.admin || objUserDetails.userType === userTypes.superAdmin ) {
     this.showBackBtn = true;
     this.startDate = this.datePipe.transform(dates[0], "yyyy-MM-dd");
-    this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
+    let ToDate = dates[1];
+    let reqDate = new Date(ToDate);
+    let testDate = reqDate.setDate(reqDate.getDate() + 1);
+    this.toDate = this.datePipe.transform(testDate, "yyyy-MM-dd");
     this.params = {
       'countryCode': this.countryCode,
       'emailId': this.emailId,

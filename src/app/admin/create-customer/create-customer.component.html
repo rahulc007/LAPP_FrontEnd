@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'firstname'| translate}}</label>
+                <label for="">* {{'firstname'| translate}}</label>
                 <input type="text" id="" placeholder="{{'firstname'| translate}}" formControlName="fname"
                     [(ngModel)]="firstname" maxlength="60" class="form-control" required />
                 <div *ngIf="customerForm.controls.fname.invalid && (customerForm.controls.fname.dirty || customerForm.controls.fname.touched)"
@@ -49,7 +49,7 @@
         </div>
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'lastname'| translate}}</label>
+                <label for="">* {{'lastname'| translate}}</label>
                 <input type="text" class="form-control" id="" placeholder="{{'lastname'| translate}}"
                     formControlName="lname" [(ngModel)]="lastname" maxlength="60" required />
                 <div *ngIf="customerForm.controls.lname.invalid && (customerForm.controls.lname.dirty || customerForm.controls.lname.touched)"
@@ -68,7 +68,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'emailid'| translate}}</label>
+                <label for="">* {{'emailid'| translate}}</label>
                 <input placeholder="{{'emailid'| translate}}" formControlName="email" class="form-control"
                     [(ngModel)]="emailId" maxlength="60" type="text" [attr.disabled]="editflag?true:null" required />
                 <div *ngIf="customerForm.controls.email.invalid && (customerForm.controls.email.dirty || customerForm.controls.email.touched)"
@@ -83,7 +83,7 @@
         </div>
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'customerid'| translate}}</label>
+                <label for="">* {{'customerid'| translate}}</label>
                 <input placeholder="{{'customerid'| translate}}" type="text" class="form-control" maxlength="60"
                     [(ngModel)]="uid" formControlName="userid" [attr.disabled]="editflag?true:null" required />
                 <div *ngIf="customerForm.controls.userid.invalid && (customerForm.controls.userid.dirty || customerForm.controls.userid.touched)"
@@ -116,7 +116,7 @@
         </div>
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'state'| translate}}</label>
+                <label for="">* {{'state'| translate}}</label>
                 <input type="text" class="form-control" formControlName="State" [(ngModel)]="state" onmousedown="value = '';"  placeholder="{{'state'| translate}}" list="statecodes"
                     step="5" min="5" max="200" (keyup)="filterState($event)" required />
                 <datalist id="statecodes">
@@ -138,7 +138,7 @@
         </div>
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'city'| translate}}</label>
+                <label for="">* {{'city'| translate}}</label>
                 <input type="text" class="form-control" formControlName="City" [(ngModel)]="city" onmousedown="value = '';" (keyup)="filterCity($event)"
                     placeholder="{{'city'| translate}}" list="citycodes" step="5" min="5" max="200" [attr.disabled]="citydisabled === 1?true:null" required />
                 <datalist id="citycodes">
@@ -163,7 +163,7 @@
     <div class="row">
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'phone'| translate}}</label>
+                <label for="">* {{'phone'| translate}}</label>
                 <input placeholder="{{'phone'| translate}}" type="text" [(ngModel)]="phone" class="form-control"
                     maxlength="12" formControlName="phone" required />
                 <div *ngIf="customerForm.controls.phone.invalid && (customerForm.controls.phone.dirty || customerForm.controls.phone.touched)"
@@ -179,7 +179,7 @@
         </div>
         <div class="col">
             <div class="form-group custom_form-group">
-                <label for="">{{'usertype'| translate}}</label>
+                <label for="">* {{'usertype'| translate}}</label>
                 <input type="text" class="form-control" formControlName="usertype" [(ngModel)]='usertype'
                     (click)="clear()" [attr.disabled]="editflag?true:null" placeholder="{{'usertype'| translate}}"
                     list="usertypecodes" step="5" min="5" max="200" required />
@@ -202,6 +202,7 @@
         <div class="col" *ngIf="editflag===0">
             <button (click)="formSubmit()" [disabled]="customerForm.pristine || customerForm.invalid"
                 class="btn btn-orange">{{'submit'| translate}}</button>
+            <h6 class="mt-1" style="color: red;">* - Indicates Mandatory Field</h6>
         </div>
         <div class="col" *ngIf="editflag===1">
             <button (click)="updateUser()" [disabled]="customerForm.pristine || customerForm.invalid" class="btn btn-orange float-left">{{'update'| translate}}</button>

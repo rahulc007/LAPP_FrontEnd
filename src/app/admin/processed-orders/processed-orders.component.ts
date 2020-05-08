@@ -114,7 +114,11 @@ export class ProcessedOrdersComponent implements OnInit, AfterViewInit, AfterVie
     let startLimit = (this.page -1) * 10
     this.showBackBtn = true;
     this.startDate = this.datePipe.transform(dates[0], "yyyy-MM-dd");
-    this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
+    let ToDate = dates[1];
+    let reqDate = new Date(ToDate);
+    let testDate = reqDate.setDate(reqDate.getDate() + 1);
+    this.toDate = this.datePipe.transform(testDate, "yyyy-MM-dd");
+    // this.toDate = this.datePipe.transform(dates[1], "yyyy-MM-dd");
     this.params = {
       'countryCode':this.countryCode,
       'emailId': this.emailId,
