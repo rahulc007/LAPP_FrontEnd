@@ -29,7 +29,7 @@
     "font-awesome": "^4.7.0",
     "handsontable": "^7.1.0",
     "jqeury": "0.0.1-security",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jwt-decode": "^2.2.0",
     "ng-auto-complete": "^4.1.8",
     "ng-bootstrap": "^1.6.3",
